@@ -1,0 +1,6 @@
+﻿.vs/bifconveniosDES/v16/.suo
+*.dll
+*.pdb
+*.cache
+*.exe
+BIFUtils/obj/Debug/BIFUtils.vbproj.FileListAbsolute.txt
