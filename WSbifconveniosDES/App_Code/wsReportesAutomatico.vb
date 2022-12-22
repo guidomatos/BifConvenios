@@ -10,6 +10,9 @@ Imports System.Data.SqlClient
 Imports BIFConvenios.BL
 Imports BIFConvenios.BE
 Imports BIFUtils
+Imports System
+Imports System.Configuration
+Imports Microsoft.VisualBasic
 
 <WebService(Namespace:="http://tempuri.org/")> _
 <WebServiceBinding(ConformsTo:=WsiProfiles.BasicProfile1_1)> _

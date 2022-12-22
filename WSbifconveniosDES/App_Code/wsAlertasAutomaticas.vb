@@ -2,6 +2,7 @@
 Imports System.Collections
 Imports System.Collections.Generic
 Imports System.ComponentModel
+Imports System.Configuration
 Imports System.Data
 Imports System.Data.SqlClient
 Imports System.Text
@@ -13,6 +14,7 @@ Imports BIFConvenios.BE
 Imports BIFConvenios.BL.BIFConvenios.BL
 
 Imports Resource
+Imports Microsoft.VisualBasic
 
 <WebService(Namespace:="http://tempuri.org/")> _
 <WebServiceBinding(ConformsTo:=WsiProfiles.BasicProfile1_1)> _

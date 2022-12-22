@@ -12,6 +12,7 @@ Imports System.Web.Services.Protocols
 Imports BIFConvenios.BE
 Imports BIFConvenios.BL
 Imports Resource
+Imports Microsoft.VisualBasic
 
 <WebService(Namespace:="http://tempuri.org/")> _
 <WebServiceBinding(ConformsTo:=WsiProfiles.BasicProfile1_1)> _
