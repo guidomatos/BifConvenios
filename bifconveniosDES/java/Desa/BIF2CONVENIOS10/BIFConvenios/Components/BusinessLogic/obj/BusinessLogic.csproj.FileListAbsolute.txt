@@ -1,0 +1,14 @@
+C:\Users\MDP10\Desktop\PROYECTO\PROYECTO_BIFCONVENIO\BIFConvenios\Components\BusinessLogic\bin\Debug\BusinessLogic.dll
+C:\Users\MDP10\Desktop\PROYECTO\PROYECTO_BIFCONVENIO\BIFConvenios\Components\BusinessLogic\bin\Debug\BusinessLogic.pdb
+C:\Users\MDP10\Desktop\PROYECTO\PROYECTO_BIFCONVENIO\BIFConvenios\Components\BusinessLogic\bin\Debug\DataAccess.dll
+C:\Users\MDP10\Desktop\PROYECTO\PROYECTO_BIFCONVENIO\BIFConvenios\Components\BusinessLogic\bin\Debug\DataAccess.pdb
+C:\Users\MDP10\Desktop\PROYECTO\PROYECTO_BIFCONVENIO\BIFConvenios\Components\BusinessLogic\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\MDP10\Desktop\PROYECTO\PROYECTO_BIFCONVENIO\BIFConvenios\Components\BusinessLogic\obj\Debug\BusinessLogic.dll
+C:\Users\MDP10\Desktop\PROYECTO\PROYECTO_BIFCONVENIO\BIFConvenios\Components\BusinessLogic\obj\Debug\BusinessLogic.pdb
+C:\PROYECTO_BIFCONVENIO1\BIFConvenios\Components\BusinessLogic\bin\Debug\BusinessLogic.dll
+C:\PROYECTO_BIFCONVENIO1\BIFConvenios\Components\BusinessLogic\bin\Debug\BusinessLogic.pdb
+C:\PROYECTO_BIFCONVENIO1\BIFConvenios\Components\BusinessLogic\bin\Debug\DataAccess.dll
+C:\PROYECTO_BIFCONVENIO1\BIFConvenios\Components\BusinessLogic\bin\Debug\DataAccess.pdb
+C:\PROYECTO_BIFCONVENIO1\BIFConvenios\Components\BusinessLogic\obj\Debug\ResolveAssemblyReference.cache
+C:\PROYECTO_BIFCONVENIO1\BIFConvenios\Components\BusinessLogic\obj\Debug\BusinessLogic.dll
+C:\PROYECTO_BIFCONVENIO1\BIFConvenios\Components\BusinessLogic\obj\Debug\BusinessLogic.pdb

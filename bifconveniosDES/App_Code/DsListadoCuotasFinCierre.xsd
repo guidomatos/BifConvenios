@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DsListadoCuotasFinCierre" targetNamespace="http://tempuri.org/DsListadoCuotasFinCierre.xsd" xmlns:mstns="http://tempuri.org/DsListadoCuotasFinCierre.xsd" xmlns="http://tempuri.org/DsListadoCuotasFinCierre.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+        </Connections>
+        <Tables>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DsListadoCuotasFinCierre" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DLinfo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CUSCUN" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CUSNA1" type="xs:string" minOccurs="0" />
+              <xs:element name="CUSNA2" type="xs:string" minOccurs="0" />
+              <xs:element name="CUSCTY" type="xs:string" minOccurs="0" />
+              <xs:element name="NOMCNT" type="xs:string" minOccurs="0" />
+              <xs:element name="CUSZPC" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Cliente">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DLNP" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DLCUN" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DLNE" type="xs:string" minOccurs="0" />
+              <xs:element name="DLOAM" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DLPRI" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DLVCA" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DLVCM" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DLCNC1" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DLNCT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CPENDIENTES" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DLIC" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DLITF" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DLESD" type="xs:string" minOccurs="0" />
+              <xs:element name="DLCM" type="xs:string" minOccurs="0" />
+              <xs:element name="DLMO" type="xs:string" minOccurs="0" />
+              <xs:element name="FechaCargoCuenta" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DLST" type="xs:string" minOccurs="0" />
+              <xs:element name="DLAG" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DLCTA" type="xs:decimal" />
+              <xs:element name="GP" type="xs:string" />
+              <xs:element name="DLCEM" type="xs:string" minOccurs="0" />
+              <xs:element name="FINICRE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DLMOD" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

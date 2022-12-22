@@ -1,0 +1,39 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+BIFUtils
+</name>
+</assembly>
+<members>
+<member name="M:BIFUtils.ArchivoDBF.ExportaDBFUNMSM(System.Data.DataSet@,System.String,System.String)">
+	<summary>
+ Exporta informacion en formato DBF para la UNMSM.
+ </summary>
+	<param name="pData">Informacion a exportar</param>
+	<param name="pNombreArchivoProceso">Nombre del archivo a generar.</param>
+	<remarks>ADD 02/09/2013 NCA: Generar archivo de cobranzas en formato DBF para la UNMSM
+          MOD 05/09/2013 NCA: Generar dos formatos de archivos para la UNMSM</remarks>
+</member><member name="M:BIFUtils.bifwebservices.DecodificarClave.#ctor">
+	<remarks/>
+</member><member name="E:BIFUtils.bifwebservices.DecodificarClave.DecodificaCompleted">
+	<remarks/>
+</member><member name="M:BIFUtils.bifwebservices.DecodificarClave.Decodifica(System.String)">
+	<remarks/>
+</member><member name="M:BIFUtils.bifwebservices.DecodificarClave.DecodificaAsync(System.String)">
+	<remarks/>
+</member><member name="M:BIFUtils.bifwebservices.DecodificarClave.DecodificaAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:BIFUtils.bifwebservices.DecodificarClave.CancelAsync(System.Object)">
+	<remarks/>
+</member><member name="T:BIFUtils.bifwebservices.DecodificarClave">
+	<remarks/>
+</member><member name="T:BIFUtils.bifwebservices.DecodificaCompletedEventHandler">
+	<remarks/>
+</member><member name="P:BIFUtils.bifwebservices.DecodificaCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:BIFUtils.bifwebservices.DecodificaCompletedEventArgs">
+	<remarks/>
+</member>
+</members>
+</doc>

@@ -1,0 +1,223 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E16D1911-94DD-4495-A5FB-46904BD291F5}</ProjectGuid>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>BIFConveniosTextExport</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyMode>None</AssemblyOriginatorKeyMode>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>WinExe</OutputType>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionStrict>Off</OptionStrict>
+    <RootNamespace>
+    </RootNamespace>
+    <StartupObject>frmMonitor</StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>BIFConveniosTextExport.xml</DocumentationFile>
+    <BaseAddress>285212672</BaseAddress>
+    <ConfigurationOverrideFile>App.config</ConfigurationOverrideFile>
+    <DefineConstants>
+    </DefineConstants>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42016,42017,42018,42019,42032</NoWarn>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>BIFConveniosTextExport.xml</DocumentationFile>
+    <BaseAddress>285212672</BaseAddress>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>
+    </DefineConstants>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42016,42017,42018,42019,42032</NoWarn>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ADODB">
+      <Name>adodb</Name>
+      <HintPath>..\..\..\..\..\..\Program Files\Microsoft.NET\Primary Interop Assemblies\adodb.dll</HintPath>
+    </Reference>
+    <Reference Include="BIFData, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BIFConveniosComponent\BIFData\bin\Debug\BIFData.dll</HintPath>
+    </Reference>
+    <Reference Include="BlueHeaderControl, Version=1.0.3321.28489, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\BIFConvenios_2005\Components\external\BIFConveniosTextExport\bin\BlueHeaderControl.dll</HintPath>
+    </Reference>
+    <Reference Include="LREM.Tools.Reporting.Excel">
+      <Name>LREM.Tools.Reporting.Excel</Name>
+      <HintPath>..\..\LREM.Tools.Reporting.Excel\bin\Debug\LREM.Tools.Reporting.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="MyXPButton, Version=1.0.1511.16664, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\BIFConvenios_2005\Components\external\BIFConveniosTextExport\bin\MyXPButton.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Web">
+      <Name>System.Web</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <ProjectReference Include="..\BroadcasterClass\BroadcasterClass.vbproj">
+      <Name>BroadcasterClass</Name>
+      <Project>{42C1460D-E809-4BBD-BAE8-8D38B531F409}</Project>
+      <Package>{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</Package>
+    </ProjectReference>
+    <COMReference Include="DTS">
+      <Guid>{10010001-EB1C-11CF-AE6E-00AA004A34D5}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <Compile Include="AssemblyInfo.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Componentes\Bloqueo.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Componentes\CargaCronogamaFururo.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Componentes\Cliente.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Componentes\CSVReport.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Componentes\DBFReport.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Componentes\DLREC.vb" />
+    <Compile Include="Componentes\EliminacionErrorEnvio.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Componentes\EnvioInformacionActualizada.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Componentes\Envio_informacion_cobranza_IBS.vb" />
+    <Compile Include="Componentes\ExecutePackage.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Componentes\ObtenerCronogramaFuturo.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Componentes\ObtenerCronogramaFuturo2.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Componentes\ProcesaArchivoDBF.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Componentes\ProcesaArchivoDescuentosEstandar.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Componentes\ProcesaArchivoDescuentosEstandarTexto.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Componentes\ProcesaArchivoTextoGeneral.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Componentes\Proceso.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Componentes\Prorroga.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Componentes\TCPClient.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Componentes\TXTReport.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="frmMonitor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="modules\Utils.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="frmMonitor.resx">
+      <DependentUpon>frmMonitor.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="My Project\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

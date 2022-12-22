@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://BidfEncripta/desEncripta" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://BidfEncripta/desEncripta" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://BidfEncripta/desEncripta">
+      <s:element name="Decodifica">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="a_codificar" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DecodificaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DecodificaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Codificar">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="a_codificar" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CodificarResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CodificarResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="DecodificaSoapIn">
+    <wsdl:part name="parameters" element="tns:Decodifica" />
+  </wsdl:message>
+  <wsdl:message name="DecodificaSoapOut">
+    <wsdl:part name="parameters" element="tns:DecodificaResponse" />
+  </wsdl:message>
+  <wsdl:message name="CodificarSoapIn">
+    <wsdl:part name="parameters" element="tns:Codificar" />
+  </wsdl:message>
+  <wsdl:message name="CodificarSoapOut">
+    <wsdl:part name="parameters" element="tns:CodificarResponse" />
+  </wsdl:message>
+  <wsdl:message name="DecodificaHttpGetIn">
+    <wsdl:part name="a_codificar" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DecodificaHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CodificarHttpGetIn">
+    <wsdl:part name="a_codificar" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CodificarHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DecodificaHttpPostIn">
+    <wsdl:part name="a_codificar" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DecodificaHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CodificarHttpPostIn">
+    <wsdl:part name="a_codificar" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CodificarHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="DecodificarClaveSoap">
+    <wsdl:operation name="Decodifica">
+      <wsdl:input message="tns:DecodificaSoapIn" />
+      <wsdl:output message="tns:DecodificaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Codificar">
+      <wsdl:input message="tns:CodificarSoapIn" />
+      <wsdl:output message="tns:CodificarSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="DecodificarClaveHttpGet">
+    <wsdl:operation name="Decodifica">
+      <wsdl:input message="tns:DecodificaHttpGetIn" />
+      <wsdl:output message="tns:DecodificaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Codificar">
+      <wsdl:input message="tns:CodificarHttpGetIn" />
+      <wsdl:output message="tns:CodificarHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="DecodificarClaveHttpPost">
+    <wsdl:operation name="Decodifica">
+      <wsdl:input message="tns:DecodificaHttpPostIn" />
+      <wsdl:output message="tns:DecodificaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Codificar">
+      <wsdl:input message="tns:CodificarHttpPostIn" />
+      <wsdl:output message="tns:CodificarHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DecodificarClaveSoap" type="tns:DecodificarClaveSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Decodifica">
+      <soap:operation soapAction="http://BidfEncripta/desEncripta/Decodifica" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Codificar">
+      <soap:operation soapAction="http://BidfEncripta/desEncripta/Codificar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DecodificarClaveSoap12" type="tns:DecodificarClaveSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Decodifica">
+      <soap12:operation soapAction="http://BidfEncripta/desEncripta/Decodifica" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Codificar">
+      <soap12:operation soapAction="http://BidfEncripta/desEncripta/Codificar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DecodificarClaveHttpGet" type="tns:DecodificarClaveHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="Decodifica">
+      <http:operation location="/Decodifica" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Codificar">
+      <http:operation location="/Codificar" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DecodificarClaveHttpPost" type="tns:DecodificarClaveHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Decodifica">
+      <http:operation location="/Decodifica" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Codificar">
+      <http:operation location="/Codificar" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DecodificarClave">
+    <wsdl:port name="DecodificarClaveSoap" binding="tns:DecodificarClaveSoap">
+      <soap:address location="http://10.30.30.48/WebServiceCodificar/WebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DecodificarClaveSoap12" binding="tns:DecodificarClaveSoap12">
+      <soap12:address location="http://10.30.30.48/WebServiceCodificar/WebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DecodificarClaveHttpGet" binding="tns:DecodificarClaveHttpGet">
+      <http:address location="http://10.30.30.48/WebServiceCodificar/WebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DecodificarClaveHttpPost" binding="tns:DecodificarClaveHttpPost">
+      <http:address location="http://10.30.30.48/WebServiceCodificar/WebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

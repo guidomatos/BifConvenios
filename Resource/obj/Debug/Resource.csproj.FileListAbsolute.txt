@@ -1,0 +1,13 @@
+D:\banbif\project\BifConvenios\Resource\bin\Debug\Resource.dll
+D:\banbif\project\BifConvenios\Resource\bin\Debug\Resource.pdb
+D:\banbif\project\BifConvenios\Resource\bin\Debug\BIFUtils.dll
+D:\banbif\project\BifConvenios\Resource\bin\Debug\Desencripta.dll
+D:\banbif\project\BifConvenios\Resource\bin\Debug\stdole.dll
+D:\banbif\project\BifConvenios\Resource\bin\Debug\BIFUtils.pdb
+D:\banbif\project\BifConvenios\Resource\bin\Debug\BIFUtils.xml
+D:\banbif\project\BifConvenios\Resource\bin\Debug\BIFUtils.dll.config
+D:\banbif\project\BifConvenios\Resource\obj\Debug\Resource.csproj.AssemblyReference.cache
+D:\banbif\project\BifConvenios\Resource\obj\Debug\Resource.csproj.CoreCompileInputs.cache
+D:\banbif\project\BifConvenios\Resource\obj\Debug\Resource.csproj.CopyComplete
+D:\banbif\project\BifConvenios\Resource\obj\Debug\Resource.dll
+D:\banbif\project\BifConvenios\Resource\obj\Debug\Resource.pdb

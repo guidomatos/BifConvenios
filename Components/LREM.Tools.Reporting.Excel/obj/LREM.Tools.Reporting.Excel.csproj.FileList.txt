@@ -1,0 +1,7 @@
+bin\Debug\LREM.Tools.Reporting.Excel.dll
+bin\Debug\LREM.Tools.Reporting.Excel.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\LREM.Tools.Reporting.Excel.xlsRes.resources
+obj\Debug\LREM.Tools.Reporting.Excel.csproj.GenerateResource.Cache
+obj\Debug\LREM.Tools.Reporting.Excel.dll
+obj\Debug\LREM.Tools.Reporting.Excel.pdb

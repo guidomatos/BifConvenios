@@ -1,0 +1,68 @@
+﻿	
+	/*Caja de titulos*/
+	
+        .TituloMensaje
+        {                    
+			font-size: 16px; 
+			color:White;  					
+        }
+                
+        .CeldaTitulo
+        {
+        	background-color: blue;
+        	text-align: center;
+        	margin: 0px;
+        }
+    
+
+     /* Inicio style caja dialogo*/
+      
+    .FondoAplicacion
+	{
+		background-color: Gray;
+		filter: alpha(opacity=70);
+		opacity: 0.7;
+	}
+	
+    .CajaDialogo
+	{
+		background-color: #ffffff;
+		border-width: 2px;
+		border-style: outset;
+		border-color: #627AA4;
+		padding: 0px;
+		width: 300px;										
+		margin: 0px;
+		text-align: left;
+	}
+    
+    .CajaDialogo div
+	{
+		margin: 0px;
+		text-align: left;
+	}
+
+    .accordionCabecera
+	{ 
+		border: 1px solid black; 
+		background-color: #385062; 
+		font-family: Arial,Sans-Serif; 
+		font-size: 12px; 
+		color:White;  					
+		padding: 4px; 
+		margin-top: 4px; 
+		cursor: pointer; 
+	} 
+      
+    .accordionContenido 
+	{ 
+		font-family: Sans-Serif; 
+		background-color: #ffffff; 
+		border: 1px solid black; 
+		border-top: none; 
+		font-size: 12px; 
+		padding: 7px; 
+		height:auto; 
+	} 
+
+    /*fin style caja dialogo*/

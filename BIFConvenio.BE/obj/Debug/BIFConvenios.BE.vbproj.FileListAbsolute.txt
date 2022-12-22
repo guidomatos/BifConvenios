@@ -1,0 +1,10 @@
+D:\banbif\project\BifConvenios\BIFConvenio.BE\bin\Debug\BIFConvenios.BE.dll
+D:\banbif\project\BifConvenios\BIFConvenio.BE\bin\Debug\BIFConvenios.BE.pdb
+D:\banbif\project\BifConvenios\BIFConvenio.BE\bin\Debug\BIFConvenio.BE.xml
+D:\banbif\project\BifConvenios\BIFConvenio.BE\obj\Debug\BIFConvenios.BE.vbproj.AssemblyReference.cache
+D:\banbif\project\BifConvenios\BIFConvenio.BE\obj\Debug\BIFConvenios.BE.Resources.resources
+D:\banbif\project\BifConvenios\BIFConvenio.BE\obj\Debug\BIFConvenios.BE.vbproj.GenerateResource.cache
+D:\banbif\project\BifConvenios\BIFConvenio.BE\obj\Debug\BIFConvenios.BE.vbproj.CoreCompileInputs.cache
+D:\banbif\project\BifConvenios\BIFConvenio.BE\obj\Debug\BIFConvenios.BE.dll
+D:\banbif\project\BifConvenios\BIFConvenio.BE\obj\Debug\BIFConvenio.BE.xml
+D:\banbif\project\BifConvenios\BIFConvenio.BE\obj\Debug\BIFConvenios.BE.pdb

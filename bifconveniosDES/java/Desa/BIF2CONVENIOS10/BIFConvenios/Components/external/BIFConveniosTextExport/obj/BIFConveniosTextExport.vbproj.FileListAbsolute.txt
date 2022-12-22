@@ -1,0 +1,133 @@
+C:\data javier\+Proyectos\BifConvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.exe.config
+C:\data javier\+Proyectos\BifConvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.exe
+C:\data javier\+Proyectos\BifConvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.pdb
+C:\data javier\+Proyectos\BifConvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.xml
+C:\data javier\+Proyectos\BifConvenios\Components\external\BIFConveniosTextExport\bin\BIFData.dll
+C:\data javier\+Proyectos\BifConvenios\Components\external\BIFConveniosTextExport\bin\BlueHeaderControl.dll
+C:\data javier\+Proyectos\BifConvenios\Components\external\BIFConveniosTextExport\bin\BroadcasterClass.dll
+C:\data javier\+Proyectos\BifConvenios\Components\external\BIFConveniosTextExport\bin\LREM.Tools.Reporting.Excel.dll
+C:\data javier\+Proyectos\BifConvenios\Components\external\BIFConveniosTextExport\bin\MyXPButton.dll
+C:\data javier\+Proyectos\BifConvenios\Components\external\BIFConveniosTextExport\bin\BIFData.pdb
+C:\data javier\+Proyectos\BifConvenios\Components\external\BIFConveniosTextExport\bin\BIFData.xml
+C:\data javier\+Proyectos\BifConvenios\Components\external\BIFConveniosTextExport\bin\LREM.Tools.Reporting.Excel.pdb
+C:\data javier\+Proyectos\BifConvenios\Components\external\BIFConveniosTextExport\bin\BroadcasterClass.pdb
+C:\data javier\+Proyectos\BifConvenios\Components\external\BIFConveniosTextExport\bin\BroadcasterClass.xml
+C:\data javier\+Proyectos\BifConvenios\Components\external\BIFConveniosTextExport\bin\Interop.DTS.dll
+C:\data javier\+Proyectos\BifConvenios\Components\external\BIFConveniosTextExport\obj\Debug\ResolveAssemblyReference.cache
+C:\data javier\+Proyectos\BifConvenios\Components\external\BIFConveniosTextExport\obj\Debug\Interop.DTS.dll
+C:\data javier\+Proyectos\BifConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.vbproj.ResolveComReference.cache
+C:\data javier\+Proyectos\BifConvenios\Components\external\BIFConveniosTextExport\obj\Debug\frmMonitor.resources
+C:\data javier\+Proyectos\BifConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.vbproj.GenerateResource.Cache
+C:\data javier\+Proyectos\BifConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.exe
+C:\data javier\+Proyectos\BifConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.xml
+C:\data javier\+Proyectos\BifConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.pdb
+C:\Inetpub\wwwroot\Sistema_Bifconvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.exe.config
+C:\Inetpub\wwwroot\Sistema_Bifconvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.exe
+C:\Inetpub\wwwroot\Sistema_Bifconvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.pdb
+C:\Inetpub\wwwroot\Sistema_Bifconvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.xml
+C:\Inetpub\wwwroot\Sistema_Bifconvenios\Components\external\BIFConveniosTextExport\bin\BIFData.dll
+C:\Inetpub\wwwroot\Sistema_Bifconvenios\Components\external\BIFConveniosTextExport\bin\BlueHeaderControl.dll
+C:\Inetpub\wwwroot\Sistema_Bifconvenios\Components\external\BIFConveniosTextExport\bin\BroadcasterClass.dll
+C:\Inetpub\wwwroot\Sistema_Bifconvenios\Components\external\BIFConveniosTextExport\bin\LREM.Tools.Reporting.Excel.dll
+C:\Inetpub\wwwroot\Sistema_Bifconvenios\Components\external\BIFConveniosTextExport\bin\MyXPButton.dll
+C:\Inetpub\wwwroot\Sistema_Bifconvenios\Components\external\BIFConveniosTextExport\bin\BIFData.pdb
+C:\Inetpub\wwwroot\Sistema_Bifconvenios\Components\external\BIFConveniosTextExport\bin\BIFData.xml
+C:\Inetpub\wwwroot\Sistema_Bifconvenios\Components\external\BIFConveniosTextExport\bin\LREM.Tools.Reporting.Excel.pdb
+C:\Inetpub\wwwroot\Sistema_Bifconvenios\Components\external\BIFConveniosTextExport\bin\BroadcasterClass.pdb
+C:\Inetpub\wwwroot\Sistema_Bifconvenios\Components\external\BIFConveniosTextExport\bin\BroadcasterClass.xml
+C:\Inetpub\wwwroot\Sistema_Bifconvenios\Components\external\BIFConveniosTextExport\bin\Interop.DTS.dll
+C:\Inetpub\wwwroot\Sistema_Bifconvenios\Components\external\BIFConveniosTextExport\obj\Debug\ResolveAssemblyReference.cache
+C:\Inetpub\wwwroot\Sistema_Bifconvenios\Components\external\BIFConveniosTextExport\obj\Debug\Interop.DTS.dll
+C:\Inetpub\wwwroot\Sistema_Bifconvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.vbproj.ResolveComReference.cache
+C:\Inetpub\wwwroot\Sistema_Bifconvenios\Components\external\BIFConveniosTextExport\obj\Debug\frmMonitor.resources
+C:\Inetpub\wwwroot\Sistema_Bifconvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.vbproj.GenerateResource.Cache
+C:\Inetpub\wwwroot\Sistema_Bifconvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.exe
+C:\Inetpub\wwwroot\Sistema_Bifconvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.xml
+C:\Inetpub\wwwroot\Sistema_Bifconvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.pdb
+C:\Inetpub\wwwroot\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.exe.config
+C:\Inetpub\wwwroot\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.exe
+C:\Inetpub\wwwroot\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.pdb
+C:\Inetpub\wwwroot\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.xml
+C:\Inetpub\wwwroot\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BroadcasterClass.dll
+C:\Inetpub\wwwroot\BIFConvenios\Components\external\BIFConveniosTextExport\bin\LREM.Tools.Reporting.Excel.dll
+C:\Inetpub\wwwroot\BIFConvenios\Components\external\BIFConveniosTextExport\bin\LREM.Tools.Reporting.Excel.pdb
+C:\Inetpub\wwwroot\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BroadcasterClass.pdb
+C:\Inetpub\wwwroot\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BroadcasterClass.xml
+C:\Inetpub\wwwroot\BIFConvenios\Components\external\BIFConveniosTextExport\bin\Interop.DTS.dll
+C:\Inetpub\wwwroot\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\ResolveAssemblyReference.cache
+C:\Inetpub\wwwroot\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\Interop.DTS.dll
+C:\Inetpub\wwwroot\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.vbproj.ResolveComReference.cache
+C:\Inetpub\wwwroot\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\frmMonitor.resources
+C:\Inetpub\wwwroot\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.vbproj.GenerateResource.Cache
+C:\Inetpub\wwwroot\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.exe
+C:\Inetpub\wwwroot\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.xml
+C:\Inetpub\wwwroot\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.pdb
+C:\Documents and Settings\RHERESI\Mis documentos\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS V1.0\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.exe.config
+C:\Documents and Settings\RHERESI\Mis documentos\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS V1.0\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.exe
+C:\Documents and Settings\RHERESI\Mis documentos\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS V1.0\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.xml
+C:\Documents and Settings\RHERESI\Mis documentos\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS V1.0\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.pdb
+C:\Documents and Settings\RHERESI\Mis documentos\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS V1.0\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.exe
+C:\Documents and Settings\RHERESI\Mis documentos\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS V1.0\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.pdb
+C:\Documents and Settings\RHERESI\Mis documentos\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS V1.0\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.xml
+C:\Documents and Settings\RHERESI\Mis documentos\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS V1.0\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFData.dll
+C:\Documents and Settings\RHERESI\Mis documentos\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS V1.0\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BroadcasterClass.dll
+C:\Documents and Settings\RHERESI\Mis documentos\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS V1.0\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\LREM.Tools.Reporting.Excel.dll
+C:\Documents and Settings\RHERESI\Mis documentos\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS V1.0\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFData.pdb
+C:\Documents and Settings\RHERESI\Mis documentos\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS V1.0\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFData.xml
+C:\Documents and Settings\RHERESI\Mis documentos\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS V1.0\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\LREM.Tools.Reporting.Excel.pdb
+C:\Documents and Settings\RHERESI\Mis documentos\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS V1.0\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BroadcasterClass.pdb
+C:\Documents and Settings\RHERESI\Mis documentos\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS V1.0\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BroadcasterClass.xml
+C:\Documents and Settings\RHERESI\Mis documentos\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS V1.0\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\Interop.DTS.dll
+C:\Documents and Settings\RHERESI\Mis documentos\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS V1.0\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\RHERESI\Mis documentos\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS V1.0\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\Interop.DTS.dll
+C:\Documents and Settings\RHERESI\Mis documentos\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS V1.0\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.vbproj.ResolveComReference.cache
+C:\Documents and Settings\RHERESI\Mis documentos\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS V1.0\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\frmMonitor.resources
+C:\Documents and Settings\RHERESI\Mis documentos\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS V1.0\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.vbproj.GenerateResource.Cache
+C:\Documents and Settings\RHERESI\Mis documentos\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS V1.0\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BlueHeaderControl.dll
+C:\Documents and Settings\RHERESI\Mis documentos\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS V1.0\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\MyXPButton.dll
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.exe.config
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.exe
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.xml
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.pdb
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.exe
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.pdb
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.xml
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFData.dll
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BlueHeaderControl.dll
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BroadcasterClass.dll
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\LREM.Tools.Reporting.Excel.dll
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\MyXPButton.dll
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFData.pdb
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFData.xml
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\LREM.Tools.Reporting.Excel.pdb
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BroadcasterClass.pdb
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BroadcasterClass.xml
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\bin\Interop.DTS.dll
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\ResolveAssemblyReference.cache
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\Interop.DTS.dll
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.vbproj.ResolveComReference.cache
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\frmMonitor.resources
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\B1-BIFCONVENIOS\FUENTES\APLICATIVO\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.vbproj.GenerateResource.Cache
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\WORK BIFCONVENIOS\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.exe.config
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\WORK BIFCONVENIOS\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.exe
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\WORK BIFCONVENIOS\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.xml
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\WORK BIFCONVENIOS\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.pdb
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\WORK BIFCONVENIOS\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.exe
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\WORK BIFCONVENIOS\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.pdb
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\WORK BIFCONVENIOS\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFConveniosTextExport.xml
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\WORK BIFCONVENIOS\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFData.dll
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\WORK BIFCONVENIOS\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BlueHeaderControl.dll
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\WORK BIFCONVENIOS\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BroadcasterClass.dll
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\WORK BIFCONVENIOS\BIFConvenios\Components\external\BIFConveniosTextExport\bin\LREM.Tools.Reporting.Excel.dll
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\WORK BIFCONVENIOS\BIFConvenios\Components\external\BIFConveniosTextExport\bin\MyXPButton.dll
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\WORK BIFCONVENIOS\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFData.pdb
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\WORK BIFCONVENIOS\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BIFData.xml
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\WORK BIFCONVENIOS\BIFConvenios\Components\external\BIFConveniosTextExport\bin\LREM.Tools.Reporting.Excel.pdb
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\WORK BIFCONVENIOS\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BroadcasterClass.pdb
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\WORK BIFCONVENIOS\BIFConvenios\Components\external\BIFConveniosTextExport\bin\BroadcasterClass.xml
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\WORK BIFCONVENIOS\BIFConvenios\Components\external\BIFConveniosTextExport\bin\Interop.DTS.dll
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\WORK BIFCONVENIOS\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\ResolveAssemblyReference.cache
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\WORK BIFCONVENIOS\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\Interop.DTS.dll
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\WORK BIFCONVENIOS\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.vbproj.ResolveComReference.cache
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\WORK BIFCONVENIOS\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\frmMonitor.resources
+C:\PROYECTOS PSALINAS\PROYECTO BIFCONVENIOS\WORK BIFCONVENIOS\BIFConvenios\Components\external\BIFConveniosTextExport\obj\Debug\BIFConveniosTextExport.vbproj.GenerateResource.Cache

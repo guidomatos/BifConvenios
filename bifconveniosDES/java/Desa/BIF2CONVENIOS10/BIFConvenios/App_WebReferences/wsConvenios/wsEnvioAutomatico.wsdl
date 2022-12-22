@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ObtenerListaProcesosDisponiblesByFecha">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="pintDia" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerListaProcesosDisponiblesByFechaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerListaProcesosDisponiblesByFechaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerListaProcesosDisponibles">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pstrFiltro" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerListaProcesosDisponiblesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerListaProcesosDisponiblesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcesarEnvioNominasByCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="pintCodigoProcesoAutomatico" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrCodigoIBS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrTipoDocumento" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrNumeroDocumento" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrMesPeriodo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrAnioPeriodo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrFechaProcesoAS400" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrUsuario" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pintEstado" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcesarEnvioNominasByClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProcesarEnvioNominasByClienteResult" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pintEstado" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcesarTodosClientes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="penuTipoEnvio" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrUsuario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcesarTodosClientesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProcesarTodosClientesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ObtenerListaProcesosDisponiblesByFechaSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerListaProcesosDisponiblesByFecha" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerListaProcesosDisponiblesByFechaSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerListaProcesosDisponiblesByFechaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerListaProcesosDisponiblesSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerListaProcesosDisponibles" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerListaProcesosDisponiblesSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerListaProcesosDisponiblesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProcesarEnvioNominasByClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:ProcesarEnvioNominasByCliente" />
+  </wsdl:message>
+  <wsdl:message name="ProcesarEnvioNominasByClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:ProcesarEnvioNominasByClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProcesarTodosClientesSoapIn">
+    <wsdl:part name="parameters" element="tns:ProcesarTodosClientes" />
+  </wsdl:message>
+  <wsdl:message name="ProcesarTodosClientesSoapOut">
+    <wsdl:part name="parameters" element="tns:ProcesarTodosClientesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="wsEnvioAutomaticoSoap">
+    <wsdl:operation name="ObtenerListaProcesosDisponiblesByFecha">
+      <wsdl:input message="tns:ObtenerListaProcesosDisponiblesByFechaSoapIn" />
+      <wsdl:output message="tns:ObtenerListaProcesosDisponiblesByFechaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerListaProcesosDisponibles">
+      <wsdl:input message="tns:ObtenerListaProcesosDisponiblesSoapIn" />
+      <wsdl:output message="tns:ObtenerListaProcesosDisponiblesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcesarEnvioNominasByCliente">
+      <wsdl:input message="tns:ProcesarEnvioNominasByClienteSoapIn" />
+      <wsdl:output message="tns:ProcesarEnvioNominasByClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcesarTodosClientes">
+      <wsdl:input message="tns:ProcesarTodosClientesSoapIn" />
+      <wsdl:output message="tns:ProcesarTodosClientesSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="wsEnvioAutomaticoSoap" type="tns:wsEnvioAutomaticoSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ObtenerListaProcesosDisponiblesByFecha">
+      <soap:operation soapAction="http://tempuri.org/ObtenerListaProcesosDisponiblesByFecha" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerListaProcesosDisponibles">
+      <soap:operation soapAction="http://tempuri.org/ObtenerListaProcesosDisponibles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcesarEnvioNominasByCliente">
+      <soap:operation soapAction="http://tempuri.org/ProcesarEnvioNominasByCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcesarTodosClientes">
+      <soap:operation soapAction="http://tempuri.org/ProcesarTodosClientes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="wsEnvioAutomaticoSoap12" type="tns:wsEnvioAutomaticoSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ObtenerListaProcesosDisponiblesByFecha">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerListaProcesosDisponiblesByFecha" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerListaProcesosDisponibles">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerListaProcesosDisponibles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcesarEnvioNominasByCliente">
+      <soap12:operation soapAction="http://tempuri.org/ProcesarEnvioNominasByCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcesarTodosClientes">
+      <soap12:operation soapAction="http://tempuri.org/ProcesarTodosClientes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="wsEnvioAutomatico">
+    <wsdl:port name="wsEnvioAutomaticoSoap" binding="tns:wsEnvioAutomaticoSoap">
+      <soap:address location="http://localhost:5750/wsBIFConvenios/wsEnvioAutomatico.asmx" />
+    </wsdl:port>
+    <wsdl:port name="wsEnvioAutomaticoSoap12" binding="tns:wsEnvioAutomaticoSoap12">
+      <soap12:address location="http://localhost:5750/wsBIFConvenios/wsEnvioAutomatico.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,15 @@
+D:\banbif\project\BifConvenios\Components\BusinessLogic\bin\Debug\BusinessLogic.dll
+D:\banbif\project\BifConvenios\Components\BusinessLogic\bin\Debug\BusinessLogic.pdb
+D:\banbif\project\BifConvenios\Components\BusinessLogic\bin\Debug\DataAccess.dll
+D:\banbif\project\BifConvenios\Components\BusinessLogic\bin\Debug\BIFUtils.dll
+D:\banbif\project\BifConvenios\Components\BusinessLogic\bin\Debug\Desencripta.dll
+D:\banbif\project\BifConvenios\Components\BusinessLogic\bin\Debug\DataAccess.pdb
+D:\banbif\project\BifConvenios\Components\BusinessLogic\bin\Debug\DataAccess.dll.config
+D:\banbif\project\BifConvenios\Components\BusinessLogic\bin\Debug\BIFUtils.pdb
+D:\banbif\project\BifConvenios\Components\BusinessLogic\bin\Debug\BIFUtils.xml
+D:\banbif\project\BifConvenios\Components\BusinessLogic\bin\Debug\BIFUtils.dll.config
+D:\banbif\project\BifConvenios\Components\BusinessLogic\obj\Debug\BusinessLogic.csproj.AssemblyReference.cache
+D:\banbif\project\BifConvenios\Components\BusinessLogic\obj\Debug\BusinessLogic.csproj.CoreCompileInputs.cache
+D:\banbif\project\BifConvenios\Components\BusinessLogic\obj\Debug\BusinessLogic.csproj.CopyComplete
+D:\banbif\project\BifConvenios\Components\BusinessLogic\obj\Debug\BusinessLogic.dll
+D:\banbif\project\BifConvenios\Components\BusinessLogic\obj\Debug\BusinessLogic.pdb

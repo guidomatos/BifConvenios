@@ -1,0 +1,16 @@
+D:\banbif\project\BifConvenios\DAL\bin\Debug\DAL.dll.config
+D:\banbif\project\BifConvenios\DAL\bin\Debug\DAL.dll
+D:\banbif\project\BifConvenios\DAL\bin\Debug\DAL.pdb
+D:\banbif\project\BifConvenios\DAL\bin\Debug\BIFUtils.dll
+D:\banbif\project\BifConvenios\DAL\bin\Debug\Resource.dll
+D:\banbif\project\BifConvenios\DAL\bin\Debug\Desencripta.dll
+D:\banbif\project\BifConvenios\DAL\bin\Debug\SevenZipSharp.dll
+D:\banbif\project\BifConvenios\DAL\bin\Debug\BIFUtils.pdb
+D:\banbif\project\BifConvenios\DAL\bin\Debug\BIFUtils.xml
+D:\banbif\project\BifConvenios\DAL\bin\Debug\BIFUtils.dll.config
+D:\banbif\project\BifConvenios\DAL\bin\Debug\Resource.pdb
+D:\banbif\project\BifConvenios\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache
+D:\banbif\project\BifConvenios\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+D:\banbif\project\BifConvenios\DAL\obj\Debug\DAL.csproj.CopyComplete
+D:\banbif\project\BifConvenios\DAL\obj\Debug\DAL.dll
+D:\banbif\project\BifConvenios\DAL\obj\Debug\DAL.pdb

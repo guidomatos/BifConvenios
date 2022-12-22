@@ -1,0 +1,25 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+BIFConvenios.BL
+</name>
+</assembly>
+<members>
+<member name="M:BIFConvenios.BL.CuotaBL.GeneraCronogramaFuturo(System.String,System.String,System.String,System.String)">
+	<summary>
+ GeneraCronogramaFuturo: 
+ Metodo que genera información para los diferentes convenios del banco en formato de archivo personalizado.
+ </summary>
+	<param name="pCodigo_proceso"></param>
+	<param name="pTipoFormatoArchivo"></param>
+	<param name="pSituacionTrabajador"></param>
+	<param name="pUsuario"></param>
+	<returns>
+         0 - Generacion Satisfactoria.
+         1 - Error en el proceso.
+ </returns>
+	<remarks>ADD 02/09/2013 NCA: Se agrego metodo para generar archivo de cobranza para la UNMSM</remarks>
+</member>
+</members>
+</doc>

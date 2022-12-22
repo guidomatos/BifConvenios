@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BeginBodyXls" xml:space="preserve">
+    <value>&amp;lt;body link=blue vlink=purple&amp;gt;</value>
+    <comment>Inicio del Body Xls</comment>
+  </data>
+  <data name="BeginNormalTD" xml:space="preserve">
+    <value>&amp;lt;td&amp;gt;</value>
+  </data>
+  <data name="BeginNormalTR" xml:space="preserve">
+    <value>&amp;lt;tr&amp;gt;</value>
+  </data>
+  <data name="BeginTable" xml:space="preserve">
+    <value>&amp;lt;table x:str border=0 cellpadding=0 cellspacing=0 width=177 style='border-collapse:
+ collapse;table-layout:fixed;width:133pt'&amp;gt;</value>
+    <comment>Inicio de la tabla</comment>
+  </data>
+  <data name="BeginXls" xml:space="preserve">
+    <value>&amp;lt;html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns="http://www.w3.org/TR/REC-html40"&amp;gt;</value>
+    <comment>Inicio del encabezado html para excel</comment>
+  </data>
+  <data name="EndBodyXls" xml:space="preserve">
+    <value>&amp;lt;/body&amp;gt;</value>
+    <comment>Final del Body Xls</comment>
+  </data>
+  <data name="EndNormalTD" xml:space="preserve">
+    <value>&amp;lt;/td&amp;gt;</value>
+  </data>
+  <data name="EndNormalTR" xml:space="preserve">
+    <value>&amp;lt;/tr&amp;gt;</value>
+  </data>
+  <data name="EndTable" xml:space="preserve">
+    <value>&amp;lt;/table&amp;gt;</value>
+    <comment>Fin de la tabla</comment>
+  </data>
+  <data name="EndXls" xml:space="preserve">
+    <value>&amp;lt;/html&amp;gt;</value>
+    <comment>Final del Body Xls</comment>
+  </data>
+  <data name="HeaderXls" xml:space="preserve">
+    <value>&amp;lt;head&amp;gt;
+&amp;lt;meta http-equiv=Content-Type content="text/html; charset=windows-1252"&amp;gt;
+&amp;lt;meta name=ProgId content=Excel.Sheet&amp;gt;
+&amp;lt;meta name=Generator content="Microsoft Excel 10"&amp;gt;
+&amp;lt;!--[if gte mso 9]&amp;gt;&amp;lt;xml&amp;gt;
+ &amp;lt;o:DocumentProperties&amp;gt;
+  &amp;lt;o:Author&amp;gt;Administrator&amp;lt;/o:Author&amp;gt;
+  &amp;lt;o:LastAuthor&amp;gt;Administrator&amp;lt;/o:LastAuthor&amp;gt;
+  &amp;lt;o:Created&amp;gt;2006-10-21T19:50:04Z&amp;lt;/o:Created&amp;gt;
+  &amp;lt;o:LastSaved&amp;gt;2006-10-21T20:18:54Z&amp;lt;/o:LastSaved&amp;gt;
+  &amp;lt;o:Company&amp;gt;Microsoft Corporation&amp;lt;/o:Company&amp;gt;
+  &amp;lt;o:Version&amp;gt;10.3501&amp;lt;/o:Version&amp;gt;
+ &amp;lt;/o:DocumentProperties&amp;gt;
+ &amp;lt;o:OfficeDocumentSettings&amp;gt;
+  &amp;lt;o:DownloadComponents/&amp;gt;
+  &amp;lt;o:LocationOfComponents HRef="/"/&amp;gt;
+ &amp;lt;/o:OfficeDocumentSettings&amp;gt;
+&amp;lt;/xml&amp;gt;&amp;lt;![endif]--&amp;gt;
+&amp;lt;style&amp;gt;
+&amp;lt;!--table
+	{mso-displayed-decimal-separator:"\.";
+	mso-displayed-thousand-separator:"\,";}
+@page
+	{margin:1.0in .75in 1.0in .75in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;}
+tr
+	{mso-height-source:auto;}
+col
+	{mso-width-source:auto;}
+br
+	{mso-data-placement:same-cell;}
+.style0
+	{mso-number-format:General;
+	text-align:general;
+	vertical-align:bottom;
+	white-space:nowrap;
+	mso-rotate:0;
+	mso-background-source:auto;
+	mso-pattern:auto;
+	color:windowtext;
+	font-size:10.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:Arial;
+	mso-generic-font-family:auto;
+	mso-font-charset:0;
+	border:none;
+	mso-protection:locked visible;
+	mso-style-name:Normal;
+	mso-style-id:0;}
+td
+	{mso-style-parent:style0;
+	padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	mso-ignore:padding;
+	color:windowtext;
+	font-size:10.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:Arial;
+	mso-generic-font-family:auto;
+	mso-font-charset:0;
+	mso-number-format:General;
+	text-align:general;
+	vertical-align:bottom;
+	border:none;
+	mso-background-source:auto;
+	mso-pattern:auto;
+	mso-protection:locked visible;
+	white-space:nowrap;
+	mso-rotate:0;}
+.xl24
+	{mso-style-parent:style0;
+	mso-number-format:0;}
+--&amp;gt;
+&amp;lt;/style&amp;gt;
+&amp;lt;!--[if gte mso 9]&amp;gt;&amp;lt;xml&amp;gt;
+ &amp;lt;x:ExcelWorkbook&amp;gt;
+  &amp;lt;x:ExcelWorksheets&amp;gt;
+   &amp;lt;x:ExcelWorksheet&amp;gt;
+    &amp;lt;x:Name&amp;gt;Sheet1&amp;lt;/x:Name&amp;gt;
+    &amp;lt;x:WorksheetOptions&amp;gt;
+     &amp;lt;x:Print&amp;gt;
+      &amp;lt;x:ValidPrinterInfo/&amp;gt;
+      &amp;lt;x:HorizontalResolution&amp;gt;1200&amp;lt;/x:HorizontalResolution&amp;gt;
+      &amp;lt;x:VerticalResolution&amp;gt;1200&amp;lt;/x:VerticalResolution&amp;gt;
+     &amp;lt;/x:Print&amp;gt;
+     &amp;lt;x:Selected/&amp;gt;
+     &amp;lt;x:Panes&amp;gt;
+      &amp;lt;x:Pane&amp;gt;
+       &amp;lt;x:Number&amp;gt;3&amp;lt;/x:Number&amp;gt;
+       &amp;lt;x:ActiveCol&amp;gt;1&amp;lt;/x:ActiveCol&amp;gt;
+      &amp;lt;/x:Pane&amp;gt;
+     &amp;lt;/x:Panes&amp;gt;
+     &amp;lt;x:ProtectContents&amp;gt;False&amp;lt;/x:ProtectContents&amp;gt;
+     &amp;lt;x:ProtectObjects&amp;gt;False&amp;lt;/x:ProtectObjects&amp;gt;
+     &amp;lt;x:ProtectScenarios&amp;gt;False&amp;lt;/x:ProtectScenarios&amp;gt;
+    &amp;lt;/x:WorksheetOptions&amp;gt;
+   &amp;lt;/x:ExcelWorksheet&amp;gt;
+  &amp;lt;/x:ExcelWorksheets&amp;gt;
+  &amp;lt;x:WindowHeight&amp;gt;8385&amp;lt;/x:WindowHeight&amp;gt;
+  &amp;lt;x:WindowWidth&amp;gt;14940&amp;lt;/x:WindowWidth&amp;gt;
+  &amp;lt;x:WindowTopX&amp;gt;360&amp;lt;/x:WindowTopX&amp;gt;
+  &amp;lt;x:WindowTopY&amp;gt;240&amp;lt;/x:WindowTopY&amp;gt;
+  &amp;lt;x:ProtectStructure&amp;gt;False&amp;lt;/x:ProtectStructure&amp;gt;
+  &amp;lt;x:ProtectWindows&amp;gt;False&amp;lt;/x:ProtectWindows&amp;gt;
+ &amp;lt;/x:ExcelWorkbook&amp;gt;
+&amp;lt;/xml&amp;gt;&amp;lt;![endif]--&amp;gt;
+&amp;lt;/head&amp;gt;</value>
+    <comment>Header del html para excel</comment>
+  </data>
+</root>

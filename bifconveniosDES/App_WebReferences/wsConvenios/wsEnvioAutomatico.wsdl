@@ -1,0 +1,759 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ObtenerListaProcesosDisponiblesByFecha">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="pintDia" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerListaProcesosDisponiblesByFechaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerListaProcesosDisponiblesByFechaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerListaProcesosDisponibles">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pstrFiltro" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerListaProcesosDisponiblesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerListaProcesosDisponiblesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcesarEnvioNominasByCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="pintCodigoProcesoAutomatico" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrCodigoIBS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrTipoDocumento" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrNumeroDocumento" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrMesPeriodo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrAnioPeriodo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrFechaProcesoAS400" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrUsuario" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pintEstado" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcesarEnvioNominasByClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProcesarEnvioNominasByClienteResult" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pintEstado" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcesarTodosClientes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="penuTipoEnvio" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrUsuario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcesarTodosClientesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProcesarTodosClientesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegistrarLogEventoSistema">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pstrHilo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="penuNivel" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrAccion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrMensaje" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrExcepcion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrUsuario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegistrarLogEventoSistemaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RegistrarLogEventoSistemaResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegistrarLogEnvio">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="pintCodigoProcesoAutomatico" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pintCodigoCliente" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pintCodigoIBS" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="penuTipoEnvio" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrCodigoProceso" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pintAnioPeriodo" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pintMesPeriodo" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrMensaje" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="penuEstado" type="tns:enumLogEnvioCorreo" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrUsuario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="enumLogEnvioCorreo">
+        <s:restriction base="s:string">
+          <s:enumeration value="Enviado" />
+          <s:enumeration value="Cancelado" />
+          <s:enumeration value="Error" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="RegistrarLogEnvioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RegistrarLogEnvioResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegistrarLogProcesosAutomaticos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="pintTotal" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pintProcesados" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pintError" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrMensaje" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pintEstado" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrUsuario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegistrarLogProcesosAutomaticosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RegistrarLogProcesosAutomaticosResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActualizarLogProcesosAutomaticos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="pintCodigoProcesoAutomatico" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pintTotal" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pintProcesados" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pintError" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrMensaje" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pintEstado" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="pstrUsuario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActualizarLogProcesosAutomaticosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ActualizarLogProcesosAutomaticosResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DataTable" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+            <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="int" type="s:int" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ObtenerListaProcesosDisponiblesByFechaSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerListaProcesosDisponiblesByFecha" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerListaProcesosDisponiblesByFechaSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerListaProcesosDisponiblesByFechaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerListaProcesosDisponiblesSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerListaProcesosDisponibles" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerListaProcesosDisponiblesSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerListaProcesosDisponiblesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProcesarEnvioNominasByClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:ProcesarEnvioNominasByCliente" />
+  </wsdl:message>
+  <wsdl:message name="ProcesarEnvioNominasByClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:ProcesarEnvioNominasByClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProcesarTodosClientesSoapIn">
+    <wsdl:part name="parameters" element="tns:ProcesarTodosClientes" />
+  </wsdl:message>
+  <wsdl:message name="ProcesarTodosClientesSoapOut">
+    <wsdl:part name="parameters" element="tns:ProcesarTodosClientesResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarLogEventoSistemaSoapIn">
+    <wsdl:part name="parameters" element="tns:RegistrarLogEventoSistema" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarLogEventoSistemaSoapOut">
+    <wsdl:part name="parameters" element="tns:RegistrarLogEventoSistemaResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarLogEnvioSoapIn">
+    <wsdl:part name="parameters" element="tns:RegistrarLogEnvio" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarLogEnvioSoapOut">
+    <wsdl:part name="parameters" element="tns:RegistrarLogEnvioResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarLogProcesosAutomaticosSoapIn">
+    <wsdl:part name="parameters" element="tns:RegistrarLogProcesosAutomaticos" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarLogProcesosAutomaticosSoapOut">
+    <wsdl:part name="parameters" element="tns:RegistrarLogProcesosAutomaticosResponse" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarLogProcesosAutomaticosSoapIn">
+    <wsdl:part name="parameters" element="tns:ActualizarLogProcesosAutomaticos" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarLogProcesosAutomaticosSoapOut">
+    <wsdl:part name="parameters" element="tns:ActualizarLogProcesosAutomaticosResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerListaProcesosDisponiblesByFechaHttpGetIn">
+    <wsdl:part name="pintDia" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerListaProcesosDisponiblesByFechaHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerListaProcesosDisponiblesHttpGetIn">
+    <wsdl:part name="pstrFiltro" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerListaProcesosDisponiblesHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="ProcesarTodosClientesHttpGetIn">
+    <wsdl:part name="penuTipoEnvio" type="s:string" />
+    <wsdl:part name="pstrUsuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcesarTodosClientesHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarLogEventoSistemaHttpGetIn">
+    <wsdl:part name="pstrHilo" type="s:string" />
+    <wsdl:part name="penuNivel" type="s:string" />
+    <wsdl:part name="pstrAccion" type="s:string" />
+    <wsdl:part name="pstrMensaje" type="s:string" />
+    <wsdl:part name="pstrExcepcion" type="s:string" />
+    <wsdl:part name="pstrUsuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarLogEventoSistemaHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarLogEnvioHttpGetIn">
+    <wsdl:part name="pintCodigoProcesoAutomatico" type="s:string" />
+    <wsdl:part name="pintCodigoCliente" type="s:string" />
+    <wsdl:part name="pintCodigoIBS" type="s:string" />
+    <wsdl:part name="penuTipoEnvio" type="s:string" />
+    <wsdl:part name="pstrCodigoProceso" type="s:string" />
+    <wsdl:part name="pintAnioPeriodo" type="s:string" />
+    <wsdl:part name="pintMesPeriodo" type="s:string" />
+    <wsdl:part name="pstrMensaje" type="s:string" />
+    <wsdl:part name="penuEstado" type="s:string" />
+    <wsdl:part name="pstrUsuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarLogEnvioHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarLogProcesosAutomaticosHttpGetIn">
+    <wsdl:part name="pintTotal" type="s:string" />
+    <wsdl:part name="pintProcesados" type="s:string" />
+    <wsdl:part name="pintError" type="s:string" />
+    <wsdl:part name="pstrMensaje" type="s:string" />
+    <wsdl:part name="pintEstado" type="s:string" />
+    <wsdl:part name="pstrUsuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarLogProcesosAutomaticosHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarLogProcesosAutomaticosHttpGetIn">
+    <wsdl:part name="pintCodigoProcesoAutomatico" type="s:string" />
+    <wsdl:part name="pintTotal" type="s:string" />
+    <wsdl:part name="pintProcesados" type="s:string" />
+    <wsdl:part name="pintError" type="s:string" />
+    <wsdl:part name="pstrMensaje" type="s:string" />
+    <wsdl:part name="pintEstado" type="s:string" />
+    <wsdl:part name="pstrUsuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarLogProcesosAutomaticosHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerListaProcesosDisponiblesByFechaHttpPostIn">
+    <wsdl:part name="pintDia" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerListaProcesosDisponiblesByFechaHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerListaProcesosDisponiblesHttpPostIn">
+    <wsdl:part name="pstrFiltro" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerListaProcesosDisponiblesHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="ProcesarTodosClientesHttpPostIn">
+    <wsdl:part name="penuTipoEnvio" type="s:string" />
+    <wsdl:part name="pstrUsuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcesarTodosClientesHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarLogEventoSistemaHttpPostIn">
+    <wsdl:part name="pstrHilo" type="s:string" />
+    <wsdl:part name="penuNivel" type="s:string" />
+    <wsdl:part name="pstrAccion" type="s:string" />
+    <wsdl:part name="pstrMensaje" type="s:string" />
+    <wsdl:part name="pstrExcepcion" type="s:string" />
+    <wsdl:part name="pstrUsuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarLogEventoSistemaHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarLogEnvioHttpPostIn">
+    <wsdl:part name="pintCodigoProcesoAutomatico" type="s:string" />
+    <wsdl:part name="pintCodigoCliente" type="s:string" />
+    <wsdl:part name="pintCodigoIBS" type="s:string" />
+    <wsdl:part name="penuTipoEnvio" type="s:string" />
+    <wsdl:part name="pstrCodigoProceso" type="s:string" />
+    <wsdl:part name="pintAnioPeriodo" type="s:string" />
+    <wsdl:part name="pintMesPeriodo" type="s:string" />
+    <wsdl:part name="pstrMensaje" type="s:string" />
+    <wsdl:part name="penuEstado" type="s:string" />
+    <wsdl:part name="pstrUsuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarLogEnvioHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarLogProcesosAutomaticosHttpPostIn">
+    <wsdl:part name="pintTotal" type="s:string" />
+    <wsdl:part name="pintProcesados" type="s:string" />
+    <wsdl:part name="pintError" type="s:string" />
+    <wsdl:part name="pstrMensaje" type="s:string" />
+    <wsdl:part name="pintEstado" type="s:string" />
+    <wsdl:part name="pstrUsuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarLogProcesosAutomaticosHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarLogProcesosAutomaticosHttpPostIn">
+    <wsdl:part name="pintCodigoProcesoAutomatico" type="s:string" />
+    <wsdl:part name="pintTotal" type="s:string" />
+    <wsdl:part name="pintProcesados" type="s:string" />
+    <wsdl:part name="pintError" type="s:string" />
+    <wsdl:part name="pstrMensaje" type="s:string" />
+    <wsdl:part name="pintEstado" type="s:string" />
+    <wsdl:part name="pstrUsuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarLogProcesosAutomaticosHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:portType name="wsEnvioAutomaticoSoap">
+    <wsdl:operation name="ObtenerListaProcesosDisponiblesByFecha">
+      <wsdl:input message="tns:ObtenerListaProcesosDisponiblesByFechaSoapIn" />
+      <wsdl:output message="tns:ObtenerListaProcesosDisponiblesByFechaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerListaProcesosDisponibles">
+      <wsdl:input message="tns:ObtenerListaProcesosDisponiblesSoapIn" />
+      <wsdl:output message="tns:ObtenerListaProcesosDisponiblesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcesarEnvioNominasByCliente">
+      <wsdl:input message="tns:ProcesarEnvioNominasByClienteSoapIn" />
+      <wsdl:output message="tns:ProcesarEnvioNominasByClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcesarTodosClientes">
+      <wsdl:input message="tns:ProcesarTodosClientesSoapIn" />
+      <wsdl:output message="tns:ProcesarTodosClientesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogEventoSistema">
+      <wsdl:input message="tns:RegistrarLogEventoSistemaSoapIn" />
+      <wsdl:output message="tns:RegistrarLogEventoSistemaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogEnvio">
+      <wsdl:input message="tns:RegistrarLogEnvioSoapIn" />
+      <wsdl:output message="tns:RegistrarLogEnvioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogProcesosAutomaticos">
+      <wsdl:input message="tns:RegistrarLogProcesosAutomaticosSoapIn" />
+      <wsdl:output message="tns:RegistrarLogProcesosAutomaticosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarLogProcesosAutomaticos">
+      <wsdl:input message="tns:ActualizarLogProcesosAutomaticosSoapIn" />
+      <wsdl:output message="tns:ActualizarLogProcesosAutomaticosSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="wsEnvioAutomaticoHttpGet">
+    <wsdl:operation name="ObtenerListaProcesosDisponiblesByFecha">
+      <wsdl:input message="tns:ObtenerListaProcesosDisponiblesByFechaHttpGetIn" />
+      <wsdl:output message="tns:ObtenerListaProcesosDisponiblesByFechaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerListaProcesosDisponibles">
+      <wsdl:input message="tns:ObtenerListaProcesosDisponiblesHttpGetIn" />
+      <wsdl:output message="tns:ObtenerListaProcesosDisponiblesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcesarTodosClientes">
+      <wsdl:input message="tns:ProcesarTodosClientesHttpGetIn" />
+      <wsdl:output message="tns:ProcesarTodosClientesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogEventoSistema">
+      <wsdl:input message="tns:RegistrarLogEventoSistemaHttpGetIn" />
+      <wsdl:output message="tns:RegistrarLogEventoSistemaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogEnvio">
+      <wsdl:input message="tns:RegistrarLogEnvioHttpGetIn" />
+      <wsdl:output message="tns:RegistrarLogEnvioHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogProcesosAutomaticos">
+      <wsdl:input message="tns:RegistrarLogProcesosAutomaticosHttpGetIn" />
+      <wsdl:output message="tns:RegistrarLogProcesosAutomaticosHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarLogProcesosAutomaticos">
+      <wsdl:input message="tns:ActualizarLogProcesosAutomaticosHttpGetIn" />
+      <wsdl:output message="tns:ActualizarLogProcesosAutomaticosHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="wsEnvioAutomaticoHttpPost">
+    <wsdl:operation name="ObtenerListaProcesosDisponiblesByFecha">
+      <wsdl:input message="tns:ObtenerListaProcesosDisponiblesByFechaHttpPostIn" />
+      <wsdl:output message="tns:ObtenerListaProcesosDisponiblesByFechaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerListaProcesosDisponibles">
+      <wsdl:input message="tns:ObtenerListaProcesosDisponiblesHttpPostIn" />
+      <wsdl:output message="tns:ObtenerListaProcesosDisponiblesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcesarTodosClientes">
+      <wsdl:input message="tns:ProcesarTodosClientesHttpPostIn" />
+      <wsdl:output message="tns:ProcesarTodosClientesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogEventoSistema">
+      <wsdl:input message="tns:RegistrarLogEventoSistemaHttpPostIn" />
+      <wsdl:output message="tns:RegistrarLogEventoSistemaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogEnvio">
+      <wsdl:input message="tns:RegistrarLogEnvioHttpPostIn" />
+      <wsdl:output message="tns:RegistrarLogEnvioHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogProcesosAutomaticos">
+      <wsdl:input message="tns:RegistrarLogProcesosAutomaticosHttpPostIn" />
+      <wsdl:output message="tns:RegistrarLogProcesosAutomaticosHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarLogProcesosAutomaticos">
+      <wsdl:input message="tns:ActualizarLogProcesosAutomaticosHttpPostIn" />
+      <wsdl:output message="tns:ActualizarLogProcesosAutomaticosHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="wsEnvioAutomaticoSoap" type="tns:wsEnvioAutomaticoSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ObtenerListaProcesosDisponiblesByFecha">
+      <soap:operation soapAction="http://tempuri.org/ObtenerListaProcesosDisponiblesByFecha" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerListaProcesosDisponibles">
+      <soap:operation soapAction="http://tempuri.org/ObtenerListaProcesosDisponibles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcesarEnvioNominasByCliente">
+      <soap:operation soapAction="http://tempuri.org/ProcesarEnvioNominasByCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcesarTodosClientes">
+      <soap:operation soapAction="http://tempuri.org/ProcesarTodosClientes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogEventoSistema">
+      <soap:operation soapAction="http://tempuri.org/RegistrarLogEventoSistema" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogEnvio">
+      <soap:operation soapAction="http://tempuri.org/RegistrarLogEnvio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogProcesosAutomaticos">
+      <soap:operation soapAction="http://tempuri.org/RegistrarLogProcesosAutomaticos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarLogProcesosAutomaticos">
+      <soap:operation soapAction="http://tempuri.org/ActualizarLogProcesosAutomaticos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="wsEnvioAutomaticoSoap12" type="tns:wsEnvioAutomaticoSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ObtenerListaProcesosDisponiblesByFecha">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerListaProcesosDisponiblesByFecha" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerListaProcesosDisponibles">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerListaProcesosDisponibles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcesarEnvioNominasByCliente">
+      <soap12:operation soapAction="http://tempuri.org/ProcesarEnvioNominasByCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcesarTodosClientes">
+      <soap12:operation soapAction="http://tempuri.org/ProcesarTodosClientes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogEventoSistema">
+      <soap12:operation soapAction="http://tempuri.org/RegistrarLogEventoSistema" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogEnvio">
+      <soap12:operation soapAction="http://tempuri.org/RegistrarLogEnvio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogProcesosAutomaticos">
+      <soap12:operation soapAction="http://tempuri.org/RegistrarLogProcesosAutomaticos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarLogProcesosAutomaticos">
+      <soap12:operation soapAction="http://tempuri.org/ActualizarLogProcesosAutomaticos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="wsEnvioAutomaticoHttpGet" type="tns:wsEnvioAutomaticoHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="ObtenerListaProcesosDisponiblesByFecha">
+      <http:operation location="/ObtenerListaProcesosDisponiblesByFecha" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerListaProcesosDisponibles">
+      <http:operation location="/ObtenerListaProcesosDisponibles" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcesarTodosClientes">
+      <http:operation location="/ProcesarTodosClientes" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogEventoSistema">
+      <http:operation location="/RegistrarLogEventoSistema" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogEnvio">
+      <http:operation location="/RegistrarLogEnvio" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogProcesosAutomaticos">
+      <http:operation location="/RegistrarLogProcesosAutomaticos" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarLogProcesosAutomaticos">
+      <http:operation location="/ActualizarLogProcesosAutomaticos" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="wsEnvioAutomaticoHttpPost" type="tns:wsEnvioAutomaticoHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="ObtenerListaProcesosDisponiblesByFecha">
+      <http:operation location="/ObtenerListaProcesosDisponiblesByFecha" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerListaProcesosDisponibles">
+      <http:operation location="/ObtenerListaProcesosDisponibles" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcesarTodosClientes">
+      <http:operation location="/ProcesarTodosClientes" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogEventoSistema">
+      <http:operation location="/RegistrarLogEventoSistema" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogEnvio">
+      <http:operation location="/RegistrarLogEnvio" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogProcesosAutomaticos">
+      <http:operation location="/RegistrarLogProcesosAutomaticos" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarLogProcesosAutomaticos">
+      <http:operation location="/ActualizarLogProcesosAutomaticos" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="wsEnvioAutomatico">
+    <wsdl:port name="wsEnvioAutomaticoSoap" binding="tns:wsEnvioAutomaticoSoap">
+      <soap:address location="http://localhost/WSBIFConveniosDES/wsEnvioAutomatico.asmx" />
+    </wsdl:port>
+    <wsdl:port name="wsEnvioAutomaticoSoap12" binding="tns:wsEnvioAutomaticoSoap12">
+      <soap12:address location="http://localhost/WSBIFConveniosDES/wsEnvioAutomatico.asmx" />
+    </wsdl:port>
+    <wsdl:port name="wsEnvioAutomaticoHttpGet" binding="tns:wsEnvioAutomaticoHttpGet">
+      <http:address location="http://localhost/WSBIFConveniosDES/wsEnvioAutomatico.asmx" />
+    </wsdl:port>
+    <wsdl:port name="wsEnvioAutomaticoHttpPost" binding="tns:wsEnvioAutomaticoHttpPost">
+      <http:address location="http://localhost/WSBIFConveniosDES/wsEnvioAutomatico.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

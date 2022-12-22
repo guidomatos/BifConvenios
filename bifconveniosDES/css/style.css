@@ -1,0 +1,50 @@
+﻿.row
+{
+	display:table-row;
+}
+.cell
+{
+	display:table-cell;
+}
+
+#container
+{
+    display:table;
+    border:dashed 1px gray;
+}
+
+	.containercell
+	{
+		padding:10px;
+	}
+	
+#search
+{
+    display:table;
+    width:100%;
+}
+
+	.searchborder
+	{
+		border: 1px solid black; 
+		padding:5px;
+	}
+
+.button
+{
+    font-weight:bold;
+    color:#FFFFFF;
+    background-color:#555555;
+    border-style:solid;
+    border-color:#000000;
+    border-width:1px;
+    height:100%
+}
+
+.textbox {
+    background:#FFFFFF url('../images/search.png') no-repeat 4px 4px;
+    padding:4px 4px 4px 22px;
+    border:1px solid #CCCCCC;
+    width:60px;
+    
+}

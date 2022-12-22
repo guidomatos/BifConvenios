@@ -1,0 +1,9 @@
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\BIFConveniosGeneracionDocumentos.Resources.resources
+obj\Debug\BIFConveniosGeneracionDocumentos.vbproj.GenerateResource.Cache
+bin\Debug\BIFConveniosGeneracionDocumentos.dll
+bin\Debug\BIFConveniosGeneracionDocumentos.pdb
+bin\Debug\BIFConveniosGeneracionDocumentos.xml
+obj\Debug\BIFConveniosGeneracionDocumentos.dll
+obj\Debug\BIFConveniosGeneracionDocumentos.xml
+obj\Debug\BIFConveniosGeneracionDocumentos.pdb

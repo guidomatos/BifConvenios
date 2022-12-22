@@ -1,0 +1,9 @@
+bin\Debug\BroadcasterClass.dll
+bin\Debug\BroadcasterClass.pdb
+bin\Debug\BroadcasterClass.xml
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\BroadcasterClass.Resources.resources
+obj\Debug\BroadcasterClass.vbproj.GenerateResource.Cache
+obj\Debug\BroadcasterClass.dll
+obj\Debug\BroadcasterClass.xml
+obj\Debug\BroadcasterClass.pdb
