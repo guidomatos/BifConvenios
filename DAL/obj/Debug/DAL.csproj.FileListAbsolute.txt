@@ -14,3 +14,20 @@ D:\banbif\project\BifConvenios\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
 D:\banbif\project\BifConvenios\DAL\obj\Debug\DAL.csproj.CopyComplete
 D:\banbif\project\BifConvenios\DAL\obj\Debug\DAL.dll
 D:\banbif\project\BifConvenios\DAL\obj\Debug\DAL.pdb
+E:\Otros\Innova TA\Banbif\Proyecto\Desarrollo\DAL\bin\Debug\DAL.dll.config
+E:\Otros\Innova TA\Banbif\Proyecto\Desarrollo\DAL\bin\Debug\DAL.dll
+E:\Otros\Innova TA\Banbif\Proyecto\Desarrollo\DAL\bin\Debug\DAL.pdb
+E:\Otros\Innova TA\Banbif\Proyecto\Desarrollo\DAL\bin\Debug\BIFUtils.dll
+E:\Otros\Innova TA\Banbif\Proyecto\Desarrollo\DAL\bin\Debug\Resource.dll
+E:\Otros\Innova TA\Banbif\Proyecto\Desarrollo\DAL\bin\Debug\Desencripta.dll
+E:\Otros\Innova TA\Banbif\Proyecto\Desarrollo\DAL\bin\Debug\SevenZipSharp.dll
+E:\Otros\Innova TA\Banbif\Proyecto\Desarrollo\DAL\bin\Debug\BIFUtils.pdb
+E:\Otros\Innova TA\Banbif\Proyecto\Desarrollo\DAL\bin\Debug\BIFUtils.xml
+E:\Otros\Innova TA\Banbif\Proyecto\Desarrollo\DAL\bin\Debug\BIFUtils.dll.config
+E:\Otros\Innova TA\Banbif\Proyecto\Desarrollo\DAL\bin\Debug\Resource.pdb
+E:\Otros\Innova TA\Banbif\Proyecto\Desarrollo\DAL\bin\Debug\SevenZipSharp.pdb
+E:\Otros\Innova TA\Banbif\Proyecto\Desarrollo\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache
+E:\Otros\Innova TA\Banbif\Proyecto\Desarrollo\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+E:\Otros\Innova TA\Banbif\Proyecto\Desarrollo\DAL\obj\Debug\DAL.csproj.CopyComplete
+E:\Otros\Innova TA\Banbif\Proyecto\Desarrollo\DAL\obj\Debug\DAL.dll
+E:\Otros\Innova TA\Banbif\Proyecto\Desarrollo\DAL\obj\Debug\DAL.pdb
