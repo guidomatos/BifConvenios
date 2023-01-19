@@ -9,16 +9,16 @@ Imports System.Runtime.InteropServices
 ' Revisar los valores de los atributos del ensamblado
 
 <Assembly: AssemblyTitle("BIFConvenio.BE")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("BIFConvenio.BE")> 
-<Assembly: AssemblyCopyright("©  2019")> 
+<Assembly: AssemblyDescription("")>
+<Assembly: AssemblyCompany("Banbif")>
+<Assembly: AssemblyProduct("BIFConvenio.BE")>
+<Assembly: AssemblyCopyright("©  2023")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
 
 'El siguiente GUID sirve como identificador de la biblioteca de tipos si este proyecto se expone a COM
-<Assembly: Guid("dbb8e3a2-cb0d-4d9b-a4c6-4864e826dda2")> 
+<Assembly: Guid("dbb8e3a2-cb0d-4d9b-a4c6-4864e826dda2")>
 
 ' La información de versión de un ensamblado consta de los cuatro valores siguientes:
 '
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' mediante el asterisco ('*'), como se muestra a continuación:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.0")> 
-<Assembly: AssemblyFileVersion("1.0.0.0")> 
+<Assembly: AssemblyVersion("4.0.0.0")>
+<Assembly: AssemblyFileVersion("4.0.0.0")>
