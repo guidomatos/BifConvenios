@@ -1,9 +1,0 @@
-bin\Debug\BIFData.dll
-bin\Debug\BIFData.pdb
-bin\Debug\BIFData.xml
-obj\Debug\ResolveAssemblyReference.cache
-obj\Debug\BIFData.Resources.resources
-obj\Debug\BIFData.vbproj.GenerateResource.Cache
-obj\Debug\BIFData.dll
-obj\Debug\BIFData.xml
-obj\Debug\BIFData.pdb
