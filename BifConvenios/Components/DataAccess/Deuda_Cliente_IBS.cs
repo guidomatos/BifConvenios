@@ -1,49 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Configuration;
 using System.Data;
-using System.Data.Sql;
 using System.Data.SqlClient;
-using System.Reflection;
-using System.ComponentModel;
-using System.Data.OleDb;
-using ADODB;
 
 namespace DataAccess
 {
     public class Deuda_Cliente_IBS
     {
-        private string connexion;
+        private readonly string connexion;
 
         public Deuda_Cliente_IBS()
-        {                         
+        {
             //connexion = ConfigurationManager.AppSettings["ConnectionString"].Trim();               
             connexion = BIFUtils.WS.Utils.CadenaConexion("ConnectionString");
         }
 
         public string DescifrarCadenaConexion(string cadena_conexion)
         {
-            string cadena_conexion_antes_password_cifrado = string.Empty;
-            string password_cifrado = string.Empty;
-            string cadena_conexion_despues_password_cifrado = string.Empty;
-            string temporal = string.Empty;
-            string password_descifrado = string.Empty;
-            string cadena_conexion_descifrada = string.Empty;
-
+            string cadena_conexion_descifrada;
             try
             {
-                cadena_conexion_antes_password_cifrado = cadena_conexion.Substring(0, cadena_conexion.IndexOf("Password") + 9);
-                temporal = cadena_conexion.Substring(cadena_conexion.IndexOf("Password") + 9);
-                cadena_conexion_despues_password_cifrado = temporal.Substring(temporal.IndexOf(";"));
-                password_cifrado = temporal.Substring(0, temporal.IndexOf(";"));                
+                string cadena_conexion_antes_password_cifrado = cadena_conexion.Substring(0, cadena_conexion.IndexOf("Password") + 9);
+                string temporal = cadena_conexion.Substring(cadena_conexion.IndexOf("Password") + 9);
+                string cadena_conexion_despues_password_cifrado = temporal.Substring(temporal.IndexOf(";"));
+                string password_cifrado = temporal.Substring(0, temporal.IndexOf(";"));
                 //bifwebservices.DecodificarClave c = new bifwebservices.DecodificarClave();   
                 //password_descifrado = c.Decodifica(password_cifrado);
-                password_descifrado = password_cifrado;
+                string password_descifrado = password_cifrado;
                 cadena_conexion_descifrada = cadena_conexion_antes_password_cifrado + password_descifrado + cadena_conexion_despues_password_cifrado;
             }
 
-            catch (Exception ex)
+            catch
             {
                 cadena_conexion_descifrada = "";
             }
@@ -56,9 +43,10 @@ namespace DataAccess
             List<int> LISTA_mes_DLCCR = new List<int>();
 
             SqlConnection con = new SqlConnection(connexion);
-         
-            SqlCommand cmd = new SqlCommand("MES_DLCCR", con);
-            cmd.CommandType = CommandType.StoredProcedure;
+            SqlCommand cmd = new SqlCommand("MES_DLCCR", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
 
             con.Open();
 
@@ -66,12 +54,10 @@ namespace DataAccess
 
             while (reader.Read())
             {
-                LISTA_mes_DLCCR.Add(Convert.ToInt32(  reader.GetValue (reader.GetOrdinal("DLVCM"))));
+                LISTA_mes_DLCCR.Add(Convert.ToInt32(reader.GetValue(reader.GetOrdinal("DLVCM"))));
             }
 
             return LISTA_mes_DLCCR;
-
-
         }
 
         public List<int> lista_anio_DLCCR()
@@ -79,38 +65,38 @@ namespace DataAccess
             List<int> LISTA_ANIO_DLCCR = new List<int>();
 
             SqlConnection con = new SqlConnection(connexion);
-           
+            SqlCommand cmd = new SqlCommand("ANIO_DLCCR", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
 
-            SqlCommand cmd = new SqlCommand("ANIO_DLCCR", con);
-            cmd.CommandType = CommandType.StoredProcedure;
             con.Open();
 
             SqlDataReader reader = cmd.ExecuteReader();
 
             while (reader.Read())
             {
-               LISTA_ANIO_DLCCR.Add(Convert.ToInt32(reader.GetValue(reader.GetOrdinal("DLVCA"))));
+                LISTA_ANIO_DLCCR.Add(Convert.ToInt32(reader.GetValue(reader.GetOrdinal("DLVCA"))));
             }
 
             return LISTA_ANIO_DLCCR;
-
         }
 
-        public DataTable  lista_deuda_empresa_DLCCR(string mes , string anio)
+        public DataTable lista_deuda_empresa_DLCCR(string mes, string anio)
         {
-
             DataTable dt = null;
 
             SqlConnection con = new SqlConnection(connexion);
-            SqlCommand cmd = new SqlCommand("LISTA_TOTAL_MES_DEUDA_EMPRES", con);
-            cmd.CommandType = CommandType.StoredProcedure;
+            SqlCommand cmd = new SqlCommand("LISTA_TOTAL_MES_DEUDA_EMPRES", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
 
-            
             cmd.Parameters.Add(new SqlParameter("@MES", mes));
             cmd.Parameters.Add(new SqlParameter("@ANIO", anio));
-                        
+
             con.Open();
-          
+
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)
             {
@@ -133,11 +119,11 @@ namespace DataAccess
                 dt.Columns.Add(dc_deuda_mes);
                 dt.Columns.Add(dc_nro_total_clientes);
                 dt.Columns.Add(dc_deuda_total);
-              
+
                 while (reader.Read())
                 {
                     DataRow rs = dt.NewRow();
-                                                         
+
                     rs[0] = reader.GetString(reader.GetOrdinal("DLECUN"));
                     rs[1] = reader.GetString(reader.GetOrdinal("DLEDSC"));
                     rs[2] = reader.GetString(reader.GetOrdinal("MES"));
@@ -148,24 +134,21 @@ namespace DataAccess
                     rs[7] = Class_Formato.formatodecimal(reader.GetDecimal(reader.GetOrdinal("DEUDA_TOTAL")));
 
                     dt.Rows.Add(rs);
-                    rs = null;
                 }
             }
-
             return dt;
-
         }
 
-
-        public DataTable   LISTAR_RESULTADO_DEUDA_TOTAL(int codigo_cliente, string anio, string mes)
+        public DataTable LISTAR_RESULTADO_DEUDA_TOTAL(int codigo_cliente, string anio, string mes)
         {
-
             DataTable dt = null;
 
             SqlConnection con = new SqlConnection(connexion);
-            SqlCommand cmd = new SqlCommand("LISTAR_RESULTADO_DEUDA_TOTAL", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            
+            SqlCommand cmd = new SqlCommand("LISTAR_RESULTADO_DEUDA_TOTAL", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
             cmd.Parameters.Add(new SqlParameter("@MES", mes));
             cmd.Parameters.Add(new SqlParameter("@ANIO", anio));
             cmd.Parameters.Add(new SqlParameter("@codigo_cliente", codigo_cliente));
@@ -184,7 +167,7 @@ namespace DataAccess
                 dt.Columns.Add(dc_DLEDSC);
                 dt.Columns.Add(dc_total_deuda);
                 dt.Columns.Add(dc_total_cantidad);
-              
+
 
                 while (reader.Read())
                 {
@@ -193,25 +176,22 @@ namespace DataAccess
                     rs[0] = reader.GetString(reader.GetOrdinal("DLEDSC"));
                     rs[1] = Class_Formato.formatodecimal(reader.GetDecimal(reader.GetOrdinal("total_deuda")));
                     rs[2] = reader.GetInt32(reader.GetOrdinal("total_cantidad"));
-                   
+
                     dt.Rows.Add(rs);
-                    rs = null;
                 }
             }
-
             return dt;
-
         }
-
 
         public DataTable LISTA_DETALLE_CUOTA_EMPRESA_IBS(int codigo_cliente, string anio, string mes)
         {
-
             DataTable dt = null;
 
             SqlConnection con = new SqlConnection(connexion);
-            SqlCommand cmd = new SqlCommand("LISTA_DETALLE_CUOTA_EMPRESA_IBS", con);
-            cmd.CommandType = CommandType.StoredProcedure;
+            SqlCommand cmd = new SqlCommand("LISTA_DETALLE_CUOTA_EMPRESA_IBS", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
 
             cmd.Parameters.Add(new SqlParameter("@MES", mes));
             cmd.Parameters.Add(new SqlParameter("@ANIO", anio));
@@ -251,23 +231,20 @@ namespace DataAccess
                     rs[5] = Class_Formato.formatodecimal(reader.GetDecimal(reader.GetOrdinal("SALDO_DEUDA")));
 
                     dt.Rows.Add(rs);
-                    rs = null;
                 }
             }
-
             return dt;
-
         }
 
-
-        public DataTable LISTAR_RESULTADO_DEUDA_MES(int codigo_cliente,string mes, string anio)
+        public DataTable LISTAR_RESULTADO_DEUDA_MES(int codigo_cliente, string mes, string anio)
         {
-
             DataTable dt = null;
 
             SqlConnection con = new SqlConnection(connexion);
-            SqlCommand cmd = new SqlCommand("LISTAR_RESULTADO_DEUDA_MES", con);
-            cmd.CommandType = CommandType.StoredProcedure;
+            SqlCommand cmd = new SqlCommand("LISTAR_RESULTADO_DEUDA_MES", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
 
             cmd.Parameters.Add(new SqlParameter("@MES", mes));
             cmd.Parameters.Add(new SqlParameter("@ANIO", anio));
@@ -295,28 +272,23 @@ namespace DataAccess
 
                     rs[0] = reader.GetString(reader.GetOrdinal("DLEDSC"));
                     rs[1] = Class_Formato.formatodecimal(reader.GetDecimal(reader.GetOrdinal("total_deuda_mes")));
-                    rs[2] =  Class_Formato.formatodecimal(reader.GetInt32(reader.GetOrdinal("cantidad_pagares")));
+                    rs[2] = Class_Formato.formatodecimal(reader.GetInt32(reader.GetOrdinal("cantidad_pagares")));
 
                     dt.Rows.Add(rs);
-                    rs = null;
                 }
             }
-
             return dt;
-
-
         }
 
-
-
-        public DataTable LISTA_DETALLE_CUOTA_EMPRESA_MES_IBS(int codigo_cliente,string mes, string anio)
+        public DataTable LISTA_DETALLE_CUOTA_EMPRESA_MES_IBS(int codigo_cliente, string mes, string anio)
         {
-
             DataTable dt = null;
 
             SqlConnection con = new SqlConnection(connexion);
-            SqlCommand cmd = new SqlCommand("LISTA_DETALLE_CUOTA_EMPRESA_MES_IBS", con);
-            cmd.CommandType = CommandType.StoredProcedure;
+            SqlCommand cmd = new SqlCommand("LISTA_DETALLE_CUOTA_EMPRESA_MES_IBS", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
 
             cmd.Parameters.Add(new SqlParameter("@MES", mes));
             cmd.Parameters.Add(new SqlParameter("@ANIO", anio));
@@ -355,27 +327,23 @@ namespace DataAccess
                     rs[3] = reader.GetString(reader.GetOrdinal("ANIO"));
                     rs[4] = reader.GetString(reader.GetOrdinal("MES"));
                     rs[5] = Class_Formato.formatodecimal(reader.GetDecimal(reader.GetOrdinal("SALDO_DEUDA")));
-                    
+
 
                     dt.Rows.Add(rs);
-                    rs = null;
                 }
             }
-
             return dt;
-
         }
-
-
 
         public DataTable LISTA_DETALLE_CUOTA_EMPRESA_MES_IBS_otros(int codigo_cliente, string mes, string anio)
         {
-
             DataTable dt = null;
 
             SqlConnection con = new SqlConnection(connexion);
-            SqlCommand cmd = new SqlCommand("LISTA_DETALLE_CUOTA_EMPRESA_IBS_OTROS", con);
-            cmd.CommandType = CommandType.StoredProcedure;
+            SqlCommand cmd = new SqlCommand("LISTA_DETALLE_CUOTA_EMPRESA_IBS_OTROS", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
 
             cmd.Parameters.Add(new SqlParameter("@MES", mes));
             cmd.Parameters.Add(new SqlParameter("@ANIO", anio));
@@ -417,23 +385,20 @@ namespace DataAccess
 
 
                     dt.Rows.Add(rs);
-                    rs = null;
                 }
             }
-
             return dt;
-
         }
 
-
-        public DataTable detalle_pagare(string  pagare , string mes, string anio)
+        public DataTable detalle_pagare(string pagare, string mes, string anio)
         {
-
             DataTable dt = null;
 
             SqlConnection con = new SqlConnection(connexion);
-            SqlCommand cmd = new SqlCommand("DETALLE_PAGARE", con);
-            cmd.CommandType = CommandType.StoredProcedure;
+            SqlCommand cmd = new SqlCommand("DETALLE_PAGARE", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
 
             cmd.Parameters.Add(new SqlParameter("@MES", mes));
             cmd.Parameters.Add(new SqlParameter("@ANIO", anio));
@@ -467,35 +432,30 @@ namespace DataAccess
                     DataRow rs = dt.NewRow();
 
                     rs[0] = reader.GetString(reader.GetOrdinal("MONEDA"));
-                    rs[1] = (reader.GetDecimal(reader.GetOrdinal("ANIO"))+ 2000).ToString() ;
-                    rs[2] = reader.GetDecimal(reader.GetOrdinal("MES")).ToString() ;
+                    rs[1] = (reader.GetDecimal(reader.GetOrdinal("ANIO")) + 2000).ToString();
+                    rs[2] = reader.GetDecimal(reader.GetOrdinal("MES")).ToString();
                     rs[3] = Class_Formato.formatodecimal(reader.GetDecimal(reader.GetOrdinal("MONTO_MES")));
                     rs[4] = Class_Formato.formatodecimal(reader.GetDecimal(reader.GetOrdinal("MONTO_PAGADO")));
                     rs[5] = Class_Formato.formatodecimal(reader.GetDecimal(reader.GetOrdinal("ITF")));
 
 
                     dt.Rows.Add(rs);
-                    rs = null;
                 }
             }
-
             return dt;
-
         }
 
-
-
-        public DataTable cLIENTES_CUOTAS_NEGATIVAS (int mes, int anio)
+        public DataTable cLIENTES_CUOTAS_NEGATIVAS(int mes, int anio)
         {
-
             DataTable dt = null;
+
             try
             {
-               
-
                 SqlConnection con = new SqlConnection(connexion);
-                SqlCommand cmd = new SqlCommand("LISTA_CUOTAS_NEGATIVAS", con);
-                cmd.CommandType = CommandType.StoredProcedure;
+                SqlCommand cmd = new SqlCommand("LISTA_CUOTAS_NEGATIVAS", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
 
                 cmd.Parameters.Add(new SqlParameter("@MES", mes));
                 cmd.Parameters.Add(new SqlParameter("@ANIO", anio));
@@ -537,7 +497,6 @@ namespace DataAccess
 
 
                         dt.Rows.Add(rs);
-                        rs = null;
                     }
                 }
 
@@ -547,18 +506,17 @@ namespace DataAccess
                 throw ex;
             }
             return dt;
-
         }
-
 
         public DataTable cLIENTES_CUOTAS_NEGATIVAS_IBS(int mes, int anio)
         {
-
             DataTable dt = null;
 
             SqlConnection con = new SqlConnection(connexion);
-            SqlCommand cmd = new SqlCommand("LISTA_CUOTAS_NEGATIVAS_IBS", con);
-            cmd.CommandType = CommandType.StoredProcedure;
+            SqlCommand cmd = new SqlCommand("LISTA_CUOTAS_NEGATIVAS_IBS", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
 
             cmd.Parameters.Add(new SqlParameter("@MES", mes));
             cmd.Parameters.Add(new SqlParameter("@ANIO", anio));
@@ -600,15 +558,9 @@ namespace DataAccess
 
 
                     dt.Rows.Add(rs);
-                    rs = null;
                 }
             }
-
             return dt;
-
         }
-
-
-
     }
 }

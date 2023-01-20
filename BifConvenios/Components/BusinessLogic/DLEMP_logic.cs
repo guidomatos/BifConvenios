@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using DataAccess;
+﻿using DataAccess;
 
 namespace BusinessLogic
 {
@@ -10,14 +7,13 @@ namespace BusinessLogic
      
         public bool actualizar_dlemp(string cliente_id, string anio, string mes)
         {
-            bool result = false;
+            bool result;
             try
             {
-
                 DLEMP dlemp_acc = new DataAccess.DLEMP();
                 result = dlemp_acc.Actualizar_datos_DLEMP(cliente_id, anio, mes);
             }
-            catch (Exception ex)
+            catch
             {
                 result = false;
             }

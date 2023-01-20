@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Configuration;
-using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using System.Reflection;
-using System.ComponentModel;
+﻿using System.Data;
 using System.Data.OleDb;
 using ADODB;
 using BIFUtils.WS;
 
 namespace DataAccess
 {
-    public  class DLEMP
+    public class DLEMP
     {
         private string connexion;
 
@@ -24,12 +16,12 @@ namespace DataAccess
             //connexion = DescifrarCadenaConexion(ConfigurationManager.AppSettings["AS400_ConnectionString_Convenios"].Trim());            
 
             connexion = Utils.CadenaConexion("AS400-ConnectionString-Convenios");
-        }        
+        }
 
         public DataSet dDLEMP()
         {
-            ADODB.Connection conn = new Connection();
-            ADODB.Recordset result = new Recordset();
+            Connection conn = new Connection();
+            Recordset result = new Recordset();
 
             conn.CursorLocation = CursorLocationEnum.adUseClient;
             conn.Open(connexion, "", "", -1);
@@ -38,8 +30,7 @@ namespace DataAccess
                          " FROM       DLEMP " +
                          " ORDER BY DLEDSC";
 
-            object gg = null;
-            result = conn.Execute(str, out gg, 0);
+            result = conn.Execute(str, out object gg, 0);
 
             result.ActiveConnection = null;
 
@@ -53,15 +44,14 @@ namespace DataAccess
             return ds;
         }
 
-
-        public bool Actualizar_datos_DLEMP(string Cliente_ID , string anio,string mes)
+        public bool Actualizar_datos_DLEMP(string Cliente_ID, string anio, string mes)
         {
             bool result_bool = false;
 
             try
             {
-                ADODB.Connection conn = new Connection();
-                ADODB.Recordset result = new Recordset();
+                Connection conn = new Connection();
+                Recordset result = new Recordset();
 
                 conn.CursorLocation = CursorLocationEnum.adUseClient;
                 conn.Open(connexion, "", "", -1);
@@ -72,11 +62,10 @@ namespace DataAccess
                 string str = " UPDATE DLEMP SET DLEAEN = " + anio.Trim() + ", DLEMEN = " + mes.Trim() +
                              " WHERE  DLECUN =" + Cliente_ID.Trim();
 
-                object gg = null;
-                result = conn.Execute(str, out gg, 0);
+                result = conn.Execute(str, out object gg, 0);
                 result_bool = true;
             }
-            catch (Exception ex)
+            catch
             {
                 result_bool = false;
             }
