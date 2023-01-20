@@ -62,6 +62,10 @@
     <Compile Include="Reporte_Deuda_cliente_IBScs.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\BIFUtils\BIFUtils.vbproj">
+      <Project>{afa34a2c-8f69-4671-85e3-74b86f34054e}</Project>
+      <Name>BIFUtils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{4F1C63A4-2395-42A2-BEA0-11C096FC8AD1}</Project>
       <Name>DataAccess</Name>

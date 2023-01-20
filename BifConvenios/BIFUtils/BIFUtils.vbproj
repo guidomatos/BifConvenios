@@ -40,10 +40,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Desencripta">
-      <HintPath>..\packages\DLL Banbif\Desencripta.dll</HintPath>
+      <HintPath>..\..\DLL\Desencripta.dll</HintPath>
     </Reference>
     <Reference Include="Encripta">
-      <HintPath>..\packages\DLL Banbif\Encripta.dll</HintPath>
+      <HintPath>..\..\DLL\Encripta.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />

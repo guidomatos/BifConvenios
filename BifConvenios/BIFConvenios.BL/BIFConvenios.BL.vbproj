@@ -39,7 +39,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Resource, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -126,6 +125,10 @@
     <ProjectReference Include="..\BIFUtils\BIFUtils.vbproj">
       <Project>{AFA34A2C-8F69-4671-85E3-74B86F34054E}</Project>
       <Name>BIFUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resource\Resource.csproj">
+      <Project>{eb9becf5-c64d-4a1a-b1c5-91494bbe4519}</Project>
+      <Name>Resource</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />

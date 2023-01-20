@@ -8,20 +8,21 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "bifconveniosDES(1)", "bifco
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv2.0"
 		ProjectReferences = "{C963285A-3057-49D5-8CEB-629C8E88956C}|BIFConvenios.BE.dll;{BAC914D4-0394-455D-B0C2-AF3CF6B1598C}|BIFConvenios.BL.dll;{AFA34A2C-8F69-4671-85E3-74B86F34054E}|BIFUtils.dll;{D0A42DE9-45EB-4951-9E50-FE449B019860}|BusinessLogic.dll;{C6B95A0F-392E-4775-B51A-F5676ACB2C17}|BIFConvenios.DO.dll;{8EBE95EA-BEAB-423D-B06C-87B9FAA730A8}|DAL.dll;{EB9BECF5-C64D-4A1A-B1C5-91494BBE4519}|Resource.dll;{4F1C63A4-2395-42A2-BEA0-11C096FC8AD1}|DataAccess.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/bifconveniosDES"
-		Debug.AspNetCompiler.PhysicalPath = "D:\SWBIFCONVENIOS_16012020\bifconveniosDES\"
+		Debug.AspNetCompiler.PhysicalPath = "bifconveniosDES\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\bifconveniosDES\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/bifconveniosDES"
-		Release.AspNetCompiler.PhysicalPath = "D:\SWBIFCONVENIOS_16012020\bifconveniosDES\"
+		Release.AspNetCompiler.PhysicalPath = "bifconveniosDES\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\bifconveniosDES\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "60926"
+		SlnRelativePath = "bifconveniosDES\"
 	EndProjectSection
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WSbifconveniosDES(1)", "WSbifconveniosDES\", "{A65D5F0D-158D-4A3E-90E3-729202673EC7}"
@@ -29,20 +30,21 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WSbifconveniosDES(1)", "WSb
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv2.0"
 		ProjectReferences = "{C963285A-3057-49D5-8CEB-629C8E88956C}|BIFConvenios.BE.dll;{BAC914D4-0394-455D-B0C2-AF3CF6B1598C}|BIFConvenios.BL.dll;{C6B95A0F-392E-4775-B51A-F5676ACB2C17}|BIFConvenios.DO.dll;{AFA34A2C-8F69-4671-85E3-74B86F34054E}|BIFUtils.dll;{8EBE95EA-BEAB-423D-B06C-87B9FAA730A8}|DAL.dll;{EB9BECF5-C64D-4A1A-B1C5-91494BBE4519}|Resource.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/WSbifconveniosDES"
-		Debug.AspNetCompiler.PhysicalPath = "D:\SWBIFCONVENIOS_16012020\WSbifconveniosDES\"
+		Debug.AspNetCompiler.PhysicalPath = "WSbifconveniosDES\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\WSbifconveniosDES\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/WSbifconveniosDES"
-		Release.AspNetCompiler.PhysicalPath = "D:\SWBIFCONVENIOS_16012020\WSbifconveniosDES\"
+		Release.AspNetCompiler.PhysicalPath = "WSbifconveniosDES\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\WSbifconveniosDES\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "63066"
+		SlnRelativePath = "WSbifconveniosDES\"
 	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BIFConvenios.BE", "BIFConvenio.BE\BIFConvenios.BE.vbproj", "{C963285A-3057-49D5-8CEB-629C8E88956C}"
@@ -56,8 +58,6 @@ EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BIFUtils", "BIFUtils\BIFUtils.vbproj", "{AFA34A2C-8F69-4671-85E3-74B86F34054E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resource", "Resource\Resource.csproj", "{EB9BECF5-C64D-4A1A-B1C5-91494BBE4519}"
-EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.vbproj", "{8CDDF167-D385-430A-9B57-D7F6D5CD074F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "Components\BusinessLogic\BusinessLogic.csproj", "{D0A42DE9-45EB-4951-9E50-FE449B019860}"
 EndProject
@@ -145,14 +145,6 @@ Global
 		{EB9BECF5-C64D-4A1A-B1C5-91494BBE4519}.Release|.NET.ActiveCfg = Release|Any CPU
 		{EB9BECF5-C64D-4A1A-B1C5-91494BBE4519}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB9BECF5-C64D-4A1A-B1C5-91494BBE4519}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{8CDDF167-D385-430A-9B57-D7F6D5CD074F}.Debug|.NET.ActiveCfg = Debug|Any CPU
-		{8CDDF167-D385-430A-9B57-D7F6D5CD074F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8CDDF167-D385-430A-9B57-D7F6D5CD074F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8CDDF167-D385-430A-9B57-D7F6D5CD074F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{8CDDF167-D385-430A-9B57-D7F6D5CD074F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{8CDDF167-D385-430A-9B57-D7F6D5CD074F}.Release|.NET.ActiveCfg = Release|Any CPU
-		{8CDDF167-D385-430A-9B57-D7F6D5CD074F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8CDDF167-D385-430A-9B57-D7F6D5CD074F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D0A42DE9-45EB-4951-9E50-FE449B019860}.Debug|.NET.ActiveCfg = Debug|Any CPU
 		{D0A42DE9-45EB-4951-9E50-FE449B019860}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D0A42DE9-45EB-4951-9E50-FE449B019860}.Debug|Any CPU.Build.0 = Debug|Any CPU
