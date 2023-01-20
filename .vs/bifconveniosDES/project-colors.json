@@ -5,7 +5,42 @@
       "ProjectGuid": "c963285a-3057-49d5-8ceb-629c8e88956c",
       "DisplayName": "BIFConvenios.BE",
       "ColorIndex": 0
+    },
+    "bac914d4-0394-455d-b0c2-af3cf6b1598c": {
+      "ProjectGuid": "bac914d4-0394-455d-b0c2-af3cf6b1598c",
+      "DisplayName": "BIFConvenios.BL",
+      "ColorIndex": 1
+    },
+    "afa34a2c-8f69-4671-85e3-74b86f34054e": {
+      "ProjectGuid": "afa34a2c-8f69-4671-85e3-74b86f34054e",
+      "DisplayName": "BIFUtils",
+      "ColorIndex": 2
+    },
+    "c6b95a0f-392e-4775-b51a-f5676acb2c17": {
+      "ProjectGuid": "c6b95a0f-392e-4775-b51a-f5676acb2c17",
+      "DisplayName": "BIFConvenios.DO",
+      "ColorIndex": 3
+    },
+    "8ebe95ea-beab-423d-b06c-87b9faa730a8": {
+      "ProjectGuid": "8ebe95ea-beab-423d-b06c-87b9faa730a8",
+      "DisplayName": "DAL",
+      "ColorIndex": 4
+    },
+    "eb9becf5-c64d-4a1a-b1c5-91494bbe4519": {
+      "ProjectGuid": "eb9becf5-c64d-4a1a-b1c5-91494bbe4519",
+      "DisplayName": "Resource",
+      "ColorIndex": 5
+    },
+    "4f1c63a4-2395-42a2-bea0-11c096fc8ad1": {
+      "ProjectGuid": "4f1c63a4-2395-42a2-bea0-11c096fc8ad1",
+      "DisplayName": "DataAccess",
+      "ColorIndex": 6
+    },
+    "d0a42de9-45eb-4951-9e50-fe449b019860": {
+      "ProjectGuid": "d0a42de9-45eb-4951-9e50-fe449b019860",
+      "DisplayName": "BusinessLogic",
+      "ColorIndex": 7
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 8
 }
