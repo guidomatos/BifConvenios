@@ -1,26 +1,16 @@
-﻿Imports System
-Imports System.Collections
-Imports System.Collections.Generic
+﻿Imports System.Collections.Generic
 Imports System.ComponentModel
-Imports System.Configuration
 Imports System.Data
-Imports System.Data.SqlClient
-Imports System.Web
 Imports System.Web.Services
-Imports System.Web.Services.Protocols
-
 Imports BIFConvenios.BE
-Imports BIFConvenios.BL.BIFConvenios.BL
-
 Imports Resource
-Imports Microsoft.VisualBasic
 
 <WebService(Namespace:="http://tempuri.org/")> _
-<WebServiceBinding(ConformsTo:=WsiProfiles.BasicProfile1_1)> _
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<WebServiceBinding(ConformsTo:=WsiProfiles.BasicProfile1_1)>
+<CompilerServices.DesignerGenerated()>
 <ToolboxItem(False)> _
 Public Class wsEnvioAutomatico
-    Inherits System.Web.Services.WebService
+    Inherits WebService
 
     Protected objClienteBL As New BIFConvenios.BL.clsClienteBL
     Protected objProcesoBL As New BIFConvenios.BL.clsProcesoBL
@@ -39,23 +29,21 @@ Public Class wsEnvioAutomatico
     Protected objLogEnvioCorreo As New clsLogEnvioCorreo
     Protected objEventoSistema As New clsEventoSistema
 
-    <WebMethod()> _
-    Public Function ValidarFinProcesoBatch(ByVal codigo_proceso As String) As Boolean
+    <WebMethod()>
+    Public Function ValidarFinProcesoBatch(codigo_proceso As String) As Boolean
         Return objProcesoBL.ValidarFinProcesoBatch(codigo_proceso)
     End Function
 
-    <WebMethod()> _
-    Public Function ObtenerListaProcesosDisponiblesByFecha(ByVal pintDia As Integer) As DataTable
-        Dim _dtProcesosIBS As New DataTable()
-        Dim _dtProcesosBifConvenios As New DataTable()
-        Dim _dtClientes As New DataTable()
+    <WebMethod()>
+    Public Function ObtenerListaProcesosDisponiblesByFecha(pintDia As Integer) As DataTable
+
         Dim _dsResult As New DataSet()
 
-        _dtProcesosIBS = objProcesoBL.ObtenerInformacionProcesosIBS("").Copy()
+        Dim _dtProcesosIBS As DataTable = objProcesoBL.ObtenerInformacionProcesosIBS("").Copy()
         _dtProcesosIBS.TableName = "dtProcesosIBS"
-        _dtProcesosBifConvenios = objProcesoBL.ObtenerProcesosRealizadosActual().Copy()
+        Dim _dtProcesosBifConvenios As DataTable = objProcesoBL.ObtenerProcesosRealizadosActual().Copy()
         _dtProcesosBifConvenios.TableName = "dtProcesosBIF"
-        _dtClientes = objClienteBL.ObtenerListaClientesByDiaEnvio(pintDia).Copy()
+        Dim _dtClientes As DataTable = objClienteBL.ObtenerListaClientesByDiaEnvio(pintDia).Copy()
         _dtClientes.TableName = "dtCliente"
 
         _dsResult.Tables.Add(_dtProcesosIBS)
@@ -67,18 +55,18 @@ Public Class wsEnvioAutomatico
         'Columnas del Padre
         'CUSTID, CUSIDN, DLEAP, DLEMP
         Dim ParentColumns() As DataColumn = New DataColumn() _
-                    {_dsResult.Tables("dtProcesosIBS").Columns("CUSTID"), _
-                        _dsResult.Tables("dtProcesosIBS").Columns("CUSIDN"), _
-                        _dsResult.Tables("dtProcesosIBS").Columns("DLEAP"), _
+                    {_dsResult.Tables("dtProcesosIBS").Columns("CUSTID"),
+                        _dsResult.Tables("dtProcesosIBS").Columns("CUSIDN"),
+                        _dsResult.Tables("dtProcesosIBS").Columns("DLEAP"),
                         _dsResult.Tables("dtProcesosIBS").Columns("DLEMP")}
         ' Procesos registrados
 
         'Columnas del hijo
         'TipoDocumento, NumeroDocumento, Anio_periodo, Mes_Periodo
         Dim ChildColumns() As DataColumn = New DataColumn() _
-                    {_dsResult.Tables("dtProcesosBIF").Columns("TipoDocumento"), _
-                        _dsResult.Tables("dtProcesosBIF").Columns("NumeroDocumento"), _
-                        _dsResult.Tables("dtProcesosBIF").Columns("Anio_periodo"), _
+                    {_dsResult.Tables("dtProcesosBIF").Columns("TipoDocumento"),
+                        _dsResult.Tables("dtProcesosBIF").Columns("NumeroDocumento"),
+                        _dsResult.Tables("dtProcesosBIF").Columns("Anio_periodo"),
                         _dsResult.Tables("dtProcesosBIF").Columns("Mes_Periodo")}
         ' Procesos disponibles AS/400
 
@@ -96,11 +84,11 @@ Public Class wsEnvioAutomatico
         _dsResult.Tables("dtProcesosIBS").AcceptChanges()
 
         Dim ChildProcesos() As DataColumn = New DataColumn() _
-                                {_dsResult.Tables("dtProcesosIBS").Columns("CUSTID"), _
+                                {_dsResult.Tables("dtProcesosIBS").Columns("CUSTID"),
                                     _dsResult.Tables("dtProcesosIBS").Columns("CUSIDN")}
 
         Dim ParentRegistrados() As DataColumn = New DataColumn() _
-                                {_dsResult.Tables("dtCliente").Columns("TipoDocumento"), _
+                                {_dsResult.Tables("dtCliente").Columns("TipoDocumento"),
                                     _dsResult.Tables("dtCliente").Columns("NumeroDocumento")}
 
         Dim CustomerRelation2 As New DataRelation("Division2", ParentRegistrados, ChildProcesos, False)
@@ -117,18 +105,16 @@ Public Class wsEnvioAutomatico
         Return _dsResult.Tables("dtProcesosIBS")
     End Function
 
-    <WebMethod()> _
-    Public Function ObtenerListaProcesosDisponibles(ByVal pstrFiltro As String) As DataTable
-        Dim _dtProcesosIBS As New DataTable()
-        Dim _dtProcesosBifConvenios As New DataTable()
-        Dim _dtClientes As New DataTable()
+    <WebMethod()>
+    Public Function ObtenerListaProcesosDisponibles(pstrFiltro As String) As DataTable
+
         Dim _dsResult As New DataSet()
 
-        _dtProcesosIBS = objProcesoBL.ObtenerInformacionProcesosIBS(pstrFiltro).Copy()
+        Dim _dtProcesosIBS As DataTable = objProcesoBL.ObtenerInformacionProcesosIBS(pstrFiltro).Copy()
         _dtProcesosIBS.TableName = "dtProcesosIBS"
-        _dtProcesosBifConvenios = objProcesoBL.ObtenerProcesosRealizadosActual().Copy()
+        Dim _dtProcesosBifConvenios As DataTable = objProcesoBL.ObtenerProcesosRealizadosActual().Copy()
         _dtProcesosBifConvenios.TableName = "dtProcesosBIF"
-        _dtClientes = objClienteBL.ObtenerListaDocumentosClientesRegistrados().Copy()
+        Dim _dtClientes As DataTable = objClienteBL.ObtenerListaDocumentosClientesRegistrados().Copy()
         _dtClientes.TableName = "dtCliente"
 
         _dsResult.Tables.Add(_dtProcesosIBS)
@@ -140,18 +126,18 @@ Public Class wsEnvioAutomatico
         'Columnas del Padre
         'CUSTID, CUSIDN, DLEAP, DLEMP
         Dim ParentColumns() As DataColumn = New DataColumn() _
-                    {_dsResult.Tables("dtProcesosIBS").Columns("CUSTID"), _
-                        _dsResult.Tables("dtProcesosIBS").Columns("CUSIDN"), _
-                        _dsResult.Tables("dtProcesosIBS").Columns("DLEAP"), _
+                    {_dsResult.Tables("dtProcesosIBS").Columns("CUSTID"),
+                        _dsResult.Tables("dtProcesosIBS").Columns("CUSIDN"),
+                        _dsResult.Tables("dtProcesosIBS").Columns("DLEAP"),
                         _dsResult.Tables("dtProcesosIBS").Columns("DLEMP")}
         ' Procesos registrados
 
         'Columnas del hijo
         'TipoDocumento, NumeroDocumento, Anio_periodo, Mes_Periodo
         Dim ChildColumns() As DataColumn = New DataColumn() _
-                    {_dsResult.Tables("dtProcesosBIF").Columns("TipoDocumento"), _
-                        _dsResult.Tables("dtProcesosBIF").Columns("NumeroDocumento"), _
-                        _dsResult.Tables("dtProcesosBIF").Columns("Anio_periodo"), _
+                    {_dsResult.Tables("dtProcesosBIF").Columns("TipoDocumento"),
+                        _dsResult.Tables("dtProcesosBIF").Columns("NumeroDocumento"),
+                        _dsResult.Tables("dtProcesosBIF").Columns("Anio_periodo"),
                         _dsResult.Tables("dtProcesosBIF").Columns("Mes_Periodo")}
         ' Procesos disponibles AS/400
 
@@ -169,11 +155,11 @@ Public Class wsEnvioAutomatico
         _dsResult.Tables("dtProcesosIBS").AcceptChanges()
 
         Dim ChildProcesos() As DataColumn = New DataColumn() _
-                                {_dsResult.Tables("dtProcesosIBS").Columns("CUSTID"), _
+                                {_dsResult.Tables("dtProcesosIBS").Columns("CUSTID"),
                                     _dsResult.Tables("dtProcesosIBS").Columns("CUSIDN")}
 
         Dim ParentRegistrados() As DataColumn = New DataColumn() _
-                                {_dsResult.Tables("dtCliente").Columns("TipoDocumento"), _
+                                {_dsResult.Tables("dtCliente").Columns("TipoDocumento"),
                                     _dsResult.Tables("dtCliente").Columns("NumeroDocumento")}
 
         Dim CustomerRelation2 As New DataRelation("Division2", ParentRegistrados, ChildProcesos, False)
@@ -190,28 +176,22 @@ Public Class wsEnvioAutomatico
         Return _dsResult.Tables("dtProcesosIBS")
     End Function
 
-    <WebMethod()> _
-    Public Function ProcesarEnvioNominasByCliente(ByVal pintCodigoProcesoAutomatico As Integer, ByVal pstrCodigoIBS As String, ByVal pstrTipoDocumento As String, ByVal pstrNumeroDocumento As String, ByVal pstrMesPeriodo As String, ByVal pstrAnioPeriodo As String, ByVal pstrFechaProcesoAS400 As String, ByVal pstrUsuario As String, ByRef pintEstado As Integer) As String
-        Dim _dtCliente As New DataTable()
-
+    <WebMethod()>
+    Public Function ProcesarEnvioNominasByCliente(pintCodigoProcesoAutomatico As Integer, pstrCodigoIBS As String, pstrTipoDocumento As String, pstrNumeroDocumento As String, pstrMesPeriodo As String, pstrAnioPeriodo As String, pstrFechaProcesoAS400 As String, pstrUsuario As String, ByRef pintEstado As Integer) As String
         Dim strCodigoCliente As String = ""
-        Dim strNombreCliente As String = ""
-        Dim strEnvioAutomatico As String = ""
-        Dim strCorreosElectronicos As String = ""
-        Dim intDiaEnvioPlanilla As Integer = 0
 
-        Dim strMensajeEvento As String = ""
+        Dim strMensajeEvento As String
 
         Try
-            _dtCliente = objClienteBL.ExisteClienteBifConvenio(pstrTipoDocumento, pstrNumeroDocumento)
+            Dim _dtCliente As DataTable = objClienteBL.ExisteClienteBifConvenio(pstrTipoDocumento, pstrNumeroDocumento)
 
             strCodigoCliente = _dtCliente.Rows(0)("CodigoCliente").ToString()
-            strNombreCliente = _dtCliente.Rows(0)("NombreCliente").ToString().Trim()
-            intDiaEnvioPlanilla = Convert.ToInt32(_dtCliente.Rows(0)("DiaEnvioPlanilla").ToString())
-            strEnvioAutomatico = _dtCliente.Rows(0)("EnvioAutomaticoListado").ToString()
-            strCorreosElectronicos = objClienteBL.ObtenerEmailsEnviosClientes(strCodigoCliente)
+            Dim strNombreCliente As String = _dtCliente.Rows(0)("NombreCliente").ToString().Trim()
+            Dim intDiaEnvioPlanilla As Integer = Convert.ToInt32(_dtCliente.Rows(0)("DiaEnvioPlanilla").ToString())
+            Dim strEnvioAutomatico As String = _dtCliente.Rows(0)("EnvioAutomaticoListado").ToString()
+            Dim strCorreosElectronicos As String = objClienteBL.ObtenerEmailsEnviosClientes(strCodigoCliente)
 
-            If intDiaEnvioPlanilla.Equals(DateTime.Now.Day) Then ''And strEnvioAutomatico.ToUpper.Equals("S") Then
+            If intDiaEnvioPlanilla.Equals(Date.Now.Day) Then ''And strEnvioAutomatico.ToUpper.Equals("S") Then
                 'If strCorreosElectronicos.Length > 0 Then
                 'Else
                 '    strMensajeEvento = clsMensajesGeneric.MensajeNoRegistraCorreos.Replace("&1", strNombreCliente).Replace("&2", strCodigoCliente)
@@ -269,28 +249,14 @@ Public Class wsEnvioAutomatico
         End Try
     End Function
 
-    <WebMethod()> _
-    Public Function ProcesarTodosClientes(ByVal penuTipoEnvio As Integer, ByVal pstrUsuario As String) As String
-        Dim strTipoDocumento As String = String.Empty
-        Dim strNumeroDocumento As String = String.Empty
-        Dim strCodigoIBS As String = String.Empty
-        Dim strCodigoCliente As String = String.Empty
-        Dim strNombreCliente As String = String.Empty
-        Dim strMesProceso As String = String.Empty
-        Dim strAnioProceso As String = String.Empty
-        Dim strFechaProcesoAS400 As String = String.Empty
-
-        Dim intDiaEnvioPlanilla As Integer = 0
-        Dim strEnvioAutomatico As String = String.Empty
-        Dim strCorreosElectronicos As String = String.Empty
-
-        Dim strMensajeEvento As String = String.Empty
+    <WebMethod()>
+    Public Function ProcesarTodosClientes(penuTipoEnvio As Integer, pstrUsuario As String) As String
         Dim intContadorEnvios As Integer = 0
         Dim intContadorError As Integer = 0
 
         Dim _dtListaProcesosCliente As New DataTable()
 
-        Dim strMensajes As List(Of String) = New List(Of String)
+        Dim strMensajes As New List(Of String)
         Dim strMensajeEnviar As String
 
         RegistrarLogEventoSistema("BifConvenio", enumEstadoLogEnvio.Info, "ProcesarTodosLosClientes", "Inicio del Método - Parametros: penuTipoEnvio = " & penuTipoEnvio & ", pstrUsuiario = " & pstrUsuario, "", pstrUsuario)
@@ -299,25 +265,26 @@ Public Class wsEnvioAutomatico
             _dtListaProcesosCliente = ObtenerListaProcesosDisponibles("")
 
             For Each _dr As DataRow In _dtListaProcesosCliente.Rows
-                strTipoDocumento = _dr("CUSTID").ToString()
-                strNumeroDocumento = _dr("CUSIDN").ToString()
-                strNombreCliente = _dr("CUSNA1").ToString()
-                strMesProceso = _dr("DLEMP").ToString()
-                strAnioProceso = _dr("DLEAP").ToString()
-                strFechaProcesoAS400 = _dr("DLEFP").ToString()
-                strCodigoIBS = _dr("CUSCUN").ToString()
+                Dim strTipoDocumento As String = _dr("CUSTID").ToString()
+                Dim strNumeroDocumento As String = _dr("CUSIDN").ToString()
+                Dim strNombreCliente As String = _dr("CUSNA1").ToString()
+                Dim strMesProceso As String = _dr("DLEMP").ToString()
+                Dim strAnioProceso As String = _dr("DLEAP").ToString()
+                Dim strFechaProcesoAS400 As String = _dr("DLEFP").ToString()
+                Dim strCodigoIBS As String = _dr("CUSCUN").ToString()
 
                 Try
                     Dim _dtCliente As New DataTable()
 
                     _dtCliente = objClienteBL.ExisteClienteBifConvenio(strTipoDocumento, strNumeroDocumento)
 
-                    strCodigoCliente = _dtCliente.Rows(0)("CodigoCliente").ToString()
-                    intDiaEnvioPlanilla = Convert.ToInt32(_dtCliente.Rows(0)("DiaEnvioPlanilla").ToString())
-                    strEnvioAutomatico = _dtCliente.Rows(0)("EnvioAutomaticoListado").ToString()
-                    strCorreosElectronicos = _dtCliente.Rows(0)("CorreoElectronico").ToString()
+                    Dim strCodigoCliente As String = _dtCliente.Rows(0)("CodigoCliente").ToString()
+                    Dim intDiaEnvioPlanilla As Integer = Convert.ToInt32(_dtCliente.Rows(0)("DiaEnvioPlanilla").ToString())
+                    Dim strEnvioAutomatico As String = _dtCliente.Rows(0)("EnvioAutomaticoListado").ToString()
+                    Dim strCorreosElectronicos As String = _dtCliente.Rows(0)("CorreoElectronico").ToString()
 
-                    If intDiaEnvioPlanilla.Equals(DateTime.Now.Day) And strEnvioAutomatico.ToUpper.Equals("S") Then
+                    If intDiaEnvioPlanilla.Equals(Date.Now.Day) And strEnvioAutomatico.ToUpper.Equals("S") Then
+                        Dim strMensajeEvento As String
                         If strCorreosElectronicos.Length > 0 Then
                             Dim strCodigoProceso As String = ""
 
@@ -331,20 +298,20 @@ Public Class wsEnvioAutomatico
 
                                     strMensajes.Add(clsMensajesGeneric.ProcesoMensajeEnviadoExitoso.Replace("&1", strCodigoProceso).Replace("&2", strCodigoCliente).Replace("&3", strNombreCliente))
 
-                                    intContadorEnvios = intContadorEnvios + 1
+                                    intContadorEnvios += 1
                                 Else
                                     'RegistrarLogEnvio(strCodigoCliente, strCodigoIBS, penuTipoEnvio, strCodigoProceso, strMensajeEvento, enumLogEnvioCorreo.Error, pstrUsuario)
 
                                     strMensajes.Add(clsMensajesGeneric.ProcesoMensajeEnviadoError.Replace("&1", strCodigoProceso).Replace("&2", strCodigoCliente).Replace("&3", strNombreCliente))
 
-                                    intContadorError = intContadorError + 1
+                                    intContadorError += 1
                                 End If
                             Else
                                 'RegistrarLogEnvio(strCodigoCliente, strCodigoIBS, penuTipoEnvio, strCodigoProceso, strMensajeEvento, enumLogEnvioCorreo.Error, pstrUsuario)
 
                                 strMensajes.Add(clsMensajesGeneric.ProcesoYAGenerado.Replace("&1", strCodigoProceso).Replace("&2", strCodigoCliente).Replace("&3", strNombreCliente))
 
-                                intContadorError = intContadorError + 1
+                                intContadorError += 1
                             End If
                         Else
                             strMensajeEvento = "No existe correos para el Cliente con Codigo: " + strCodigoCliente
@@ -352,7 +319,7 @@ Public Class wsEnvioAutomatico
 
                             strMensajes.Add(clsMensajesGeneric.ProcesoNoExisteCorreo.Replace("&1", "").Replace("&2", strCodigoCliente).Replace("&3", strNombreCliente))
 
-                            intContadorError = intContadorError + 1
+                            intContadorError += 1
                         End If
 
                     End If
@@ -362,7 +329,7 @@ Public Class wsEnvioAutomatico
                     'RegistrarLogEnvio(strCodigoCliente, strCodigoIBS, penuTipoEnvio, "", ex.Message, enumLogEnvioCorreo.Error, pstrUsuario)
                     strMensajes.Add(clsMensajesGeneric.ProcesoClienteError.Replace("&1", strTipoDocumento).Replace("&2", strNumeroDocumento))
 
-                    intContadorError = intContadorError + 1
+                    intContadorError += 1
                     Continue For
                 End Try
             Next
@@ -381,38 +348,26 @@ Public Class wsEnvioAutomatico
         'lo que se devolvera
     End Function
 
-    Private Function EnviarCorreoCliente(ByVal pstrCodIBS As String, ByVal pstrNomCliente As String, ByVal penuTipoProceso As enumProcessType, ByVal pstrCodigoProceso As String, ByVal pstrCorreosElectronicos As String, ByVal pstrAnioProceso As String, ByVal pstrMesProceso As String, ByVal pstrDocTrabajador As String, ByVal pstrNomTrabajador As String, ByVal pdecPagare As Decimal, ByVal pstrEstadoTrabajador As String, ByVal pintZonaUse As Integer, ByVal pstrFormatFile As String) As String
-        Dim strCorreoElectronicoDE As String = String.Empty
-        Dim strCorreoElectronicosPara As String = String.Empty
-        Dim strCorreoElectronicosBCC As String = String.Empty
-        Dim strCorreoElectronicoAsunto As String = String.Empty
-        Dim strCorreoElectronicoNotificarA As String = String.Empty
-        Dim strCorreoElectronicoCuerpo As String = String.Empty
-
+    Private Function EnviarCorreoCliente(pstrCodIBS As String, pstrNomCliente As String, penuTipoProceso As enumProcessType, pstrCodigoProceso As String, pstrCorreosElectronicos As String, pstrAnioProceso As String, pstrMesProceso As String, pstrDocTrabajador As String, pstrNomTrabajador As String, pdecPagare As Decimal, pstrEstadoTrabajador As String, pintZonaUse As Integer, pstrFormatFile As String) As String
         Dim strNameFile As String = String.Empty
         Dim strPathFile As String = String.Empty
         Dim strMensaje As String = String.Empty
 
-        Dim strPath As String = ""
-
         _dtParametrosEnvioMail = objSystemParametersBL.Seleccionar(ConfigurationManager.AppSettings(clsTiposSystemParameters.ParametroEnvioMail.ToString()))
 
-        strPath = _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.RutaDescargaNominas))("vValor").ToString().Trim()
+        Dim strPath As String = _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.RutaDescargaNominas))("vValor").ToString().Trim()
 
-        'Dim strPath As String = ConfigurationManager.AppSettings("ArchivosConvenio").ToString()
-        Dim strFullName As String = String.Empty
-
-        Dim _dtCuotas As New DataTable()
         Dim objUtils As New clsUtils
 
         'Seteando parametros
 
         'strCorreoElectronicoDE = ConfigurationManager.AppSettings("mailDefault").ToString()
-        strCorreoElectronicoDE = _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.MailPorDefecto))("vValor").ToString().Trim()
+        Dim strCorreoElectronicoDE As String = _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.MailPorDefecto))("vValor").ToString().Trim()
 
         'Si no este TEST hacemos el envio regular
         Dim strTestOnly As String = _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.ModoPrueba))("vValor").ToString().Trim()
 
+        Dim strCorreoElectronicosPara As String
         If strTestOnly = "0" Then
             strCorreoElectronicosPara = pstrCorreosElectronicos
         Else    ' en otro caso enviamos el correo a una direccion de prueba
@@ -420,13 +375,12 @@ Public Class wsEnvioAutomatico
             strCorreoElectronicosPara = _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.ListaMailTest))("vValor").ToString().Trim()
         End If
 
-        strCorreoElectronicosBCC = _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.ListaMailCopias))("vValor").ToString().Trim()
-        strCorreoElectronicoAsunto = _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.AsuntoNominaAutomatica))("vValor").ToString().Trim()
-        strCorreoElectronicoCuerpo = _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.CuerpoNominaAutomatica))("vValor").ToString().Trim().Replace("&1", clsPeriodo.NombreMes(pstrMesProceso.ToString()).Replace("&2", pstrAnioProceso))
-        strCorreoElectronicoNotificarA = _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.MailEnvio))("vValor").ToString().Trim()
+        Dim strCorreoElectronicosBCC As String = _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.ListaMailCopias))("vValor").ToString().Trim()
+        Dim strCorreoElectronicoAsunto As String = _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.AsuntoNominaAutomatica))("vValor").ToString().Trim()
+        Dim strCorreoElectronicoCuerpo As String = _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.CuerpoNominaAutomatica))("vValor").ToString().Trim().Replace("&1", clsPeriodo.NombreMes(pstrMesProceso.ToString()).Replace("&2", pstrAnioProceso))
+        Dim strCorreoElectronicoNotificarA As String = _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.MailEnvio))("vValor").ToString().Trim()
 
         Dim ar As New ArrayList()
-        Dim intResultExport As Integer = 0
 
         For Each str As Object In strCorreoElectronicosPara.Split(";")
             ar.Add(New MailSource(str))
@@ -435,13 +389,13 @@ Public Class wsEnvioAutomatico
         'Iniciando el proceso de envio del correo
 
         Try
-            _dtCuotas = objProcesoBL.ExportarRegistrosResultadoProceso(pstrCodigoProceso, pstrDocTrabajador, pstrNomTrabajador, pdecPagare, pstrEstadoTrabajador, pintZonaUse)
-            intResultExport = clsFiles.ExportToExcel(_dtCuotas, pstrFormatFile, strPath, pstrNomCliente + "-" + pstrCodIBS, Convert.ToInt32(pstrAnioProceso), Convert.ToInt32(pstrMesProceso), penuTipoProceso.ToString(), strNameFile, strPathFile, strMensaje)
+            Dim _dtCuotas As DataTable = objProcesoBL.ExportarRegistrosResultadoProceso(pstrCodigoProceso, pstrDocTrabajador, pstrNomTrabajador, pdecPagare, pstrEstadoTrabajador, pintZonaUse)
+            Dim intResultExport As Integer = clsFiles.ExportToExcel(_dtCuotas, pstrFormatFile, strPath, pstrNomCliente + "-" + pstrCodIBS, Convert.ToInt32(pstrAnioProceso), Convert.ToInt32(pstrMesProceso), penuTipoProceso.ToString(), strNameFile, strPathFile, strMensaje)
 
             If intResultExport = 0 Then
-                strFullName = strPathFile + "\\" + strNameFile
-
-                objUtils.SendNotification(strCorreoElectronicoDE, strCorreoElectronicosPara, strCorreoElectronicosBCC, strCorreoElectronicoAsunto, strCorreoElectronicoCuerpo, strFullName, True, notifyTo:=(strCorreoElectronicoNotificarA))
+                'Dim strPath As String = ConfigurationManager.AppSettings("ArchivosConvenio").ToString()
+                Dim strFullName As String = strPathFile + "\\" + strNameFile
+                objUtils.SendNotification(strCorreoElectronicoDE, strCorreoElectronicosPara, strCorreoElectronicosBCC, String.Empty, strCorreoElectronicoCuerpo, strFullName, True, notifyTo:=(strCorreoElectronicoNotificarA))
 
                 objArchivosConvenio.vCodProceso = pstrCodigoProceso
                 objArchivosConvenio.vNombreArchivo = strNameFile
@@ -450,7 +404,7 @@ Public Class wsEnvioAutomatico
                 objArchivosConvenio.vRutaHistorico = String.Empty
                 objArchivosConvenio.iEstado = 1
                 objArchivosConvenio.vUsuarioCreacion = Context.User.Identity.Name
-                objArchivosConvenio.dFechaCreacion = DateTime.Now()
+                objArchivosConvenio.dFechaCreacion = Date.Now()
 
                 Dim iInsert As Integer = objArchivosConvenioBL.Insert(objArchivosConvenio)
 
@@ -465,7 +419,7 @@ Public Class wsEnvioAutomatico
         Return strMensaje
     End Function
 
-    Private Function ProcesarCliente(ByVal pstrCodigoCliente As String, ByVal pstrNombreCliente As String, ByVal pstrCodigoIBS As String, ByVal pstrAnio As String, ByVal pstrMes As String, ByVal pstrFechaProcesoAS400 As String, ByVal pstrUserName As String, ByRef pstrCodigoProceso As String) As String
+    Private Function ProcesarCliente(pstrCodigoCliente As String, pstrNombreCliente As String, pstrCodigoIBS As String, pstrAnio As String, pstrMes As String, pstrFechaProcesoAS400 As String, pstrUserName As String, ByRef pstrCodigoProceso As String) As String
         Dim strMensaje As String = String.Empty
 
         If String.IsNullOrEmpty(pstrCodigoCliente) Then
@@ -517,8 +471,8 @@ Public Class wsEnvioAutomatico
 
 #Region "Log"
 
-    <WebMethod()> _
-    Public Function RegistrarLogEventoSistema(ByVal pstrHilo As String, ByVal penuNivel As Integer, ByVal pstrAccion As String, ByVal pstrMensaje As String, ByVal pstrExcepcion As String, ByVal pstrUsuario As String) As Integer
+    <WebMethod()>
+    Public Function RegistrarLogEventoSistema(pstrHilo As String, penuNivel As Integer, pstrAccion As String, pstrMensaje As String, pstrExcepcion As String, pstrUsuario As String) As Integer
 
         Try
             objEventoSistema.Hilo = pstrHilo
@@ -536,8 +490,8 @@ Public Class wsEnvioAutomatico
         End Try
     End Function
 
-    <WebMethod()> _
-    Public Function RegistrarLogEnvio(ByVal pintCodigoProcesoAutomatico As Integer, ByVal pintCodigoCliente As Integer, ByVal pintCodigoIBS As Integer, ByVal penuTipoEnvio As Integer, ByVal pstrCodigoProceso As String, ByVal pintAnioPeriodo As Integer, ByVal pintMesPeriodo As Integer, ByVal pstrMensaje As String, ByVal penuEstado As enumLogEnvioCorreo, ByVal pstrUsuario As String) As Integer
+    <WebMethod()>
+    Public Function RegistrarLogEnvio(pintCodigoProcesoAutomatico As Integer, pintCodigoCliente As Integer, pintCodigoIBS As Integer, penuTipoEnvio As Integer, pstrCodigoProceso As String, pintAnioPeriodo As Integer, pintMesPeriodo As Integer, pstrMensaje As String, penuEstado As enumLogEnvioCorreo, pstrUsuario As String) As Integer
 
         Try
             objLogEnvioCorreo.iProcesoAutomaticoId = pintCodigoProcesoAutomatico
@@ -560,8 +514,8 @@ Public Class wsEnvioAutomatico
 
     End Function
 
-    <WebMethod()> _
-    Public Function RegistrarLogProcesosAutomaticos(ByVal pintTotal As Integer, ByVal pintProcesados As Integer, ByVal pintError As Integer, ByVal pstrMensaje As String, ByVal pintEstado As Integer, ByVal pstrUsuario As String) As Integer
+    <WebMethod()>
+    Public Function RegistrarLogProcesosAutomaticos(pintTotal As Integer, pintProcesados As Integer, pintError As Integer, pstrMensaje As String, pintEstado As Integer, pstrUsuario As String) As Integer
         Try
             objProcesoAutomatico.iTotalRegistros = pintTotal
             objProcesoAutomatico.iProcesados = pintProcesados
@@ -577,8 +531,8 @@ Public Class wsEnvioAutomatico
 
     End Function
 
-    <WebMethod()> _
-    Public Function ActualizarLogProcesosAutomaticos(ByVal pintCodigoProcesoAutomatico As Integer, ByVal pintTotal As Integer, ByVal pintProcesados As Integer, ByVal pintError As Integer, ByVal pstrMensaje As String, ByVal pintEstado As Integer, ByVal pstrUsuario As String) As Integer
+    <WebMethod()>
+    Public Function ActualizarLogProcesosAutomaticos(pintCodigoProcesoAutomatico As Integer, pintTotal As Integer, pintProcesados As Integer, pintError As Integer, pstrMensaje As String, pintEstado As Integer, pstrUsuario As String) As Integer
         Try
             objProcesoAutomatico.iProcesoAutomaticoId = pintCodigoProcesoAutomatico
             objProcesoAutomatico.iTotalRegistros = pintTotal

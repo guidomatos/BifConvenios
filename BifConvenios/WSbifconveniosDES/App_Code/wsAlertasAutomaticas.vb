@@ -1,27 +1,15 @@
-﻿Imports System
-Imports System.Collections
-Imports System.Collections.Generic
-Imports System.ComponentModel
-Imports System.Configuration
+﻿Imports System.ComponentModel
 Imports System.Data
-Imports System.Data.SqlClient
-Imports System.Text
-Imports System.Web
 Imports System.Web.Services
-Imports System.Web.Services.Protocols
-
 Imports BIFConvenios.BE
-Imports BIFConvenios.BL.BIFConvenios.BL
-
 Imports Resource
-Imports Microsoft.VisualBasic
 
 <WebService(Namespace:="http://tempuri.org/")> _
-<WebServiceBinding(ConformsTo:=WsiProfiles.BasicProfile1_1)> _
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<WebServiceBinding(ConformsTo:=WsiProfiles.BasicProfile1_1)>
+<CompilerServices.DesignerGenerated()>
 <ToolboxItem(False)> _
 Public Class wsAlertasAutomaticas
-    Inherits System.Web.Services.WebService
+    Inherits WebService
 
     Protected objAlertasBL As New BIFConvenios.BL.clsAlertasBL
     Protected objAlertasClienteBL As New BIFConvenios.BL.clsAlertasClientesBL
@@ -44,15 +32,10 @@ Public Class wsAlertasAutomaticas
     Protected objArchivosConvenio As New clsArchivosConvenios
     Protected objProcesos As New clsProceso
 
-    Dim dtAlertasCliente As New DataTable()
-
-    Dim intContadorEnvios As Integer = 0
-    Dim intContadorError As Integer = 0
-
 #Region "Log"
 
-    <WebMethod()> _
-    Public Function RegistrarLogEventoSistema(ByVal pstrHilo As String, ByVal penuNivel As Integer, ByVal pstrAccion As String, ByVal pstrMensaje As String, ByVal pstrExcepcion As String, ByVal pstrUsuario As String) As Integer
+    <WebMethod()>
+    Public Function RegistrarLogEventoSistema(pstrHilo As String, penuNivel As Integer, pstrAccion As String, pstrMensaje As String, pstrExcepcion As String, pstrUsuario As String) As Integer
 
         Try
             objEventoSistema.Hilo = pstrHilo
@@ -70,8 +53,8 @@ Public Class wsAlertasAutomaticas
         End Try
     End Function
 
-    <WebMethod()> _
-    Public Function RegistrarLogEnvio(ByVal pintCodigoProcesoAutomatico As Integer, ByVal pintCodigoCliente As Integer, ByVal pintCodigoIBS As Integer, ByVal penuTipoEnvio As Integer, ByVal pstrCodigoProceso As String, ByVal pintAnioPeriodo As Integer, ByVal pintMesPeriodo As Integer, ByVal pstrMensaje As String, ByVal penuEstado As enumLogEnvioCorreo, ByVal pstrUsuario As String) As Integer
+    <WebMethod()>
+    Public Function RegistrarLogEnvio(pintCodigoProcesoAutomatico As Integer, pintCodigoCliente As Integer, pintCodigoIBS As Integer, penuTipoEnvio As Integer, pstrCodigoProceso As String, pintAnioPeriodo As Integer, pintMesPeriodo As Integer, pstrMensaje As String, penuEstado As enumLogEnvioCorreo, pstrUsuario As String) As Integer
 
         Try
             objLogEnvioCorreo.iProcesoAutomaticoId = pintCodigoProcesoAutomatico
@@ -94,8 +77,8 @@ Public Class wsAlertasAutomaticas
 
     End Function
 
-    <WebMethod()> _
-    Public Function RegistrarLogProcesosAutomaticos(ByVal pintTotal As Integer, ByVal pintProcesados As Integer, ByVal pintError As Integer, ByVal pstrMensaje As String, ByVal pintEstado As Integer, ByVal pstrUsuario As String) As Integer
+    <WebMethod()>
+    Public Function RegistrarLogProcesosAutomaticos(pintTotal As Integer, pintProcesados As Integer, pintError As Integer, pstrMensaje As String, pintEstado As Integer, pstrUsuario As String) As Integer
         Try
             objProcesoAutomatico.iTotalRegistros = pintTotal
             objProcesoAutomatico.iProcesados = pintProcesados
@@ -111,8 +94,8 @@ Public Class wsAlertasAutomaticas
 
     End Function
 
-    <WebMethod()> _
-    Public Function ActualizarLogProcesosAutomaticos(ByVal pintCodigoProcesoAutomatico As Integer, ByVal pintTotal As Integer, ByVal pintProcesados As Integer, ByVal pintError As Integer, ByVal pstrMensaje As String, ByVal pintEstado As Integer, ByVal pstrUsuario As String) As Integer
+    <WebMethod()>
+    Public Function ActualizarLogProcesosAutomaticos(pintCodigoProcesoAutomatico As Integer, pintTotal As Integer, pintProcesados As Integer, pintError As Integer, pstrMensaje As String, pintEstado As Integer, pstrUsuario As String) As Integer
         Try
             objProcesoAutomatico.iProcesoAutomaticoId = pintCodigoProcesoAutomatico
             objProcesoAutomatico.iTotalRegistros = pintTotal
@@ -134,7 +117,7 @@ Public Class wsAlertasAutomaticas
 
 #Region "Metodos Auxiliares"
 
-    Public Function ConvertirBody(ByVal pstrBody As String) As String
+    Public Function ConvertirBody(pstrBody As String) As String
         Dim strHtmlBody As New StringBuilder()
         Dim strBody As New StringBuilder()
 
@@ -156,9 +139,9 @@ Public Class wsAlertasAutomaticas
 
                     For x As Integer = 0 To (strCaux.Length - 1)
                         If strCaux.Chars(x) = " " Then
-                            strCadena = strCadena & "&nbsp;"
+                            strCadena &= "&nbsp;"
                         Else
-                            strCadena = strCadena & strCaux.Chars(x)
+                            strCadena &= strCaux.Chars(x)
                         End If
                     Next
 
@@ -185,10 +168,8 @@ Public Class wsAlertasAutomaticas
         Return strHtmlBody.ToString()
     End Function
 
-    Private Function ReemplazarMetadata(ByVal pstrCadena As String, ByVal pdr As DataRow) As String
-        Dim strResult As String = ""
-
-        strResult = pstrCadena
+    Private Function ReemplazarMetadata(pstrCadena As String, pdr As DataRow) As String
+        Dim strResult As String = pstrCadena
         strResult = strResult.Replace("[Nombre_Empresa]", pdr("vNombreEmpresa").ToString())
         strResult = strResult.Replace("[Fecha_Pago]", pdr("iFechaPago").ToString())
         strResult = strResult.Replace("[Cuenta_Abono]", pdr("iCuentaAbono").ToString())
@@ -204,20 +185,11 @@ Public Class wsAlertasAutomaticas
         Return strResult
     End Function
 
-    Private Function EnviarCorreoAlerta(ByVal pintCodigoIBS As Integer, ByVal pintAnioPeriodo As Integer, ByVal pintMesPeriodo As Integer, ByVal pstrCorreoDE As String, ByVal pstrCorreosPara As String, ByVal pstrCorreosCopia As String, ByVal pstrAsunto As String, ByVal pstrCuerpo As String, ByVal pstrAdjunto As String)
-        Dim strCorreoElectronicoDE As String = String.Empty
-        Dim strCorreoElectronicosPara As String = String.Empty
-        Dim strCorreoElectronicosBCC As String = String.Empty
-        Dim strCorreoElectronicoAsunto As String = String.Empty
-        Dim strCorreoElectronicoNotificarA As String = String.Empty
-        Dim strCorreoElectronicoCuerpo As String = String.Empty
-        'Dim strPath As String = ConfigurationManager.AppSettings("ArchivosConvenio").ToString()
-        Dim strPath As String = ""
-
+    Private Function EnviarCorreoAlerta(pintCodigoIBS As Integer, pintAnioPeriodo As Integer, pintMesPeriodo As Integer, pstrCorreoDE As String, pstrCorreosPara As String, pstrCorreosCopia As String, pstrAsunto As String, pstrCuerpo As String, pstrAdjunto As String) As String
         _dtParametrosEnvioMail = objSystemParametersBL.Seleccionar(ConfigurationManager.AppSettings(clsTiposSystemParameters.ParametroEnvioMail.ToString()))
 
-        strPath = _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.RutaDescargaNominas))("vValor").ToString().Trim()
-
+        'Dim strPath As String = ConfigurationManager.AppSettings("ArchivosConvenio").ToString()
+        Dim strPath As String = _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.RutaDescargaNominas))("vValor").ToString().Trim()
         Dim intExport As Integer
         Dim strNameFile As String = String.Empty
         Dim strPathFile As String = String.Empty
@@ -242,6 +214,7 @@ Public Class wsAlertasAutomaticas
         'Si no este TEST hacemos el envio regular
         Dim strTestOnly As String = _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.ModoPrueba))("vValor").ToString().Trim()
 
+        Dim strCorreoElectronicosPara As String
         If strTestOnly = "0" Then
             strCorreoElectronicosPara = pstrCorreosPara
         Else    ' en otro caso enviamos el correo a una direccion de prueba
@@ -249,11 +222,11 @@ Public Class wsAlertasAutomaticas
             strCorreoElectronicosPara = _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.ListaMailTest))("vValor").ToString().Trim()
         End If
 
-        strCorreoElectronicoDE = pstrCorreoDE
-        strCorreoElectronicosBCC = pstrCorreosCopia
+        Dim strCorreoElectronicoDE As String = pstrCorreoDE
+        Dim strCorreoElectronicosBCC As String = pstrCorreosCopia
 
-        strCorreoElectronicoAsunto = pstrAsunto
-        strCorreoElectronicoCuerpo = pstrCuerpo
+        Dim strCorreoElectronicoAsunto As String = pstrAsunto
+        Dim strCorreoElectronicoCuerpo As String = pstrCuerpo
 
         Dim ar As New ArrayList()
 
@@ -276,12 +249,11 @@ Public Class wsAlertasAutomaticas
         End Try
     End Function
 
-    Private Function FormarCorreoCopias(ByVal pintCodIBS As Integer) As String
+    Private Function FormarCorreoCopias(pintCodIBS As Integer) As String
         Dim strCorreo As String = ""
-        Dim _dt As New DataTable()
 
         Try
-            _dt = objClienteBL.ObtenerGestorConvenioPorCodigoIBSDesdeAS400(pintCodIBS)
+            Dim _dt As DataTable = objClienteBL.ObtenerGestorConvenioPorCodigoIBSDesdeAS400(pintCodIBS)
 
             strCorreo = _dt.Rows(0)("GSTCOR").ToString()
 
@@ -293,7 +265,7 @@ Public Class wsAlertasAutomaticas
 
 #End Region
 
-    <WebMethod()> _
+    <WebMethod()>
     Public Function ObtenerListClienteUltimoProceso() As DataTable
         Try
             Return objProcesosBL.ObtenerListaClienteUltimoProceso()
@@ -302,9 +274,9 @@ Public Class wsAlertasAutomaticas
         End Try
     End Function
 
-    <WebMethod()> _
-    Public Function ProcesarAlerta(ByVal pintCodigoProcesoAutomatico As Integer, ByVal pstrCodigoCliente As String, ByVal pintAnioPeriodo As Integer, ByVal pintMesPeriodo As Integer, ByVal pstrUsuario As String, ByRef pintEstado As Integer) As String
-        Dim strMensaje As String = ""
+    <WebMethod()>
+    Public Function ProcesarAlerta(pintCodigoProcesoAutomatico As Integer, pstrCodigoCliente As String, pintAnioPeriodo As Integer, pintMesPeriodo As Integer, pstrUsuario As String, ByRef pintEstado As Integer) As String
+        Dim strMensaje As String
 
         If String.IsNullOrEmpty(pstrCodigoCliente) Then
             strMensaje = clsMensajesGeneric.ParametroVacio.Replace("&1", "Codigo del Cliente")
@@ -318,12 +290,10 @@ Public Class wsAlertasAutomaticas
             Return strMensaje
         End If
 
-        Dim _dtCliente As New DataTable()
-
         Try
             objClientes.CodigoCliente = Convert.ToInt32(pstrCodigoCliente)
 
-            _dtCliente = objClienteBL.ObtenerClientePorCodigo(objClientes.CodigoCliente)
+            Dim _dtCliente As DataTable = objClienteBL.ObtenerClientePorCodigo(objClientes.CodigoCliente)
 
             Dim intCodIBS As Integer = Convert.ToInt32(_dtCliente.Rows(0)("Codigo_IBS").ToString())
             Dim decSaldoContable As Decimal

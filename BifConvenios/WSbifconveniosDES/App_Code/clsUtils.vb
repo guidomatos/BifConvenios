@@ -1,20 +1,18 @@
-Imports System.Configuration
 Imports System.Web.Mail
-Imports Microsoft.VisualBasic
 
 Public Class clsUtils
 #Region "Funciones Utiles"
     'Devuelve la fecha en formato dd/MM/yyyy
-    Public Function GetFechaCanonica(ByVal strFecha As String) As String
+    Public Function GetFechaCanonica(strFecha As String) As String
         Dim strFechaConfigurada As String = Right(strFecha, 2) & "/" & Mid(strFecha, 5, 2) & "/" & Left(strFecha, 4)
         Return strFechaConfigurada
     End Function
 
     ' sends a simple email
-    Public Sub SendNotification(ByVal strFrom As String, ByVal strTo As String, _
-                ByVal strBcc As String, ByVal strSubject As String, ByVal strBody As String, _
-                Optional ByVal strAttachment As String = "", Optional ByVal FormatHtml As Boolean = False, _
-                Optional ByVal notifyTo As String = "")
+    Public Sub SendNotification(strFrom As String, strTo As String,
+                strBcc As String, strSubject As String, strBody As String,
+                Optional strAttachment As String = "", Optional FormatHtml As Boolean = False,
+                Optional notifyTo As String = "")
         ' Obtain PortalSettings from Current Context
 
         Dim mail As New MailMessage()

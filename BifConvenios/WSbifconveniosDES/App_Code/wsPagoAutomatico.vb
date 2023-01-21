@@ -1,32 +1,22 @@
-﻿Imports System
-Imports System.Collections
-Imports System.Collections.Generic
+﻿Imports System.Collections.Generic
 Imports System.ComponentModel
-Imports System.Configuration
 Imports System.Data
-Imports System.Data.SqlClient
-Imports System.Web
 Imports System.Web.Services
-Imports System.Web.Services.Protocols
-
-Imports BIFConvenios.BE
-Imports BIFConvenios.BL
 Imports Resource
-Imports Microsoft.VisualBasic
 
 <WebService(Namespace:="http://tempuri.org/")> _
-<WebServiceBinding(ConformsTo:=WsiProfiles.BasicProfile1_1)> _
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<WebServiceBinding(ConformsTo:=WsiProfiles.BasicProfile1_1)>
+<CompilerServices.DesignerGenerated()>
 <ToolboxItem(False)> _
 Public Class wsPagoAutomatico
-    Inherits System.Web.Services.WebService
+    Inherits WebService
 
-    Dim objCobranza As New BIFConvenios.BL.CobranzaBL()
+    ReadOnly objCobranza As New BIFConvenios.BL.CobranzaBL()
 
     Protected objSystemParametersBL As New BIFConvenios.BL.clsSystemParametersBL()
     Protected _dtParametrosEnvioMail As New DataTable()
 
-    Private Function EnviarInfoAS400(ByVal pstrCodigoProceso As String) As String
+    Private Function EnviarInfoAS400(pstrCodigoProceso As String) As String
 
         '--------Usado en la llamada remoting
         Dim objSender As BroadcasterClass.GOIntranet.SubmitSuscription

@@ -1,25 +1,16 @@
-﻿Imports System.Web
-Imports System.Web.Services
-Imports System.Web.Services.Protocols
+﻿Imports System.Web.Services
 Imports System.Data
 Imports CrystalDecisions.Shared
-Imports CrystalDecisions.CrystalReports.Engine
 Imports Resource
-Imports System.IO
-Imports System.Data.SqlClient
 Imports BIFConvenios.BL
 Imports BIFConvenios.BE
-Imports BIFUtils
-Imports System
-Imports System.Configuration
-Imports Microsoft.VisualBasic
 
 <WebService(Namespace:="http://tempuri.org/")> _
-<WebServiceBinding(ConformsTo:=WsiProfiles.BasicProfile1_1)> _
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<WebServiceBinding(ConformsTo:=WsiProfiles.BasicProfile1_1)>
+<CompilerServices.DesignerGenerated()>
 Public Class wsReportesAutomatico
 
-    Inherits System.Web.Services.WebService
+    Inherits WebService
 
     Protected ds As New DataSet()
     Protected idp As String
@@ -46,8 +37,8 @@ Public Class wsReportesAutomatico
 
 #Region "Log"
 
-    <WebMethod()> _
-    Public Function RegistrarLogEventoSistema(ByVal pstrHilo As String, ByVal penuNivel As Integer, ByVal pstrAccion As String, ByVal pstrMensaje As String, ByVal pstrExcepcion As String, ByVal pstrUsuario As String) As Integer
+    <WebMethod()>
+    Public Function RegistrarLogEventoSistema(pstrHilo As String, penuNivel As Integer, pstrAccion As String, pstrMensaje As String, pstrExcepcion As String, pstrUsuario As String) As Integer
 
         Try
             objEventoSistema.Hilo = pstrHilo
@@ -65,8 +56,8 @@ Public Class wsReportesAutomatico
         End Try
     End Function
 
-    <WebMethod()> _
-    Public Function RegistrarLogEnvio(ByVal pintCodigoProcesoAutomatico As Integer, ByVal pintCodigoCliente As Integer, ByVal pintCodigoIBS As Integer, ByVal penuTipoEnvio As Integer, ByVal pstrCodigoProceso As String, ByVal pintAnioPeriodo As Integer, ByVal pintMesPeriodo As Integer, ByVal pstrMensaje As String, ByVal penuEstado As enumLogEnvioCorreo, ByVal pstrUsuario As String) As Integer
+    <WebMethod()>
+    Public Function RegistrarLogEnvio(pintCodigoProcesoAutomatico As Integer, pintCodigoCliente As Integer, pintCodigoIBS As Integer, penuTipoEnvio As Integer, pstrCodigoProceso As String, pintAnioPeriodo As Integer, pintMesPeriodo As Integer, pstrMensaje As String, penuEstado As enumLogEnvioCorreo, pstrUsuario As String) As Integer
 
         Try
             objLogEnvioCorreo.iProcesoAutomaticoId = pintCodigoProcesoAutomatico
@@ -89,8 +80,8 @@ Public Class wsReportesAutomatico
 
     End Function
 
-    <WebMethod()> _
-    Public Function RegistrarLogProcesosAutomaticos(ByVal pintTotal As Integer, ByVal pintProcesados As Integer, ByVal pintError As Integer, ByVal pstrMensaje As String, ByVal pintEstado As Integer, ByVal pstrUsuario As String) As Integer
+    <WebMethod()>
+    Public Function RegistrarLogProcesosAutomaticos(pintTotal As Integer, pintProcesados As Integer, pintError As Integer, pstrMensaje As String, pintEstado As Integer, pstrUsuario As String) As Integer
         Try
             objProcesoAutomatico.iTotalRegistros = pintTotal
             objProcesoAutomatico.iProcesados = pintProcesados
@@ -106,8 +97,8 @@ Public Class wsReportesAutomatico
 
     End Function
 
-    <WebMethod()> _
-    Public Function ActualizarLogProcesosAutomaticos(ByVal pintCodigoProcesoAutomatico As Integer, ByVal pintTotal As Integer, ByVal pintProcesados As Integer, ByVal pintError As Integer, ByVal pstrMensaje As String, ByVal pintEstado As Integer, ByVal pstrUsuario As String) As Integer
+    <WebMethod()>
+    Public Function ActualizarLogProcesosAutomaticos(pintCodigoProcesoAutomatico As Integer, pintTotal As Integer, pintProcesados As Integer, pintError As Integer, pstrMensaje As String, pintEstado As Integer, pstrUsuario As String) As Integer
         Try
             objProcesoAutomatico.iProcesoAutomaticoId = pintCodigoProcesoAutomatico
             objProcesoAutomatico.iTotalRegistros = pintTotal
@@ -127,7 +118,7 @@ Public Class wsReportesAutomatico
 
 #End Region
 
-    <WebMethod()> _
+    <WebMethod()>
     Public Function GetFuncionarios() As DataTable
         Try
             Return objFuncionarioBL.GetFuncionarios()
@@ -136,17 +127,13 @@ Public Class wsReportesAutomatico
         End Try
     End Function
 
-    <WebMethod()> _
-    Public Function EnviarReporteAutomaticoByFuncionario(ByVal pintCodigoProcesoAutomatico As Integer, ByVal pintFuncionarioId As Integer, ByVal pstrNombreFuncionario As String, ByVal pstrCEFuncionario As String, ByVal pstrUsuario As String, ByRef pintEstado As Integer) As String
-        Dim strMensajeEvento As String = ""
-
-        Dim intResult As Integer = 0
-
-        'Valida si el funcionario tiene registro a enviar en el reporte (toma getdate())
-        Dim Cantidad As Integer = 0
+    <WebMethod()>
+    Public Function EnviarReporteAutomaticoByFuncionario(pintCodigoProcesoAutomatico As Integer, pintFuncionarioId As Integer, pstrNombreFuncionario As String, pstrCEFuncionario As String, pstrUsuario As String, ByRef pintEstado As Integer) As String
+        Dim strMensajeEvento As String
 
         Try
-            Cantidad = Convert.ToInt32(objReporteAutomaticoBL.ValidaExistenciaFuncionario(pintFuncionarioId, 0).Rows(0)("Cantidad").ToString())
+            'Valida si el funcionario tiene registro a enviar en el reporte (toma getdate())
+            Dim Cantidad As Integer = Convert.ToInt32(objReporteAutomaticoBL.ValidaExistenciaFuncionario(pintFuncionarioId, 0).Rows(0)("Cantidad").ToString())
 
             If Cantidad = 0 Then
 
@@ -218,7 +205,7 @@ Public Class wsReportesAutomatico
 
     End Function
 
-    Private Function EnviarCorreoCliente(ByVal pstrNombreFuncionario As String, ByVal pstrCEFuncionario As String) As String
+    Private Function EnviarCorreoCliente(pstrNombreFuncionario As String, pstrCEFuncionario As String) As String
         'Envio Correo a Funcionarios
         Dim strCorreoElectronicoDE As String = String.Empty
         Dim strCorreoElectronicosPara As String = String.Empty
@@ -239,8 +226,8 @@ Public Class wsReportesAutomatico
         Dim strRoot As String = _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.RutaDescargaReportes))("vValor").ToString().Trim()
         Dim name As String = objUtils.getWebServerDateId() & ".xls"
 
-        Dim intAnio As Integer = Year(DateTime.Now)
-        Dim intMonth As Integer = Month(DateTime.Now)
+        Dim intAnio As Integer = Year(Date.Now)
+        Dim intMonth As Integer = Month(Date.Now)
         Dim strPathFile As String = String.Empty
         Dim strMensaje As String = String.Empty
 
@@ -257,8 +244,9 @@ Public Class wsReportesAutomatico
                 With oRepEnvioAutomatico.ExportOptions
                     .ExportDestinationType = ExportDestinationType.DiskFile
                     .ExportFormatType = ExportFormatType.Excel
-                    .DestinationOptions = New CrystalDecisions.Shared.DiskFileDestinationOptions()
-                    .DestinationOptions.DiskFileName = strFullName
+                    .DestinationOptions = New DiskFileDestinationOptions With {
+                        .DiskFileName = strFullName
+                    }
                 End With
 
                 oRepEnvioAutomatico.Export()
@@ -278,8 +266,8 @@ Public Class wsReportesAutomatico
     <WebMethod()> _
     Public Sub ReportesAutomaticos()
 
-        Dim strDE As String = System.Configuration.ConfigurationManager.AppSettings("mailDefault").ToString()
-        Dim pstrRoot As String = System.Configuration.ConfigurationManager.AppSettings("ReportesAutomatico").ToString()
+        Dim strDE As String = ConfigurationManager.AppSettings("mailDefault").ToString()
+        Dim pstrRoot As String = ConfigurationManager.AppSettings("ReportesAutomatico").ToString()
         Dim Empresa, RUC, CodigoIBS, NombreFuncionario, Motivo, FechaEnvio, strComentario As String
         Dim sCodigoCliente, sCodigoIBS, sCodigoProceso, sMensaje As String
         Dim intResult, intFuncionario, TotalEmpresa, TotalCreditos, Creditos As Integer
@@ -361,8 +349,8 @@ Public Class wsReportesAutomatico
                     Dim name As String = objUtils.getWebServerDateId() & ".xls"
 
                     'Se obtiene el la ruta a exportar
-                    Dim intAnio As Integer = Year(DateTime.Now)
-                    Dim intMonth As Integer = Month(DateTime.Now)
+                    Dim intAnio As Integer = Year(Date.Now)
+                    Dim intMonth As Integer = Month(Date.Now)
                     Dim strPathFile As String = String.Empty
 
                     intResult = clsFiles.VerifyPath(pstrRoot, intAnio, intMonth, strPathFile, NombreFuncionario)
@@ -376,14 +364,15 @@ Public Class wsReportesAutomatico
                         With oRepEnvioAutomatico.ExportOptions
                             .ExportDestinationType = ExportDestinationType.DiskFile
                             .ExportFormatType = ExportFormatType.Excel
-                            .DestinationOptions = New CrystalDecisions.Shared.DiskFileDestinationOptions()
-                            .DestinationOptions.DiskFileName = strFullName
+                            .DestinationOptions = New DiskFileDestinationOptions With {
+                                .DiskFileName = strFullName
+                            }
                         End With
 
                         oRepEnvioAutomatico.Export()
 
                         'Envio Correo a Funcionarios
-                        strCEFuncionarios = System.Configuration.ConfigurationManager.AppSettings("mailFuncionarios").ToString()
+                        strCEFuncionarios = ConfigurationManager.AppSettings("mailFuncionarios").ToString()
 
                         strComentario = "El Reporte de Nóminas, se ha generado de forma automática a través del Sistema BIFConvenios"
 
@@ -410,13 +399,13 @@ Public Class wsReportesAutomatico
 
                     sMensaje = "El funcionario no tiene registros de envío."
 
-                    objLogEnvioCorreo.iCodigoCliente = sCodigoCliente
-                    objLogEnvioCorreo.iCodigoIBS = sCodigoIBS
+                    objLogEnvioCorreo.iCodigoCliente = 0
+                    objLogEnvioCorreo.iCodigoIBS = 0
                     objLogEnvioCorreo.iTipoEnvioCorreoId = 3
                     objLogEnvioCorreo.vMensajeProceso = sMensaje
                     objLogEnvioCorreo.iEstado = 1
                     objLogEnvioCorreo.vUsuarioCreacion = 1
-                    objLogEnvioCorreo.vCodigoProceso = sCodigoProceso
+                    objLogEnvioCorreo.vCodigoProceso = ""
                     objLogEnvioCorreo.dFechaCreacion = FormatDateTime(Now, DateFormat.ShortDate)
                     objLogEnvioCorreoBL.Insert(objLogEnvioCorreo)
 
@@ -430,13 +419,13 @@ Public Class wsReportesAutomatico
             'Inserta en la tabla Log_Envio_Correo
             sMensaje = "Error en el envío de Reportes."
 
-            objLogEnvioCorreo.iCodigoCliente = sCodigoCliente
-            objLogEnvioCorreo.iCodigoIBS = sCodigoIBS
+            objLogEnvioCorreo.iCodigoCliente = 0
+            objLogEnvioCorreo.iCodigoIBS = 0
             objLogEnvioCorreo.iTipoEnvioCorreoId = 3
             objLogEnvioCorreo.vMensajeProceso = sMensaje
             objLogEnvioCorreo.iEstado = 1
             objLogEnvioCorreo.vUsuarioCreacion = 1
-            objLogEnvioCorreo.vCodigoProceso = sCodigoProceso
+            objLogEnvioCorreo.vCodigoProceso = ""
             objLogEnvioCorreo.dFechaCreacion = FormatDateTime(Now, DateFormat.ShortDate)
             objLogEnvioCorreoBL.Insert(objLogEnvioCorreo)
 
