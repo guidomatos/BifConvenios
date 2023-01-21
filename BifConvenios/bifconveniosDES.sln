@@ -27,7 +27,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "bifconveniosDES(1)", "bifco
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WSbifconveniosDES(1)", "WSbifconveniosDES\", "{A65D5F0D-158D-4A3E-90E3-729202673EC7}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv2.0"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.7.2"
 		ProjectReferences = "{C963285A-3057-49D5-8CEB-629C8E88956C}|BIFConvenios.BE.dll;{BAC914D4-0394-455D-B0C2-AF3CF6B1598C}|BIFConvenios.BL.dll;{C6B95A0F-392E-4775-B51A-F5676ACB2C17}|BIFConvenios.DO.dll;{AFA34A2C-8F69-4671-85E3-74B86F34054E}|BIFUtils.dll;{8EBE95EA-BEAB-423D-B06C-87B9FAA730A8}|DAL.dll;{EB9BECF5-C64D-4A1A-B1C5-91494BBE4519}|Resource.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/WSbifconveniosDES"
 		Debug.AspNetCompiler.PhysicalPath = "WSbifconveniosDES\"
