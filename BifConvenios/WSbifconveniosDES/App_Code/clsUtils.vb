@@ -1,4 +1,4 @@
-Imports System.Web.Mail
+Imports System.Net.Mail
 
 Public Class clsUtils
 #Region "Funciones Utiles"
@@ -15,16 +15,17 @@ Public Class clsUtils
                 Optional notifyTo As String = "")
         ' Obtain PortalSettings from Current Context
 
+        Dim Smtp_Server As New SmtpClient
         Dim mail As New MailMessage()
 
         If FormatHtml Then
-            mail.BodyFormat = MailFormat.Html
+            mail.IsBodyHtml = True
         End If
 
-        mail.From = strFrom
-        mail.To = strTo
+        mail.From = New MailAddress(strFrom)
+        mail.To.Add(strTo)
         If strBcc <> "" Then
-            mail.Bcc = strBcc
+            mail.Bcc.Add(strBcc)
         End If
         mail.Subject = strSubject
         mail.Body = strBody
@@ -46,16 +47,22 @@ Public Class clsUtils
         End If
 
         If strAttachment <> "" Then
-            mail.Attachments.Add(New MailAttachment(strAttachment))
+            'mail.Attachments.Add(New MailAttachment(strAttachment))
+            mail.Attachments.Add(New Attachment(strAttachment))
         End If
 
         ' external SMTP server
         If ConfigurationManager.AppSettings("SMTPServer") <> "" Then
-            SmtpMail.SmtpServer = ConfigurationManager.AppSettings("SMTPServer")
+            Smtp_Server.Host = ConfigurationManager.AppSettings("SMTPServer")
         End If
 
+        'Smtp_Server.UseDefaultCredentials = False
+        'Smtp_Server.Credentials = New Net.NetworkCredential("username@gmail.com", "password")
+        'Smtp_Server.Port = 587
+        'Smtp_Server.EnableSsl = True
+
         Try
-            SmtpMail.Send(mail)
+            Smtp_Server.Send(mail)
         Catch
             ' mail configuration problem
         End Try
