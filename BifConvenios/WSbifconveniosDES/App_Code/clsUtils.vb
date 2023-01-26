@@ -1,32 +1,31 @@
-Imports System.Configuration
-Imports System.Web.Mail
-Imports Microsoft.VisualBasic
+Imports System.Net.Mail
 
 Public Class clsUtils
 #Region "Funciones Utiles"
     'Devuelve la fecha en formato dd/MM/yyyy
-    Public Function GetFechaCanonica(ByVal strFecha As String) As String
+    Public Function GetFechaCanonica(strFecha As String) As String
         Dim strFechaConfigurada As String = Right(strFecha, 2) & "/" & Mid(strFecha, 5, 2) & "/" & Left(strFecha, 4)
         Return strFechaConfigurada
     End Function
 
     ' sends a simple email
-    Public Sub SendNotification(ByVal strFrom As String, ByVal strTo As String, _
-                ByVal strBcc As String, ByVal strSubject As String, ByVal strBody As String, _
-                Optional ByVal strAttachment As String = "", Optional ByVal FormatHtml As Boolean = False, _
-                Optional ByVal notifyTo As String = "")
+    Public Sub SendNotification(strFrom As String, strTo As String,
+                strBcc As String, strSubject As String, strBody As String,
+                Optional strAttachment As String = "", Optional FormatHtml As Boolean = False,
+                Optional notifyTo As String = "")
         ' Obtain PortalSettings from Current Context
 
+        Dim Smtp_Server As New SmtpClient
         Dim mail As New MailMessage()
 
         If FormatHtml Then
-            mail.BodyFormat = MailFormat.Html
+            mail.IsBodyHtml = True
         End If
 
-        mail.From = strFrom
-        mail.To = strTo
+        mail.From = New MailAddress(strFrom)
+        mail.To.Add(strTo)
         If strBcc <> "" Then
-            mail.Bcc = strBcc
+            mail.Bcc.Add(strBcc)
         End If
         mail.Subject = strSubject
         mail.Body = strBody
@@ -48,16 +47,22 @@ Public Class clsUtils
         End If
 
         If strAttachment <> "" Then
-            mail.Attachments.Add(New MailAttachment(strAttachment))
+            'mail.Attachments.Add(New MailAttachment(strAttachment))
+            mail.Attachments.Add(New Attachment(strAttachment))
         End If
 
         ' external SMTP server
         If ConfigurationManager.AppSettings("SMTPServer") <> "" Then
-            SmtpMail.SmtpServer = ConfigurationManager.AppSettings("SMTPServer")
+            Smtp_Server.Host = ConfigurationManager.AppSettings("SMTPServer")
         End If
 
+        'Smtp_Server.UseDefaultCredentials = False
+        'Smtp_Server.Credentials = New Net.NetworkCredential("username@gmail.com", "password")
+        'Smtp_Server.Port = 587
+        'Smtp_Server.EnableSsl = True
+
         Try
-            SmtpMail.Send(mail)
+            Smtp_Server.Send(mail)
         Catch
             ' mail configuration problem
         End Try
