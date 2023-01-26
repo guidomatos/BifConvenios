@@ -24,13 +24,13 @@ Namespace BIFConvenios
 
 #Region "Operaciones en AS/400"
         'Adicionar la informacion de los pagares a bloquear antes de procesarlo
-        Public Shared Function addPagare(ByVal myConnection As ADODB.Connection, ByVal numeroLote As String, _
-                                            ByVal numeroPagare As String, _
-                                            ByVal fechaProceso As String, ByVal horaProceso As String, _
+        Public Shared Function addPagare(ByVal myConnection As Connection, ByVal numeroLote As String,
+                                            ByVal numeroPagare As String,
+                                            ByVal fechaProceso As String, ByVal horaProceso As String,
                                             ByVal usuario As String, ByVal flagBloqueo As String) As Integer
 
             Dim strQuery As String
-            strQuery = "INSERT INTO EDL6376W (EDLLOTE, EDLNPGR, EDLFECR, EDLHORA, EDLUSER, EDLFLAG) " + _
+            strQuery = "INSERT INTO EDL6376W (EDLLOTE, EDLNPGR, EDLFECR, EDLHORA, EDLUSER, EDLFLAG) " +
                                  "    VALUES ( '" + numeroLote + "', '" + numeroPagare + "', '" + fechaProceso + "', '" + horaProceso + "', '" + usuario.Substring(0, 10).ToUpper + "', '" + flagBloqueo + "' )"
 
             Dim cmd As New ADODB.CommandClass()

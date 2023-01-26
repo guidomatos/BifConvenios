@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="ReporteEnvioAutomaticoPrueba.aspx.vb" Inherits="ReporteEnvioAutomaticoPrueba" %>
 
-<%@ Register Assembly="CrystalDecisions.Web, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304"
+<%@ Register Assembly="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304"
     Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
 
 <%@ Register TagPrefix="uc1" TagName="Banner" Src="controls/Banner.ascx" %>

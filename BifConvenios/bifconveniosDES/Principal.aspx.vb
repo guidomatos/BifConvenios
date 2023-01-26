@@ -49,7 +49,7 @@ Partial Class Principal
 
         strDominio = ConfigurationManager.AppSettings("DOMINIO")
         user = HttpContext.Current.User.Identity.Name
-        user = user.Substring((strDominio).Length + 1)
+        user = "JUANS" 'MIGRAR INNOVA FALTA user.Substring((strDominio).Length + 1)
 
         usuario = user
     End Sub

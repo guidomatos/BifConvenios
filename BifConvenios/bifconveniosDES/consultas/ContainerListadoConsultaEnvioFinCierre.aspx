@@ -1,7 +1,8 @@
 ﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="ContainerListadoConsultaEnvioFinCierre.aspx.vb" Inherits="BIFConvenios.ContainerListadoConsultaEnvioFinCierre" %>
 
-<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
-    Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
+<%-- MIGRAR INNOVA FALTA
+	<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>--%>
 <%@ Register TagPrefix="uc1" TagName="Banner" Src="../controls/Banner.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 
@@ -52,8 +53,9 @@
 			    </tr>
 			</thead>
 			</table>
-            <rsweb:ReportViewer ID="ReportViewer1" runat="server">
-            </rsweb:ReportViewer>
+           <%--  MIGRAR INNOVA FALTA
+			   <rsweb:ReportViewer ID="ReportViewer1" runat="server">
+            </rsweb:ReportViewer>--%>
 			
 			<!-- END -->
 			    

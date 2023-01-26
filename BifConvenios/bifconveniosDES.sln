@@ -1,12 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32602.291
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "bifconveniosDES(1)", "bifconveniosDES\", "{76F9F32A-28FC-4A4E-BA37-5223C249B14E}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "bifconveniosDES", "bifconveniosDES\", "{76F9F32A-28FC-4A4E-BA37-5223C249B14E}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv2.0"
-		ProjectReferences = "{C963285A-3057-49D5-8CEB-629C8E88956C}|BIFConvenios.BE.dll;{BAC914D4-0394-455D-B0C2-AF3CF6B1598C}|BIFConvenios.BL.dll;{AFA34A2C-8F69-4671-85E3-74B86F34054E}|BIFUtils.dll;{D0A42DE9-45EB-4951-9E50-FE449B019860}|BusinessLogic.dll;{C6B95A0F-392E-4775-B51A-F5676ACB2C17}|BIFConvenios.DO.dll;{8EBE95EA-BEAB-423D-B06C-87B9FAA730A8}|DAL.dll;{EB9BECF5-C64D-4A1A-B1C5-91494BBE4519}|Resource.dll;{4F1C63A4-2395-42A2-BEA0-11C096FC8AD1}|DataAccess.dll;"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.7.2"
+		ProjectReferences = "{C963285A-3057-49D5-8CEB-629C8E88956C}|BIFConvenios.BE.dll;{BAC914D4-0394-455D-B0C2-AF3CF6B1598C}|BIFConvenios.BL.dll;{AFA34A2C-8F69-4671-85E3-74B86F34054E}|BIFUtils.dll;{D0A42DE9-45EB-4951-9E50-FE449B019860}|BusinessLogic.dll;{C6B95A0F-392E-4775-B51A-F5676ACB2C17}|BIFConvenios.DO.dll;{8EBE95EA-BEAB-423D-B06C-87B9FAA730A8}|DAL.dll;{EB9BECF5-C64D-4A1A-B1C5-91494BBE4519}|Resource.dll;{4F1C63A4-2395-42A2-BEA0-11C096FC8AD1}|DataAccess.dll;{12cfc344-a7c0-4018-9bb7-d0c36bccc421}|BIFData.dll;{5336b890-2ca9-427d-9fa8-89e60da83129}|BroadcasterClass.dll;{9b0a4f0d-01be-4d48-8cfe-7c26c3862950}|LREM.Tools.Reporting.Excel.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/bifconveniosDES"
 		Debug.AspNetCompiler.PhysicalPath = "bifconveniosDES\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\bifconveniosDES\"
@@ -25,7 +25,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "bifconveniosDES(1)", "bifco
 		SlnRelativePath = "bifconveniosDES\"
 	EndProjectSection
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WSbifconveniosDES(1)", "WSbifconveniosDES\", "{A65D5F0D-158D-4A3E-90E3-729202673EC7}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WSbifconveniosDES", "WSbifconveniosDES\", "{A65D5F0D-158D-4A3E-90E3-729202673EC7}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv2.0"
 		ProjectReferences = "{C963285A-3057-49D5-8CEB-629C8E88956C}|BIFConvenios.BE.dll;{BAC914D4-0394-455D-B0C2-AF3CF6B1598C}|BIFConvenios.BL.dll;{C6B95A0F-392E-4775-B51A-F5676ACB2C17}|BIFConvenios.DO.dll;{AFA34A2C-8F69-4671-85E3-74B86F34054E}|BIFUtils.dll;{8EBE95EA-BEAB-423D-B06C-87B9FAA730A8}|DAL.dll;{EB9BECF5-C64D-4A1A-B1C5-91494BBE4519}|Resource.dll;"
@@ -62,6 +62,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "Components\BusinessLogic\BusinessLogic.csproj", "{D0A42DE9-45EB-4951-9E50-FE449B019860}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "Components\DataAccess\DataAccess.csproj", "{4F1C63A4-2395-42A2-BEA0-11C096FC8AD1}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BIFData", "BIFData\BIFData.vbproj", "{12CFC344-A7C0-4018-9BB7-D0C36BCCC421}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BIFConveniosTextExport", "BIFConveniosTextExport\BIFConveniosTextExport.vbproj", "{E16D1911-94DD-4495-A5FB-46904BD291F5}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BroadcasterClass", "BroadcasterClass\BroadcasterClass.vbproj", "{5336B890-2CA9-427D-9FA8-89E60DA83129}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LREM.Tools.Reporting.Excel", "LREM.Tools.Reporting.Excel\LREM.Tools.Reporting.Excel.csproj", "{9B0A4F0D-01BE-4D48-8CFE-7C26C3862950}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -161,6 +169,54 @@ Global
 		{4F1C63A4-2395-42A2-BEA0-11C096FC8AD1}.Release|.NET.ActiveCfg = Release|Any CPU
 		{4F1C63A4-2395-42A2-BEA0-11C096FC8AD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F1C63A4-2395-42A2-BEA0-11C096FC8AD1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{12CFC344-A7C0-4018-9BB7-D0C36BCCC421}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{12CFC344-A7C0-4018-9BB7-D0C36BCCC421}.Debug|.NET.Build.0 = Debug|Any CPU
+		{12CFC344-A7C0-4018-9BB7-D0C36BCCC421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12CFC344-A7C0-4018-9BB7-D0C36BCCC421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12CFC344-A7C0-4018-9BB7-D0C36BCCC421}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{12CFC344-A7C0-4018-9BB7-D0C36BCCC421}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{12CFC344-A7C0-4018-9BB7-D0C36BCCC421}.Release|.NET.ActiveCfg = Release|Any CPU
+		{12CFC344-A7C0-4018-9BB7-D0C36BCCC421}.Release|.NET.Build.0 = Release|Any CPU
+		{12CFC344-A7C0-4018-9BB7-D0C36BCCC421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12CFC344-A7C0-4018-9BB7-D0C36BCCC421}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12CFC344-A7C0-4018-9BB7-D0C36BCCC421}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{12CFC344-A7C0-4018-9BB7-D0C36BCCC421}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E16D1911-94DD-4495-A5FB-46904BD291F5}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{E16D1911-94DD-4495-A5FB-46904BD291F5}.Debug|.NET.Build.0 = Debug|Any CPU
+		{E16D1911-94DD-4495-A5FB-46904BD291F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E16D1911-94DD-4495-A5FB-46904BD291F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E16D1911-94DD-4495-A5FB-46904BD291F5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E16D1911-94DD-4495-A5FB-46904BD291F5}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E16D1911-94DD-4495-A5FB-46904BD291F5}.Release|.NET.ActiveCfg = Release|Any CPU
+		{E16D1911-94DD-4495-A5FB-46904BD291F5}.Release|.NET.Build.0 = Release|Any CPU
+		{E16D1911-94DD-4495-A5FB-46904BD291F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E16D1911-94DD-4495-A5FB-46904BD291F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E16D1911-94DD-4495-A5FB-46904BD291F5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E16D1911-94DD-4495-A5FB-46904BD291F5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5336B890-2CA9-427D-9FA8-89E60DA83129}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{5336B890-2CA9-427D-9FA8-89E60DA83129}.Debug|.NET.Build.0 = Debug|Any CPU
+		{5336B890-2CA9-427D-9FA8-89E60DA83129}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5336B890-2CA9-427D-9FA8-89E60DA83129}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5336B890-2CA9-427D-9FA8-89E60DA83129}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5336B890-2CA9-427D-9FA8-89E60DA83129}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5336B890-2CA9-427D-9FA8-89E60DA83129}.Release|.NET.ActiveCfg = Release|Any CPU
+		{5336B890-2CA9-427D-9FA8-89E60DA83129}.Release|.NET.Build.0 = Release|Any CPU
+		{5336B890-2CA9-427D-9FA8-89E60DA83129}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5336B890-2CA9-427D-9FA8-89E60DA83129}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5336B890-2CA9-427D-9FA8-89E60DA83129}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5336B890-2CA9-427D-9FA8-89E60DA83129}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9B0A4F0D-01BE-4D48-8CFE-7C26C3862950}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{9B0A4F0D-01BE-4D48-8CFE-7C26C3862950}.Debug|.NET.Build.0 = Debug|Any CPU
+		{9B0A4F0D-01BE-4D48-8CFE-7C26C3862950}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B0A4F0D-01BE-4D48-8CFE-7C26C3862950}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B0A4F0D-01BE-4D48-8CFE-7C26C3862950}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9B0A4F0D-01BE-4D48-8CFE-7C26C3862950}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9B0A4F0D-01BE-4D48-8CFE-7C26C3862950}.Release|.NET.ActiveCfg = Release|Any CPU
+		{9B0A4F0D-01BE-4D48-8CFE-7C26C3862950}.Release|.NET.Build.0 = Release|Any CPU
+		{9B0A4F0D-01BE-4D48-8CFE-7C26C3862950}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B0A4F0D-01BE-4D48-8CFE-7C26C3862950}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B0A4F0D-01BE-4D48-8CFE-7C26C3862950}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9B0A4F0D-01BE-4D48-8CFE-7C26C3862950}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -595,7 +595,7 @@ Namespace BIFConvenios
 
         'Obtener el cronograma de envio para los clientes
         Public Function GetCronogramaEnvioCliente() As DataSet
-            Dim myConnection As New ADODB.Connection()
+            Dim myConnection As New  ADODB.Connection()
             Dim oAdapter As New OleDbDataAdapter()
             Dim oDs As New DataSet()
             Dim result As New ADODB.Recordset()

@@ -50,7 +50,8 @@ Partial Class Test
         Next
 
         orepCartaCobranzaLight.SetDataSource(ds)
-        CrystalReportViewer1.ReportSource = orepCartaCobranzaLight
+        'MIGRAR INNOVA FALTA
+        'CrystalReportViewer1.ReportSource = orepCartaCobranzaLight
 
     End Sub
 

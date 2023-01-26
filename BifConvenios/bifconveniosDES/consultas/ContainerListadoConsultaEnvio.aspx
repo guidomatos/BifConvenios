@@ -1,6 +1,6 @@
 <%@ Page Language="vb" Inherits="BIFConvenios.ContainerListadoConsultaEnvio" AutoEventWireup="false" CodeFile="ContainerListadoConsultaEnvio.aspx.vb" %>
 <%@ Register TagPrefix="uc1" TagName="Banner" Src="../controls/Banner.ascx" %>
-<%@ Register TagPrefix="cr" Namespace="CrystalDecisions.Web" Assembly="CrystalDecisions.Web, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" %>
+<%@ Register TagPrefix="cr" Namespace="CrystalDecisions.Web" Assembly="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>
 	<HEAD>
@@ -50,7 +50,8 @@
 			</thead>
 			</table>
 			<!-- END -->
-			<CR:CrystalReportViewer id="CrystalReportViewer1" runat="server" DisplayGroupTree="False" EnableDrillDown="False" HasDrillUpButton="False" HasGotoPageButton="False" HasSearchButton="False" HasToggleGroupTreeButton="False" Height="50px" Width="350px"></CR:CrystalReportViewer>
+			<%--MIGRAR INNOVA FALTA
+				<CR:CrystalReportViewer id="CrystalReportViewer1" runat="server" DisplayGroupTree="False" EnableDrillDown="False" HasDrillUpButton="False" HasGotoPageButton="False" HasSearchButton="False" HasToggleGroupTreeButton="False" Height="50px" Width="350px"></CR:CrystalReportViewer>--%>
 			<!-- ADD NCA 08/07/2014 EA2013-273 OPT. CONVENIOS  -->
 			<input id="hdId" type="hidden" name="hdId" runat="server"/>
 			<!-- END -->

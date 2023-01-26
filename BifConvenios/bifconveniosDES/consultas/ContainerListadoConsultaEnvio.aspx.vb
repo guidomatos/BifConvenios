@@ -92,8 +92,8 @@ Namespace BIFConvenios
             End If
 
             If Request.Params("export") Is Nothing Then
-
-                CrystalReportViewer1.ReportSource = oRepListadoCuotasPorVencer
+                'MIGRAR INNOVA FALTA
+                'CrystalReportViewer1.ReportSource = oRepListadoCuotasPorVencer
 
             Else
 

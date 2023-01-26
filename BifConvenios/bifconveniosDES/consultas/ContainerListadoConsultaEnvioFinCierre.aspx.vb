@@ -50,13 +50,14 @@ Namespace BIFConvenios
                 If (Not Session.Item("Info") Is Nothing) Then
                     ds = CType(Session.Item("Info"), DsListadoCuotasFinCierre)
 
-                    ReportViewer1.ProcessingMode = ProcessingMode.Local
-                    ReportViewer1.LocalReport.DataSources.Clear()
-                    ReportViewer1.LocalReport.ReportPath = Server.MapPath("Reportes\RepListadoCuotasFinCierre.rdlc")
-                    Dim DatasourceDLinfo As New ReportDataSource("DsListadoCuotasFinCierre_DLinfo", ds.Tables(0))
-                    ReportViewer1.LocalReport.DataSources.Add(DatasourceDLinfo)
-                    Dim DatasourceCliente As New ReportDataSource("DsListadoCuotasFinCierre_Cliente", ds.Tables(1))
-                    ReportViewer1.LocalReport.DataSources.Add(DatasourceCliente)
+                    'MIGRAR INNOVA FALTA
+                    'ReportViewer1.ProcessingMode = ProcessingMode.Local
+                    'ReportViewer1.LocalReport.DataSources.Clear()
+                    'ReportViewer1.LocalReport.ReportPath = Server.MapPath("Reportes\RepListadoCuotasFinCierre.rdlc")
+                    'Dim DatasourceDLinfo As New ReportDataSource("DsListadoCuotasFinCierre_DLinfo", ds.Tables(0))
+                    'ReportViewer1.LocalReport.DataSources.Add(DatasourceDLinfo)
+                    'Dim DatasourceCliente As New ReportDataSource("DsListadoCuotasFinCierre_Cliente", ds.Tables(1))
+                    'ReportViewer1.LocalReport.DataSources.Add(DatasourceCliente)
 
                     'ADD NCA 08/07/2014 EA2013-273 OPT. PROCESOS CONVENIOS - ARCHIVOS DESCUENTOS
                     If Not (Session.Item("idx") Is Nothing) Then hdId.Value = Session.Item("idx").ToString
@@ -71,57 +72,59 @@ Namespace BIFConvenios
                 hdId.Value = idp
                 'END
                 ds = CType(ArchivosDescuento.getDataSetListadoCuotasFinCierre(idp, "-", "-"), DsListadoCuotasFinCierre)
-                ReportViewer1.ProcessingMode = ProcessingMode.Local
-                ReportViewer1.LocalReport.DataSources.Clear()
-                ReportViewer1.LocalReport.ReportPath = Server.MapPath("Reportes\RepListadoCuotasFinCierre.rdlc")
-                Dim DatasourceDLinfo As New ReportDataSource("DsListadoCuotasFinCierre_DLinfo", ds.Tables(0))
-                ReportViewer1.LocalReport.DataSources.Add(DatasourceDLinfo)
-                Dim DatasourceCliente As New ReportDataSource("DsListadoCuotasFinCierre_Cliente", ds.Tables(1))
-                ReportViewer1.LocalReport.DataSources.Add(DatasourceCliente)
+                'MIGRAR INNOVA FALTA
+                'ReportViewer1.ProcessingMode = ProcessingMode.Local
+                'ReportViewer1.LocalReport.DataSources.Clear()
+                'ReportViewer1.LocalReport.ReportPath = Server.MapPath("Reportes\RepListadoCuotasFinCierre.rdlc")
+                'Dim DatasourceDLinfo As New ReportDataSource("DsListadoCuotasFinCierre_DLinfo", ds.Tables(0))
+                'ReportViewer1.LocalReport.DataSources.Add(DatasourceDLinfo)
+                'Dim DatasourceCliente As New ReportDataSource("DsListadoCuotasFinCierre_Cliente", ds.Tables(1))
+                'ReportViewer1.LocalReport.DataSources.Add(DatasourceCliente)
 
                 Dim oProceso As New BIFConvenios.Proceso()
                 oProceso.UpdateFechaObtencionArchivo(idp, False, Context.User.Identity.Name)
                 oProceso.UpdEstadoGeneracionExito(idp, Context.User.Identity.Name)
             End If
             If Request.Params("export") Is Nothing Then
-                ReportViewer1.ProcessingMode = ProcessingMode.Local
-                ReportViewer1.LocalReport.DataSources.Clear()
-                ReportViewer1.LocalReport.ReportPath = Server.MapPath("Reportes\RepListadoCuotasFinCierre.rdlc")
-                Dim DatasourceDLinfo As New ReportDataSource("DsListadoCuotasFinCierre_DLinfo", ds.Tables(0))
-                ReportViewer1.LocalReport.DataSources.Add(DatasourceDLinfo)
-                Dim DatasourceCliente As New ReportDataSource("DsListadoCuotasFinCierre_Cliente", ds.Tables(1))
-                ReportViewer1.LocalReport.DataSources.Add(DatasourceCliente)
+                'MIGRAR INNOVA FALTA
+                'ReportViewer1.ProcessingMode = ProcessingMode.Local
+                'ReportViewer1.LocalReport.DataSources.Clear()
+                'ReportViewer1.LocalReport.ReportPath = Server.MapPath("Reportes\RepListadoCuotasFinCierre.rdlc")
+                'Dim DatasourceDLinfo As New ReportDataSource("DsListadoCuotasFinCierre_DLinfo", ds.Tables(0))
+                'ReportViewer1.LocalReport.DataSources.Add(DatasourceDLinfo)
+                'Dim DatasourceCliente As New ReportDataSource("DsListadoCuotasFinCierre_Cliente", ds.Tables(1))
+                'ReportViewer1.LocalReport.DataSources.Add(DatasourceCliente)
             Else
 
                 Dim name As String = getWebServerDateId() & ".xls"
                 Dim filename As String = Server.MapPath(".") & "\export\" & name
                 RemoveFiles(Server.MapPath(".") & "\export\", New TimeSpan(0, 6, 0, 0))
+                'MIGRAR INNOVA FALTA
+                'If Request.Params("idp") Is Nothing Then
 
-                If Request.Params("idp") Is Nothing Then
+                '    Dim warnings As Warning()
+                '    Dim streamIds As String()
+                '    Dim contentType As String
+                '    Dim encoding As String
+                '    Dim extension As String
 
-                    Dim warnings As Warning()
-                    Dim streamIds As String()
-                    Dim contentType As String
-                    Dim encoding As String
-                    Dim extension As String
-
-                    If ReportViewer1.LocalReport.DataSources.Count > 0 Then
-                        Dim bytes As Byte() = ReportViewer1.LocalReport.Render("EXCEL", Nothing, contentType, encoding, extension, streamIds, warnings)
-                        Response.Clear()
-                        Response.Buffer = True
-                        Response.Charset = ""
-                        Response.Cache.SetCacheability(HttpCacheability.NoCache)
-                        Response.ContentType = contentType
-                        Response.AppendHeader("Content-Disposition", "inline; filename=" & getWebServerDateId() & ".xls")
-                        Response.BinaryWrite(bytes)
-                        Response.Flush()
-                        Response.End()
-                        ReportViewer1.Dispose()
-                    End If
-                Else
-                    Response.Redirect("EnvioReporteMail.aspx?idP=" + idp + "&archivo=export\" & name)
-                End If
-                End If
+                '    If ReportViewer1.LocalReport.DataSources.Count > 0 Then
+                '        Dim bytes As Byte() = ReportViewer1.LocalReport.Render("EXCEL", Nothing, contentType, encoding, extension, streamIds, warnings)
+                '        Response.Clear()
+                '        Response.Buffer = True
+                '        Response.Charset = ""
+                '        Response.Cache.SetCacheability(HttpCacheability.NoCache)
+                '        Response.ContentType = contentType
+                '        Response.AppendHeader("Content-Disposition", "inline; filename=" & getWebServerDateId() & ".xls")
+                '        Response.BinaryWrite(bytes)
+                '        Response.Flush()
+                '        Response.End()
+                '        ReportViewer1.Dispose()
+                '    End If
+                'Else
+                '    Response.Redirect("EnvioReporteMail.aspx?idP=" + idp + "&archivo=export\" & name)
+                'End If
+            End If
         End Sub
 
         Protected Function getDataTableListadoCuotasFin(ByVal strCodigoProceso As String) As DataTable
