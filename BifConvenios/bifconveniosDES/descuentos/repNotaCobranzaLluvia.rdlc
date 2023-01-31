@@ -357,7 +357,7 @@ Select DatosCobranza.DLACC
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>NOTA DE COBRANZA</Value>
+                                  <Value>NOTA DE COBRANZA </Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>22pt</FontSize>
