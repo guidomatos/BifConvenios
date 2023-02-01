@@ -288,7 +288,7 @@ Select DatosDescuentoDetail.DLACC
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Carta de Cobranza</Value>
+                                  <Value>Carta de Cobranza </Value>
                                   <Style>
                                     <FontSize>16pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
