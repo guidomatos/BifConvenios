@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.32014.148
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33130.400
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "bifconveniosDES", "bifconveniosDES\", "{76F9F32A-28FC-4A4E-BA37-5223C249B14E}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "bifconveniosDES(1)", "bifconveniosDES\", "{76F9F32A-28FC-4A4E-BA37-5223C249B14E}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.7.2"
 		ProjectReferences = "{C963285A-3057-49D5-8CEB-629C8E88956C}|BIFConvenios.BE.dll;{BAC914D4-0394-455D-B0C2-AF3CF6B1598C}|BIFConvenios.BL.dll;{AFA34A2C-8F69-4671-85E3-74B86F34054E}|BIFUtils.dll;{D0A42DE9-45EB-4951-9E50-FE449B019860}|BusinessLogic.dll;{C6B95A0F-392E-4775-B51A-F5676ACB2C17}|BIFConvenios.DO.dll;{8EBE95EA-BEAB-423D-B06C-87B9FAA730A8}|DAL.dll;{EB9BECF5-C64D-4A1A-B1C5-91494BBE4519}|Resource.dll;{4F1C63A4-2395-42A2-BEA0-11C096FC8AD1}|DataAccess.dll;{12cfc344-a7c0-4018-9bb7-d0c36bccc421}|BIFData.dll;{5336b890-2ca9-427d-9fa8-89e60da83129}|BroadcasterClass.dll;{9b0a4f0d-01be-4d48-8cfe-7c26c3862950}|LREM.Tools.Reporting.Excel.dll;"
@@ -23,28 +23,6 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "bifconveniosDES", "bifconve
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "60926"
 		SlnRelativePath = "bifconveniosDES\"
-	EndProjectSection
-EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WSbifconveniosDES", "WSbifconveniosDES\", "{A65D5F0D-158D-4A3E-90E3-729202673EC7}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.7.2"
-		ProjectReferences = "{C963285A-3057-49D5-8CEB-629C8E88956C}|BIFConvenios.BE.dll;{BAC914D4-0394-455D-B0C2-AF3CF6B1598C}|BIFConvenios.BL.dll;{C6B95A0F-392E-4775-B51A-F5676ACB2C17}|BIFConvenios.DO.dll;{AFA34A2C-8F69-4671-85E3-74B86F34054E}|BIFUtils.dll;{8EBE95EA-BEAB-423D-B06C-87B9FAA730A8}|DAL.dll;{EB9BECF5-C64D-4A1A-B1C5-91494BBE4519}|Resource.dll;"
-		Debug.AspNetCompiler.VirtualPath = "/WSbifconveniosDES"
-		Debug.AspNetCompiler.PhysicalPath = "WSbifconveniosDES\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\WSbifconveniosDES\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/WSbifconveniosDES"
-		Release.AspNetCompiler.PhysicalPath = "WSbifconveniosDES\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\WSbifconveniosDES\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "63066"
-		SlnRelativePath = "WSbifconveniosDES\"
 	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BIFConvenios.BE", "BIFConvenio.BE\BIFConvenios.BE.vbproj", "{C963285A-3057-49D5-8CEB-629C8E88956C}"
@@ -93,18 +71,6 @@ Global
 		{76F9F32A-28FC-4A4E-BA37-5223C249B14E}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{76F9F32A-28FC-4A4E-BA37-5223C249B14E}.Release|Mixed Platforms.ActiveCfg = Debug|.NET
 		{76F9F32A-28FC-4A4E-BA37-5223C249B14E}.Release|Mixed Platforms.Build.0 = Debug|.NET
-		{A65D5F0D-158D-4A3E-90E3-729202673EC7}.Debug|.NET.ActiveCfg = Debug|Any CPU
-		{A65D5F0D-158D-4A3E-90E3-729202673EC7}.Debug|.NET.Build.0 = Debug|Any CPU
-		{A65D5F0D-158D-4A3E-90E3-729202673EC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A65D5F0D-158D-4A3E-90E3-729202673EC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A65D5F0D-158D-4A3E-90E3-729202673EC7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{A65D5F0D-158D-4A3E-90E3-729202673EC7}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{A65D5F0D-158D-4A3E-90E3-729202673EC7}.Release|.NET.ActiveCfg = Debug|Any CPU
-		{A65D5F0D-158D-4A3E-90E3-729202673EC7}.Release|.NET.Build.0 = Debug|Any CPU
-		{A65D5F0D-158D-4A3E-90E3-729202673EC7}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{A65D5F0D-158D-4A3E-90E3-729202673EC7}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{A65D5F0D-158D-4A3E-90E3-729202673EC7}.Release|Mixed Platforms.ActiveCfg = Debug|.NET
-		{A65D5F0D-158D-4A3E-90E3-729202673EC7}.Release|Mixed Platforms.Build.0 = Debug|.NET
 		{C963285A-3057-49D5-8CEB-629C8E88956C}.Debug|.NET.ActiveCfg = Debug|Any CPU
 		{C963285A-3057-49D5-8CEB-629C8E88956C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C963285A-3057-49D5-8CEB-629C8E88956C}.Debug|Any CPU.Build.0 = Debug|Any CPU
