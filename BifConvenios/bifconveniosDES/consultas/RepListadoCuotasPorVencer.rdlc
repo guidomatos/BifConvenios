@@ -192,7 +192,7 @@ From DLinfo
                   <Width>0.95in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.6in</Width>
+                  <Width>0.8in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.85in</Width>
@@ -2011,6 +2011,7 @@ From DLinfo
                           <Style />
                         </Textbox>
                         <ColSpan>2</ColSpan>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell />
@@ -2972,14 +2973,14 @@ From DLinfo
             </TablixRowHierarchy>
             <DataSetName>Cliente</DataSetName>
             <Height>3.43613in</Height>
-            <Width>10.65in</Width>
+            <Width>10.85in</Width>
             <Style />
           </Tablix>
         </ReportItems>
         <Height>4.579in</Height>
         <Style />
       </Body>
-      <Width>10.699in</Width>
+      <Width>10.85in</Width>
       <Page>
         <PageHeight>8.5in</PageHeight>
         <PageWidth>11in</PageWidth>
