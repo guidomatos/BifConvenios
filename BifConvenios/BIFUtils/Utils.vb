@@ -1,6 +1,8 @@
 Imports System.Configuration
 Imports System.IO
 Imports System.Web.Mail
+Imports Microsoft.Reporting.WebForms
+
 Namespace WS
     Public Class Utils
 
@@ -74,9 +76,9 @@ Namespace WS
         End Function
 
         ' sends a simple email
-        Public Shared Sub SendNotification(ByVal strFrom As String, ByVal strTo As String, _
-                    ByVal strBcc As String, ByVal strSubject As String, ByVal strBody As String, _
-                    Optional ByVal strAttachment As String = "", Optional ByVal FormatHtml As Boolean = False, _
+        Public Shared Sub SendNotification(ByVal strFrom As String, ByVal strTo As String,
+                    ByVal strBcc As String, ByVal strSubject As String, ByVal strBody As String,
+                    Optional ByVal strAttachment As String = "", Optional ByVal FormatHtml As Boolean = False,
                     Optional ByVal notifyTo As String = "")
             ' Obtain PortalSettings from Current Context
 
@@ -129,6 +131,17 @@ Namespace WS
 
         Public Function getWebServerDateId() As String
             Return Now.Year.ToString & Now.Month.ToString & Now.Day.ToString & Now.Hour.ToString & Now.Minute.ToString & Now.Second.ToString & Now.Millisecond.ToString & Now.Ticks.ToString
+        End Function
+
+
+        Public Shared Function RDLC_ExportarExcel(ByVal ReportViewer1 As ReportViewer) As Byte()
+            Dim mimeType As String
+            Dim encoding As String
+            Dim extension As String
+            Dim streamIds As String()
+            Dim warnings As Warning()
+            Dim bytes = ReportViewer1.LocalReport.Render("Excel", Nothing, mimeType, encoding, extension, streamIds, warnings)
+            Return bytes
         End Function
 
     End Class

@@ -141,12 +141,6 @@ Namespace BIFConvenios
 
                     ReportViewer1.LocalReport.DataSources.Add(rdsDlinfo)
                     ReportViewer1.LocalReport.DataSources.Add(rdsCliente)
-                    Dim mimeType As String
-                    Dim encoding As String
-                    Dim extension As String
-                    Dim streamIds As String()
-                    Dim warnings As Warning()
-                    Dim bytes = ReportViewer1.LocalReport.Render("Excel", Nothing, mimeType, encoding, extension, streamIds, warnings)
 
                     'Dim ms As System.IO.MemoryStream
                     'Dim fileS As FileStream = File.OpenRead(filename)
@@ -164,7 +158,7 @@ Namespace BIFConvenios
                             .ClearHeaders()
                             .ContentType = "application/vnd.ms-excel"
                             .AddHeader("Content-Disposition", "inline; filename=" & getWebServerDateId() & ".xls")
-                            .BinaryWrite(bytes)
+                            .BinaryWrite(BIFUtils.WS.Utils.RDLC_ExportarExcel(ReportViewer1))
 
                             .End()
                         End With
