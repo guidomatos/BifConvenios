@@ -1,328 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
-<Description>Converted by Crystal Conversions</Description>
-<AutoRefresh>0</AutoRefresh>
-<ReportSections>
-<ReportSection>
-<Body>
-<ReportItems>
-<Textbox Name="detEmpresa1">
-<CanGrow>false</CanGrow>
-<Top>0in</Top>
-<Left>0.25in</Left>
-<Height>0.16667in</Height>
-<Width>1.4in</Width>
-<KeepTogether>true</KeepTogether>
-<Paragraphs>
-<Paragraph>
-<TextRuns>
-<TextRun>
-<Value>=First(Fields!Empresa.Value, "Detalle")</Value>
-<Style>
-<FontFamily>Arial</FontFamily>
-<FontSize>10pt</FontSize>
-</Style>
-</TextRun>
-</TextRuns>
-</Paragraph>
-</Paragraphs>
-<Style>
-</Style>
-</Textbox>
-<Textbox Name="detRUC1">
-<CanGrow>false</CanGrow>
-<Top>0in</Top>
-<Left>1.7in</Left>
-<Height>0.16667in</Height>
-<Width>1.35in</Width>
-<KeepTogether>true</KeepTogether>
-<Paragraphs>
-<Paragraph>
-<TextRuns>
-<TextRun>
-<Value>=First(Fields!RUC.Value, "Detalle")</Value>
-<Style>
-<FontFamily>Arial</FontFamily>
-<FontSize>10pt</FontSize>
-</Style>
-</TextRun>
-</TextRuns>
-<Style>
-<TextAlign>Center</TextAlign>
-</Style>
-</Paragraph>
-</Paragraphs>
-<Style>
-</Style>
-</Textbox>
-<Textbox Name="detCodigoIBS1">
-<CanGrow>false</CanGrow>
-<Top>0in</Top>
-<Left>3.1in</Left>
-<Height>0.16667in</Height>
-<Width>1.35in</Width>
-<KeepTogether>true</KeepTogether>
-<Paragraphs>
-<Paragraph>
-<TextRuns>
-<TextRun>
-<Value>=First(Fields!CodigoIBS.Value, "Detalle")</Value>
-<Style>
-<FontFamily>Arial</FontFamily>
-<FontSize>10pt</FontSize>
-</Style>
-</TextRun>
-</TextRuns>
-<Style>
-<TextAlign>Center</TextAlign>
-</Style>
-</Paragraph>
-</Paragraphs>
-<Style>
-</Style>
-</Textbox>
-<Textbox Name="detNroCreditos1">
-<CanGrow>false</CanGrow>
-<Top>0in</Top>
-<Left>4.5in</Left>
-<Height>0.16667in</Height>
-<Width>1.4in</Width>
-<KeepTogether>true</KeepTogether>
-<Paragraphs>
-<Paragraph>
-<TextRuns>
-<TextRun>
-<Value>=First(Fields!NroCreditos.Value, "Detalle")</Value>
-<Style>
-<FontFamily>Arial</FontFamily>
-<FontSize>10pt</FontSize>
-</Style>
-</TextRun>
-</TextRuns>
-<Style>
-<TextAlign>Center</TextAlign>
-</Style>
-</Paragraph>
-</Paragraphs>
-<Style>
-</Style>
-</Textbox>
-<Textbox Name="detImporte1">
-<CanGrow>false</CanGrow>
-<Top>0in</Top>
-<Left>5.9in</Left>
-<Height>0.16667in</Height>
-<Width>1.4in</Width>
-<KeepTogether>true</KeepTogether>
-<Paragraphs>
-<Paragraph>
-<TextRuns>
-<TextRun>
-<Value>=First(Fields!Importe.Value, "Detalle")</Value>
-<Style>
-<FontFamily>Arial</FontFamily>
-<FontSize>10pt</FontSize>
-</Style>
-</TextRun>
-</TextRuns>
-<Style>
-<TextAlign>Center</TextAlign>
-</Style>
-</Paragraph>
-</Paragraphs>
-<Style>
-</Style>
-</Textbox>
-</ReportItems>
-<Height>0.167in</Height>
-<Style />
-</Body>
-<Width>8.049in</Width>
-<Page>
-<PageHeader>
-<PrintOnFirstPage>true</PrintOnFirstPage>
-<PrintOnLastPage>true</PrintOnLastPage>
-<Height>0.313in</Height>
-<ReportItems>
-<Textbox Name="phText6">
-<CanGrow>false</CanGrow>
-<Top>0.08333in</Top>
-<Left>0.25in</Left>
-<Height>0.16667in</Height>
-<Width>1.38542in</Width>
-<KeepTogether>true</KeepTogether>
-<Paragraphs>
-<Paragraph>
-<TextRuns>
-<TextRun>
-<Value>Empresa</Value>
-<Style>
-<FontFamily>Arial</FontFamily>
-<FontSize>10pt</FontSize>
-<FontWeight>Bold</FontWeight>
-<TextDecoration>Underline</TextDecoration>
-</Style>
-</TextRun>
-</TextRuns>
-<Style>
-<TextAlign>Center</TextAlign>
-</Style>
-</Paragraph>
-</Paragraphs>
-<Style>
-</Style>
-</Textbox>
-<Textbox Name="phText7">
-<CanGrow>false</CanGrow>
-<Top>0.08333in</Top>
-<Left>1.66667in</Left>
-<Height>0.16667in</Height>
-<Width>1.38542in</Width>
-<KeepTogether>true</KeepTogether>
-<Paragraphs>
-<Paragraph>
-<TextRuns>
-<TextRun>
-<Value>RUC</Value>
-<Style>
-<FontFamily>Arial</FontFamily>
-<FontSize>10pt</FontSize>
-<FontWeight>Bold</FontWeight>
-<TextDecoration>Underline</TextDecoration>
-</Style>
-</TextRun>
-</TextRuns>
-<Style>
-<TextAlign>Center</TextAlign>
-</Style>
-</Paragraph>
-</Paragraphs>
-<Style>
-</Style>
-</Textbox>
-<Textbox Name="phText8">
-<CanGrow>false</CanGrow>
-<Top>0.08333in</Top>
-<Left>3.08333in</Left>
-<Height>0.16667in</Height>
-<Width>1.38542in</Width>
-<KeepTogether>true</KeepTogether>
-<Paragraphs>
-<Paragraph>
-<TextRuns>
-<TextRun>
-<Value>C&#xF3;digo IBS</Value>
-<Style>
-<FontFamily>Arial</FontFamily>
-<FontSize>10pt</FontSize>
-<FontWeight>Bold</FontWeight>
-<TextDecoration>Underline</TextDecoration>
-</Style>
-</TextRun>
-</TextRuns>
-<Style>
-<TextAlign>Center</TextAlign>
-</Style>
-</Paragraph>
-</Paragraphs>
-<Style>
-</Style>
-</Textbox>
-<Textbox Name="phText9">
-<CanGrow>false</CanGrow>
-<Top>0.08333in</Top>
-<Left>4.5in</Left>
-<Height>0.16667in</Height>
-<Width>1.38542in</Width>
-<KeepTogether>true</KeepTogether>
-<Paragraphs>
-<Paragraph>
-<TextRuns>
-<TextRun>
-<Value>Cr&#xE9;ditos</Value>
-<Style>
-<FontFamily>Arial</FontFamily>
-<FontSize>10pt</FontSize>
-<FontWeight>Bold</FontWeight>
-<TextDecoration>Underline</TextDecoration>
-</Style>
-</TextRun>
-</TextRuns>
-<Style>
-<TextAlign>Center</TextAlign>
-</Style>
-</Paragraph>
-</Paragraphs>
-<Style>
-</Style>
-</Textbox>
-<Textbox Name="phText10">
-<CanGrow>false</CanGrow>
-<Top>0.08333in</Top>
-<Left>5.91667in</Left>
-<Height>0.16667in</Height>
-<Width>1.38542in</Width>
-<KeepTogether>true</KeepTogether>
-<Paragraphs>
-<Paragraph>
-<TextRuns>
-<TextRun>
-<Value>Importe</Value>
-<Style>
-<FontFamily>Arial</FontFamily>
-<FontSize>10pt</FontSize>
-<FontWeight>Bold</FontWeight>
-<TextDecoration>Underline</TextDecoration>
-</Style>
-</TextRun>
-</TextRuns>
-<Style>
-<TextAlign>Center</TextAlign>
-</Style>
-</Paragraph>
-</Paragraphs>
-<Style>
-</Style>
-</Textbox>
-</ReportItems>
-</PageHeader>
-<PageWidth>8.5in</PageWidth>
-<PageHeight>11in</PageHeight>
-<InteractiveWidth>8.5in</InteractiveWidth>
-<InteractiveHeight>11in</InteractiveHeight>
-<LeftMargin>0.25in</LeftMargin>
-<RightMargin>0.25in</RightMargin>
-<TopMargin>0.25in</TopMargin>
-<BottomMargin>0.25in</BottomMargin>
-<Style />
-</Page>
-</ReportSection>
-</ReportSections>
-<DataSources>
-<DataSource Name="DataSetEnviosAutomatico">
-<DataSourceReference>DataSetEnviosAutomatico</DataSourceReference>
-</DataSource>
-</DataSources>
-<DataSets>
-<DataSet Name="Cabecera">
-<Query>
-<DataSourceName>DataSetEnviosAutomatico</DataSourceName>
-<CommandType>Text</CommandType>
-<CommandText>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSetEnviosAutomatico">
+      <DataSourceReference>DataSetEnviosAutomatico</DataSourceReference>
+      <rd:DataSourceID>a6e574d0-1c31-4938-9b93-dece660b0d5a</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="Cabecera">
+      <Query>
+        <DataSourceName>DataSetEnviosAutomatico</DataSourceName>
+        <CommandText>
 Select Cabecera.TotalEmpresa
 	, Cabecera.TotalCreditos
 	, Cabecera.TotalImporte
  From Cabecera
 </CommandText>
-<rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-</Query>
-</DataSet>
-<DataSet Name="Detalle">
-<!-- Detalle -->
-<Query>
-<DataSourceName>DataSetEnviosAutomatico</DataSourceName>
-<CommandType>Text</CommandType>
-<CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+    </DataSet>
+    <DataSet Name="Detalle">
+      <Query>
+        <DataSourceName>DataSetEnviosAutomatico</DataSourceName>
+        <CommandText>
 Select Detalle.Empresa
 	, Detalle.RUC
 	, Detalle.CodigoIBS
@@ -330,33 +31,293 @@ Select Detalle.Empresa
 	, Detalle.Importe
 From Detalle
 </CommandText>
-<rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-</Query>
-<Fields>
-<Field Name="Empresa">
-<DataField>Empresa</DataField>
-<rd:TypeName>System.String</rd:TypeName>
-</Field>
-<Field Name="RUC">
-<DataField>RUC</DataField>
-<rd:TypeName>System.String</rd:TypeName>
-</Field>
-<Field Name="CodigoIBS">
-<DataField>CodigoIBS</DataField>
-<rd:TypeName>System.String</rd:TypeName>
-</Field>
-<Field Name="NroCreditos">
-<DataField>NroCreditos</DataField>
-<rd:TypeName>System.String</rd:TypeName>
-</Field>
-<Field Name="Importe">
-<DataField>Importe</DataField>
-<rd:TypeName>System.String</rd:TypeName>
-</Field>
-</Fields>
-</DataSet>
-</DataSets>
-<Code>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="Empresa">
+          <DataField>Empresa</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RUC">
+          <DataField>RUC</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CodigoIBS">
+          <DataField>CodigoIBS</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NroCreditos">
+          <DataField>NroCreditos</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Importe">
+          <DataField>Importe</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="detEmpresa1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Empresa.Value, "Detalle")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Left>0.25in</Left>
+            <Height>0.16667in</Height>
+            <Width>1.4in</Width>
+            <Style />
+          </Textbox>
+          <Textbox Name="detRUC1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!RUC.Value, "Detalle")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Left>1.7in</Left>
+            <Height>0.16667in</Height>
+            <Width>1.35in</Width>
+            <ZIndex>1</ZIndex>
+            <Style />
+          </Textbox>
+          <Textbox Name="detCodigoIBS1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!CodigoIBS.Value, "Detalle")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Left>3.1in</Left>
+            <Height>0.16667in</Height>
+            <Width>1.35in</Width>
+            <ZIndex>2</ZIndex>
+            <Style />
+          </Textbox>
+          <Textbox Name="detNroCreditos1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!NroCreditos.Value, "Detalle")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Left>4.5in</Left>
+            <Height>0.16667in</Height>
+            <Width>1.4in</Width>
+            <ZIndex>3</ZIndex>
+            <Style />
+          </Textbox>
+          <Textbox Name="detImporte1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Importe.Value, "Detalle")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Left>5.9in</Left>
+            <Height>0.16667in</Height>
+            <Width>1.4in</Width>
+            <ZIndex>4</ZIndex>
+            <Style />
+          </Textbox>
+        </ReportItems>
+        <Height>0.167in</Height>
+        <Style />
+      </Body>
+      <Width>8.049in</Width>
+      <Page>
+        <PageHeader>
+          <Height>0.313in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="phText6">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Empresa</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                        <TextDecoration>Underline</TextDecoration>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.08333in</Top>
+              <Left>0.25in</Left>
+              <Height>0.16667in</Height>
+              <Width>1.38542in</Width>
+              <Style />
+            </Textbox>
+            <Textbox Name="phText7">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>RUC</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                        <TextDecoration>Underline</TextDecoration>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.08333in</Top>
+              <Left>1.66667in</Left>
+              <Height>0.16667in</Height>
+              <Width>1.38542in</Width>
+              <ZIndex>1</ZIndex>
+              <Style />
+            </Textbox>
+            <Textbox Name="phText8">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Código IBS</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                        <TextDecoration>Underline</TextDecoration>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.08333in</Top>
+              <Left>3.08333in</Left>
+              <Height>0.16667in</Height>
+              <Width>1.38542in</Width>
+              <ZIndex>2</ZIndex>
+              <Style />
+            </Textbox>
+            <Textbox Name="phText9">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Créditos</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                        <TextDecoration>Underline</TextDecoration>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.08333in</Top>
+              <Left>4.5in</Left>
+              <Height>0.16667in</Height>
+              <Width>1.38542in</Width>
+              <ZIndex>3</ZIndex>
+              <Style />
+            </Textbox>
+            <Textbox Name="phText10">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Importe</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                        <TextDecoration>Underline</TextDecoration>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.08333in</Top>
+              <Left>5.91667in</Left>
+              <Height>0.16667in</Height>
+              <Width>1.38542in</Width>
+              <ZIndex>4</ZIndex>
+              <Style />
+            </Textbox>
+          </ReportItems>
+          <Style />
+        </PageHeader>
+        <InteractiveHeight>11in</InteractiveHeight>
+        <InteractiveWidth>8.5in</InteractiveWidth>
+        <LeftMargin>0.25in</LeftMargin>
+        <RightMargin>0.25in</RightMargin>
+        <TopMargin>0.25in</TopMargin>
+        <BottomMargin>0.25in</BottomMargin>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <Code>
 ' These String Compare functions ignore trailing space and are case insensitive
 Public Function StrEquals(val1 as Object, val2 as Object) As Boolean
 	If IsNothing(val1) or IsNothing(val2) then Return False
@@ -370,9 +331,8 @@ Public Function StrCompare(val1 as Object, val2 as Object) As Integer
 End Function
 
 </Code>
-<Language>=User!Language</Language>
-<rd:GridSpacing>0.05in</rd:GridSpacing>
-<rd:SnapToGrid>true</rd:SnapToGrid>
-<ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
-<rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>308634a1-cac6-4128-a8b7-b1c7ac2e7e6b</rd:ReportID>
 </Report>

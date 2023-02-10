@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
-  <Description>Converted by Crystal Conversions</Description>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSetDocumentoCobranza">
@@ -1999,7 +1998,7 @@ Public Function CRFamount(Fields As Microsoft.ReportingServices.ReportProcessing
 	dblamount = Val(amount)
 	dblamount = dblamount * 1.0007
 	amount = CStr(Round(dblamount, 2))
-	CRFamount = "En relación con su préstamo personal otorgado al amparo del  BIF Convenio suscrito con su empleadora " &amp; Fields!DLNCC.Value &amp; ", " _ &amp; " mediante la presente hacemos de su conocimiento que al no haberse realizado el descuento de su cuota correspondiente al mes de " &amp; CRFmescuota(Fields) &amp; " " &amp; Format(Iif(Fields!DLVCM.Value = 1, Fields!DLVCA.Value - 1, Fields!DLVCA.Value)) &amp; ", usted presenta a la fecha una cuota por pagar ascendente a " &amp; CRFmoneda(Fields) &amp; amount
+	CRFamount = "En relación con su préstamo personal otorgado al amparo del  BIF Convenio suscrito con su empleadora " &amp; Fields!DLNCC.Value &amp; ", " &amp; " mediante la presente hacemos de su conocimiento que al no haberse realizado el descuento de su cuota correspondiente al mes de " &amp; CRFmescuota(Fields) &amp; " " &amp; Format(Iif(Fields!DLVCM.Value = 1, Fields!DLVCA.Value - 1, Fields!DLVCA.Value)) &amp; ", usted presenta a la fecha una cuota por pagar ascendente a " &amp; CRFmoneda(Fields) &amp; amount
 End Function
 
 Public Function CRFestimadosr(Fields As Microsoft.ReportingServices.ReportProcessing.ReportObjectModel.Fields) As String
