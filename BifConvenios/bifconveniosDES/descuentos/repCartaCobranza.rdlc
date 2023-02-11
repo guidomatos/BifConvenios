@@ -7,7 +7,7 @@
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>71fe1684-8b9a-4620-b8d0-bcbacaa332b4</rd:DataSourceID>
+      <rd:DataSourceID>60954d17-6128-4ce8-b21a-1311e616e38a</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -148,6 +148,10 @@
         <Field Name="DLEDEN">
           <DataField>DLEDEN</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="DatosDescuentoHeader_DLACC">
+          <DataField>DatosDescuentoHeader_DLACC</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
@@ -321,7 +325,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Carta de Cobranza   </Value>
+                                  <Value>Carta de Cobranza </Value>
                                   <Style>
                                     <FontSize>16pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -1319,7 +1323,7 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>2.28125in</Top>
+                              <Top>2.14584in</Top>
                               <Left>0.65in</Left>
                               <Height>0.5in</Height>
                               <Width>7.1in</Width>
@@ -1330,7 +1334,7 @@
                               <Source>Database</Source>
                               <Value>=Fields!SIGN1DATA.Value</Value>
                               <MIMEType>image/jpeg</MIMEType>
-                              <Top>2.71181in</Top>
+                              <Top>2.5764in</Top>
                               <Left>2.05in</Left>
                               <Height>1in</Height>
                               <Width>1in</Width>
@@ -1338,7 +1342,7 @@
                               <Style />
                             </Image>
                             <Line Name="gf1Line1">
-                              <Top>3.78125in</Top>
+                              <Top>3.64584in</Top>
                               <Left>1.65in</Left>
                               <Height>0in</Height>
                               <Width>2in</Width>
@@ -1353,7 +1357,7 @@
                               <Source>Database</Source>
                               <Value>=Fields!SIGN2DATA.Value</Value>
                               <MIMEType>image/jpeg</MIMEType>
-                              <Top>2.71181in</Top>
+                              <Top>3.34723in</Top>
                               <Left>4.88125in</Left>
                               <Height>1in</Height>
                               <Width>1in</Width>
@@ -1361,7 +1365,7 @@
                               <Style />
                             </Image>
                             <Line Name="gf1Line2">
-                              <Top>3.78125in</Top>
+                              <Top>4.41667in</Top>
                               <Left>4.35in</Left>
                               <Height>0in</Height>
                               <Width>2in</Width>
@@ -1373,7 +1377,7 @@
                               </Style>
                             </Line>
                             <Line Name="gf1Line3">
-                              <Top>3.86041in</Top>
+                              <Top>3.725in</Top>
                               <Left>0.65in</Left>
                               <Height>0in</Height>
                               <Width>2in</Width>
@@ -1399,7 +1403,7 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>3.875in</Top>
+                              <Top>3.72917in</Top>
                               <Left>1.65in</Left>
                               <Height>0.15347in</Height>
                               <Width>2in</Width>
@@ -1421,7 +1425,7 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>3.875in</Top>
+                              <Top>4.5in</Top>
                               <Left>4.35in</Left>
                               <Height>0.15347in</Height>
                               <Width>1.9in</Width>
@@ -1443,7 +1447,7 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>4.04167in</Top>
+                              <Top>3.89584in</Top>
                               <Left>1.65in</Left>
                               <Height>0.15347in</Height>
                               <Width>2in</Width>
@@ -1465,7 +1469,7 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>4.04167in</Top>
+                              <Top>4.66667in</Top>
                               <Left>4.35in</Left>
                               <Height>0.15347in</Height>
                               <Width>1.9in</Width>
@@ -1552,7 +1556,7 @@
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>4.375in</Top>
+                              <Top>4.22917in</Top>
                               <Left>0.75in</Left>
                               <Height>1.16667in</Height>
                               <Width>6.85in</Width>
@@ -1723,7 +1727,7 @@
             <Style />
           </Tablix>
         </ReportItems>
-        <Height>10.00348in</Height>
+        <Height>9.754in</Height>
         <Style />
       </Body>
       <Width>8.049in</Width>
@@ -1803,7 +1807,7 @@ Public Function CRFfechaimpresion(Fields As Microsoft.ReportingServices.ReportPr
 End Function
 
 Public Function CRFmensajeoficinatelefono() As String
-	CRFmensajeoficinatelefono = "Para efectos de sostener, como última oportunidad, una reunión con los suscritos, podrá apersonarse a nuestra oficina " + Trim(Fields!BRNNME.Value) +  " ubicada en " + Trim(Fields!BRNADR.Value) + iif(Fields!BRNPHN.Value&lt;&gt;0 ,   " o comunicarse al teléfono " + CStr(Fields!BRNPHN.Value, "#") + ".", ".")
+	CRFmensajeoficinatelefono = "Finalmente, debemos señalar que los pagos correspondientes a la(s) obligación(es) requerida(s) en el primer párrafo, los puede realizar en cualquiera de las oficinas del BIF o en su defecto en la cuenta corriente en moneda nacional que tenemos en el Banco de la Nación cuyo número se detalla a continuación: 0000237787."
 End Function
 
 Public Function CRFmensajepagobanconacion() As String
