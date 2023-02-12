@@ -1,18 +1,20 @@
-﻿Imports CrystalDecisions.Shared
-Imports CrystalDecisions.CrystalReports.Engine
+﻿'Imports CrystalDecisions.Shared
+'Imports CrystalDecisions.CrystalReports.Engine
 
 Imports Resource
 Imports System.IO
 Imports System.Data.SqlClient
 Imports BIFConvenios.BL
 Imports BIFConvenios.BE
+Imports Microsoft.Reporting.WebForms
+Imports BIFConvenios.Entidad
 
 Partial Class ReporteEnvioAutomaticoPrueba
     Inherits System.Web.UI.Page
 
     Protected ds As New DataSet()
     Protected idp As String
-    Protected oRepEnvioAutomatico As New RepListadoEnvioAutomatico()
+    'Protected oRepEnvioAutomatico As New RepListadoEnvioAutomatico()
     Protected dsNominaAutomatica As New DataSetEnviosAutomatico()
     Protected oReporteAutomatico As New BIFConvenios.ReporteAutomatico
     Protected oFuncionario As New BIFConvenios.Funcionario()
@@ -60,6 +62,7 @@ Partial Class ReporteEnvioAutomaticoPrueba
 
                         'Obtiene la cabecera de la nómina enviada
                         Dim dsRC As DataSet = oReporteAutomatico.ReporteNominaAutomaticaCabecera(intFuncionario)
+
                         For Each dr As DataRow In dsRC.Tables(0).Rows
                             TotalEmpresa = dr("TOTAL_EMPRESA")
                             TotalCreditos = IIf(dr("TOTAL_CREDITOS") Is DBNull.Value, 0, dr("TOTAL_CREDITOS"))
@@ -109,7 +112,18 @@ Partial Class ReporteEnvioAutomaticoPrueba
                         Next
 
                         'Se añade el dataset al objeto set del crystal report
-                        oRepEnvioAutomatico.SetDataSource(dsNominaAutomatica)
+                        'oRepEnvioAutomatico.SetDataSource(dsNominaAutomatica)
+
+                        Dim rdsCabecera As New ReportDataSource()
+                        rdsCabecera.Name = "Cabecera"
+
+                        If Not IsNothing(dsNominaAutomatica) Then
+                            If dsNominaAutomatica.Tables.Count > 0 Then
+                                rdsCabecera.Value = dsNominaAutomatica.Tables(0)
+                            End If
+                        End If
+
+                        ReportViewer1.LocalReport.DataSources.Add(rdsCabecera)
 
                         'Se obtiene el nombre del archivo excel a generar
                         Dim name As String = BIFConvenios.Utils.getWebServerDateId() & ".xls"
@@ -127,22 +141,29 @@ Partial Class ReporteEnvioAutomaticoPrueba
                             Dim strFullName As String = strPathFile + "\\" + name
 
                             'Procedimiento para el grabado del archivo excel
-                            With oRepEnvioAutomatico.ExportOptions
-                                .ExportDestinationType = ExportDestinationType.DiskFile
-                                .ExportFormatType = ExportFormatType.Excel
-                                .DestinationOptions = New CrystalDecisions.Shared.DiskFileDestinationOptions()
-                                .DestinationOptions.DiskFileName = strFullName
-                            End With
+                            'With oRepEnvioAutomatico.ExportOptions
+                            '    .ExportDestinationType = ExportDestinationType.DiskFile
+                            '    .ExportFormatType = ExportFormatType.Excel
+                            '    .DestinationOptions = New CrystalDecisions.Shared.DiskFileDestinationOptions()
+                            '    .DestinationOptions.DiskFileName = strFullName
+                            'End With
 
-                            oRepEnvioAutomatico.Export()
+                            'oRepEnvioAutomatico.Export()
+
+                            'exporta a archivo fisico
+                            Dim byteFileRdlc = BIFUtils.WS.Utils.RDLC_ExportarExcel(ReportViewer1)
+
+                            If Not BIFUtils.WS.Utils.RDLC_ExportFile(strFullName, byteFileRdlc) Then
+                                Throw New Exception("Error al crear archivo excel en servidor")
+                            End If
 
                             'Envio Correo a Funcionarios
                             strCEFuncionarios = System.Configuration.ConfigurationManager.AppSettings("mailFuncionarios").ToString()
 
                             strComentario = "El Reporte de Nóminas, se ha generado de forma automática a través del Sistema BIFConvenios"
 
-                            BIFConvenios.Utils.SendNotification(strDE, strCEFuncionarios, strCEFuncionarios, _
-                                               ConfigurationManager.AppSettings("mailCFSubject").ToString(), strComentario, strFullName, _
+                            BIFConvenios.Utils.SendNotification(strDE, strCEFuncionarios, strCEFuncionarios,
+                                               ConfigurationManager.AppSettings("mailCFSubject").ToString(), strComentario, strFullName,
                                               notifyTo:=(ConfigurationManager.AppSettings("mailSender").ToString()))
 
                             'Inserta en la tabla Log_Envio_Correo
@@ -193,3 +214,5 @@ Partial Class ReporteEnvioAutomaticoPrueba
     End Sub
 
 End Class
+
+
