@@ -17,7 +17,7 @@
 
 Imports System.Data.SqlClient
 Imports System.IO
-Imports CrystalDecisions.Shared
+'Imports CrystalDecisions.Shared
 Imports Microsoft.Reporting.WebForms
 
 Namespace BIFConvenios
@@ -133,6 +133,7 @@ Namespace BIFConvenios
                     'End With
 
                     'oRepListadoCuotasPorVencer.Export()
+
                     ''ADD: AAZ - 2017/12/06 - Incidencia 26
                     ''Cerramos y limpiamos el Objeto Crystal
                     'oRepListadoCuotasPorVencer.Close()
@@ -141,6 +142,14 @@ Namespace BIFConvenios
 
                     ReportViewer1.LocalReport.DataSources.Add(rdsDlinfo)
                     ReportViewer1.LocalReport.DataSources.Add(rdsCliente)
+
+
+                    'exportar a archivo fisico
+                    Dim byteFileRdlc = BIFUtils.WS.Utils.RDLC_ExportarExcel(ReportViewer1)
+
+                    'If Not BIFUtils.WS.Utils.RDLC_ExportFile(filename, byteFileRdlc) Then
+                    '    Throw New Exception("Error al crear archivo excel en servidor")
+                    'End If
 
                     'Dim ms As System.IO.MemoryStream
                     'Dim fileS As FileStream = File.OpenRead(filename)
@@ -158,7 +167,7 @@ Namespace BIFConvenios
                             .ClearHeaders()
                             .ContentType = "application/vnd.ms-excel"
                             .AddHeader("Content-Disposition", "inline; filename=" & getWebServerDateId() & ".xls")
-                            .BinaryWrite(BIFUtils.WS.Utils.RDLC_ExportarExcel(ReportViewer1))
+                            .BinaryWrite(byteFileRdlc)
 
                             .End()
                         End With

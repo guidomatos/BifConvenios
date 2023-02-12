@@ -144,5 +144,28 @@ Namespace WS
             Return bytes
         End Function
 
+        Public Shared Function RDLC_ExportarPDF(ByVal ReportViewer1 As ReportViewer) As Byte()
+            Dim mimeType As String
+            Dim encoding As String
+            Dim extension As String
+            Dim streamIds As String()
+            Dim warnings As Warning()
+            Dim bytes = ReportViewer1.LocalReport.Render("PDF", Nothing, mimeType, encoding, extension, streamIds, warnings)
+            Return bytes
+        End Function
+
+
+        Public Shared Function RDLC_ExportFile(ByVal strPathName As String, ByVal byteFile As Byte()) As Boolean
+
+            Try
+                Dim filebyte As Byte() = byteFile
+                File.WriteAllBytes(strPathName, filebyte)
+                Return True
+            Catch ex As Exception
+                Return False
+            End Try
+
+        End Function
+
     End Class
 End Namespace

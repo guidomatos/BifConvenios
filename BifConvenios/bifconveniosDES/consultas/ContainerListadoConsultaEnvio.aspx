@@ -54,7 +54,7 @@
 			</thead>
 			</table>
 			<!-- END -->
-			<%--MIGRAR INNOVA FALTA
+			<%--MIGRAR INNOVA
 				<CR:CrystalReportViewer id="CrystalReportViewer1" runat="server" DisplayGroupTree="False" EnableDrillDown="False" HasDrillUpButton="False" HasGotoPageButton="False" HasSearchButton="False" HasToggleGroupTreeButton="False" Height="50px" Width="350px"></CR:CrystalReportViewer>--%>
 			<!-- ADD NCA 08/07/2014 EA2013-273 OPT. CONVENIOS  -->
 			<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
@@ -66,4 +66,4 @@
 			<!-- END -->
 		</form>
 	</body>
-</HTML>
+</html>

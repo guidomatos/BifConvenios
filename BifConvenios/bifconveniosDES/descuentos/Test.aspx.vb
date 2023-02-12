@@ -1,10 +1,12 @@
 Imports System.Data
 Imports System.Data.SqlClient
 Imports BIFConvenios
+Imports Microsoft.Reporting.WebForms
+
 Partial Class Test
     Inherits System.Web.UI.Page
     Protected ds As New DataSetCuotasPendientes()
-    Protected orepCartaCobranzaLight As New repCartaCobranzaLight()
+    'Protected orepCartaCobranzaLight As New repCartaCobranzaLight()
 
 #Region " Web Form Designer Generated Code "
 
@@ -22,37 +24,45 @@ Partial Class Test
 #End Region
 
     Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        'Put user code to initialize the page here
-        Dim dsSign As DataSet
-        ds = Seguimiento.GetDetailPagaresJoin("'233100163427', '233100165830', '233100126434', '233100144004', '233100113086', '233100146264', '233100123304', '233100192381', '233100127392', '233100163392'", "9", "2007")
+        If Not Page.IsPostBack Then
 
-        Dim proceso As String = "9661F4A3-D2D5-42DE-8FE6-614E741ED181"
-        dsSign = DocumentoCobranza.getInformacionFirmantes(context.User.Identity.Name, Proceso)
-        Dim dr As DataRow
-        For Each dr In ds.Tables("DatosDescuentoHeader").Rows
-            If dsSign.Tables(0).Rows.Count = 2 Then
-                dr("SIGN1NAME") = dsSign.Tables(0).Rows(0).Item("EjecutivoNombre")      ' ""
-                dr("SIGN2NAME") = dsSign.Tables(0).Rows(1).Item("EjecutivoNombre")
-                dr("SIGN1POSITION") = dsSign.Tables(0).Rows(0).Item("EjecutivoCargo")
-                dr("SIGN2POSITION") = dsSign.Tables(0).Rows(1).Item("EjecutivoCargo")
+            'Put user code to initialize the page here
+            Dim dsSign As DataSet
+            ds = Seguimiento.GetDetailPagaresJoin("'233100163427', '233100165830', '233100126434', '233100144004', '233100113086', '233100146264', '233100123304', '233100192381', '233100127392', '233100163392'", "9", "2007")
 
-                dr("SIGN1DATA") = Utils.getImageAsByteArray(Request.PhysicalApplicationPath & "\" & dsSign.Tables(0).Rows(0).Item("EjecutivoImagePath"))  ' 
-                dr("SIGN2DATA") = Utils.getImageAsByteArray(Request.PhysicalApplicationPath & "\" & dsSign.Tables(0).Rows(1).Item("EjecutivoImagePath"))  ' 
+            Dim proceso As String = "9661F4A3-D2D5-42DE-8FE6-614E741ED181"
+            dsSign = DocumentoCobranza.getInformacionFirmantes(Context.User.Identity.Name, proceso)
+            Dim dr As DataRow
+            For Each dr In ds.Tables("DatosDescuentoHeader").Rows
+                If dsSign.Tables(0).Rows.Count = 2 Then
+                    dr("SIGN1NAME") = dsSign.Tables(0).Rows(0).Item("EjecutivoNombre")      ' ""
+                    dr("SIGN2NAME") = dsSign.Tables(0).Rows(1).Item("EjecutivoNombre")
+                    dr("SIGN1POSITION") = dsSign.Tables(0).Rows(0).Item("EjecutivoCargo")
+                    dr("SIGN2POSITION") = dsSign.Tables(0).Rows(1).Item("EjecutivoCargo")
 
-            Else
-                dr("SIGN1NAME") = "" ' ""
-                dr("SIGN2NAME") = ""  ' ""
-                dr("SIGN1POSITION") = ""  ' ""
-                dr("SIGN2POSITION") = ""  ' ""
-                dr("SIGN1DATA") = Utils.getImageAsByteArray(Request.PhysicalApplicationPath & "\sign\VOID0.bmp")   ' 
-                dr("SIGN2DATA") = Utils.getImageAsByteArray(Request.PhysicalApplicationPath & "\sign\VOID1.bmp")  ' 
-            End If
-        Next
+                    dr("SIGN1DATA") = Utils.getImageAsByteArray(Request.PhysicalApplicationPath & "\" & dsSign.Tables(0).Rows(0).Item("EjecutivoImagePath"))  ' 
+                    dr("SIGN2DATA") = Utils.getImageAsByteArray(Request.PhysicalApplicationPath & "\" & dsSign.Tables(0).Rows(1).Item("EjecutivoImagePath"))  ' 
 
-        orepCartaCobranzaLight.SetDataSource(ds)
-        'MIGRAR INNOVA FALTA
-        'CrystalReportViewer1.ReportSource = orepCartaCobranzaLight
+                Else
+                    dr("SIGN1NAME") = "" ' ""
+                    dr("SIGN2NAME") = ""  ' ""
+                    dr("SIGN1POSITION") = ""  ' ""
+                    dr("SIGN2POSITION") = ""  ' ""
+                    dr("SIGN1DATA") = Utils.getImageAsByteArray(Request.PhysicalApplicationPath & "\sign\VOID0.bmp")   ' 
+                    dr("SIGN2DATA") = Utils.getImageAsByteArray(Request.PhysicalApplicationPath & "\sign\VOID1.bmp")  ' 
+                End If
+            Next
 
+            Dim rdsDataset As New ReportDataSource()
+            rdsDataset.Name = "DataSet1"
+            rdsDataset.Value = ds.Tables(0)
+            'orepCartaCobranzaLight.SetDataSource(ds)
+            'MIGRAR INNOVA FALTA
+            'CrystalReportViewer1.ReportSource = orepCartaCobranzaLight
+            ReportViewer1.LocalReport.ReportPath = Server.MapPath("descuentos/repCartaCobranzaLight.rdlc")
+            ReportViewer1.LocalReport.DataSources.Add(rdsDataset)
+
+        End If
     End Sub
 
 End Class
