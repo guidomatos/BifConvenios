@@ -61,9 +61,13 @@ Partial Class ReporteEnvioAutomaticoPrueba
                         'Obtiene la cabecera de la nómina enviada
                         Dim dsRC As DataSet = oReporteAutomatico.ReporteNominaAutomaticaCabecera(intFuncionario)
                         For Each dr As DataRow In dsRC.Tables(0).Rows
-                            TotalEmpresa = dr("TOTAL_EMPRESA")
-                            TotalCreditos = IIf(dr("TOTAL_CREDITOS") Is DBNull.Value, 0, dr("TOTAL_CREDITOS"))
-                            TotalImporte = IIf(dr("TOTAL_IMPORTE") Is DBNull.Value, 0, dr("TOTAL_IMPORTE"))
+                            'TotalEmpresa = dr("TOTAL_EMPRESA")
+                            'TotalCreditos = IIf(dr("TOTAL_CREDITOS") Is DBNull.Value, 0, dr("TOTAL_CREDITOS"))
+                            'TotalImporte = IIf(dr("TOTAL_IMPORTE") Is DBNull.Value, 0, dr("TOTAL_IMPORTE"))
+
+                            TotalEmpresa = dr("iTotalEmpresas")
+                            TotalCreditos = IIf(dr("iNumeroCreditos") Is DBNull.Value, 0, dr("iNumeroCreditos"))
+                            TotalImporte = IIf(dr("dTotalImporte") Is DBNull.Value, 0, dr("dTotalImporte"))
 
                             If TotalEmpresa <> 0 Then
                                 dsNominaAutomatica.Cabecera.AddCabeceraRow(TotalEmpresa, TotalCreditos, TotalImporte)
@@ -83,11 +87,15 @@ Partial Class ReporteEnvioAutomaticoPrueba
                         Next
 
                         'Obtiene la cabecera de la nómina enviada observada
-                        Dim dsRCO As DataSet = oReporteAutomatico.ReporteNominaAutomaticaCabeceraObservada(intFuncionario)
+                        'Dim dsRCO As DataSet = oReporteAutomatico.ReporteNominaAutomaticaCabeceraObservada(intFuncionario)
+                        Dim dsRCO As DataSet = oReporteAutomatico.ReporteNominaAutomaticaCabecera(intFuncionario)
                         For Each drCO As DataRow In dsRCO.Tables(0).Rows
-                            TotalEmpresa = drCO("TOTAL_EMPRESA")
-                            TotalCreditos = IIf(drCO("TOTAL_CREDITOS") Is DBNull.Value, 0, drCO("TOTAL_CREDITOS"))
-                            TotalImporte = IIf(drCO("TOTAL_IMPORTE") Is DBNull.Value, 0, drCO("TOTAL_IMPORTE"))
+                            'TotalEmpresa = drCO("TOTAL_EMPRESA")
+                            'TotalCreditos = IIf(drCO("TOTAL_CREDITOS") Is DBNull.Value, 0, drCO("TOTAL_CREDITOS"))
+                            'TotalImporte = IIf(drCO("TOTAL_IMPORTE") Is DBNull.Value, 0, drCO("TOTAL_IMPORTE"))
+                            TotalEmpresa = drCO("iTotalEmpresas")
+                            TotalCreditos = IIf(drCO("iNumeroCreditos") Is DBNull.Value, 0, drCO("iNumeroCreditos"))
+                            TotalImporte = IIf(drCO("dTotalImporte") Is DBNull.Value, 0, drCO("dTotalImporte"))
 
                             If TotalEmpresa <> 0 Then
                                 dsNominaAutomatica.CabeceraObservada.AddCabeceraObservadaRow(TotalEmpresa, TotalCreditos, TotalImporte)
@@ -96,7 +104,8 @@ Partial Class ReporteEnvioAutomaticoPrueba
                         Next
 
                         'Obtiene el detalle de la nómina enviada observada
-                        Dim dsRDO As DataSet = oReporteAutomatico.ReporteNominaAutomaticaDetalleObservada(intFuncionario)
+                        ' Dim dsRDO As DataSet = oReporteAutomatico.ReporteNominaAutomaticaDetalleObservada(intFuncionario)
+                        Dim dsRDO As DataSet = oReporteAutomatico.ReporteNominaAutomaticaDetalle(intFuncionario)
                         For Each drDO As DataRow In dsRDO.Tables(0).Rows
                             Empresa = drDO("EMPRESA")
                             RUC = drDO("RUC")

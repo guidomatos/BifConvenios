@@ -9,10 +9,9 @@
 		<meta name="vs_defaultClientScript" content="JavaScript">
 		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
 		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
-		<LINK href="<%=Request.ApplicationPath%>/css/global.css" 
-type=text/css rel=stylesheet>
-		<script language=javascript 
-src="<%Response.Write(Request.ApplicationPath)%>/js/global.js" 
+		<%--<LINK href="<%=Request.ApplicationPath%>/css/global.css" type=text/css rel=stylesheet>--%>
+		<LINK href="../css/global.css" type=text/css rel=stylesheet>
+		<script language=javascript src="../js/global.js" 
 type=text/javascript></script>
 		<LINK media="all" href="../css/calendar.css" type="text/css" rel="stylesheet">
 		<script language="javascript" src="../js/calendar.js" type="text/javascript"></script>
@@ -53,7 +52,8 @@ type=text/javascript></script>
 					
 					
 				function openBusqueda(){
-					var result = openDialog("<%=Request.ApplicationPath%>/busqueda/BuscarParametrosEmpresaSeguimiento.aspx", 380, 500);
+					<%--var result = openDialog("<%=Request.ApplicationPath%>/busqueda/BuscarParametrosEmpresaSeguimiento.aspx", 380, 500);--%>
+                    var result = openDialog("../busqueda/BuscarParametrosEmpresaSeguimiento.aspx", 380, 500);
 					//alert ( result ) ;
 					if ( result != undefined){
 						document.all ( 'hdParam1').value = getvalue(result, 1 , '|'); // Proceso 
@@ -261,7 +261,7 @@ type=text/javascript></script>
 				}
 			}
 		//-->
-		</script>
+        </script>
 		<style type="text/css">
 		<!--
 		DIV.hide1 {
@@ -308,7 +308,7 @@ type=text/javascript></script>
 											<td colSpan="3">
 												<table cellSpacing="0" cellPadding="0" width="100%" border="0">
 													<tr>
-														<td width=430 ><asp:textbox id="txtNombreEmpresa" Runat="server" MaxLength="100" Columns="60" ReadOnly="true" ></asp:textbox><input id="hdCodigoEmpresa" type="hidden" name="hdCodigoEmpresa" runat="server">
+														<td width=430 ><asp:textbox id="txtNombreEmpresa" Runat="server" MaxLength="100" Columns="60" ReadOnly="true"></asp:textbox><input id="hdCodigoEmpresa" type="hidden" name="hdCodigoEmpresa" runat="server">
 														</td>
 														<td><A href="javascript:openBusqueda()"><IMG alt="buscar" src="../images/texto.gif" border="0"></A></td>
 													</tr>

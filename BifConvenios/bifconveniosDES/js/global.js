@@ -31,7 +31,15 @@ function openPage( url, height , width ) {
 
 
 function openDialog (url, height , width ) {
-	return window.showModalDialog(url,'','dialogHeight:'+height+'px;dialogWidth:'+ width+'px;status:1;unadorned:1;help:0');
+	//return window.showModalDialog(url, '', 'dialogHeight:' + height + 'px;dialogWidth:' + width + 'px;status:1;unadorned:1;help:0');
+
+	if (window.showModalDialog) {
+		window.showModalDialog(url, '', 'dialogHeight:' + height + 'px;dialogWidth:' + width + 'px;status:1;unadorned:1;help:0');
+	} else {
+		window.open(url, '',
+			'height=' + height + 'px,width=' + width + 'px,toolbar=no,directories=no,status=no,continued from previous linemenubar = no, scrollbars = no, resizable = no, modal = yes');
+	}
+
 }
 
 

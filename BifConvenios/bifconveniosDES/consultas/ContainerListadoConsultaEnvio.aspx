@@ -12,9 +12,9 @@
 		<%--<meta name="GENERATOR" content="Microsoft Visual Studio.NET 7.0">
 		<meta name="CODE_LANGUAGE" content="Visual Basic 7.0">
 		<meta name="vs_defaultClientScript" content="JavaScript">--%>
-		<LINK href="<%=Request.ApplicationPath%>/css/global.css" type="text/css" rel="stylesheet">
+		<%--<LINK href="<%=Request.ApplicationPath%>/css/global.css" type="text/css" rel="stylesheet">--%>
 		<%--<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">--%>
-		
+		<link href="../css/global.css" type="text/css" rel="stylesheet" />
 		<script type="text/javascript">
 		/* ADD NCA 08/07/2014 EA2013-273 OPT. PROCESOS CONVENIOS */
 			function EnviarReporte(idx){
@@ -38,7 +38,8 @@
 			<thead>
 			    <tr>
 			        <th>
-						<img src="<%=Request.ApplicationPath%>/images/bar_begin.gif" height="17"/>
+						<%--<img src="<%=Request.ApplicationPath%>/images/bar_begin.gif" height="17"/>--%>
+						<img src="../images/bar_begin.gif" height="17"/>
 					</th>
 			        <th>
 			            <a href="javascript:EnviarReporte('<%=Request.Params("idx")%>');">Exportar Archivo Descuentos</a>
@@ -46,7 +47,8 @@
 			        
 			        </th>
 			        <th>
-						<img src="<%=Request.ApplicationPath%>/images/bar_end.gif" height="17"/>
+						<%--<img src="<%=Request.ApplicationPath%>/images/bar_end.gif" height="17"/>--%>
+						<img src="../images/bar_end.gif" height="17"/>
 				    </th>
 			        <th>
 			        </th>

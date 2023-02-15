@@ -15,7 +15,10 @@
 	<body>
 		<form id="Form1" method="post" runat="server">
 			<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-			<rsweb:ReportViewer ID="ReportViewer1" runat="server" BackColor="" ClientIDMode="AutoID" ProcessingMode="Local" Width="100%" Height="700px" ShowDocumentMapButton="false" DocumentMapCollapsed="true">
+			<rsweb:ReportViewer ID="ReportViewer1" runat="server" BackColor="" ClientIDMode="AutoID" Width="100%" Height="700px" ShowDocumentMapButton="False" DocumentMapCollapsed="True" HighlightBackgroundColor="" InternalBorderColor="204, 204, 204" InternalBorderStyle="Solid" InternalBorderWidth="1px" LinkActiveColor="" LinkActiveHoverColor="" LinkDisabledColor="" PrimaryButtonBackgroundColor="" PrimaryButtonForegroundColor="" PrimaryButtonHoverBackgroundColor="" PrimaryButtonHoverForegroundColor="" SecondaryButtonBackgroundColor="" SecondaryButtonForegroundColor="" SecondaryButtonHoverBackgroundColor="" SecondaryButtonHoverForegroundColor="" SplitterBackColor="" ToolbarDividerColor="" ToolbarForegroundColor="" ToolbarForegroundDisabledColor="" ToolbarHoverBackgroundColor="" ToolbarHoverForegroundColor="" ToolBarItemBorderColor="" ToolBarItemBorderStyle="Solid" ToolBarItemBorderWidth="1px" ToolBarItemHoverBackColor="" ToolBarItemPressedBorderColor="51, 102, 153" ToolBarItemPressedBorderStyle="Solid" ToolBarItemPressedBorderWidth="1px" ToolBarItemPressedHoverBackColor="153, 187, 226">
+              <%--  <LocalReport ReportPath="descuentos\repCartaCobranzaLight.rdlc">
+                </LocalReport>--%>
+				
 			</rsweb:ReportViewer>
 		<%--	MIGRAR INNOVA
 			<CR:CrystalReportViewer id="CrystalReportViewer1" style="Z-INDEX: 101; LEFT: 8px; POSITION: absolute; TOP: 8px" runat="server" Width="350px" Height="50px" DisplayGroupTree="False" HasToggleGroupTreeButton="False"></CR:CrystalReportViewer>--%>

@@ -3,14 +3,14 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
         <td height="55" colspan="2">
-            <table width="100%" height="51" border="0" cellpadding="0" cellspacing="0" background="/BIFConvenios/images/lineavertical.jpg">
+            <table width="100%" height="51" border="0" cellpadding="0" cellspacing="0" background="../images/lineavertical.jpg">
                 <tr>
                     <td width="224" align="left" valign="top">
                         <a href='<%Response.Write(Request.ApplicationPath)%>/'>
-                            <img src="/BIFConvenios/images/cabeceraint.gif" border="0" width="224">
+                            <img src="../images/cabeceraint.gif" border="0" width="224">
                         </a>
                     </td>
-                    <td background="/BIFConvenios/images/derech.gif">
+                    <td background="../images/derech.gif">
                         <table width="100%" border="0" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td height="32">
@@ -21,14 +21,14 @@
                                     <table border="0" cellspacing="0" cellpadding="0" width="555">
                                         <tr>
                                             <td>
-                                                <cc1:SolpartMenu ID="ctlMenu" runat="server" SystemImagesPath="/BIFConvenios/images/"
+                                                <cc1:SolpartMenu ID="ctlMenu" runat="server" SystemImagesPath="../images/"
                                                     BackColor="#8899DD" ForeColor="White" Font-Names="Arial,Helvetica" Font-Bold="True"
                                                     Font-Size="12px" MenuEffects-Style="filter:progid:DXImageTransform.Microsoft.Shadow(color='DimGray', Direction=135, Strength=4) progid:DXImageTransform.Microsoft.Alpha( Opacity=100, FinishOpacity=75, Style=1, StartX=0,  FinishX=100, StartY=0, FinishY=100);"
                                                     MenuEffects-MouseOverDisplay="None" SelectedColor="#EE6600" MenuEffects-MouseOverExpand="True"
                                                     ShadowColor="#404040" IconBackgroundColor="#8899DD" HighlightColor="#FF8080"
                                                     SelectedForeColor="White" IconWidth="8" SelectedBorderColor="#333333" Moveable="True"
                                                     MenuBarHeight="8" MenuItemHeight="8" MenuBorderWidth="0" ForceDownlevel="False"
-                                                    MouseOutHideDelay="1" MenuEffects-MouseOutHideDelay="500" BackgroundMenuImage="/images/bevel_inter.gif"
+                                                    MouseOutHideDelay="1" MenuEffects-MouseOutHideDelay="500" BackgroundMenuImage="../images/bevel_inter.gif"
                                                     MenuEffects-MenuTransition="AlphaFadeBottomRight" Display="Horizontal" MenuEffects-ShadowStrength="4"
                                                     RootArrow="True">
                                                 </cc1:SolpartMenu>
