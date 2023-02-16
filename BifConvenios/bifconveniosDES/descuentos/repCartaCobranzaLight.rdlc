@@ -1214,7 +1214,7 @@ Select DatosDescuentoDetail.DLACC
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>Debemos manifestarle que en caso no cumpla con el pago dentro del plazo antes indicado procederemos a dar por vencidas todas sus cuotas e iniciar las acciones judiciales de ejecución, siendo los gastos procesales correspondientes íntegramente de su cargo*.</Value>
+                                      <Value>Debemos manifestarle que en caso no cumpla con el pago dentro del plazo antes indicado procederemos a dar por vencidas todas sus cuotas e iniciar las acciones judiciales de ejecución, siendo los gastos procesales correspondientes íntegramente de su cargo*. </Value>
                                       <Style />
                                     </TextRun>
                                   </TextRuns>
@@ -1517,7 +1517,6 @@ Select DatosDescuentoDetail.DLACC
                           <Style />
                         </Rectangle>
                         <ColSpan>23</ColSpan>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell />
