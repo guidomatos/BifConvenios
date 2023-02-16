@@ -157,10 +157,10 @@ Partial Class Test
         table.Columns.Add("DLVCM", GetType(Integer))
         table.Columns.Add("DLVCD", GetType(Integer))
         table.Columns.Add("DLCCY", GetType(String))
-        table.Columns.Add("DLEIC", GetType(Integer))
+        table.Columns.Add("DLEIC", GetType(Decimal))
 
         ' Add five rows with those columns filled in the DataTable.
-        table.Rows.Add("44127820", "Juan Perez", "San medina 465, San Miguel", "Lima", "Perú", "", "Principal", "Las Begonias 1045", "01 395 4525", "Grupo Miraflores SAC", "Lima", "", "", "", "", "", "", "", "M", "", "", "", "", "", "", "44127820", 10, 10, 11, "SOL", 1500)
+        table.Rows.Add("44127820", "Juan Perez", "San medina 465, San Miguel", "Lima", "Perú", "1045", "Principal", "Las Begonias 1045", "01 395 4525", "Grupo Miraflores SAC", "Lima", "", "", "", "", "", "", "", "M", "", "", "", "", "", "", "44127820", 10, 10, 10, "SOL", 2000)
         ds.Tables.Add(table)
 
         'Dim table2 As New DataTable
@@ -278,53 +278,11 @@ Partial Class Test
     End Function
 
     Function GetTableRepCartaNotarial()
-        Dim table As New DataTable
-
-        ' Create 3 typed columns in the DataTable.
-        table.Columns.Add("DLACC", GetType(String))
-        table.Columns.Add("CUSNA1", GetType(String))
-        table.Columns.Add("DIRECCION", GetType(String))
-        table.Columns.Add("CUSCTY", GetType(String))
-        table.Columns.Add("CUSZPC", GetType(String))
-        table.Columns.Add("BRNNME", GetType(String))
-        table.Columns.Add("BRNADR", GetType(String))
-        table.Columns.Add("BRNPHN", GetType(String))
-        table.Columns.Add("DLNCC", GetType(String))
-
-        table.Columns.Add("HORAAG", GetType(String))
-
-
-        table.Columns.Add("DLVCA", GetType(Integer))
-        table.Columns.Add("DLVCM", GetType(Integer))
-        table.Columns.Add("DLVCD", GetType(Integer))
-        table.Columns.Add("DLCCY", GetType(String))
-        table.Columns.Add("DLEIC", GetType(Integer))
-
-        ' Add five rows with those columns filled in the DataTable.
-        table.Rows.Add("44127820", "Juan Perez", "San medina 465, San Miguel", "Lima", "Perú", "Principal", "Las Begonias 1045", "01 395 4525", "Grupo Miraflores SAC", "", 10, 10, 11, "SOL", 2000)
-        ds.Tables.Add(table)
-
-        'Dim table2 As New DataTable
-        'table2.Columns.Add("DLACC", GetType(String))
-        'table2.Columns.Add("DLVCA", GetType(Integer))
-        'table2.Columns.Add("DLVCM", GetType(Integer))
-        'table2.Columns.Add("DLVCD", GetType(Integer))
-        'table2.Columns.Add("DLCCY", GetType(String))
-        'table2.Columns.Add("DLEIC", GetType(Integer))
-        'table2.Rows.Add("", 1500, 10, 11, "SOL", 15)
-        'ds.Tables.Add(table2)
-        Return ds
-    End Function
-
-
-
-    Function GetTableRepNotaCobranza() As DataSet
         ' Create new DataTable instance.
         Dim ds As New DataSet
         Dim table As New DataTable
 
         ' Create 3 typed columns in the DataTable.
-        table.Columns.Add("DatosDescuentoHeader_DLACC", GetType(String))
         table.Columns.Add("CUSNA1", GetType(String))
         table.Columns.Add("DIRECCION", GetType(String))
         table.Columns.Add("CUSCTY", GetType(String))
@@ -350,10 +308,64 @@ Partial Class Test
         table.Columns.Add("DLACC", GetType(String))
         table.Columns.Add("DLVCA", GetType(Integer))
         table.Columns.Add("DLVCM", GetType(Integer))
+        table.Columns.Add("DLVCD", GetType(Integer))
+        table.Columns.Add("DLCCY", GetType(String))
+        table.Columns.Add("DLEIC", GetType(Integer))
+
+        ' Add five rows with those columns filled in the DataTable.
+        table.Rows.Add("Juan Perez", "San medina 465, San Miguel", "Lima", "Las Begonias 1045", "Grupo Miraflores SAC", "Lima", "", "", "", "", "M", "", "", "", "", "", "", "", "", "", "44127820", 10, 10, 10, "SOL", 2000)
+        ds.Tables.Add(table)
+
+        'Dim table2 As New DataTable
+        'table2.Columns.Add("DLACC", GetType(String))
+        'table2.Columns.Add("DLVCA", GetType(Integer))
+        'table2.Columns.Add("DLVCM", GetType(Integer))
+        'table2.Columns.Add("DLVCD", GetType(Integer))
+        'table2.Columns.Add("DLCCY", GetType(String))
+        'table2.Columns.Add("DLEIC", GetType(Integer))
+        'table2.Rows.Add("", 1500, 10, 11, "SOL", 15)
+        'ds.Tables.Add(table2)
+        Return ds
+    End Function
+
+
+
+    Function GetTableRepNotaCobranza() As DataSet
+        ' Create new DataTable instance.
+        Dim ds As New DataSet
+        Dim table As New DataTable
+
+        ' Create 3 typed columns in the DataTable.
+        table.Columns.Add("CUSNA1", GetType(String))
+        table.Columns.Add("DIRECCION", GetType(String))
+        table.Columns.Add("CUSCTY", GetType(String))
+        table.Columns.Add("BRNADR", GetType(String))
+        table.Columns.Add("DLNCC", GetType(String))
+
+        table.Columns.Add("CIUDAG", GetType(String))
+        table.Columns.Add("HORAAG", GetType(String))
+        table.Columns.Add("DATA", GetType(String))
+        table.Columns.Add("CUSFNA", GetType(String))
+        table.Columns.Add("CUSLN1", GetType(String))
+        table.Columns.Add("CUSSEX", GetType(String))
+        table.Columns.Add("SIGN1NAME", GetType(String))
+        table.Columns.Add("SIGN2NAME", GetType(String))
+        table.Columns.Add("SIGN1POSITION", GetType(String))
+        table.Columns.Add("SIGN2POSITION", GetType(String))
+        table.Columns.Add("SIGN1DATA", GetType(String))
+        table.Columns.Add("SIGN2DATA", GetType(String))
+        table.Columns.Add("DLEAEN", GetType(Integer))
+        table.Columns.Add("DLEMEN", GetType(Integer))
+        table.Columns.Add("DLEDEN", GetType(Integer))
+
+        table.Columns.Add("DLACC", GetType(String))
+        table.Columns.Add("DLVCA", GetType(Integer))
+        table.Columns.Add("DLVCM", GetType(Integer))
+        table.Columns.Add("DLVCD", GetType(Integer))
         table.Columns.Add("DLCCY", GetType(String))
 
         ' Add five rows with those columns filled in the DataTable.
-        table.Rows.Add("44127820", "Juan Perez", "San medina 465, San Miguel", "Lima", "Las Begonias 1045", "Grupo Miraflores SAC", "Lima", "", "", "", "", "M", "", "", "", "", "", "", "", "", "", "44127820", 10, 10, "SOL")
+        table.Rows.Add("Juan Perez", "San medina 465, San Miguel", "Lima", "Las Begonias 1045", "Grupo Miraflores SAC", "Lima", "", "Some text with 44127820 inside, and some other text.", "", "", "M", "", "", "", "", "", "", 10, 10, 10, "44127820", 10, 10, 10, "SOL")
         ds.Tables.Add(table)
 
         'Dim table2 As New DataTable

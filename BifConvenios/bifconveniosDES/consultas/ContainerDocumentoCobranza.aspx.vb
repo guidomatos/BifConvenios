@@ -141,7 +141,7 @@ Namespace BIFConvenios
                     Case "CN"
                         rdsCobranza.Value = ds.Tables(0)
                         'oRepCartaNotarial.SetDataSource(ds)
-                        ReportViewer1.LocalReport.ReportPath = Server.MapPath("descuentos/repCartaNotarial.rdlc")
+                        ReportViewer1.LocalReport.ReportPath = "descuentos/repCartaNotarial.rdlc"
                         ReportViewer1.LocalReport.DataSources.Add(rdsCobranza)
                         'CrystalReportViewer1.ReportSource = oRepCartaNotarial
                     Case "C"
@@ -149,13 +149,13 @@ Namespace BIFConvenios
                         If lstrCodigo_Cliente = "190828057" Then    'DIRECCION REGIONAL DE EDUCACION LAMBAYEQUE
                             rdsDataset.Value = dsC.Tables(0)
                             ' orepCartaCobranzaLightLluvia2.SetDataSource(dsC)
-                            ReportViewer1.LocalReport.ReportPath = Server.MapPath("descuentos/repCartaCobranzaLightLluvia2.rdlc")
+                            ReportViewer1.LocalReport.ReportPath = "descuentos/repCartaCobranzaLightLluvia2.rdlc"
                             ReportViewer1.LocalReport.DataSources.Add(rdsDataset)
                             'CrystalReportViewer1.ReportSource = orepCartaCobranzaLightLluvia2
                         ElseIf lstrCodigo_Cliente = "190828058" Then 'DIRECCION REGIONAL DE EDUC AMAZONAS CHACHAPOY
                             rdsDataset.Value = dsC.Tables(0)
                             'orepCartaCobranzaLightLluvia.SetDataSource(dsC)
-                            ReportViewer1.LocalReport.ReportPath = Server.MapPath("descuentos/repCartaCobranzaLightLluvia.rdlc")
+                            ReportViewer1.LocalReport.ReportPath = "descuentos/repCartaCobranzaLightLluvia.rdlc"
                             ReportViewer1.LocalReport.DataSources.Add(rdsDataset)
                             'CrystalReportViewer1.ReportSource = orepCartaCobranzaLightLluvia
                         Else
@@ -163,7 +163,7 @@ Namespace BIFConvenios
                             'CrystalReportViewer1.ReportSource = oRepCartaCobranza
                             rdsDataset.Value = dsC.Tables(0)
                             'orepCartaCobranzaLight.SetDataSource(dsC)
-                            ReportViewer1.LocalReport.ReportPath = Server.MapPath("descuentos/repCartaCobranzaLight.rdlc")
+                            ReportViewer1.LocalReport.ReportPath = "descuentos/repCartaCobranzaLight.rdlc"
                             ReportViewer1.LocalReport.DataSources.Add(rdsDataset)
                             'CrystalReportViewer1.ReportSource = orepCartaCobranzaLight
                         End If
@@ -187,14 +187,14 @@ Namespace BIFConvenios
                         If Request.Params("export") Is Nothing Then
                             'TODO: AHSP 20080424-Clientes con Reporte especial por Lluvias
                             If lstrCodigo_Cliente = "190828057" Then        'DIRECCION REGIONAL DE EDUCACION LAMBAYEQUE
-                                ReportViewer1.LocalReport.ReportPath = Server.MapPath("descuentos/repNotaCobranzaLluvia2.rdlc")
+                                ReportViewer1.LocalReport.ReportPath = "descuentos/repNotaCobranzaLluvia2.rdlc"
                                 'CrystalReportViewer1.ReportSource = oRepNotaCobranzaLluvia2
                             ElseIf lstrCodigo_Cliente = "190828058" Then    'DIRECCION REGIONAL DE EDUC AMAZONAS CHACHAPOY
-                                ReportViewer1.LocalReport.ReportPath = Server.MapPath("descuentos/repNotaCobranzaLluvia.rdlc")
+                                ReportViewer1.LocalReport.ReportPath = "descuentos/repNotaCobranzaLluvia.rdlc"
                                 'CrystalReportViewer1.ReportSource = oRepNotaCobranzaLluvia
                             Else
                                 'Reporte Normal
-                                ReportViewer1.LocalReport.ReportPath = Server.MapPath("descuentos/repNotaCobranza.rdlc")
+                                ReportViewer1.LocalReport.ReportPath = "descuentos/repNotaCobranza.rdlc"
                                 ' CrystalReportViewer1.ReportSource = oRepNotaCobranza
                             End If
                         Else
@@ -266,7 +266,7 @@ Namespace BIFConvenios
                         ' oRepNotaCobranza.SetDataSource(ds)
                         rdsCobranza.Value = ds.Tables(0)
                         ReportViewer1.LocalReport.DataSources.Add(rdsCobranza)
-                        ReportViewer1.LocalReport.ReportPath = Server.MapPath("descuentos/repNotaCobranza.rdlc")
+                        ReportViewer1.LocalReport.ReportPath = "descuentos/repNotaCobranza.rdlc"
                         'CrystalReportViewer1.ReportSource = oRepNotaCobranza
                 End Select
 

@@ -124,7 +124,7 @@ Partial Class ReporteEnvioAutomaticoPrueba
                         'oRepEnvioAutomatico.SetDataSource(dsNominaAutomatica)
 
                         Dim rdsCabecera As New ReportDataSource()
-                        rdsCabecera.Name = "Cabecera"
+                        rdsCabecera.Name = "DataSet1"
 
                         If Not IsNothing(dsNominaAutomatica) Then
                             If dsNominaAutomatica.Tables.Count > 0 Then
