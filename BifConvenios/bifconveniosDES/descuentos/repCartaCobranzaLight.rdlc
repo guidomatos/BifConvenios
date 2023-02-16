@@ -3,67 +3,70 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSetCuotasPendientes">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>264439d8-e6e3-40ee-a5d6-fc6dc6f35d67</rd:DataSourceID>
+      <DataSourceReference>DataSetCuotasPendientes</DataSourceReference>
+      <rd:DataSourceID>d8bdd02d-f3ca-46ae-be01-bc5e867614f8</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="DataSet1">
       <Query>
         <DataSourceName>DataSetCuotasPendientes</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
+        <CommandText>
+Select DatosDescuentoDetail.DLACC
+	, DatosDescuentoDetail.DLVCA
+	, DatosDescuentoDetail.DLVCM
+	, DatosDescuentoDetail.DLVCD
+	, DatosDescuentoDetail.DLCCY
+	, DatosDescuentoDetail.DLEIC
+	, DatosDescuentoHeader.DLACC as DatosDescuentoHeader_DLACC
+	, DatosDescuentoHeader.CUSNA1
+	, DatosDescuentoHeader.DIRECCION
+	, DatosDescuentoHeader.CUSCTY
+	, DatosDescuentoHeader.CUSZPC
+	, DatosDescuentoHeader.DLNCC
+	, DatosDescuentoHeader.CIUDAG
+	, DatosDescuentoHeader.CUSSEX
+	, DatosDescuentoHeader.SIGN1NAME
+	, DatosDescuentoHeader.SIGN2NAME
+	, DatosDescuentoHeader.SIGN1POSITION
+	, DatosDescuentoHeader.SIGN2POSITION
+	, DatosDescuentoHeader.SIGN1DATA
+	, DatosDescuentoHeader.SIGN2DATA
+ From DatosDescuentoDetail
+ INNER JOIN DatosDescuentoHeader on (DatosDescuentoDetail.DLACC = DatosDescuentoHeader.DLACC)
+ Where DatosDescuentoHeader.DLACC = DatosDescuentoDetail.DLACC
+ Order by DatosDescuentoDetail.DLACC desc
+</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
-        <Field Name="DatosDescuentoHeader_DLACC">
-          <DataField>DatosDescuentoHeader_DLACC</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CUSZPC">
-          <DataField>CUSZPC</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="BRNNUM">
-          <DataField>BRNNUM</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="BRNNME">
-          <DataField>BRNNME</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="BRNADR">
-          <DataField>BRNADR</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="BRNPHN">
-          <DataField>BRNPHN</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DLNCC">
-          <DataField>DLNCC</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CIUDAG">
-          <DataField>CIUDAG</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="PROVAG">
-          <DataField>PROVAG</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DEPTAG">
-          <DataField>DEPTAG</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DATA">
-          <DataField>DATA</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="DLACC">
           <DataField>DLACC</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="DLVCA">
+          <DataField>DLVCA</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="DLVCM">
+          <DataField>DLVCM</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="DLVCD">
+          <DataField>DLVCD</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="DLCCY">
+          <DataField>DLCCY</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DLEIC">
+          <DataField>DLEIC</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="DatosDescuentoHeader_DLACC">
+          <DataField>DatosDescuentoHeader_DLACC</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
         </Field>
         <Field Name="CUSNA1">
           <DataField>CUSNA1</DataField>
@@ -77,32 +80,20 @@
           <DataField>CUSCTY</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="CUSFNA">
-          <DataField>CUSFNA</DataField>
+        <Field Name="CUSZPC">
+          <DataField>CUSZPC</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="CUSLN1">
-          <DataField>CUSLN1</DataField>
+        <Field Name="DLNCC">
+          <DataField>DLNCC</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="CUSLN2">
-          <DataField>CUSLN2</DataField>
+        <Field Name="CIUDAG">
+          <DataField>CIUDAG</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="CUSSEX">
           <DataField>CUSSEX</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="SIGN2DATA">
-          <DataField>SIGN2DATA</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="SIGN1POSITION">
-          <DataField>SIGN1POSITION</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="SIGN2POSITION">
-          <DataField>SIGN2POSITION</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="SIGN1NAME">
@@ -113,19 +104,23 @@
           <DataField>SIGN2NAME</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="SIGN1DATA">
-          <DataField>SIGN1DATA</DataField>
+        <Field Name="SIGN1POSITION">
+          <DataField>SIGN1POSITION</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="SIGN2POSITION">
+          <DataField>SIGN2POSITION</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SIGN1DATA">
+          <DataField>SIGN1DATA</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
+        <Field Name="SIGN2DATA">
+          <DataField>SIGN2DATA</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
       </Fields>
-      <rd:DataSetInfo>
-        <rd:DataSetName>DataSetCuotasPendientes</rd:DataSetName>
-        <rd:SchemaPath>B:\HTC\BANBIF\Fuentes\BifConvenios\BifConvenios\bifconveniosDES\App_Code\DataSetCuotasPendientes.xsd</rd:SchemaPath>
-        <rd:TableName>DatosDescuentoHeader</rd:TableName>
-        <rd:TableAdapterFillMethod />
-        <rd:TableAdapterGetDataMethod />
-        <rd:TableAdapterName />
-      </rd:DataSetInfo>
     </DataSet>
   </DataSets>
   <ReportSections>
@@ -1219,7 +1214,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>Debemos manifestarle que en caso no cumpla con el pago dentro del plazo antes indicado procederemos a dar por vencidas todas sus cuotas e iniciar las acciones judiciales de ejecución, siendo los gastos procesales correspondientes íntegramente de su cargo*. </Value>
+                                      <Value>Debemos manifestarle que en caso no cumpla con el pago dentro del plazo antes indicado procederemos a dar por vencidas todas sus cuotas e iniciar las acciones judiciales de ejecución, siendo los gastos procesales correspondientes íntegramente de su cargo*.</Value>
                                       <Style />
                                     </TextRun>
                                   </TextRuns>
@@ -1246,7 +1241,7 @@
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>1.25in</Top>
+                              <Top>1.53125in</Top>
                               <Left>0.65in</Left>
                               <Height>0.75in</Height>
                               <Width>6.75in</Width>
@@ -1290,7 +1285,7 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>2.33334in</Top>
+                              <Top>2.70834in</Top>
                               <Left>0.65in</Left>
                               <Height>0.5in</Height>
                               <Width>7.1in</Width>
@@ -1301,7 +1296,7 @@
                               <Source>Database</Source>
                               <Value>=Fields!SIGN1DATA.Value</Value>
                               <MIMEType>image/jpeg</MIMEType>
-                              <Top>2.7639in</Top>
+                              <Top>3.34723in</Top>
                               <Left>2.05in</Left>
                               <Height>1in</Height>
                               <Width>1in</Width>
@@ -1309,7 +1304,7 @@
                               <Style />
                             </Image>
                             <Line Name="gf1Line1">
-                              <Top>3.83334in</Top>
+                              <Top>4.41667in</Top>
                               <Left>1.65in</Left>
                               <Height>0in</Height>
                               <Width>2in</Width>
@@ -1324,7 +1319,7 @@
                               <Source>Database</Source>
                               <Value>=Fields!SIGN2DATA.Value</Value>
                               <MIMEType>image/jpeg</MIMEType>
-                              <Top>2.7639in</Top>
+                              <Top>3.34723in</Top>
                               <Left>4.88125in</Left>
                               <Height>1in</Height>
                               <Width>1in</Width>
@@ -1332,7 +1327,7 @@
                               <Style />
                             </Image>
                             <Line Name="gf1Line2">
-                              <Top>3.83334in</Top>
+                              <Top>4.41667in</Top>
                               <Left>4.35in</Left>
                               <Height>0in</Height>
                               <Width>2in</Width>
@@ -1358,7 +1353,7 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>3.91667in</Top>
+                              <Top>4.5in</Top>
                               <Left>1.65in</Left>
                               <Height>0.15347in</Height>
                               <Width>2in</Width>
@@ -1380,7 +1375,7 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>3.91667in</Top>
+                              <Top>4.5in</Top>
                               <Left>4.35in</Left>
                               <Height>0.15347in</Height>
                               <Width>1.9in</Width>
@@ -1402,7 +1397,7 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>4.08334in</Top>
+                              <Top>4.66667in</Top>
                               <Left>1.65in</Left>
                               <Height>0.15347in</Height>
                               <Width>2in</Width>
@@ -1424,7 +1419,7 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>4.08334in</Top>
+                              <Top>4.66667in</Top>
                               <Left>4.35in</Left>
                               <Height>0.15347in</Height>
                               <Width>1.9in</Width>
@@ -1511,7 +1506,7 @@
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>4.41667in</Top>
+                              <Top>5in</Top>
                               <Left>0.75in</Left>
                               <Height>1.16667in</Height>
                               <Width>6.85in</Width>
@@ -1522,6 +1517,7 @@
                           <Style />
                         </Rectangle>
                         <ColSpan>23</ColSpan>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell />
@@ -1682,7 +1678,7 @@
             <Style />
           </Tablix>
         </ReportItems>
-        <Height>9.75348in</Height>
+        <Height>9.754in</Height>
         <Style />
       </Body>
       <Width>8.049in</Width>
@@ -1763,10 +1759,6 @@ End Function
 
 Public Function CRFmensajeoficinatelefono() As String
 	CRFmensajeoficinatelefono = "Finalmente, debemos señalar que los pagos correspondientes a la(s) obligación(es) requerida(s) en el primer párrafo, los puede realizar en cualquiera de las oficinas del BIF o en su defecto en la cuenta corriente en moneda nacional que tenemos en el Banco de la Nación cuyo número se detalla a continuación: 0000237787."
-End Function
-
-Public Function CRFmensajepagobanconacion() As String
-	CRFmensajepagobanconacion = "En caso el pago se haya hecho en la cuenta que tenemos en el Banco de la Nación, deberá faxearnos el  comprobante de pago con sus nombres completos totalmente legibles al siguiente número: (074)232137 o escanearnos al correo electrónico jmino@bif.com.pe. En ambos casos con atención a la señorita Jessica Mino."
 End Function
 
 Public Function CRFmoneda(Fields As Microsoft.ReportingServices.ReportProcessing.ReportObjectModel.Fields) As String
