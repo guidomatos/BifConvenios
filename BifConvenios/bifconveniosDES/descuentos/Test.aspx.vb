@@ -96,8 +96,8 @@ Partial Class Test
                     dr("SIGN1POSITION") = dsSign.Tables(0).Rows(0).Item("EjecutivoCargo")
                     dr("SIGN2POSITION") = dsSign.Tables(0).Rows(1).Item("EjecutivoCargo")
 
-                    dr("SIGN1DATA") = Utils.getImageAsByteArray(Request.PhysicalApplicationPath & "\images\firmatest1.jpg")  'Utils.getImageAsByteArray(Request.PhysicalApplicationPath & "\" & dsSign.Tables(0).Rows(0).Item("EjecutivoImagePath"))  ' 
-                    dr("SIGN2DATA") = Utils.getImageAsByteArray(Request.PhysicalApplicationPath & "\images\firmatest2.jpg")  'Utils.getImageAsByteArray(Request.PhysicalApplicationPath & "\" & dsSign.Tables(0).Rows(1).Item("EjecutivoImagePath"))  ' 
+                    dr("SIGN1DATA") = Utils.getImageAsByteArray(Server.MapPath("/images/firmatest1.jpg"))  'Utils.getImageAsByteArray(Request.PhysicalApplicationPath & "\" & dsSign.Tables(0).Rows(0).Item("EjecutivoImagePath"))  ' 
+                    dr("SIGN2DATA") = Utils.getImageAsByteArray(Server.MapPath("/images/firmatest2.jpg"))  'Utils.getImageAsByteArray(Request.PhysicalApplicationPath & "\" & dsSign.Tables(0).Rows(1).Item("EjecutivoImagePath"))  ' 
 
                 Else
                     dr("SIGN1NAME") = "" ' ""
@@ -149,8 +149,8 @@ Partial Class Test
         table.Columns.Add("SIGN2NAME", GetType(String))
         table.Columns.Add("SIGN1POSITION", GetType(String))
         table.Columns.Add("SIGN2POSITION", GetType(String))
-        table.Columns.Add("SIGN1DATA", GetType(String))
-        table.Columns.Add("SIGN2DATA", GetType(String))
+        table.Columns.Add("SIGN1DATA", GetType(Byte()))
+        table.Columns.Add("SIGN2DATA", GetType(Byte()))
 
         table.Columns.Add("DLACC", GetType(String))
         table.Columns.Add("DLVCA", GetType(Integer))
@@ -160,7 +160,7 @@ Partial Class Test
         table.Columns.Add("DLEIC", GetType(Decimal))
 
         ' Add five rows with those columns filled in the DataTable.
-        table.Rows.Add("44127820", "Juan Perez", "San medina 465, San Miguel", "Lima", "Perú", "1045", "Principal", "Las Begonias 1045", "01 395 4525", "Grupo Miraflores SAC", "Lima", "", "", "", "", "", "", "", "M", "", "", "", "", "", "", "44127820", 10, 10, 10, "SOL", 2000)
+        table.Rows.Add("44127820", "Juan Perez", "San medina 465, San Miguel", "Lima", "Perú", "1045", "Principal", "Las Begonias 1045", "01 395 4525", "Grupo Miraflores SAC", "Lima", "", "", "", "", "", "", "", "M", "", "", "", "", Nothing, Nothing, "44127820", 10, 10, 10, "SOL", 2000)
         ds.Tables.Add(table)
 
         'Dim table2 As New DataTable
@@ -204,8 +204,8 @@ Partial Class Test
         table.Columns.Add("SIGN2NAME", GetType(String))
         table.Columns.Add("SIGN1POSITION", GetType(String))
         table.Columns.Add("SIGN2POSITION", GetType(String))
-        table.Columns.Add("SIGN1DATA", GetType(String))
-        table.Columns.Add("SIGN2DATA", GetType(String))
+        table.Columns.Add("SIGN1DATA", GetType(Byte()))
+        table.Columns.Add("SIGN2DATA", GetType(Byte()))
         table.Columns.Add("DLEAEN", GetType(String))
         table.Columns.Add("DLEMEN", GetType(String))
         table.Columns.Add("DLEDEN", GetType(String))
@@ -218,7 +218,7 @@ Partial Class Test
         table.Columns.Add("DLEIC", GetType(Integer))
 
         ' Add five rows with those columns filled in the DataTable.
-        table.Rows.Add("44127820", "Juan Perez", "San medina 465, San Miguel", "Lima", "Perú", "", "Principal", "Las Begonias 1045", "01 395 4525", "Grupo Miraflores SAC", "Lima", "", "", "", "", "", "", "", "M", "", "", "", "", "", "", "", "", "", "44127820", 10, 10, 11, "SOL", 1500)
+        table.Rows.Add("44127820", "Juan Perez", "San medina 465, San Miguel", "Lima", "Perú", "", "Principal", "Las Begonias 1045", "01 395 4525", "Grupo Miraflores SAC", "Lima", "", "", "", "", "", "", "", "M", "", "", "", "", Nothing, Nothing, "", "", "", "44127820", 10, 10, 11, "SOL", 1500)
         ds.Tables.Add(table)
 
         'Dim table2 As New DataTable
@@ -251,8 +251,8 @@ Partial Class Test
         table.Columns.Add("SIGN2NAME", GetType(String))
         table.Columns.Add("SIGN1POSITION", GetType(String))
         table.Columns.Add("SIGN2POSITION", GetType(String))
-        table.Columns.Add("SIGN1DATA", GetType(String))
-        table.Columns.Add("SIGN2DATA", GetType(String))
+        table.Columns.Add("SIGN1DATA", GetType(Byte()))
+        table.Columns.Add("SIGN2DATA", GetType(Byte()))
 
         table.Columns.Add("DLACC", GetType(String))
         table.Columns.Add("DLVCA", GetType(Integer))
@@ -262,7 +262,7 @@ Partial Class Test
         table.Columns.Add("DLEIC", GetType(Integer))
 
         ' Add five rows with those columns filled in the DataTable.
-        table.Rows.Add("44127820", "Juan Perez", "San medina 465, San Miguel", "Lima", "Perú", "Grupo Miraflores SAC", "Lima", "M", "", "", "", "", "", "", "44127820", 10, 10, 11, "SOL", 1500)
+        table.Rows.Add("44127820", "Juan Perez", "San medina 465, San Miguel", "Lima", "Perú", "Grupo Miraflores SAC", "Lima", "M", "", "", "", "", Nothing, Nothing, "44127820", 10, 10, 11, "SOL", 1500)
         ds.Tables.Add(table)
 
         'Dim table2 As New DataTable
@@ -299,8 +299,8 @@ Partial Class Test
         table.Columns.Add("SIGN2NAME", GetType(String))
         table.Columns.Add("SIGN1POSITION", GetType(String))
         table.Columns.Add("SIGN2POSITION", GetType(String))
-        table.Columns.Add("SIGN1DATA", GetType(String))
-        table.Columns.Add("SIGN2DATA", GetType(String))
+        table.Columns.Add("SIGN1DATA", GetType(Byte()))
+        table.Columns.Add("SIGN2DATA", GetType(Byte()))
         table.Columns.Add("DLEAEN", GetType(String))
         table.Columns.Add("DLEMEN", GetType(String))
         table.Columns.Add("DLEDEN", GetType(String))
@@ -313,7 +313,7 @@ Partial Class Test
         table.Columns.Add("DLEIC", GetType(Integer))
 
         ' Add five rows with those columns filled in the DataTable.
-        table.Rows.Add("Juan Perez", "San medina 465, San Miguel", "Lima", "Las Begonias 1045", "Grupo Miraflores SAC", "Lima", "", "", "", "", "M", "", "", "", "", "", "", "", "", "", "44127820", 10, 10, 10, "SOL", 2000)
+        table.Rows.Add("Juan Perez", "San medina 465, San Miguel", "Lima", "Las Begonias 1045", "Grupo Miraflores SAC", "Lima", "", "", "", "", "M", "", "", "", "", Nothing, Nothing, "", "", "", "44127820", 10, 10, 10, "SOL", 2000)
         ds.Tables.Add(table)
 
         'Dim table2 As New DataTable
@@ -352,8 +352,8 @@ Partial Class Test
         table.Columns.Add("SIGN2NAME", GetType(String))
         table.Columns.Add("SIGN1POSITION", GetType(String))
         table.Columns.Add("SIGN2POSITION", GetType(String))
-        table.Columns.Add("SIGN1DATA", GetType(String))
-        table.Columns.Add("SIGN2DATA", GetType(String))
+        table.Columns.Add("SIGN1DATA", GetType(Byte()))
+        table.Columns.Add("SIGN2DATA", GetType(Byte()))
         table.Columns.Add("DLEAEN", GetType(Integer))
         table.Columns.Add("DLEMEN", GetType(Integer))
         table.Columns.Add("DLEDEN", GetType(Integer))
@@ -365,7 +365,7 @@ Partial Class Test
         table.Columns.Add("DLCCY", GetType(String))
 
         ' Add five rows with those columns filled in the DataTable.
-        table.Rows.Add("Juan Perez", "San medina 465, San Miguel", "Lima", "Las Begonias 1045", "Grupo Miraflores SAC", "Lima", "", "Some text with 44127820 inside, and some other text.", "", "", "M", "", "", "", "", "", "", 10, 10, 10, "44127820", 10, 10, 10, "SOL")
+        table.Rows.Add("Juan Perez", "San medina 465, San Miguel", "Lima", "Las Begonias 1045", "Grupo Miraflores SAC", "Lima", "", "Some text with 44127820 inside, and some other text.", "", "", "M", "", "", "", "", Nothing, Nothing, 10, 10, 10, "44127820", 10, 10, 10, "SOL")
         ds.Tables.Add(table)
 
         'Dim table2 As New DataTable
