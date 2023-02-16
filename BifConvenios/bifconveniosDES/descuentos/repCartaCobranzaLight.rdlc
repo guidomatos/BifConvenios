@@ -1721,7 +1721,7 @@ Public Function CRFconvenioentidad(Fields As Microsoft.ReportingServices.ReportP
 End Function
 
 Public Function CRFcuotapor(Fields As Microsoft.ReportingServices.ReportProcessing.ReportObjectModel.Fields) As String
-	CRFcuotapor = "● Cuota por un monto a la fecha de " &amp; CRFmoneda(Fields) &amp; " " &amp; CStr(Round(Fields!DLEIC.Value * 1.0007, 2)) &amp; " (" &amp; CRFfechacuota(Fields) &amp; ")"
+	CRFcuotapor = "● Cuota por un monto a la fecha de "  &amp; CRFmoneda(Fields) &amp; " " &amp; CStr(Round(Fields!DLEIC.Value * 1.0007, 2)) &amp; " (" &amp; CRFfechacuota(Fields) &amp; ")"
 End Function
 
 Public Function CRFfechacuota(Fields As Microsoft.ReportingServices.ReportProcessing.ReportObjectModel.Fields) As String

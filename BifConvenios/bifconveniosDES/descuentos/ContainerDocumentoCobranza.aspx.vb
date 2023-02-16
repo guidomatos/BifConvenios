@@ -141,7 +141,7 @@ Namespace BIFConvenios
                     Case "CN"
                         rdsCobranza.Value = ds.Tables(0)
                         'oRepCartaNotarial.SetDataSource(ds)
-                        ReportViewer1.LocalReport.ReportPath = Server.MapPath("descuentos/repCartaNotarial.rdlc")
+                        ReportViewer1.LocalReport.ReportPath = "descuentos/repCartaNotarial.rdlc"
                         ReportViewer1.LocalReport.DataSources.Add(rdsCobranza)
                         'CrystalReportViewer1.ReportSource = oRepCartaNotarial
                     Case "C"
@@ -149,13 +149,13 @@ Namespace BIFConvenios
                         If lstrCodigo_Cliente = "190828057" Then    'DIRECCION REGIONAL DE EDUCACION LAMBAYEQUE
                             rdsDataset.Value = dsC.Tables(0)
                             ' orepCartaCobranzaLightLluvia2.SetDataSource(dsC)
-                            ReportViewer1.LocalReport.ReportPath = Server.MapPath("descuentos/repCartaCobranzaLightLluvia2.rdlc")
+                            ReportViewer1.LocalReport.ReportPath = "descuentos/repCartaCobranzaLightLluvia2.rdlc"
                             ReportViewer1.LocalReport.DataSources.Add(rdsDataset)
                             'CrystalReportViewer1.ReportSource = orepCartaCobranzaLightLluvia2
                         ElseIf lstrCodigo_Cliente = "190828058" Then 'DIRECCION REGIONAL DE EDUC AMAZONAS CHACHAPOY
                             rdsDataset.Value = dsC.Tables(0)
                             'orepCartaCobranzaLightLluvia.SetDataSource(dsC)
-                            ReportViewer1.LocalReport.ReportPath = Server.MapPath("descuentos/repCartaCobranzaLightLluvia.rdlc")
+                            ReportViewer1.LocalReport.ReportPath = "descuentos/repCartaCobranzaLightLluvia.rdlc"
                             ReportViewer1.LocalReport.DataSources.Add(rdsDataset)
                             'CrystalReportViewer1.ReportSource = orepCartaCobranzaLightLluvia
                         Else
@@ -164,7 +164,7 @@ Namespace BIFConvenios
                             rdsDataset.Value = dsC.Tables(0)
                             'orepCartaCobranzaLight.SetDataSource(dsC)
                             'CrystalReportViewer1.ReportSource = orepCartaCobranzaLight
-                            ReportViewer1.LocalReport.ReportPath = Server.MapPath("descuentos/repCartaCobranzaLight.rdlc")
+                            ReportViewer1.LocalReport.ReportPath = "descuentos/repCartaCobranzaLight.rdlc"
                             ReportViewer1.LocalReport.DataSources.Add(rdsDataset)
                         End If
                     Case "N"
@@ -188,14 +188,14 @@ Namespace BIFConvenios
                             'TODO: AHSP 20080424-Clientes con Reporte especial por Lluvias
                             If lstrCodigo_Cliente = "190828057" Then        'DIRECCION REGIONAL DE EDUCACION LAMBAYEQUE
                                 'CrystalReportViewer1.ReportSource = oRepNotaCobranzaLluvia2
-                                ReportViewer1.LocalReport.ReportPath = Server.MapPath("descuentos/repNotaCobranzaLluvia2.rdlc")
+                                ReportViewer1.LocalReport.ReportPath = "descuentos/repNotaCobranzaLluvia2.rdlc"
                             ElseIf lstrCodigo_Cliente = "190828058" Then    'DIRECCION REGIONAL DE EDUC AMAZONAS CHACHAPOY
                                 'CrystalReportViewer1.ReportSource = oRepNotaCobranzaLluvia
-                                ReportViewer1.LocalReport.ReportPath = Server.MapPath("descuentos/repNotaCobranzaLluvia.rdlc")
+                                ReportViewer1.LocalReport.ReportPath = "descuentos/repNotaCobranzaLluvia.rdlc"
                             Else
                                 'Reporte Normal
                                 'CrystalReportViewer1.ReportSource = oRepNotaCobranza
-                                ReportViewer1.LocalReport.ReportPath = Server.MapPath("descuentos/repNotaCobranza.rdlc")
+                                ReportViewer1.LocalReport.ReportPath = "descuentos/repNotaCobranza.rdlc"
                             End If
                         Else
                             '------------------------
