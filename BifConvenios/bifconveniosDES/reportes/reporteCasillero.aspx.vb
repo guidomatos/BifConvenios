@@ -16,7 +16,7 @@ Partial Class reportes_reporteCasillero
     Protected oCuota As New BIFConvenios.Cuota()
     Protected dsCasilleroCabIBS As DataSet
     Protected dsCasilleroDetIBS As DataSet
-    Protected oRepListadoCasillero As New RepListadoCasillero()
+    'Protected oRepListadoCasillero As New RepListadoCasillero()
     Protected dsListadoCasillero As New DataSetReporteCasillero()
 
 
@@ -139,7 +139,7 @@ Partial Class reportes_reporteCasillero
         Next
 
         'Se añade el dataset al objeto set del crystal report
-        oRepListadoCasillero.SetDataSource(dsListadoCasillero)
+        'oRepListadoCasillero.SetDataSource(dsListadoCasillero)
 
         'Se obtiene el nombre del archivo excel a generar
         Dim name As String = ConfigurationManager.AppSettings("NombreCasillero")
@@ -154,14 +154,14 @@ Partial Class reportes_reporteCasillero
         'Dim strFullName As String = strPathFile + "\\" + name
 
         'Procedimiento para el grabado del archivo excel
-        With oRepListadoCasillero.ExportOptions
-            .ExportDestinationType = ExportDestinationType.DiskFile
-            .ExportFormatType = ExportFormatType.Excel
-            .DestinationOptions = New CrystalDecisions.Shared.DiskFileDestinationOptions()
-            .DestinationOptions.DiskFileName = filename
-        End With
+        'With oRepListadoCasillero.ExportOptions
+        '    .ExportDestinationType = ExportDestinationType.DiskFile
+        '    .ExportFormatType = ExportFormatType.Excel
+        '    .DestinationOptions = New CrystalDecisions.Shared.DiskFileDestinationOptions()
+        '    .DestinationOptions.DiskFileName = filename
+        'End With
 
-        oRepListadoCasillero.Export()
+        'oRepListadoCasillero.Export()
 
         Dim ms As System.IO.MemoryStream
         Dim fileS As FileStream = File.OpenRead(filename)
