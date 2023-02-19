@@ -3,14 +3,14 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
         <td height="55" colspan="2">
-            <table width="100%" height="51" border="0" cellpadding="0" cellspacing="0" background="../images/lineavertical.jpg">
+            <table width="100%" height="51" border="0" cellpadding="0" cellspacing="0" style="background-image: url('../images/lineavertical.gif')">
                 <tr>
                     <td width="224" align="left" valign="top">
                         <a href='<%Response.Write(Request.ApplicationPath)%>/'>
                             <img src="../images/cabeceraint.gif" border="0" width="224">
                         </a>
                     </td>
-                    <td background="../images/derech.gif">
+                    <td style="background-image: url('../images/derech.jpg')">
                         <table width="100%" border="0" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td height="32">

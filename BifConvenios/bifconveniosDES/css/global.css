@@ -370,20 +370,20 @@ DIV.tabla TABLE TFOOT TR {
 
 /********* titulo **************/
 #hd {
-	BORDER-RIGHT: #93b2cc 1px solid; BORDER-TOP: #93b2cc 1px solid; BACKGROUND: url(/BIFConvenios/images/bg_hd.gif) #b6cde1 repeat-x 0px 0px; BORDER-LEFT: #93b2cc 1px solid; WIDTH: 748px; BORDER-BOTTOM: #93b2cc 1px solid; POSITION: relative
+	BORDER-RIGHT: #93b2cc 1px solid; BORDER-TOP: #93b2cc 1px solid; BACKGROUND: url(/../images/bg_hd.gif) #b6cde1 repeat-x 0px 0px; BORDER-LEFT: #93b2cc 1px solid; WIDTH: 748px; BORDER-BOTTOM: #93b2cc 1px solid; POSITION: relative
 }
 #hd H1 {
-	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: bold; FONT-SIZE: 120%; BACKGROUND: url(/BIFConvenios/images/title_h_bg.gif) no-repeat 0px 0px; LEFT: -1px; PADDING-BOTTOM: 2px; MARGIN: 0px -2px 0px 0px; WIDTH: 750px; COLOR: #000; TEXT-INDENT: 15px; PADDING-TOP: 4px; POSITION: relative; TOP: -1px
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: bold; FONT-SIZE: 120%; BACKGROUND: url(/../images/title_h_bg.gif) no-repeat 0px 0px; LEFT: -1px; PADDING-BOTTOM: 2px; MARGIN: 0px -2px 0px 0px; WIDTH: 750px; COLOR: #000; TEXT-INDENT: 15px; PADDING-TOP: 4px; POSITION: relative; TOP: -1px
 }
 
 
 #hdShort {
-	BORDER-RIGHT: #93b2cc 1px solid; BORDER-TOP: #93b2cc 1px solid; BACKGROUND: url(/BIFConvenios/images/bg_hd.gif) #b6cde1 repeat-x 0px 0px; BORDER-LEFT: #93b2cc 1px solid; WIDTH: 398px; BORDER-BOTTOM: #93b2cc 1px solid; POSITION: relative
+	BORDER-RIGHT: #93b2cc 1px solid; BORDER-TOP: #93b2cc 1px solid; BACKGROUND: url(/../images/bg_hd.gif) #b6cde1 repeat-x 0px 0px; BORDER-LEFT: #93b2cc 1px solid; WIDTH: 398px; BORDER-BOTTOM: #93b2cc 1px solid; POSITION: relative
 }
 
 
 #hdShort H1 {
-	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: bold; FONT-SIZE: 90%; BACKGROUND: url(/BIFConvenios/images/title_h_bg.gif) no-repeat 0px 0px; LEFT: -1px; PADDING-BOTTOM: 2px; MARGIN: 0px -2px 0px 0px; WIDTH: 400px; COLOR: #000; TEXT-INDENT: 10px; PADDING-TOP: 4px; POSITION: relative; TOP: -1px
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: bold; FONT-SIZE: 90%; BACKGROUND: url(/../images/title_h_bg.gif) no-repeat 0px 0px; LEFT: -1px; PADDING-BOTTOM: 2px; MARGIN: 0px -2px 0px 0px; WIDTH: 400px; COLOR: #000; TEXT-INDENT: 10px; PADDING-TOP: 4px; POSITION: relative; TOP: -1px
 }
 
 
