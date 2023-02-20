@@ -15,10 +15,12 @@
     <meta content="JavaScript" name="vs_defaultClientScript" />
     <meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema" />
     
-    <link href="../css/global.css" rel="stylesheet" type="text/css" />
-    <link href="../css/style.css" rel="stylesheet" type="text/css" />
-    <script src="../js/global.js" type="text/javascript"></script>
-        
+    <%--<link href="../css/style.css" rel="stylesheet" type="text/css" />--%>
+    <LINK href="<%= ResolveUrl("~/css/style.css") %>" type="text/css" rel="stylesheet" />
+         <%--<LINK href="<%=Request.ApplicationPath%>/css/global.css" type=text/css rel=stylesheet>--%>
+    <LINK href="<%= ResolveUrl("~/css/global.css") %>" type="text/css" rel="stylesheet" />
+    <%--<script language=javascript src="<%Response.Write(Request.ApplicationPath)%>/js/global.js" type=text/javascript></script>--%>
+    <script language="javascript" src="<%= ResolveUrl("~/js/global.js") %>" type="text/javascript"></script>
     <script type="text/javascript">
     
 		function EliminaCliente ( id, name ) {
@@ -99,7 +101,7 @@
     </style>
 
 </head>
-<body style="margin-left:0; margin-top:0; margin-right:0;" onload="MM_preloadImages('/BIFConvenios/images/buscar_on.jpg')">
+<body style="margin-left:0; margin-top:0; margin-right:0;" onload="MM_preloadImages('../images/buscar_on.jpg')">
     <form id="Form1" method="post" runat="server">
         <asp:HiddenField ID="hdData" runat="server" />        
         <table style="border:0; width:100%;" cellspacing="0" cellpadding="0">

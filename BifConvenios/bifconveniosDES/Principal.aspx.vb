@@ -8,7 +8,7 @@ Imports System.Data.SqlClient
 Imports System.Web.Services
 Imports BIFConvenios.BL
 Imports System.Collections.Specialized.StringCollection
-
+Imports BIFConvenios
 
 Partial Class Principal
 
@@ -23,7 +23,7 @@ Partial Class Principal
 
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-     
+
         Dim perfil As String
         ObtenerUsuario()
         perfil = objAccesoConvenioBL.GetBuscarPerfilUsuario(CType(usuario, String))
@@ -33,7 +33,8 @@ Partial Class Principal
 
 
             Session("usuarioIniciado") = usuario
-            Response.Redirect("Default.aspx")
+            ' Response.Redirect("Default.aspx")
+            Response.Redirect(Utils.getUrlPathApplicationRedirectPage("Default.aspx"))
 
         Else
 

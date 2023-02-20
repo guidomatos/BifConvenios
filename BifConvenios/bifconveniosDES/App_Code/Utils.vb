@@ -271,6 +271,14 @@ Namespace BIFConvenios
             BinRed.Close()
         End Function
 
+        Public Function getUrlPathApplication() As String
+            Return HttpContext.Current.Request.Url.ToString().Replace(HttpContext.Current.Request.Url.PathAndQuery, "")
+        End Function
+
+        Public Function getUrlPathApplicationRedirectPage(ByVal newurl As String) As String
+            Return HttpContext.Current.Request.Url.ToString().Replace(HttpContext.Current.Request.Url.PathAndQuery, newurl)
+        End Function
+
 #End Region
 
         '/* ADD NCA 08/07/2014 EA2013-273 OPT PROCESOS CONVENIOS */

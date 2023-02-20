@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
     <title>BIFConvenios - Apertura día</title>
-    <LINK href="~/css/global.css" type=text/css rel=stylesheet>
+    <LINK href="/css/global.css" type=text/css rel=stylesheet>
 </head>
 
 <body topmargin="0" leftmargin="0" rightmargin="0">

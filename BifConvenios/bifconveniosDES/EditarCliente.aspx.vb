@@ -25,8 +25,8 @@ Namespace BIFConvenios
         Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
             'Put user code to initialize the page here
             If Not Page.IsPostBack Then
-                Utils.AddSwap(lnkCancelar, "Image12", "/BIFConvenios/images/cancelar_on.jpg")
-                Utils.AddSwap(lnkAceptar, "Image10", "/BIFConvenios/images/aceptar_on.jpg")
+                Utils.AddSwap(lnkCancelar, "Image12", "/images/cancelar_on.jpg")
+                Utils.AddSwap(lnkAceptar, "Image10", "/images/aceptar_on.jpg")
                 ddlTipoDocumento.DataSource = BIFConvenios.TipoDocumento.GetTipoDocumento()
                 ddlTipoDocumento.DataBind()
                 ddlTipoDocumento.Items.Insert(0, New ListItem("--Seleccione el tipo de documento--", ""))
@@ -174,7 +174,8 @@ Namespace BIFConvenios
 
                 oCliente.UpdateCliente(id, Trim(txtNombreCliente.Text), ddlTipoDocumento.SelectedItem.Value, Trim(txtNumeroDocumento.Text), "", Trim(txtTelefono1.Text), Trim(txtTelefono2.Text), Trim(txtTelefono3.Text), "", Trim(txtDiaEnvioPlanilla.Text), Trim(txtDiaCierrePlanilla.Text), Trim(txtMesesAnticipEnvioListado.Text), Trim(txtDiaCorte.Text), ddlFuncionarioConvenios.SelectedItem.Value, Trim(txtCodigoIBS.Text), Trim(txtCodigoInstitucion.Text), ddlEnvioAutListadoDescuentos.SelectedItem.Value, Context.User.Identity.Name, Now, Context.User.Identity.Name, Now)
 
-                Response.Redirect("Clientes.aspx")
+                'Response.Redirect("/Clientes.aspx")
+                Response.Redirect(Utils.getUrlPathApplicationRedirectPage("/Clientes.aspx"))
             End If
         End Sub
 
@@ -217,7 +218,8 @@ Namespace BIFConvenios
         'End Sub
 
         Private Sub lnkCancelar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lnkCancelar.Click
-            Response.Redirect(Request.ApplicationPath + "/clientes/clientes.aspx")
+            ' Response.Redirect(Request.ApplicationPath + "/clientes/clientes.aspx")
+            Response.Redirect(Utils.getUrlPathApplicationRedirectPage("/clientes/clientes.aspx"))
         End Sub
     End Class
 End Namespace

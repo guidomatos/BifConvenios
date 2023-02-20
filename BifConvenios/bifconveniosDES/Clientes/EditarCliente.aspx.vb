@@ -377,7 +377,8 @@ Namespace BIFConvenios
                 Session("ExisteCodigoIBS") = -1
             End If
             If intExiste = -1 Then
-                Response.Redirect(Request.ApplicationPath + "/clientes/clientes.aspx", True)
+                ' Response.Redirect(Request.ApplicationPath + "~/clientes/clientes.aspx", True)
+                Response.Redirect(Utils.getUrlPathApplicationRedirectPage("/clientes/clientes.aspx"), True)
             End If
             'If Session("ExisteCodigoIBS") IsNot Nothing Then
             '    intExiste = 0
@@ -409,7 +410,8 @@ Namespace BIFConvenios
                 End If
                 intResult = objClienteBL.EliminarCliente(objCliente.CodigoCliente, Context.User.Identity.Name)
 
-                Response.Redirect("Clientes.aspx")
+                'Response.Redirect("/Clientes.aspx")
+                Response.Redirect(Utils.getUrlPathApplicationRedirectPage("/Clientes.aspx"))
             Catch ex1 As HandledException
                 lblMensaje.Text = ex1.ErrorMessage + ": " + ex1.ErrorMessageFull
             Catch ex2 As Exception
