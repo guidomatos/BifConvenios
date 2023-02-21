@@ -14,10 +14,12 @@
     <meta name="CODE_LANGUAGE" content="Visual Basic 7.0" />
     <meta name="vs_defaultClientScript" content="JavaScript" />
     <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5" />
-    <link href="<%=Request.ApplicationPath%>/css/global.css" type="text/css" rel="stylesheet" />
-    <link href="<%=Request.ApplicationPath%>/css/grid.css" rel="stylesheet" type="text/css" />
-    <script language="javascript" src="<%Response.Write(Request.ApplicationPath)%>/js/global.js"
-        type="text/javascript"></script>
+   <%-- <link href="<%=Request.ApplicationPath%>/css/grid.css" rel="stylesheet" type="text/css" />--%>
+    <LINK href="<%= ResolveUrl("~/css/grid.css") %>" type="text/css" rel="stylesheet">
+    <%--<LINK href="<%=Request.ApplicationPath%>/css/global.css" type="text/css" rel="stylesheet">--%>
+		<LINK href="<%= ResolveUrl("~/css/global.css") %>" type="text/css" rel="stylesheet">
+		<%--<script language=javascript src="<%Response.Write(Request.ApplicationPath)%>/js/global.js" type=text/javascript></script>--%>
+		<script language="javascript" src="<%= ResolveUrl("~/js/global.js") %>" type="text/javascript"></script>
 
     <script type="text/javascript">
 		

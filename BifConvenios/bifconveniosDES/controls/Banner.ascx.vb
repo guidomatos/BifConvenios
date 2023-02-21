@@ -1,4 +1,5 @@
 Imports System.Configuration
+Imports BIFConvenios
 
 Partial Class Banner
     Inherits System.Web.UI.UserControl
@@ -21,11 +22,11 @@ Partial Class Banner
     Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'Put user code to initialize the page here
         ' If Not Page.IsPostBack Then
-        Dim strPath As String = Request.ApplicationPath
+        Dim strPath As String = Utils.getUrlPathApplication() ' Request.ApplicationPath
 
         ctlMenu.MenuData = "<root>"
         ctlMenu.MenuData = ctlMenu.MenuData + "<menuitem id=""1"" title=""Empresas"">"
-        If BIFConvenios.Utils.isAccessallowed(context.User.Identity.Name, "Clientes.aspx") Then
+        If BIFConvenios.Utils.isAccessallowed(Context.User.Identity.Name, "Clientes.aspx") Then
             ctlMenu.MenuData = ctlMenu.MenuData + "			<menuitem id=""2"" title=""Registro de Empresas"" url=""" + strPath + "/Clientes/Clientes.aspx"" />"
         End If
         ctlMenu.MenuData = ctlMenu.MenuData + "			<menuitem id=""3"" title=""Fechas de Cargo por Empresa"" url=""" + strPath + "/Default.aspx"" />"

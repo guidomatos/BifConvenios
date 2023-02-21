@@ -367,7 +367,8 @@ Namespace BIFConvenios
         End Sub
 
         Protected Sub btnRegresar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnRegresar.Click
-            Response.Redirect(Request.ApplicationPath + "/clientes/clientes.aspx", True)
+            'Response.Redirect(Request.ApplicationPath + "/clientes/clientes.aspx", True)
+            Response.Redirect(Utils.getUrlPathApplicationRedirectPage("/clientes/clientes.aspx"), True)
         End Sub
     End Class
 End Namespace
