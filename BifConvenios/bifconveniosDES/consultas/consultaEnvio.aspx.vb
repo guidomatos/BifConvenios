@@ -1,3 +1,5 @@
+Imports System.Data.HashFunction.Core.Utilities
+
 Partial Class consultaEnvio
     Inherits System.Web.UI.Page
     Protected WithEvents pnlControls As System.Web.UI.WebControls.Panel
@@ -26,6 +28,7 @@ Partial Class consultaEnvio
 
         If Not Page.IsPostBack Then
             '-------Informacion del año
+
             ddlAnio.DataSource = oproc.GetAnioEnvioArchivoAS400()
             ddlAnio.DataBind()
             ddlAnio.Items.Insert(0, New ListItem("-- Todos los años --", ""))
@@ -37,13 +40,37 @@ Partial Class consultaEnvio
             ddlMes.Items.Insert(0, New ListItem("-- Todos los meses --", ""))
             ddlMes.SelectedIndex = ddlMes.Items.IndexOf(ddlMes.Items.FindByValue(Now.Month.ToString()))
             Call BindGrid()
+
+            Ordenar_DropDownList(ddlAnio)
+
         End If
     End Sub
+
+    Private Sub Ordenar_DropDownList(ByRef ddList As DropDownList)
+        Dim i As Integer
+        Dim count As Integer = ddList.Items.Count
+        Dim a As Integer = 0
+        While count > 1
+            For i = 0 To count - 2
+                If String.Compare(ddList.Items(i).Text, ddList.Items(i + 1).Text) > 0 Then
+                    Reemplazar_DropDownListItems(ddList, i, i + 1)
+                End If
+            Next
+            count = count - 1
+        End While
+    End Sub
+    Private Sub Reemplazar_DropDownListItems(ByRef ddList As DropDownList, ByVal index1 As Integer, ByVal index2 As Integer)
+        Dim TempLI As New ListItem
+        TempLI = ddList.Items(index2)
+        ddList.Items.RemoveAt(index2)
+        ddList.Items.Insert(index1, TempLI)
+    End Sub
+
 
     Private Sub BindGrid()
         dgProcesos.DataSource = oproc.GetProcesosEnvioArchivoAS400(ddlAnio.SelectedItem.Value, ddlMes.SelectedItem.Value)
         dgProcesos.DataBind()
-        lblNumReg.text = dgProcesos.Items.Count.ToString
+        lblNumReg.Text = dgProcesos.Items.Count.ToString
     End Sub
 
 

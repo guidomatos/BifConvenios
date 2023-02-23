@@ -8,8 +8,7 @@
 		<meta content="Visual Basic 7.0" name="CODE_LANGUAGE">
 		<meta content="JavaScript" name="vs_defaultClientScript">
 		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
-		<LINK href="<%=Request.ApplicationPath%>/css/global.css" 
-type=text/css rel=stylesheet>
+		<LINK href="/css/global.css" type="text/css" rel="Stylesheet">
 		<script language=javascript 
 src="<%Response.Write(Request.ApplicationPath)%>/js/global.js" 
 type=text/javascript></script>

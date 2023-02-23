@@ -8,12 +8,11 @@
 		<meta name="CODE_LANGUAGE" content="Visual Basic 7.0">
 		<meta name="vs_defaultClientScript" content="JavaScript">
 		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
-		<LINK href="<%=Request.ApplicationPath%>/css/global.css" 
-type=text/css rel=stylesheet>
+		<LINK href="/css/global.css" type="text/css" rel="Stylesheet">
 		<script language=javascript 
 src="<%Response.Write(Request.ApplicationPath)%>/js/global.js" 
 type=text/javascript></script>
-	</HEAD>
+	</HEAD> 
 	<body leftmargin="0" topmargin="0" onload="MM_preloadImages('/BIFConvenios/images/regresar_on.jpg')">
 		<form id="Form1" method="post" runat="server">
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -129,7 +128,7 @@ type=text/javascript></script>
 							</TR>
 							<tr>
 								<TD width="30"></TD>
-								<TD colSpan="2"><asp:linkbutton id="lnkBack" Runat="server"><img src='/BIFConvenios/images/regresar.jpg' name='Image1' border="0" alt='Regresar' /></asp:linkbutton></TD>
+								<TD colSpan="2"><asp:linkbutton id="lnkBack" Runat="server"><img src="../images/regresar.jpg" name='Image1' border="0" alt='Regresar' /></asp:linkbutton></TD>
 							</tr>
 						</TABLE>
 					</td>
