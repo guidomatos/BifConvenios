@@ -9,7 +9,7 @@
     <meta content="blendTrans(Duration=0.5)" http-equiv="Page-Enter" />
 	<meta content="blendTrans(Duration=0.5)" http-equiv="Page-Exit" />
     <title></title>
-    <link href="../App_Themes/Default/Default.css" rel="stylesheet" type="text/css" />
+    <link href="<%= ResolveUrl("~/App_Themes/Default/Default.css") %>" type="text/css" rel="stylesheet" />
     <script language="javascript" type="text/javascript">
         function permite(elEvento, permitidos) {
           // Variables que definen los caracteres permitidos

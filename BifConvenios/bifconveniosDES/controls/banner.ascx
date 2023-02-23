@@ -1,16 +1,17 @@
 <%@ Register TagPrefix="cc1" Namespace="SolpartWebControls" Assembly="SolpartWebControls" %>
 <%@ Control Language="vb" AutoEventWireup="false" Inherits="Banner" CodeFile="Banner.ascx.vb" %>
+
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
         <td height="55" colspan="2">
-            <table width="100%" height="51" border="0" cellpadding="0" cellspacing="0" background="../images/lineavertical.jpg">
+            <table width="100%" height="51" border="0" cellpadding="0" cellspacing="0" background="<%= ResolveUrl("~/images/lineavertical.gif") %>">
                 <tr>
                     <td width="224" align="left" valign="top">
-                        <a href='<%Response.Write(Request.ApplicationPath)%>/'>
-                            <img src="../images/cabeceraint.gif" border="0" width="224">
+                        <a href="<%= ResolveUrl("~/") %>">
+                            <img src="<%= ResolveUrl("~/images/cabeceraint.gif") %>" border="0" width="224">
                         </a>
                     </td>
-                    <td background="../images/derech.gif">
+                    <td background="<%= ResolveUrl("~/images/derech.jpg") %>">
                         <table width="100%" border="0" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td height="32">

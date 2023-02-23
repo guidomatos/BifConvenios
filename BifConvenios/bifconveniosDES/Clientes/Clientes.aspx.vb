@@ -92,9 +92,10 @@ Namespace BIFConvenios
         End Sub
 
         Protected Sub btnNuevoCliente_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNuevoCliente.Click
-            Dim strResult As String = "editarcliente.aspx"
-
-            Response.Redirect(strResult, True)
+            'Dim strResult As String = "editarcliente.aspx"
+            Dim strResult As String = "/clientes/editarcliente.aspx"
+            Response.Redirect(Utils.getUrlPathApplicationRedirectPage(strResult), True)
+            'Response.Redirect(strResult, True)
         End Sub
 
         Protected Sub gvClientes_PageIndexChanging(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewPageEventArgs) Handles gvClientes.PageIndexChanging
@@ -104,7 +105,9 @@ Namespace BIFConvenios
         End Sub
 
         Protected Sub btnRegresar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnRegresar.Click
-            Response.Redirect(Request.ApplicationPath + "/default.aspx", True)
+            'Response.Redirect(Request.ApplicationPath + "/default.aspx", True)
+            'Response.Redirect("~/default.aspx", True)
+            Response.Redirect(Utils.getUrlPathApplicationRedirectPage("/default.aspx"), True)
         End Sub
     End Class
 End Namespace

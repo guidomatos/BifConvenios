@@ -8,11 +8,11 @@
 		<meta name="CODE_LANGUAGE" content="Visual Basic 7.0">
 		<meta name="vs_defaultClientScript" content="JavaScript">
 		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
-		<LINK href="<%=Request.ApplicationPath%>/css/global.css" type="text/css" rel="stylesheet">
-		<script language=javascript 
-src="<%Response.Write(Request.ApplicationPath)%>/js/global.js" 
-type=text/javascript></script>
-		<script language="javascript">
+		<%--<LINK href="<%=Request.ApplicationPath%>/css/global.css" type="text/css" rel="stylesheet">--%>
+		<LINK href="<%= ResolveUrl("~/css/global.css") %>" type="text/css" rel="stylesheet">
+		<%--<script language=javascript src="<%Response.Write(Request.ApplicationPath)%>/js/global.js" type=text/javascript></script>--%>
+		<script language="javascript" src="<%= ResolveUrl("~/js/global.js") %>" type="text/javascript"></script>
+		<script language="javascript" type="text/javascript">
 		<!--
 			function Valida (obj, args ){
 				args.IsValid = true;
@@ -98,7 +98,7 @@ type=text/javascript></script>
 		-->
 		</script>
 	</HEAD>
-	<body leftmargin="0" topmargin="0" onload="MM_preloadImages('/BIFConvenios/images/aceptar_on.jpg','/BIFConvenios/images/cancelar_on.jpg');">
+	<body leftmargin="0" topmargin="0" onload="MM_preloadImages('/images/aceptar_on.jpg','/images/cancelar_on.jpg');">
 		<form id="Form1" runat="server">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr>
@@ -109,7 +109,7 @@ type=text/javascript></script>
 			</table>
 			<TABLE id="Table1" cellSpacing="0" cellPadding="35" width="650" border="0">
 				<TR>
-					<TD width="30%" colspan="2" background="/BIFConvenios/images/hoja1.jpg" height="550" valign="top">
+					<TD width="30%" colspan="2" background="<%= ResolveUrl("~/images/hoja1.jpg") %>" height="550" valign="top">
 						<table border="0" cellpadding="8" cellspacing="0" width="100%">
 							<TR>
 								<TD width="30">&nbsp;</TD>
@@ -234,10 +234,10 @@ type=text/javascript></script>
                                     &nbsp;
                                     &nbsp;
                                     <asp:LinkButton CausesValidation="False" id="lnkCancelar" runat="server">
-										<IMG id="btnRetornar" title="Cancelar" alt="Cancelar" src="/BIFConvenios/images/cancelar.jpg" border="0" name="Image12"></asp:LinkButton>
+										<IMG id="btnRetornar" title="Cancelar" alt="Cancelar" src="<%= ResolveUrl("~/images/cancelar.jpg") %>" border="0" name="Image12"></asp:LinkButton>
 									&nbsp;
 									<asp:LinkButton id="lnkAceptar" runat="server">
-										<img src="/BIFConvenios/images/aceptar.jpg" name="Image10" width="88" height="21" border="0"></asp:LinkButton></TD>
+										<img src="<%= ResolveUrl("~/images/aceptar.jpg") %>" name="Image10" width="88" height="21" border="0"></asp:LinkButton></TD>
 							</TR>
 						</table>																									
 						</td>										

@@ -13,10 +13,10 @@
     <meta name="vs_defaultClientScript" content="JavaScript"/>
     <meta http-equiv="Page-Enter" content="blendtrans(duration=1.0, transition=8)"/>
     <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5"/>
-    <link href="<%=Request.ApplicationPath%>/css/global.css" type="text/css" rel="stylesheet"/>
-
-    <script language="javascript" src="<%Response.Write(Request.ApplicationPath)%>/js/global.js"
-        type="text/javascript"></script>
+    <%--<LINK href="<%=Request.ApplicationPath%>/css/global.css" type="text/css" rel="stylesheet">--%>
+		<LINK href="/css/global.css" type="text/css" rel="stylesheet">
+		<%--<script language=javascript src="<%Response.Write(Request.ApplicationPath)%>/js/global.js" type=text/javascript></script>--%>
+		<script language="javascript" src="/js/global.js" type="text/javascript"></script>
         
     <style type="text/css">
         
@@ -111,12 +111,12 @@
                                         <asp:BoundField ItemStyle-Width="450" DataField="DLEDSC" HeaderText="Nombre de Empresa" />
                                         <asp:TemplateField ItemStyle-Width="80" HeaderText="Año">
                                             <ItemTemplate>
-                                                <%#NormalizaAnhio(DataBinder.Eval (Container.DataItem, "DLEAEN"))%>
+                                                <%#NormalizaAnhio(DataBinder.Eval(Container.DataItem, "DLEAEN"))%>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField ItemStyle-Width="80" HeaderText="Mes">
                                             <ItemTemplate>
-                                                <%#BIFConvenios.Periodo.GetMonthByNumber(DataBinder.Eval (Container.DataItem, "DLEMEN"))%>
+                                                <%#BIFConvenios.Periodo.GetMonthByNumber(DataBinder.Eval(Container.DataItem, "DLEMEN"))%>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:BoundField ItemStyle-Width="80" DataField="DLEDEN" HeaderText="Dia" />

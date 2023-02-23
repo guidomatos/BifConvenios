@@ -9,16 +9,14 @@
     <title>Accesos</title>
 </head>
 <!-- DEBAJO DE ESTA LINEA VA LA IMAGEN DE FONDO url(imagen.jpg) -->
-<body style="background-image: url(Images/bg4.jpg); text-align:center; padding-top:0px; padding-left:80px" bgcolor="#cccccc">
+<body style="background-image: url(/Images/bg4.jpg); text-align:center; padding-top:0px; padding-left:80px" bgcolor="#cccccc">
     <form id="form1" runat="server">
 
     <!-- DEBAJO DE ESTA LINEA VA EL BANNER  src="bannerimagen.jpg"-->
-    <div style="width:980px" align="left"><img src="Images/Topbiflogo_convenios.JPG" align="center"/> </div>
+    <div style="width:980px" align="left"><img src="/Images/Topbiflogo_convenios.JPG" align="center"/> </div>
       
     <div align="center">
-        </div>
-
-
+    </div>
     <br />
     <br />
     <br />

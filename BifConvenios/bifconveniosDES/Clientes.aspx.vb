@@ -24,7 +24,7 @@ Namespace BIFConvenios
             'Put user code to initialize the page here
             If Not Page.IsPostBack Then
                 Call RebindGrid()
-                Utils.AddSwap(lnkBuscar, "Image1", "/BIFConvenios/images/buscar_on.jpg")
+                Utils.AddSwap(lnkBuscar, "Image1", "/images/buscar_on.jpg")
             End If
         End Sub
 
