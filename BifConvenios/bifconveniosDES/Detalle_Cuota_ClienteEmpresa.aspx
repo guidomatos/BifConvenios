@@ -9,9 +9,9 @@
 		<meta content="Visual Basic 7.0" name="CODE_LANGUAGE">
 		<meta content="JavaScript" name="vs_defaultClientScript">
 		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
-		<link href="css/global.css" type="text/css" rel="stylesheet">
-		<link href="css/StyleSheet.css" type="text/css" rel="stylesheet">
-		<link href="css/MouseEvent.css" type="text/css" rel ="stylesheet" />
+		<link href="../css/global.css" type="text/css" rel="stylesheet">
+		<link href="../css/StyleSheet.css" type="text/css" rel="stylesheet">
+		<link href="../css/MouseEvent.css" type="text/css" rel ="stylesheet" />
 	     <script type="text/javascript" src="js/global.js"></script>
 		
 		<script language="javascript"  type="text/javascript">

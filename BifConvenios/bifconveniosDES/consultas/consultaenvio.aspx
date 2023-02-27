@@ -8,8 +8,7 @@
 		<meta content="Visual Basic 7.0" name="CODE_LANGUAGE">
 		<meta content="JavaScript" name="vs_defaultClientScript">
 		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
-		<LINK href="<%=Request.ApplicationPath%>/css/global.css" 
-type=text/css rel=stylesheet>
+		<LINK href="../css/global.css" type="text/css" rel="stylesheet">
 		<script language=javascript 
 src="<%Response.Write(Request.ApplicationPath)%>/js/global.js" 
 type=text/javascript></script>
@@ -39,7 +38,7 @@ type=text/javascript></script>
 											<TD width="30">&nbsp;</TD>
 											<TD class="SubHead" width="50">Año</TD>
 											<TD align="left" width="650">
-												<asp:DropDownList id="ddlAnio" runat="server" AutoPostBack="True" Width="200px" DataValueField="Anio_Periodo" DataTextField="Anio_Periodo"></asp:DropDownList></TD>
+												<asp:DropDownList id="ddlAnio" runat="server" AutoPostBack="True" Width="200px"  DataValueField="Anio_Periodo" DataTextField="Anio_Periodo"></asp:DropDownList></TD>
 										</TR>
 										<TR>
 											<TD>&nbsp;</TD>

@@ -1,9 +1,9 @@
 <%@ Page Language="VB" AutoEventWireup="false" CodeFile="MantenimientoCuotas.aspx.vb" Inherits="BIFConvenios.MantenimientoCuotas" %>
-<%@ Register TagPrefix="uc1" TagName="Banner" Src="controls/Banner.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="Banner" Src="~/controls/Banner.ascx" %>
 <%@ Register Assembly="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
     Namespace="System.Web.UI" TagPrefix="asp" %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
@@ -13,10 +13,9 @@
 		<meta content="Visual Basic 7.0" name="CODE_LANGUAGE">
 		<meta content="JavaScript" name="vs_defaultClientScript">
 		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
-		<!--<LINK href="<%=Request.ApplicationPath%>/css/global.css" type="text/css" rel="stylesheet">-->
-		<LINK href="css/global.css" type="text/css" rel="stylesheet">
-		<!--<LINK href="<%=Request.ApplicationPath%>/css/StyleSheet.css" type="text/css" rel="stylesheet">-->
-		<LINK href="css/StyleSheet.css" type="text/css" rel="stylesheet">
+
+        <LINK href="../css/global.css" type="text/css" rel="stylesheet">
+		<LINK href="../css/styleSheet.css" type="text/css" rel="stylesheet">
 		<script language="javascript"  type="text/javascript" src="js/global.js"></script>
 		
 </head>
@@ -35,7 +34,10 @@
    
         <asp:UpdatePanel id="UpdatePanel1" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
-                <asp:GridView ID="Gvw_datos_cliente" runat="server" AutoGenerateColumns="False" OnRowCommand="Gvw_datos_cliente_RowCommand" OnRowDeleting="Gvw_datos_cliente_RowDeleting" OnRowEditing="Gvw_datos_cliente_RowEditing" OnRowUpdating="Gvw_datos_cliente_RowUpdating" OnRowCancelingEdit="Gvw_datos_cliente_RowCancelingEdit" CssClass="grilla_principal">
+                <asp:GridView ID="Gvw_datos_cliente" runat="server" AutoGenerateColumns="False" 
+                    OnRowCommand="Gvw_datos_cliente_RowCommand" OnRowDeleting="Gvw_datos_cliente_RowDeleting" 
+                    OnRowEditing="Gvw_datos_cliente_RowEditing" OnRowUpdating="Gvw_datos_cliente_RowUpdating" 
+                    OnRowCancelingEdit="Gvw_datos_cliente_RowCancelingEdit" CssClass="grilla_principal">
                 				
                     <Columns>
                         <asp:TemplateField HeaderText="C&#243;digo Cliente">
@@ -111,16 +113,16 @@
                          <asp:TemplateField HeaderText="Editar">
                               <EditItemTemplate>
                                 <asp:ImageButton ID="btnActualizar" runat="server" AlternateText="Actualizar" CommandName="update"
-                                  ImageUrl="~/Images/Icono_PreCalificar_1.gif" ValidationGroup="GroupActivoFijoInmueble"
+                                  ImageUrl="../images/Icono_PreCalificar_1.gif" ValidationGroup="GroupActivoFijoInmueble"
                                   Width="21px" />
                                 <asp:ImageButton ID="btnCancelar" runat="server" AlternateText="Cancelar" CommandName="cancel"
-                                  ImageUrl="~/Images/Icono_Cancelar_1.ico" Visible="true" />
+                                  ImageUrl="../images/Icono_Cancelar_1.ico" Visible="true" />
                               </EditItemTemplate>
                               <ItemStyle HorizontalAlign="Center" />
                               <HeaderStyle HorizontalAlign="Center" />
                               <ItemTemplate>
                                 <asp:ImageButton ID="btnEditar" runat="server" AlternateText="Editar" CommandName="edit"
-                                  ImageUrl="~/Images/Editar.gif" Width="21px" />
+                                  ImageUrl="../images/Editar.gif" Width="21px" />
                               </ItemTemplate>
                             </asp:TemplateField>
                     </Columns>

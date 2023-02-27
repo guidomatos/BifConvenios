@@ -16,9 +16,9 @@
 		<meta content="JavaScript" name="vs_defaultClientScript">
 		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
 		<!--<LINK href="<%=Request.ApplicationPath%>/css/global.css" type="text/css" rel="stylesheet">-->
-		<link href="~/css/global.css" type="text/css" rel="stylesheet">
+		<link href="../css/global.css" type="text/css" rel="stylesheet">
 		<!--<LINK href="<%=Request.ApplicationPath%>/css/StyleSheet.css" type="text/css" rel="stylesheet">-->
-		<link href="~/css/StyleSheet.css" type="text/css" rel="stylesheet">
+		<link href="../css/StyleSheet.css" type="text/css" rel="stylesheet">
 		<script language="javascript"  type="text/javascript" src="~/js/global.js"></script>
 </head>
 <body leftMargin="0" topMargin="0" rightMargin="0">
