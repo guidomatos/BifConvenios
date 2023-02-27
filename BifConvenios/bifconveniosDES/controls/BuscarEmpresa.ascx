@@ -77,7 +77,6 @@
     }
 </style>
 
-<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 <asp:ImageButton ID="btnVerPanel" ImageUrl="../images/texto.gif" AlternateText="Buscar" runat="server" />
 <asp:Panel ID="pnlBuscarEmpresa" runat="server">
     <div id="container" style="width:800px;">
