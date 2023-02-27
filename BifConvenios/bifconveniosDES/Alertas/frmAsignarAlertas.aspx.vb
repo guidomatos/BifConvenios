@@ -1,5 +1,5 @@
 ﻿Imports System.Data
-
+Imports BIFConvenios
 Imports BIFConvenios.BE
 Imports BIFConvenios.BL
 
@@ -110,7 +110,8 @@ Partial Class Alertas_frmAsignarAlertas
     End Sub
 
     Protected Sub btnNuevo_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNuevo.Click
-        Response.Redirect(Request.ApplicationPath + "/Alertas/frmEditarAlertaCliente.aspx?id=0&idCliente=" + hdCodCliente.Value, True)
+        'Response.Redirect(Request.ApplicationPath + "/Alertas/frmEditarAlertaCliente.aspx?id=0&idCliente=" + hdCodCliente.Value, True)
+        Response.Redirect(Utils.getUrlPathApplicationRedirectPage("/Alertas/frmEditarAlertaCliente.aspx") + "?id=0&idCliente=" + hdCodCliente.Value, True)
     End Sub
 
     Protected Sub lnkCargarCliente_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lnkCargarCliente.Click
@@ -134,7 +135,8 @@ Partial Class Alertas_frmAsignarAlertas
     End Sub
 
     Protected Sub btnRegresar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnRegresar.Click
-        Response.Redirect(Request.ApplicationPath + "/default.aspx", True)
+        ' Response.Redirect(Request.ApplicationPath + "/default.aspx", True)
+        Response.Redirect(Utils.getUrlPathApplicationRedirectPage("/default.aspx"), True)
     End Sub
 
     Protected Sub btnEnviarAlertas_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEnviarAlertas.Click

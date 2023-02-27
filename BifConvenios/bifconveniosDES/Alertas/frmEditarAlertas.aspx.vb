@@ -1,5 +1,5 @@
 ﻿Imports System.Data
-
+Imports BIFConvenios
 Imports BIFConvenios.BE
 Imports BIFConvenios.BL
 Imports Resource
@@ -81,7 +81,7 @@ Partial Class Alertas_frmEditarAlertas
             txtDescripcion.Text = dt.Rows(0)("vDescripcionAlerta").ToString()
             txtAsunto.Text = dt.Rows(0)("vAsuntoMensaje").ToString()
             txtCuerpo.Text = dt.Rows(0)("vCuerpoMensaje").ToString()
-            
+
         Catch ex1 As HandledException
             lblMensaje.Text = ex1.ErrorMessage + ": " + ex1.ErrorMessageFull
         Catch ex2 As Exception
@@ -150,7 +150,8 @@ Partial Class Alertas_frmEditarAlertas
                 objAlertasBL.Update(objAlertas)
             End If
 
-            Response.Redirect(Request.ApplicationPath + "/Alertas/frmAlertas.aspx", True)
+            ' Response.Redirect(Request.ApplicationPath + "/Alertas/frmAlertas.aspx", True)
+            Response.Redirect(Utils.getUrlPathApplicationRedirectPage("/Alertas/frmAlertas.aspx"), True)
         Catch ex1 As HandledException
             lblMensaje.Text = ex1.ErrorMessage + ": " + ex1.ErrorMessageFull
         Catch ex2 As Exception
@@ -182,7 +183,8 @@ Partial Class Alertas_frmEditarAlertas
     End Sub
 
     Protected Sub btnCancelar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCancelar.Click
-        Response.Redirect(Request.ApplicationPath + "/Alertas/frmAlertas.aspx", True)
+        'Response.Redirect(Request.ApplicationPath + "/Alertas/frmAlertas.aspx", True)
+        Response.Redirect(Utils.getUrlPathApplicationRedirectPage("/Alertas/frmAlertas.aspx"), True)
     End Sub
 
     Protected Sub btnGuardar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGuardar.Click
@@ -202,7 +204,7 @@ Partial Class Alertas_frmEditarAlertas
         Catch ex2 As Exception
             lblMensaje.Text = "Error: " + ex2.Message
         End Try
-        
+
     End Sub
 
     Protected Sub lnkGuardar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lnkGuardar.Click

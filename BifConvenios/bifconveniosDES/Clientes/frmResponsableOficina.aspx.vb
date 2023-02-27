@@ -1,6 +1,6 @@
 ﻿Imports System.Data
 Imports System.Data.SqlClient
-
+Imports BIFConvenios
 Imports BIFConvenios.BE
 Imports BIFConvenios.BL
 Imports Resource
@@ -14,7 +14,7 @@ Partial Class Clientes_frmResponsableOficina
     Protected objClienteBL As New clsClienteBL()
 
     Protected dtResponsable As New DataTable()
-    
+
 #Region "Metodos"
 
     Private Sub BindDG()
@@ -301,7 +301,8 @@ Partial Class Clientes_frmResponsableOficina
     End Sub
 
     Protected Sub btnRegresar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnRegresar.Click
-        Response.Redirect(Request.ApplicationPath + "/default.aspx", True)
+        ' Response.Redirect(Request.ApplicationPath + "/default.aspx", True)
+        Response.Redirect(Utils.getUrlPathApplicationRedirectPage("/default.aspx"), True)
     End Sub
 
     Protected Sub lnkCargarOficinaIBS_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lnkCargarOficinaIBS.Click

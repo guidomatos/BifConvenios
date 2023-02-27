@@ -1,5 +1,5 @@
 ﻿Imports System.Data
-
+Imports BIFConvenios
 Imports BIFConvenios.BE
 Imports BIFConvenios.BL
 Imports Resource
@@ -13,7 +13,7 @@ Partial Class Alertas_frmEditarAlertaCliente
     Protected objClienteBL As New clsClienteBL
     Protected objAlertasBL As New clsAlertasBL
     Protected objAlertasClientesBL As New clsAlertasClientesBL
-    
+
 #Region "Metodos"
 
     Private Sub LimpiarControles()
@@ -229,7 +229,8 @@ Partial Class Alertas_frmEditarAlertaCliente
                 objAlertasClientesBL.Update(objAlertasClientes)
             End If
 
-            Response.Redirect(Request.ApplicationPath + "/Alertas/frmAsignarAlertas.aspx?id=" + objAlertasClientes.iClienteId.ToString())
+            ' Response.Redirect(Request.ApplicationPath + "/Alertas/frmAsignarAlertas.aspx?id=" + objAlertasClientes.iClienteId.ToString())
+            Response.Redirect(Utils.getUrlPathApplicationRedirectPage("/Alertas/frmAsignarAlertas.aspx") + "?id=" + objAlertasClientes.iClienteId.ToString())
         Catch ex1 As HandledException
             lblMensaje.Text = ex1.ErrorMessage + ": " + ex1.ErrorMessageFull
         Catch ex2 As Exception
@@ -255,7 +256,8 @@ Partial Class Alertas_frmEditarAlertaCliente
     End Sub
 
     Protected Sub btnCancelar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCancelar.Click
-        Response.Redirect(Request.ApplicationPath + "/Alertas/frmAsignarAlertas.aspx?id=" + hdCodCliente.Value, True)
+        'Response.Redirect(Request.ApplicationPath + "/Alertas/frmAsignarAlertas.aspx?id=" + hdCodCliente.Value, True)
+        Response.Redirect(Utils.getUrlPathApplicationRedirectPage("/Alertas/frmAsignarAlertas.aspx") + "?id=" + hdCodCliente.Value, True)
     End Sub
 
     Protected Sub btnGuardar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGuardar.Click
