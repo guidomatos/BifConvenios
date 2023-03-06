@@ -30,7 +30,7 @@ Namespace BIFConvenios
         Protected oproc As New Proceso()
         Protected oprocesoBL As New BIFConvenios.Logica.ProcesoBL
         Protected Pid As String = ""
-
+        Protected objWSConvenios As New wsBIFConvenios.WSBIFConveniosClient
 
 #Region " Web Form Designer Generated Code "
 
@@ -113,12 +113,9 @@ Namespace BIFConvenios
 
                 'RemoveHandler objSender.Submision, AddressOf objEventSink.SubmissionReceiver
                 oproc.ActualizaFlagCargaAutomatica("L", 1)
-                Dim objWSConvenios As New wsConvenios.WSBIFConvenios
-
-                objWSConvenios.Credentials = System.Net.CredentialCache.DefaultCredentials
                 objWSConvenios.EnviaInformacionIBS(idProcess, Context.User.Identity.Name)
 
-               
+
             Catch excp As Exception  'TODO: Enviar un mensaje si ocurre un error
                 oproc.ActualizaFlagCargaAutomatica("L", 0)
                 Response.Write(excp.ToString)

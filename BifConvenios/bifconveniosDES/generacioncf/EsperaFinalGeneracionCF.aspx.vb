@@ -13,6 +13,7 @@ Namespace BIFConvenios
         Protected tipoNomina = "E"
         Protected indicadorFormato = "A"
         Protected tipoProceso = "O"
+        Protected objWSConvenios As New wsBIFConvenios.WSBIFConveniosClient
 
 #Region " Web Form Designer Generated Code "
 
@@ -49,8 +50,6 @@ Namespace BIFConvenios
                 If oProceso.EnviarMensajeGeneracionArchivo(Pid.Split("|")(0)) Then
 
                     Try
-                        Dim objWSConvenios As New wsConvenios.WSBIFConvenios
-                        objWSConvenios.Credentials = System.Net.CredentialCache.DefaultCredentials
                         objWSConvenios.GeneraCronogramaFuturo(Pid.Split("|")(0), Pid.Split("|")(1), Pid.Split("|")(2), Context.User.Identity.Name)
                     Catch ex As Exception
                         Call MostrarMensajeGeneral(True, Utils.HandleError(ex))

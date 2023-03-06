@@ -10,7 +10,7 @@ Partial Class frmConsultaCuotasCliente
     Protected oCliente As New BIFConvenios.Cliente()
     'Protected oProceso As New Proceso()
 
-    Protected objWSConvenios As New wsConvenios.WSBIFConvenios
+    Protected objWSConvenios As New wsBIFConvenios.WSBIFConveniosClient
     Protected PID As String = ""
 
     Protected dt As New DataTable()
@@ -90,7 +90,6 @@ Partial Class frmConsultaCuotasCliente
                 ltrlDocumento.Text = NumeroDocumento
                 ltrlPeriodo.Text = strAnio.ToString() + " - " + strMes.ToString()
 
-                objWSConvenios.Credentials = System.Net.CredentialCache.DefaultCredentials
                 dt = objWSConvenios.ConsultaPagaresDeIBS(CodClienteIBS, strAnio, strMes, strFechaIBS, CodCliente, Context.User.Identity.Name.ToString())
 
                 Session("dtEmpresa") = dt

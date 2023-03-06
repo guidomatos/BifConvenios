@@ -11,8 +11,8 @@ Namespace BIFConvenios
         Public Shared Function isLoteBloqueoProcesado(ByVal numeroLote As String) As Boolean
             Dim myConnection As New SqlConnection(GetDBConnectionString)
             Dim returnValue As Integer
-            Dim myCommand As SqlCommand = SqlCommandGenerator.GenerateCommand(myConnection, _
-                CType(MethodBase.GetCurrentMethod(), MethodInfo), _
+            Dim myCommand As SqlCommand = SqlCommandGenerator.GenerateCommand(myConnection,
+                CType(MethodBase.GetCurrentMethod(), MethodInfo),
                 New Object() {numeroLote})
 
             myConnection.Open()
@@ -75,8 +75,8 @@ Namespace BIFConvenios
         'obtener un código de bloqueo para procesar los demas lotes
         Protected Function creaLoteBloqueo(ByVal Codigo_proceso As String, ByVal userId As String) As Integer
             Dim returnValue As Integer
-            Dim myCommand As SqlCommand = SqlCommandGenerator.GenerateCommand(myConnection, _
-                CType(MethodBase.GetCurrentMethod(), MethodInfo), _
+            Dim myCommand As SqlCommand = SqlCommandGenerator.GenerateCommand(myConnection,
+                CType(MethodBase.GetCurrentMethod(), MethodInfo),
                 New Object() {Codigo_proceso, userId})
 
             myCommand.Transaction = transaction
@@ -88,8 +88,8 @@ Namespace BIFConvenios
         'adiciona un bloqueo al grupo
         Protected Function addBloqueo(ByVal Codigo_proceso As String, ByVal codigoLote As Integer, ByVal dlnp As String) As Boolean
             Dim returnValue As Boolean
-            Dim myCommand As SqlCommand = SqlCommandGenerator.GenerateCommand(myConnection, _
-                CType(MethodBase.GetCurrentMethod(), MethodInfo), _
+            Dim myCommand As SqlCommand = SqlCommandGenerator.GenerateCommand(myConnection,
+                CType(MethodBase.GetCurrentMethod(), MethodInfo),
                 New Object() {Codigo_proceso, codigoLote, dlnp})
 
             myCommand.Transaction = transaction
@@ -162,10 +162,8 @@ Namespace BIFConvenios
             ''Aqui enviamos el mensaje al motor .net para que procese la aplicacion 
             'Remoting.sendMessage("ProcesoBloqueo", CStr(loteBloqueo))
 
-            Dim objWSConvenios As New wsConvenios.WSBIFConvenios
-
-            objWSConvenios.Credentials = System.Net.CredentialCache.DefaultCredentials
-            objWSConvenios.ProcesaBloqueo(CStr(loteBloqueo), userName)
+            Dim objWSConvenios As New wsBIFConvenios.WSBIFConveniosClient
+            objWSConvenios.ProcesaBloqueo(loteBloqueo.ToString, userName)
 
             Return loteBloqueo
 

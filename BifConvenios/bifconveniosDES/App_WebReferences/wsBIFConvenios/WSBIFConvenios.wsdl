@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WSBIFConvenios" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:51944/WSBIFConvenios.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:51944/WSBIFConvenios.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:51944/WSBIFConvenios.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+      <xsd:import schemaLocation="http://localhost:51944/WSBIFConvenios.svc?xsd=xsd3" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IWSBIFConvenios_AnulaEnvioCobranzaIBS_InputMessage">
+    <wsdl:part name="parameters" element="tns:AnulaEnvioCobranzaIBS" />
+  </wsdl:message>
+  <wsdl:message name="IWSBIFConvenios_AnulaEnvioCobranzaIBS_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AnulaEnvioCobranzaIBSResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWSBIFConvenios_EnviaInformacionIBS_InputMessage">
+    <wsdl:part name="parameters" element="tns:EnviaInformacionIBS" />
+  </wsdl:message>
+  <wsdl:message name="IWSBIFConvenios_EnviaInformacionIBS_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EnviaInformacionIBSResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWSBIFConvenios_GeneraCronogramaFuturo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GeneraCronogramaFuturo" />
+  </wsdl:message>
+  <wsdl:message name="IWSBIFConvenios_GeneraCronogramaFuturo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GeneraCronogramaFuturoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWSBIFConvenios_ImportaDescuentoEmpresa_InputMessage">
+    <wsdl:part name="parameters" element="tns:ImportaDescuentoEmpresa" />
+  </wsdl:message>
+  <wsdl:message name="IWSBIFConvenios_ImportaDescuentoEmpresa_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ImportaDescuentoEmpresaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWSBIFConvenios_ImportaDescuentosEmpresa_InputMessage">
+    <wsdl:part name="parameters" element="tns:ImportaDescuentosEmpresa" />
+  </wsdl:message>
+  <wsdl:message name="IWSBIFConvenios_ImportaDescuentosEmpresa_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ImportaDescuentosEmpresaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWSBIFConvenios_ConsultaPagaresDeIBS_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultaPagaresDeIBS" />
+  </wsdl:message>
+  <wsdl:message name="IWSBIFConvenios_ConsultaPagaresDeIBS_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultaPagaresDeIBSResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWSBIFConvenios_ImportaPagaresDeIBS_InputMessage">
+    <wsdl:part name="parameters" element="tns:ImportaPagaresDeIBS" />
+  </wsdl:message>
+  <wsdl:message name="IWSBIFConvenios_ImportaPagaresDeIBS_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ImportaPagaresDeIBSResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWSBIFConvenios_ProcesaBloqueo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProcesaBloqueo" />
+  </wsdl:message>
+  <wsdl:message name="IWSBIFConvenios_ProcesaBloqueo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProcesaBloqueoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWSBIFConvenios_ProcesaProrroga_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProcesaProrroga" />
+  </wsdl:message>
+  <wsdl:message name="IWSBIFConvenios_ProcesaProrroga_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProcesaProrrogaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWSBIFConvenios_ConsultarMotivoIBS_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultarMotivoIBS" />
+  </wsdl:message>
+  <wsdl:message name="IWSBIFConvenios_ConsultarMotivoIBS_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultarMotivoIBSResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWSBIFConvenios_ObtenerCabeceraCasillero_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerCabeceraCasillero" />
+  </wsdl:message>
+  <wsdl:message name="IWSBIFConvenios_ObtenerCabeceraCasillero_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerCabeceraCasilleroResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWSBIFConvenios_ObtenerDetalleCasillero_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerDetalleCasillero" />
+  </wsdl:message>
+  <wsdl:message name="IWSBIFConvenios_ObtenerDetalleCasillero_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerDetalleCasilleroResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IWSBIFConvenios">
+    <wsdl:operation name="AnulaEnvioCobranzaIBS">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWSBIFConvenios/AnulaEnvioCobranzaIBS" message="tns:IWSBIFConvenios_AnulaEnvioCobranzaIBS_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWSBIFConvenios/AnulaEnvioCobranzaIBSResponse" message="tns:IWSBIFConvenios_AnulaEnvioCobranzaIBS_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EnviaInformacionIBS">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWSBIFConvenios/EnviaInformacionIBS" message="tns:IWSBIFConvenios_EnviaInformacionIBS_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWSBIFConvenios/EnviaInformacionIBSResponse" message="tns:IWSBIFConvenios_EnviaInformacionIBS_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GeneraCronogramaFuturo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWSBIFConvenios/GeneraCronogramaFuturo" message="tns:IWSBIFConvenios_GeneraCronogramaFuturo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWSBIFConvenios/GeneraCronogramaFuturoResponse" message="tns:IWSBIFConvenios_GeneraCronogramaFuturo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ImportaDescuentoEmpresa">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWSBIFConvenios/ImportaDescuentoEmpresa" message="tns:IWSBIFConvenios_ImportaDescuentoEmpresa_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWSBIFConvenios/ImportaDescuentoEmpresaResponse" message="tns:IWSBIFConvenios_ImportaDescuentoEmpresa_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ImportaDescuentosEmpresa">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWSBIFConvenios/ImportaDescuentosEmpresa" message="tns:IWSBIFConvenios_ImportaDescuentosEmpresa_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWSBIFConvenios/ImportaDescuentosEmpresaResponse" message="tns:IWSBIFConvenios_ImportaDescuentosEmpresa_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaPagaresDeIBS">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWSBIFConvenios/ConsultaPagaresDeIBS" message="tns:IWSBIFConvenios_ConsultaPagaresDeIBS_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWSBIFConvenios/ConsultaPagaresDeIBSResponse" message="tns:IWSBIFConvenios_ConsultaPagaresDeIBS_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ImportaPagaresDeIBS">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWSBIFConvenios/ImportaPagaresDeIBS" message="tns:IWSBIFConvenios_ImportaPagaresDeIBS_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWSBIFConvenios/ImportaPagaresDeIBSResponse" message="tns:IWSBIFConvenios_ImportaPagaresDeIBS_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcesaBloqueo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWSBIFConvenios/ProcesaBloqueo" message="tns:IWSBIFConvenios_ProcesaBloqueo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWSBIFConvenios/ProcesaBloqueoResponse" message="tns:IWSBIFConvenios_ProcesaBloqueo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcesaProrroga">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWSBIFConvenios/ProcesaProrroga" message="tns:IWSBIFConvenios_ProcesaProrroga_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWSBIFConvenios/ProcesaProrrogaResponse" message="tns:IWSBIFConvenios_ProcesaProrroga_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarMotivoIBS">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWSBIFConvenios/ConsultarMotivoIBS" message="tns:IWSBIFConvenios_ConsultarMotivoIBS_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWSBIFConvenios/ConsultarMotivoIBSResponse" message="tns:IWSBIFConvenios_ConsultarMotivoIBS_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCabeceraCasillero">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWSBIFConvenios/ObtenerCabeceraCasillero" message="tns:IWSBIFConvenios_ObtenerCabeceraCasillero_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWSBIFConvenios/ObtenerCabeceraCasilleroResponse" message="tns:IWSBIFConvenios_ObtenerCabeceraCasillero_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerDetalleCasillero">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWSBIFConvenios/ObtenerDetalleCasillero" message="tns:IWSBIFConvenios_ObtenerDetalleCasillero_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWSBIFConvenios/ObtenerDetalleCasilleroResponse" message="tns:IWSBIFConvenios_ObtenerDetalleCasillero_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IWSBIFConvenios" type="tns:IWSBIFConvenios">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AnulaEnvioCobranzaIBS">
+      <soap:operation soapAction="http://tempuri.org/IWSBIFConvenios/AnulaEnvioCobranzaIBS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviaInformacionIBS">
+      <soap:operation soapAction="http://tempuri.org/IWSBIFConvenios/EnviaInformacionIBS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GeneraCronogramaFuturo">
+      <soap:operation soapAction="http://tempuri.org/IWSBIFConvenios/GeneraCronogramaFuturo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportaDescuentoEmpresa">
+      <soap:operation soapAction="http://tempuri.org/IWSBIFConvenios/ImportaDescuentoEmpresa" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportaDescuentosEmpresa">
+      <soap:operation soapAction="http://tempuri.org/IWSBIFConvenios/ImportaDescuentosEmpresa" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaPagaresDeIBS">
+      <soap:operation soapAction="http://tempuri.org/IWSBIFConvenios/ConsultaPagaresDeIBS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportaPagaresDeIBS">
+      <soap:operation soapAction="http://tempuri.org/IWSBIFConvenios/ImportaPagaresDeIBS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcesaBloqueo">
+      <soap:operation soapAction="http://tempuri.org/IWSBIFConvenios/ProcesaBloqueo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcesaProrroga">
+      <soap:operation soapAction="http://tempuri.org/IWSBIFConvenios/ProcesaProrroga" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarMotivoIBS">
+      <soap:operation soapAction="http://tempuri.org/IWSBIFConvenios/ConsultarMotivoIBS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCabeceraCasillero">
+      <soap:operation soapAction="http://tempuri.org/IWSBIFConvenios/ObtenerCabeceraCasillero" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerDetalleCasillero">
+      <soap:operation soapAction="http://tempuri.org/IWSBIFConvenios/ObtenerDetalleCasillero" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSBIFConvenios">
+    <wsdl:port name="BasicHttpBinding_IWSBIFConvenios" binding="tns:BasicHttpBinding_IWSBIFConvenios">
+      <soap:address location="http://localhost:51944/WSBIFConvenios.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

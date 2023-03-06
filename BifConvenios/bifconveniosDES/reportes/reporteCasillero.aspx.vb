@@ -3,7 +3,7 @@ Imports BIFConvenios.Utils
 Imports Resource
 
 Partial Class reportes_reporteCasillero
-    Inherits System.Web.UI.Page
+    Inherits Page
 
     Protected oproc As New BIFConvenios.Proceso()
     Protected oCuota As New BIFConvenios.Cuota()
@@ -11,8 +11,7 @@ Partial Class reportes_reporteCasillero
     Protected dsCasilleroDetIBS As DataSet
     'Protected oRepListadoCasillero As New RepListadoCasillero()
     Protected dsListadoCasillero As New DataSetReporteCasillero()
-
-
+    Protected objWSConvenios As New wsBIFConvenios.WSBIFConveniosClient
 
     Private Sub ResultadoBusquedaEmpresa(resultadoBusqueda As String)
         Dim resultadoArray() As String = Split(resultadoBusqueda, "|")
@@ -53,9 +52,8 @@ Partial Class reportes_reporteCasillero
 
         Try
 
-            Dim objWSConvenios As New wsConvenios.WSBIFConvenios
-            objWSConvenios.Credentials = System.Net.CredentialCache.DefaultCredentials
             ldsCabecera = objWSConvenios.ObtenerCabeceraCasillero(pEmpresa, pAnio, pMes)
+
             Session("ldsCabecera") = ldsCabecera
 
             If ldsCabecera.Tables(0).Rows.Count > 0 Then

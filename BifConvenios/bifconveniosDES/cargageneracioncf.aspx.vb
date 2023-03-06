@@ -18,7 +18,7 @@ Namespace BIFConvenios
         Protected strValor As String = String.Empty
 
         Protected objProcesos As New clsCuotaBL
-        Dim objWSConvenios As New wsConvenios.WSBIFConvenios
+        Dim objWSConvenios As New wsBIFConvenios.WSBIFConveniosClient
         Dim objWSEnvioAutomatico As New wsConvenios.wsEnvioAutomatico
 
         Private objProcesosAutomaticos As New clsProcesosAutomaticos()
@@ -107,7 +107,6 @@ Namespace BIFConvenios
             lblUltimaActualizacionProcesoBatch.Text = AperturaDia.ObtenerUltimaActualizacionProcesoBatch()
 
             If Not IsPostBack Then
-                objWSConvenios.Credentials = System.Net.CredentialCache.DefaultCredentials
                 objWSEnvioAutomatico.Credentials = System.Net.CredentialCache.DefaultCredentials
 
                 Dim dtEmpresas As New DataTable()
@@ -249,8 +248,6 @@ Namespace BIFConvenios
                         'RemoveHandler objSender.Submision, AddressOf objEventSink.SubmissionReceiver
                         'Response.Redirect("cargasprop.aspx")
 
-                        Dim objWSConvenios As New wsConvenios.WSBIFConvenios
-                        objWSConvenios.Credentials = System.Net.CredentialCache.DefaultCredentials
                         lCodigo_proceso = objWSConvenios.ImportaPagaresDeIBS(CustomerNumber, anio, mes, fechaProcesoAS400, Codigo_Cliente, Context.User.Identity.Name)
 
                         'lCodigo_proceso = objProcesos.ImportaPagareDeIBS(CustomerNumber, anio, mes, fechaProcesoAS400, Codigo_Cliente, Context.User.Identity.Name)

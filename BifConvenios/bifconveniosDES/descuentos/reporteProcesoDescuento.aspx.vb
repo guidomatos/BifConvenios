@@ -5,6 +5,8 @@ Namespace BIFConvenios
         Inherits System.Web.UI.Page
         Protected oProc As New Proceso()
         Protected idProcess As String = ""
+        Protected objWSConvenios As New wsBIFConvenios.WSBIFConveniosClient
+
 #Region " Web Form Designer Generated Code "
 
         'This call is required by the Web Form Designer.
@@ -159,8 +161,6 @@ Namespace BIFConvenios
 
                 'RemoveHandler objSender.Submision, AddressOf objEventSink.SubmissionReceiver
 
-                Dim objWSConvenios As New WSConvenios.WSBIFConvenios
-                objWSConvenios.Credentials = System.Net.CredentialCache.DefaultCredentials
                 objWSConvenios.AnulaEnvioCobranzaIBS(idProcess, Context.User.Identity.Name)
 
 

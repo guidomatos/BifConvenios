@@ -1,387 +1,318 @@
-Imports System.Data
-Imports System.Data.SqlClient
-Imports System.Configuration.ConfigurationSettings
 Imports System.IO
-Imports BIFConvenios.BL
+Imports System.Data.SqlClient
+Imports BIFConvenios
 
-Namespace BIFConvenios
-    Partial Class ReportePostConciliacion
-        Inherits System.Web.UI.Page
-        Protected oproc As New Proceso()
+Partial Class ReportePostConciliacion
+    Inherits Page
+    Protected oproc As New Proceso()
 
-        Protected dsIBS As DataSet
-        Protected dsIBSTD As DataSet
-        Protected dsData As New DataSet
+    Protected dsIBS As DataSet
+    Protected dsIBSTD As DataSet
+    Protected dsData As New DataSet
 
-        Protected dsIBSCuotas As DataSet  'Información actualizada de las cuotas
-        Protected dsIBSDatosAdicionales As DataSet  'Informacion de datos adicionales de los clientes
-        Protected dsIBSDatosCuentas As DataSet  'Informacion de cuentas de los clientes
-        Protected dsIBSDatosCastigo As DataSet  'Informacion de castigos de los clientes
-        Protected dsIBSDatosDevolucion As DataSet 'Informacion devolucion
-        Protected dblImporteInstitucion As Decimal = 0
-        Protected dblImporteBIFActualizado As Decimal = 0
-        Protected dblSaldoDeudorAcreedor As Decimal = 0
-        Protected dblPAGOIBSPROCESOCOBRANZA As Decimal = 0
+    Protected dsIBSCuotas As DataSet  'Información actualizada de las cuotas
+    Protected dsIBSDatosAdicionales As DataSet  'Informacion de datos adicionales de los clientes
+    Protected dsIBSDatosCuentas As DataSet  'Informacion de cuentas de los clientes
+    Protected dsIBSDatosCastigo As DataSet  'Informacion de castigos de los clientes
+    Protected dsIBSDatosDevolucion As DataSet 'Informacion devolucion
+    Protected dblImporteInstitucion As Decimal = 0
+    Protected dblImporteBIFActualizado As Decimal = 0
+    Protected dblSaldoDeudorAcreedor As Decimal = 0
+    Protected dblPAGOIBSPROCESOCOBRANZA As Decimal = 0
 
-        Protected dblImporteInformado As Decimal = 0
+    Protected dblImporteInformado As Decimal = 0
+
+    Protected objWSConvenios As New wsBIFConvenios.WSBIFConveniosClient
 
 #Region " Web Form Designer Generated Code "
 
-        'This call is required by the Web Form Designer.
-        <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
+    'This call is required by the Web Form Designer.
+    <Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
 
-        End Sub
+    End Sub
 
-        Private Sub Page_Init(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Init
-            'CODEGEN: This method call is required by the Web Form Designer
-            'Do not modify it using the code editor.
-            InitializeComponent()
-        End Sub
+    Private Sub Page_Init(sender As Object, e As EventArgs) Handles MyBase.Init
+        'CODEGEN: This method call is required by the Web Form Designer
+        'Do not modify it using the code editor.
+        InitializeComponent()
+    End Sub
 
 #End Region
 
-        Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-            'Put user code to initialize the page here
+    Private Sub ResultadoBusquedaEmpresa(resultadoBusqueda As String)
+        Dim resultadoArray() As String = Split(resultadoBusqueda, "|")
 
-            If Not Page.IsPostBack Then
-                txtFechaDesde.Text = Format(DateSerial(Year(Now), Month(Now), 1), "dd/MM/yyyy")
-                txtFechaHasta.Text = Format(DateSerial(Year(Now), Month(Now) + 1, 0), "dd/MM/yyyy")
-                Utils.AddSwap(lnkBuscar, "Image1", "/BIFConvenios/images/procesar_on.jpg")
-            End If
+        hdParam1.Value = resultadoArray(0) 'Proceso
+        hdParam2.Value = resultadoArray(1) 'Año
+        hdParam3.Value = resultadoArray(2) 'Mes
+        hdParam4.Value = resultadoArray(6) 'Tipo Documento
+        hdParam5.Value = resultadoArray(7) 'Numero Documento
+        txtPeriodo.Text = resultadoArray(5) 'Numero Documento
+        hdCodigoEmpresa.Value = resultadoArray(3)
+        txtNombreEmpresa.Text = resultadoArray(4)
+        txtFechaDesde.Text = resultadoArray(8)
+        txtFechaHasta.Text = resultadoArray(9)
 
-            ddlBuscarpor.Enabled = chkInclude.Checked
-            txtCampo.Enabled = chkInclude.Checked
+        dvData.Visible = False
 
-        End Sub
+    End Sub
 
-        Private Function getCondicionFiltro() As String
+    Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Put user code to initialize the page here
 
-            Dim condicionFiltro As String = ""
-            condicionFiltro = ddlKind.SelectedItem.Value
-            If Not ddlUGE.SelectedItem Is Nothing Then
-                condicionFiltro = condicionFiltro + IIf(ddlUGE.SelectedItem.Value.Trim <> "", IIf(ddlKind.SelectedItem.Value.Trim() <> "", " AND ", "") + " UGE='" + ddlUGE.SelectedItem.Value.Trim + "'", "")
-            End If
-            condicionFiltro = condicionFiltro + IIf(ddlSituacion.SelectedItem.Value.Trim <> "", IIf(condicionFiltro.Trim <> "", " AND ", "") + ddlSituacion.SelectedItem.Value, "")
-            Return condicionFiltro
+        AddHandler ucBuscarParanetroEmpresa.UpdateEvent, AddressOf ResultadoBusquedaEmpresa
 
-        End Function
 
-        Private Sub lnkGenerarReporte_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lnkGenerarReporte.Click
+        If Not Page.IsPostBack Then
+            txtFechaDesde.Text = Format(DateSerial(Year(Now), Month(Now), 1), "dd/MM/yyyy")
+            txtFechaHasta.Text = Format(DateSerial(Year(Now), Month(Now) + 1, 0), "dd/MM/yyyy")
+            Utils.AddSwap(lnkBuscar, "Image1", "~/images/procesar_on.jpg")
+        End If
 
-            Dim dv, dvDescuento As New DataView()
-            Dim fileName As String = Utils.getWebServerDateId() + ".xls"
+        ddlBuscarpor.Enabled = chkInclude.Checked
+        txtCampo.Enabled = chkInclude.Checked
 
-            Me.MostrarInformacionSeguimiento()
+    End Sub
 
-            Dim _dtDescuento As New DataTable()
+    Private Function GetCondicionFiltro() As String
 
-            _dtDescuento = Session("dsDescuento")
+        Dim condicionFiltro As String = ""
+        condicionFiltro = ddlKind.SelectedItem.Value
+        If ddlUGE.SelectedItem IsNot Nothing Then
+            condicionFiltro += IIf(ddlUGE.SelectedItem.Value.Trim <> "", IIf(ddlKind.SelectedItem.Value.Trim() <> "", " AND ", "") + " UGE='" + ddlUGE.SelectedItem.Value.Trim + "'", "")
+        End If
+        condicionFiltro += IIf(ddlSituacion.SelectedItem.Value.Trim <> "", IIf(condicionFiltro.Trim <> "", " AND ", "") + ddlSituacion.SelectedItem.Value, "")
+        Return condicionFiltro
 
-            'dv = New DataView(dsData.Tables("Descuentos"), Me.getCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows)
-            dvDescuento = New DataView(_dtDescuento, Me.getCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows)
+    End Function
 
-            'Se actualiza la fecha de post conciliacion del proceso. Christian Rivera 15-01-2015 EA273 Mejoras Convenios
-            oproc.ActualizaFechaPostConciliacion(hdParam1.Value.Trim())
+    Private Sub lnkGenerarReporte_Click(sender As Object, e As EventArgs) Handles lnkGenerarReporte.Click
 
-            LREM.Tools.Reporting.Excel.ReportGenerator.Generate(dvDescuento, System.Configuration.ConfigurationManager.AppSettings("GenFolder"), fileName, System.Configuration.ConfigurationManager.AppSettings("archivoPostConciliacionCampos"), System.Configuration.ConfigurationManager.AppSettings("archivoPostConciliacionTitulos"))
+        Dim dv, dvDescuento As New DataView()
+        Dim fileName As String = Utils.getWebServerDateId() + ".xls"
 
-            Dim ms As System.IO.MemoryStream
-            Dim fileS As FileStream = File.OpenRead(System.Configuration.ConfigurationManager.AppSettings("GenFolder") + fileName)
+        Me.MostrarInformacionSeguimiento()
 
-            ms = New MemoryStream(fileS.Length)
-            Dim br As BinaryReader = New BinaryReader(fileS)
-            Dim bytesRead As Byte() = br.ReadBytes(fileS.Length)
+        Dim _dtDescuento As New DataTable()
 
-            ms.Write(bytesRead, 0, fileS.Length)
+        _dtDescuento = Session("dsDescuento")
 
-            With HttpContext.Current.Response
-                .ClearContent()
-                .ClearHeaders()
-                .ContentType = "application/vnd.ms-excel"
-                .AddHeader("Content-Disposition", "inline; filename=" & getWebServerDateId() & ".xls")
-                .BinaryWrite(ms.ToArray)
-                .End()
-            End With
+        'dv = New DataView(dsData.Tables("Descuentos"), Me.getCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows)
+        dvDescuento = New DataView(_dtDescuento, Me.GetCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows)
 
-        End Sub
+        'Se actualiza la fecha de post conciliacion del proceso. Christian Rivera 15-01-2015 EA273 Mejoras Convenios
+        oproc.ActualizaFechaPostConciliacion(hdParam1.Value.Trim())
 
-        Private Sub lnkBuscar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lnkBuscar.Click
+        LREM.Tools.Reporting.Excel.ReportGenerator.Generate(dvDescuento, ConfigurationManager.AppSettings("GenFolder"), fileName, ConfigurationManager.AppSettings("archivoPostConciliacionCampos"), ConfigurationManager.AppSettings("archivoPostConciliacionTitulos"))
 
-            Dim daTransform As New System.Data.OleDb.OleDbDataAdapter()
-            Dim oDS As New DataSet()
+        Dim ms As IO.MemoryStream
+        Dim fileS As FileStream = File.OpenRead(ConfigurationManager.AppSettings("GenFolder") + fileName)
 
-            Dim lds As DataSet
-            Dim ldt As New DataTable
-            Dim dv As DataView
-            'Dim CuotaBL As New CuotaBL()
-            Dim Cuota As New Cuota()
-            Dim result As New ADODB.Recordset()
-            Dim dsJoin As New DataSet()
-            Dim dsTest As SqlDataReader
-            Dim intCodigoIBS As Integer = 0
-            Dim dsDescuento As New DataSetDescuentos()
-            Dim DLDNI As String
+        ms = New MemoryStream(fileS.Length)
+        Dim br As New BinaryReader(fileS)
+        Dim bytesRead As Byte() = br.ReadBytes(fileS.Length)
 
-            dsTest = oproc.GetCodigoClienteIBS(hdParam1.Value.Trim())
+        ms.Write(bytesRead, 0, fileS.Length)
 
-            With dsTest.Read
-                intCodigoIBS = Convert.ToInt32(dsTest.Item("CodigoCliente").ToString())
-            End With
+        With HttpContext.Current.Response
+            .ClearContent()
+            .ClearHeaders()
+            .ContentType = "application/vnd.ms-excel"
+            .AddHeader("Content-Disposition", "inline; filename=" & getWebServerDateId() & ".xls")
+            .BinaryWrite(ms.ToArray)
+            .End()
+        End With
 
-            dsData = oproc.GetRegistrosResultadoProcesoDescuentos(hdParam1.Value.Trim(), Me.NumeroPagare, Me.NombreCliente)
+    End Sub
 
-            actualizaInformacionDataSet(dsData)
-            Session.Add("dsDataPostConciliacion", dsData)
+    Private Sub lnkBuscar_Click(sender As Object, e As EventArgs) Handles lnkBuscar.Click
 
-            'OBTENER MOTIVOS DE IBS DE UNA EMPRESA
-            Dim objWSConvenios As New wsConvenios.WSBIFConvenios
-            objWSConvenios.Credentials = System.Net.CredentialCache.DefaultCredentials
-            lds = objWSConvenios.ConsultarMotivoIBS(hdParam1.Value.Trim(), intCodigoIBS.ToString(), hdParam2.Value.Trim(), hdParam3.Value.Trim())
+        Dim daTransform As New Data.OleDb.OleDbDataAdapter()
+        Dim oDS As New DataSet()
 
-            Dim Motivo As String
-            Dim fila() As DataRow
+        Dim lds As DataSet
+        Dim ldt As New DataTable
+        Dim dv As DataView
+        'Dim CuotaBL As New CuotaBL()
+        Dim Cuota As New Cuota()
+        Dim result As New ADODB.Recordset()
+        Dim dsJoin As New DataSet()
+        Dim dsTest As SqlDataReader
+        Dim intCodigoIBS As Integer = 0
+        Dim dsDescuento As New DataSetDescuentos()
+        Dim DLDNI As String
 
-            For Each dr As DataRow In dsData.Tables("Descuentos").Rows
-                fila = lds.Tables("table").Select("DLRNP = " & dr("DLNP"))
-                If fila.Length > 0 Then
-                    Motivo = fila(0).Item("DLDMO")
-                Else
-                    Motivo = ""
-                End If
+        dsTest = oproc.GetCodigoClienteIBS(hdParam1.Value.Trim())
 
-                DLDNI = IIf(dr("DLDNI") Is DBNull.Value, "", dr("DLDNI"))
+        With dsTest.Read
+            intCodigoIBS = Convert.ToInt32(dsTest.Item("CodigoCliente").ToString())
+        End With
 
-                'dsDescuento.DESCUENTO.AddDESCUENTORow(dr("DLNP"), dr("DLCM"), dr("DLNE"), dr("DLAP"), dr("DLMP"), dr("DLIC"), dr("DLID"), dr("DeudaPeriodo"), dr("ImporteBIFActualizada"), _
-                '                                      dr("PAGOIBSPROCESOCOBRANZA"), dr("DEVOLUCION"), dr("UGE"), dr("NUMCUOTAS"), dr("NUMCUOTASACTUAL"), dr("SITUACIONPAGARE"), dr("CUENTACARGO"), _
-                '                                      dr("PAGOPARCIAL"), dr("SITUACIONLABORALACTUAL"), dr("DIRECCION"), dr("CUIDAD"), dr("TELCASA"), dr("TELTRABAJO"), dr("TELOTRO"), DLDNI, _
-                '                                      dr("ESTADOPAGARE"), dr("CUENTAAHORRO"), dr("CASTIGORCD"), dr("DIFERENCIA"), Motivo, dr("SaldoDeudorAcreedor"))
-                dsDescuento.DESCUENTOEXCEL.AddDESCUENTOEXCELRow(dr("DLNP"), dr("DLCM"), DLDNI, dr("DLNE"), dr("DLAP"), dr("DLMP"), dr("DLID"), dr("PAGOIBSPROCESOCOBRANZA"), dr("DEVOLUCION"), dr("DIFERENCIA"), _
-                                                                dr("ESTADOPAGARE"), dr("CUENTAAHORRO"), dr("TIPODEVOLUCION"), dr("CASTIGORCD"), Motivo, dr("SaldoDeudorAcreedor")) 'EA2017-11386
+        dsData = oproc.GetRegistrosResultadoProcesoDescuentos(hdParam1.Value.Trim(), Me.NumeroPagare, Me.NombreCliente)
 
-            Next
+        ActualizaInformacionDataSet(dsData)
+        Session.Add("dsDataPostConciliacion", dsData)
 
-            'Session.Add("dsDataPostConciliacion", dsData)
-            Session.Add("dsDescuento", dsDescuento.DESCUENTOEXCEL)
+        'OBTENER MOTIVOS DE IBS DE UNA EMPRESA
+        lds = objWSConvenios.ConsultarMotivoIBS(hdParam1.Value.Trim(), intCodigoIBS.ToString(), hdParam2.Value.Trim(), hdParam3.Value.Trim())
 
-            ddlUGE.DataSource = Proceso.getUGES(hdParam1.Value)
-            ddlUGE.DataBind()
+        Dim Motivo As String
+        Dim fila() As DataRow
 
-            If ddlUGE.Items.Count > 0 Then
-                ddlUGE.Visible = True
-                ddlUGE.Items.Insert(0, New ListItem("Todas las UGE", ""))
+        For Each dr As DataRow In dsData.Tables("Descuentos").Rows
+            fila = lds.Tables("table").Select("DLRNP = " & dr("DLNP"))
+            If fila.Length > 0 Then
+                Motivo = fila(0).Item("DLDMO")
             Else
-                ddlUGE.Visible = False
+                Motivo = ""
             End If
 
-            dv = (New DataView(dsData.Tables("Descuentos"), Me.getCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows)) 'dsData
-            'dv = (New DataView(dsDescuento.DESCUENTO, Me.getCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows)) 'dsData
-            Me.getCalculoResumenCarga(dv)
+            DLDNI = IIf(dr("DLDNI") Is DBNull.Value, "", dr("DLDNI"))
 
-            dgProcesoResult.CurrentPageIndex = 0
-            dgProcesoResult.DataSource = dv
-            dgProcesoResult.DataBind()
-            dgProcesoResult.Visible = True
+            'dsDescuento.DESCUENTO.AddDESCUENTORow(dr("DLNP"), dr("DLCM"), dr("DLNE"), dr("DLAP"), dr("DLMP"), dr("DLIC"), dr("DLID"), dr("DeudaPeriodo"), dr("ImporteBIFActualizada"), _
+            '                                      dr("PAGOIBSPROCESOCOBRANZA"), dr("DEVOLUCION"), dr("UGE"), dr("NUMCUOTAS"), dr("NUMCUOTASACTUAL"), dr("SITUACIONPAGARE"), dr("CUENTACARGO"), _
+            '                                      dr("PAGOPARCIAL"), dr("SITUACIONLABORALACTUAL"), dr("DIRECCION"), dr("CUIDAD"), dr("TELCASA"), dr("TELTRABAJO"), dr("TELOTRO"), DLDNI, _
+            '                                      dr("ESTADOPAGARE"), dr("CUENTAAHORRO"), dr("CASTIGORCD"), dr("DIFERENCIA"), Motivo, dr("SaldoDeudorAcreedor"))
+            dsDescuento.DESCUENTOEXCEL.AddDESCUENTOEXCELRow(dr("DLNP"), dr("DLCM"), DLDNI, dr("DLNE"), dr("DLAP"), dr("DLMP"), dr("DLID"), dr("PAGOIBSPROCESOCOBRANZA"), dr("DEVOLUCION"), dr("DIFERENCIA"),
+                                                            dr("ESTADOPAGARE"), dr("CUENTAAHORRO"), dr("TIPODEVOLUCION"), dr("CASTIGORCD"), Motivo, dr("SaldoDeudorAcreedor")) 'EA2017-11386
 
-            lblTotalReg.Text = dsData.Tables(0).Rows.Count  'dgProcesoResult.Items.Count.ToString.Trim()
-            dvData.Visible = True
-            tdMostrar.Visible = True
-            tdddl.Visible = True
-            ddlSituacion.Visible = True
+        Next
 
-        End Sub
+        'Session.Add("dsDataPostConciliacion", dsData)
+        Session.Add("dsDescuento", dsDescuento.DESCUENTOEXCEL)
+
+        ddlUGE.DataSource = Proceso.getUGES(hdParam1.Value)
+        ddlUGE.DataBind()
+
+        If ddlUGE.Items.Count > 0 Then
+            ddlUGE.Visible = True
+            ddlUGE.Items.Insert(0, New ListItem("Todas las UGE", ""))
+        Else
+            ddlUGE.Visible = False
+        End If
+
+        dv = (New DataView(dsData.Tables("Descuentos"), Me.GetCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows)) 'dsData
+        'dv = (New DataView(dsDescuento.DESCUENTO, Me.getCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows)) 'dsData
+        GetCalculoResumenCarga(dv)
+
+        dgProcesoResult.CurrentPageIndex = 0
+        dgProcesoResult.DataSource = dv
+        dgProcesoResult.DataBind()
+        dgProcesoResult.Visible = True
+
+        lblTotalReg.Text = dsData.Tables(0).Rows.Count  'dgProcesoResult.Items.Count.ToString.Trim()
+        dvData.Visible = True
+        tdMostrar.Visible = True
+        tdddl.Visible = True
+        ddlSituacion.Visible = True
+
+    End Sub
 
 #Region "Actualizacion de informacion del DataSet desde IBS"
-        'Actualizamos los datos del Dataset desde IBS
-        Protected Function actualizaInformacionDataSet(ByRef dsData As DataSet)
-            Dim dr As DataRow
-            Dim importe As String
-            Dim PAGOVENTANILLA As String, PAGOINTERNET As String, PAGOIBS As String, PAGOIBSPROCESOCOBRANZA As String, NUMCUOTASACTUAL As String = "0", SITUACIONPAGARE As String = "", CUENTACARGO As String = "", PAGOPARCIAL As String = "0.00", SITUACIONLABORALACTUAL As String = ""
-            Dim DIRECCION As String = "", CUIDAD As String = "", TELCASA As String = "", TELTRABAJO As String = "", TELOTRO As String = "", DLDNI As String = "", ESTADOPAGARE As String = "", CUENTAAHORRO As String = "", CASTIGORCD As String = ""
-            Dim DEVOLUCION As String = "0.00"
-            Dim MOTDEVOLUCION As String = "" 'EA2017-11386
-            Dim FLAGPEND As Boolean = False
-            ' Try
-            For Each dr In dsData.Tables(0).Rows()
-                dr("TotalPagosCliente") = getTotalPagosCliente(dr("DLCC"), GetSQLDate(txtFechaDesde.Text), GetSQLDate(txtFechaHasta.Text), dr("DLNP"), dr("LOTE"), PAGOVENTANILLA, PAGOINTERNET, PAGOIBS, PAGOIBSPROCESOCOBRANZA, SITUACIONPAGARE, CUENTACARGO)
-                'RESPINOZA 20061023 - Los pagos son ahora calculados de forma diferente
-                '                       Diferencia del Mes = Monto de Envio - (Monto Recibido + Total Pagos)
-                dr("SaldoDeudorAcreedor") = Decimal.Parse(IIf(TypeOf (dr("DLIC")) Is DBNull, "0", dr("DLIC"))) - (Decimal.Parse(IIf(TypeOf (dr("DLID")) Is DBNull, "0", dr("DLID"))) + Decimal.Parse(dr("TotalPagosCliente")))   'Decimal.Parse(importe) - Decimal.Parse(IIf(TypeOf (dr("DLID")) Is DBNull, "0", dr("DLID")))
+    'Actualizamos los datos del Dataset desde IBS
+    Protected Sub ActualizaInformacionDataSet(ByRef dsData As DataSet)
+        Dim dr As DataRow
+        Dim importe As String
+        Dim PAGOVENTANILLA As String, PAGOINTERNET As String, PAGOIBS As String, PAGOIBSPROCESOCOBRANZA As String, NUMCUOTASACTUAL As String = "0", SITUACIONPAGARE As String = "", CUENTACARGO As String = "", PAGOPARCIAL As String = "0.00", SITUACIONLABORALACTUAL As String = ""
+        Dim DIRECCION As String = "", CUIDAD As String = "", TELCASA As String = "", TELTRABAJO As String = "", TELOTRO As String = "", DLDNI As String = "", ESTADOPAGARE As String = "", CUENTAAHORRO As String = "", CASTIGORCD As String = ""
+        Dim DEVOLUCION As String = "0.00"
+        Dim MOTDEVOLUCION As String = "" 'EA2017-11386
+        ' Try
 
-                ', SITUACIONLABORALACTUAL
-                importe = getAmountUpdatedDiscount(dr("DLCC"), dr("DLNP"), dr("DLAP"), dr("DLMP"), NUMCUOTASACTUAL, PAGOPARCIAL)
-                dr("ImporteBIFActualizada") = importe
+        For Each dr In dsData.Tables(0).Rows()
+            dr("TotalPagosCliente") = GetTotalPagosCliente(dr("DLCC"), GetSQLDate(txtFechaDesde.Text), GetSQLDate(txtFechaHasta.Text), dr("DLNP"), dr("LOTE"), PAGOVENTANILLA, PAGOINTERNET, PAGOIBS, PAGOIBSPROCESOCOBRANZA, SITUACIONPAGARE, CUENTACARGO)
+            'RESPINOZA 20061023 - Los pagos son ahora calculados de forma diferente
+            '                       Diferencia del Mes = Monto de Envio - (Monto Recibido + Total Pagos)
+            dr("SaldoDeudorAcreedor") = Decimal.Parse(IIf(TypeOf (dr("DLIC")) Is DBNull, "0", dr("DLIC"))) - (Decimal.Parse(IIf(TypeOf (dr("DLID")) Is DBNull, "0", dr("DLID"))) + Decimal.Parse(dr("TotalPagosCliente")))   'Decimal.Parse(importe) - Decimal.Parse(IIf(TypeOf (dr("DLID")) Is DBNull, "0", dr("DLID")))
 
-                'RESPINOZA 20070914 - Obtenemos datos adicionales del cliente para el reporte 
-                getDatosAdicionales(dr("DLCC"), dr("DLNP"), SITUACIONLABORALACTUAL, DIRECCION, CUIDAD, TELCASA, TELTRABAJO, TELOTRO, DLDNI, ESTADOPAGARE)
+            ', SITUACIONLABORALACTUAL
+            importe = GetAmountUpdatedDiscount(dr("DLCC"), dr("DLNP"), dr("DLAP"), dr("DLMP"), NUMCUOTASACTUAL, PAGOPARCIAL)
+            dr("ImporteBIFActualizada") = importe
 
-                '20121019: AHSP(BANBIF) - Obtener datos requeridos
-                getDatosCuentas(dr("DLCC"), dr("DLNP"), CUENTAAHORRO)
-                getDatosCastigo(dr("DLCC"), dr("DLNP"), CASTIGORCD)
+            'RESPINOZA 20070914 - Obtenemos datos adicionales del cliente para el reporte 
+            GetDatosAdicionales(dr("DLCC"), dr("DLNP"), SITUACIONLABORALACTUAL, DIRECCION, CUIDAD, TELCASA, TELTRABAJO, TELOTRO, DLDNI, ESTADOPAGARE)
 
-                '20140827: HAMP -- ONTENER DEVOLUCION
-                getDatosDevolucion(dr("DLCC"), dr("DLNP"), dr("DLAP"), dr("DLMP"), DEVOLUCION, MOTDEVOLUCION)
+            '20121019: AHSP(BANBIF) - Obtener datos requeridos
+            GetDatosCuentas(dr("DLCC"), dr("DLNP"), CUENTAAHORRO)
+            GetDatosCastigo(dr("DLCC"), dr("DLNP"), CASTIGORCD)
 
-                'ImporteBIFActualizada
-                If dr("DLID") > 0 And dr("SaldoDeudorAcreedor") > 0 Then   'Obtenemos informacion de la deuda dentro del aplicativo de intranet - es decir lo que deberia quedar 
-                    ' despues de procesar en IBS, en caso de tener algun monto parcial cargado
-                    importe = dr("SaldoDeudorAcreedor")
-                End If
+            '20140827: HAMP -- ONTENER DEVOLUCION
+            GetDatosDevolucion(dr("DLCC"), dr("DLNP"), dr("DLAP"), dr("DLMP"), DEVOLUCION, MOTDEVOLUCION)
 
-                'ImporteBIFActualizada
-                If dr("DLID") > 0 And dr("SaldoDeudorAcreedor") > 0 Then   'Obtenemos informacion de la deuda dentro del aplicativo de intranet - es decir lo que deberia quedar 
-                    ' despues de procesar en IBS, en caso de tener algun monto parcial cargado
-                    importe = dr("SaldoDeudorAcreedor")
-                End If
-
-                'PAGOIBSPROCESOCOBRANZA
-                If dr("DLID") > 0 Then
-                    dr("PAGOIBSPROCESOCOBRANZA") = PAGOIBSPROCESOCOBRANZA
-                Else
-                    dr("PAGOIBSPROCESOCOBRANZA") = "0.00"
-                End If
-
-                dr("ImporteBIFActualizadaReporte") = importe
-
-                dr("PAGOVENTANILLA") = PAGOVENTANILLA
-                dr("PAGOINTERNET") = PAGOINTERNET
-                dr("PAGOIBS") = PAGOIBS
-                'dr("PAGOIBSPROCESOCOBRANZA") = PAGOIBSPROCESOCOBRANZA
-                dr("NUMCUOTASACTUAL") = NUMCUOTASACTUAL
-                dr("PAGOPARCIAL") = PAGOPARCIAL
-
-                dr("SITUACIONPAGARE") = SITUACIONPAGARE
-                dr("CUENTACARGO") = CUENTACARGO
-                dr("SITUACIONLABORALACTUAL") = SITUACIONLABORALACTUAL
-
-                dr("DIRECCION") = DIRECCION
-                dr("CUIDAD") = CUIDAD
-                dr("TELCASA") = TELCASA
-                dr("TELTRABAJO") = TELTRABAJO
-                dr("TELOTRO") = TELOTRO
-
-                '20121019: AHSP(BANBIF) - Actualizacion de estos estados
-                dr("DLDNI") = DLDNI
-                dr("ESTADOPAGARE") = ESTADOPAGARE
-                dr("CUENTAAHORRO") = CUENTAAHORRO
-                dr("CASTIGORCD") = CASTIGORCD
-
-                '20140827 HAMP
-                dr("DEVOLUCION") = DEVOLUCION
-                '20160211 CALCULO DIFERENCIA
-                Dim decDiferencia As Decimal = Convert.ToDecimal(dr("DLID")) - (Convert.ToDecimal(dr("PAGOIBSPROCESOCOBRANZA").ToString()) + Convert.ToDecimal(dr("DEVOLUCION").ToString()))
-                dr("DIFERENCIA") = decDiferencia.ToString()
-                Dim TIPODEV = ""
-                'EA2017-11386
-                If String.IsNullOrEmpty(CUENTAAHORRO) Then
-                    FLAGPEND = Seguimiento.getCuentaConDevolucionPendiente(dr("DLCC"), dr("DLNP"), dr("DLAP"), dr("DLMP"))
-                    If (FLAGPEND) Then
-                        TIPODEV = "A PENDIENTE"
-                    Else
-                        TIPODEV = ""
-                    End If
-                Else
-                    TIPODEV = "A CUENTA"
-                End If
-
-                dr("TIPODEVOLUCION") = TIPODEV 'EA2017-11386
-
-                PAGOVENTANILLA = "0.00"
-                PAGOINTERNET = "0.00"
-                PAGOIBS = "0.00"
-                PAGOIBSPROCESOCOBRANZA = "0.00"
-                NUMCUOTASACTUAL = "0"
-                SITUACIONPAGARE = ""
-                CUENTACARGO = ""
-                PAGOPARCIAL = "0.00"
-                SITUACIONLABORALACTUAL = ""
-
-                DIRECCION = ""
-                CUIDAD = ""
-                TELCASA = ""
-                TELTRABAJO = ""
-                TELOTRO = ""
-
-                DLDNI = ""
-                ESTADOPAGARE = ""
-                CUENTAAHORRO = ""
-                CASTIGORCD = ""
-                DEVOLUCION = "0.00"
-            Next
-        End Function
-
-        'Obtenemos la informacion del numero de pagare desde el DataSet para poder 
-        'mostrarlo en pantalla
-        Protected Function getAmountUpdatedDiscount(ByVal DLCC As String, ByVal numeroPagare As String, _
-                    ByVal mAnio As String, _
-                    ByVal mMes As String, ByRef NUMCUOTASACTUAL As String, ByRef PAGOPARCIAL As String) As String ', ByRef SITUACIONLABORALACTUAL As String
-
-            Dim dr As DataRow()
-            Dim returnValue As String = "0.00"
-
-            If dsIBSCuotas Is Nothing Then
-                dsIBSCuotas = Seguimiento.getMontoDescuento(DLCC, mAnio, mMes)
+            'ImporteBIFActualizada
+            If dr("DLID") > 0 And dr("SaldoDeudorAcreedor") > 0 Then   'Obtenemos informacion de la deuda dentro del aplicativo de intranet - es decir lo que deberia quedar 
+                ' despues de procesar en IBS, en caso de tener algun monto parcial cargado
+                importe = dr("SaldoDeudorAcreedor")
             End If
 
-            dr = dsIBSCuotas.Tables(0).Select("DLNP = " + numeroPagare)
-
-            If dr.GetLength(0) > 0 Then
-                returnValue = Format(dr(0).Item("DLEIC"), "#0.00")
-                NUMCUOTASACTUAL = dr(0).Item("NUMCOUTASACTUAL")
-                PAGOPARCIAL = Format(dr(0).Item("PAGOPARCIAL"), "#0.00")
-                'SITUACIONLABORALACTUAL = dr(0).Item("SITUACIONLABORALACTUAL")
+            'ImporteBIFActualizada
+            If dr("DLID") > 0 And dr("SaldoDeudorAcreedor") > 0 Then   'Obtenemos informacion de la deuda dentro del aplicativo de intranet - es decir lo que deberia quedar 
+                ' despues de procesar en IBS, en caso de tener algun monto parcial cargado
+                importe = dr("SaldoDeudorAcreedor")
             End If
 
-            Return returnValue
-        End Function
+            'PAGOIBSPROCESOCOBRANZA
+            If dr("DLID") > 0 Then
+                dr("PAGOIBSPROCESOCOBRANZA") = PAGOIBSPROCESOCOBRANZA
+            Else
+                dr("PAGOIBSPROCESOCOBRANZA") = "0.00"
+            End If
 
-        Protected Function getTotalPagosCliente(ByVal codigoCliente As String, ByVal fechaInicial As String, _
-        ByVal fechaFinal As String, ByVal numeroPagare As String, ByVal lote As String, ByRef PAGOVENTANILLA As String, _
-        ByRef PAGOINTERNET As String, ByRef PAGOIBS As String, ByRef PAGOIBSPROCESOCOBRANZA As String, ByRef SITUACIONPAGARE As String, ByRef CUENTACARGO As String)
+            dr("ImporteBIFActualizadaReporte") = importe
 
-            Dim dr As DataRow()
-            Dim returnValue As String = "0.00"
+            dr("PAGOVENTANILLA") = PAGOVENTANILLA
+            dr("PAGOINTERNET") = PAGOINTERNET
+            dr("PAGOIBS") = PAGOIBS
+            'dr("PAGOIBSPROCESOCOBRANZA") = PAGOIBSPROCESOCOBRANZA
+            dr("NUMCUOTASACTUAL") = NUMCUOTASACTUAL
+            dr("PAGOPARCIAL") = PAGOPARCIAL
+
+            dr("SITUACIONPAGARE") = SITUACIONPAGARE
+            dr("CUENTACARGO") = CUENTACARGO
+            dr("SITUACIONLABORALACTUAL") = SITUACIONLABORALACTUAL
+
+            dr("DIRECCION") = DIRECCION
+            dr("CUIDAD") = CUIDAD
+            dr("TELCASA") = TELCASA
+            dr("TELTRABAJO") = TELTRABAJO
+            dr("TELOTRO") = TELOTRO
+
+            '20121019: AHSP(BANBIF) - Actualizacion de estos estados
+            dr("DLDNI") = DLDNI
+            dr("ESTADOPAGARE") = ESTADOPAGARE
+            dr("CUENTAAHORRO") = CUENTAAHORRO
+            dr("CASTIGORCD") = CASTIGORCD
+
+            '20140827 HAMP
+            dr("DEVOLUCION") = DEVOLUCION
+            '20160211 CALCULO DIFERENCIA
+            Dim decDiferencia As Decimal = Convert.ToDecimal(dr("DLID")) - (Convert.ToDecimal(dr("PAGOIBSPROCESOCOBRANZA").ToString()) + Convert.ToDecimal(dr("DEVOLUCION").ToString()))
+            dr("DIFERENCIA") = decDiferencia.ToString()
+            Dim TIPODEV = ""
+            'EA2017-11386
+            If String.IsNullOrEmpty(CUENTAAHORRO) Then
+                Dim FLAGPEND As Boolean = Seguimiento.getCuentaConDevolucionPendiente(dr("DLCC"), dr("DLNP"), dr("DLAP"), dr("DLMP"))
+                If (FLAGPEND) Then
+                    TIPODEV = "A PENDIENTE"
+                Else
+                    TIPODEV = ""
+                End If
+            Else
+                TIPODEV = "A CUENTA"
+            End If
+
+            dr("TIPODEVOLUCION") = TIPODEV 'EA2017-11386
+
             PAGOVENTANILLA = "0.00"
             PAGOINTERNET = "0.00"
             PAGOIBS = "0.00"
             PAGOIBSPROCESOCOBRANZA = "0.00"
+            NUMCUOTASACTUAL = "0"
             SITUACIONPAGARE = ""
             CUENTACARGO = ""
+            PAGOPARCIAL = "0.00"
+            SITUACIONLABORALACTUAL = ""
 
-            'Obtenemos la informacion de los pagos desde IBS
-            If dsIBS Is Nothing Then
-                dsIBS = PostConciliacion.getResumenPagosIBS(codigoCliente, fechaInicial, fechaFinal, lote.Trim)
-            End If
-
-            If dsIBSTD Is Nothing Then
-                dsIBSTD = PostConciliacion.getResumenProcesoIBS(codigoCliente, fechaInicial, fechaFinal)
-            End If
-
-            'Otros Pagos
-            dr = dsIBS.Tables(0).Select("DLCNP = " + numeroPagare)
-            If dr.GetLength(0) > 0 Then
-                PAGOVENTANILLA = Format(dr(0).Item("PAGOVENTANILLA"), "#0.00")
-                PAGOINTERNET = Format(dr(0).Item("PAGOINTERNET"), "#0.00")
-                PAGOIBS = Format(dr(0).Item("PAGOIBS"), "#0.00")
-                'PAGOIBSPROCESOCOBRANZA = Format(dr(0).Item("PAGOIBSPROCESOCOBRANZA"), "#0.00")
-
-                returnValue = Format(dr(0).Item("IMPORTE"), "#0.00")
-            End If
-            'Cargo Intranet 
-            dr = dsIBSTD.Tables(0).Select("TTRACC = " + numeroPagare)
-            If dr.GetLength(0) > 0 Then
-                PAGOIBSPROCESOCOBRANZA = Format(dr(0).Item("TTRAMTS"), "#0.00")
-                SITUACIONPAGARE = dr(0).Item("DEASTS")
-                CUENTACARGO = dr(0).Item("TTRACR")
-            End If
-
-            Return returnValue
-        End Function
-
-        'RESPINOZA 20070914 - Obtener informacion de datos adicionales del cliente desde IBS
-        Protected Function getDatosAdicionales(ByVal codigoCliente As String, ByVal numeroPagare As String, ByRef SITUACIONLABORAL As String, ByRef DIRECCION As String, ByRef CUIDAD As String, ByRef TELCASA As String, ByRef TELTRABAJO As String, ByRef TELOTRO As String, ByRef DLDNI As String, ByRef ESTADOPAGARE As String)
-            Dim dr As DataRow()
-
-            SITUACIONLABORAL = ""
             DIRECCION = ""
             CUIDAD = ""
             TELCASA = ""
@@ -390,274 +321,362 @@ Namespace BIFConvenios
 
             DLDNI = ""
             ESTADOPAGARE = ""
-
-            If dsIBSDatosAdicionales Is Nothing Then
-                dsIBSDatosAdicionales = Seguimiento.getDatosAdicionalesClienteConvenio(codigoCliente)
-            End If
-
-            dr = dsIBSDatosAdicionales.Tables(0).Select("PAGARE = " + numeroPagare)
-            If dr.GetLength(0) > 0 Then
-                SITUACIONLABORAL = dr(0).Item("SITUACIONLABORAL")
-                DIRECCION = dr(0).Item("DIRECCION")
-                CUIDAD = dr(0).Item("CUIDAD")
-                TELCASA = dr(0).Item("TELCASA")
-                TELTRABAJO = dr(0).Item("TELTRABAJO")
-                TELOTRO = dr(0).Item("TELOTRO")
-
-                DLDNI = dr(0).Item("DLDNI")
-
-                If UCase(dr(0).Item("DEASTS")) = "C" Then
-                    ESTADOPAGARE = "CERRADO"
-                Else
-                    Select Case dr(0).Item("DEADLC")
-                        Case 1 : ESTADOPAGARE = "VIGENTE"
-                        Case 2 : ESTADOPAGARE = "VENCIDO"
-                        Case 3 : ESTADOPAGARE = "ATRASADO"
-                        Case 4 : ESTADOPAGARE = "ABOGADO"
-                        Case 5 : ESTADOPAGARE = "C/JUDICIAL"
-                        Case Else : ESTADOPAGARE = ""
-                    End Select
-                End If
-
-            End If
-
-        End Function
-
-        'ASANCHEZP 20121005 - Obtener informacion de las Cuentas del Cliente
-        Protected Function getDatosCuentas(ByVal codigoCliente As String, ByVal numeroPagare As String, ByRef CUENTAAHORRO As String)
-            Dim ldr As DataRow()
-            Dim lCuentas() As String
-            Dim lTipoCuenta As String
-
             CUENTAAHORRO = ""
-
-            If dsIBSDatosCuentas Is Nothing Then
-                dsIBSDatosCuentas = Seguimiento.getDatosCuentas(codigoCliente, "'" & AppSettings("archivoPostConciliacionCuentas").Replace(",", "','") & "'")
-            End If
-
-            ldr = dsIBSDatosCuentas.Tables(0).Select("PAGARE = " + numeroPagare)
-
-            'Si existe al menos una cuenta
-            If ldr.GetLength(0) > 0 Then
-
-                'Si existe solo una cuenta escogemos la unica
-                If ldr.GetLength(0) = 1 Then
-                    CUENTAAHORRO = ldr(0).Item("ACMACC")
-                Else
-                    'Si existe mas de una cuenta tenemos que priorizar
-
-                    'Obtenemos la priorizacion de las cuentas a mostrar
-                    lCuentas = AppSettings("archivoPostConciliacionCuentas").Split(",")
-
-                    'Nos barremos los tipos de cuentas segun su prioridad
-                    For Each lTipoCuenta In lCuentas
-
-                        'Nos barremos todas las cuentas disponibles
-                        For Each dr As DataRow In ldr
-                            If lTipoCuenta = dr.Item("ACMPRO") Then
-                                CUENTAAHORRO = dr.Item("ACMACC")
-                                Exit Function
-                            End If
-                        Next
-                    Next
-
-                End If
-            End If
-
-        End Function
-
-        'ASANCHEZP 20121009 - Obtener informacion de los Castigos de los Clientes
-        Protected Function getDatosCastigo(ByVal codigoCliente As String, ByVal numeroPagare As String, ByRef CASTIGORCD As String)
-            Dim ldr As DataRow()
-
             CASTIGORCD = ""
+            DEVOLUCION = "0.00"
+        Next
+    End Sub
 
-            If dsIBSDatosCastigo Is Nothing Then
-                dsIBSDatosCastigo = Seguimiento.getDatosCastigo(codigoCliente)
+    'Obtenemos la informacion del numero de pagare desde el DataSet para poder 
+    'mostrarlo en pantalla
+    Protected Function GetAmountUpdatedDiscount(DLCC As String, numeroPagare As String,
+                mAnio As String,
+                mMes As String, ByRef NUMCUOTASACTUAL As String, ByRef PAGOPARCIAL As String) As String ', ByRef SITUACIONLABORALACTUAL As String
+
+        Dim dr As DataRow()
+        Dim returnValue As String = "0.00"
+
+        If dsIBSCuotas Is Nothing Then
+            dsIBSCuotas = Seguimiento.getMontoDescuento(DLCC, mAnio, mMes)
+        End If
+
+        dr = dsIBSCuotas.Tables(0).Select("DLNP = " + numeroPagare)
+
+        If dr.GetLength(0) > 0 Then
+            returnValue = Format(dr(0).Item("DLEIC"), "#0.00")
+            NUMCUOTASACTUAL = dr(0).Item("NUMCOUTASACTUAL")
+            PAGOPARCIAL = Format(dr(0).Item("PAGOPARCIAL"), "#0.00")
+            'SITUACIONLABORALACTUAL = dr(0).Item("SITUACIONLABORALACTUAL")
+        End If
+
+        Return returnValue
+    End Function
+
+    Protected Function GetTotalPagosCliente(codigoCliente As String, fechaInicial As String,
+    fechaFinal As String, numeroPagare As String, lote As String, ByRef PAGOVENTANILLA As String,
+    ByRef PAGOINTERNET As String, ByRef PAGOIBS As String, ByRef PAGOIBSPROCESOCOBRANZA As String, ByRef SITUACIONPAGARE As String, ByRef CUENTACARGO As String) As String
+
+        Dim dr As DataRow()
+        Dim returnValue As String = "0.00"
+        PAGOVENTANILLA = "0.00"
+        PAGOINTERNET = "0.00"
+        PAGOIBS = "0.00"
+        PAGOIBSPROCESOCOBRANZA = "0.00"
+        SITUACIONPAGARE = ""
+        CUENTACARGO = ""
+
+        'Obtenemos la informacion de los pagos desde IBS
+        If dsIBS Is Nothing Then
+            dsIBS = PostConciliacion.getResumenPagosIBS(codigoCliente, fechaInicial, fechaFinal, lote.Trim)
+        End If
+
+        If dsIBSTD Is Nothing Then
+            dsIBSTD = PostConciliacion.getResumenProcesoIBS(codigoCliente, fechaInicial, fechaFinal)
+        End If
+
+        'Otros Pagos
+        dr = dsIBS.Tables(0).Select("DLCNP = " + numeroPagare)
+        If dr.GetLength(0) > 0 Then
+            PAGOVENTANILLA = Format(dr(0).Item("PAGOVENTANILLA"), "#0.00")
+            PAGOINTERNET = Format(dr(0).Item("PAGOINTERNET"), "#0.00")
+            PAGOIBS = Format(dr(0).Item("PAGOIBS"), "#0.00")
+            'PAGOIBSPROCESOCOBRANZA = Format(dr(0).Item("PAGOIBSPROCESOCOBRANZA"), "#0.00")
+
+            returnValue = Format(dr(0).Item("IMPORTE"), "#0.00")
+        End If
+        'Cargo Intranet 
+        dr = dsIBSTD.Tables(0).Select("TTRACC = " + numeroPagare)
+        If dr.GetLength(0) > 0 Then
+            PAGOIBSPROCESOCOBRANZA = Format(dr(0).Item("TTRAMTS"), "#0.00")
+            SITUACIONPAGARE = dr(0).Item("DEASTS")
+            CUENTACARGO = dr(0).Item("TTRACR")
+        End If
+
+        Return returnValue
+    End Function
+
+    'RESPINOZA 20070914 - Obtener informacion de datos adicionales del cliente desde IBS
+    Protected Sub GetDatosAdicionales(codigoCliente As String, numeroPagare As String, ByRef SITUACIONLABORAL As String, ByRef DIRECCION As String, ByRef CUIDAD As String, ByRef TELCASA As String, ByRef TELTRABAJO As String, ByRef TELOTRO As String, ByRef DLDNI As String, ByRef ESTADOPAGARE As String)
+        Dim dr As DataRow()
+
+        SITUACIONLABORAL = ""
+        DIRECCION = ""
+        CUIDAD = ""
+        TELCASA = ""
+        TELTRABAJO = ""
+        TELOTRO = ""
+
+        DLDNI = ""
+        ESTADOPAGARE = ""
+
+        If dsIBSDatosAdicionales Is Nothing Then
+            dsIBSDatosAdicionales = Seguimiento.getDatosAdicionalesClienteConvenio(codigoCliente)
+        End If
+
+        dr = dsIBSDatosAdicionales.Tables(0).Select("PAGARE = " + numeroPagare)
+        If dr.GetLength(0) > 0 Then
+            SITUACIONLABORAL = dr(0).Item("SITUACIONLABORAL")
+            DIRECCION = dr(0).Item("DIRECCION")
+            CUIDAD = dr(0).Item("CUIDAD")
+            TELCASA = dr(0).Item("TELCASA")
+            TELTRABAJO = dr(0).Item("TELTRABAJO")
+            TELOTRO = dr(0).Item("TELOTRO")
+
+            DLDNI = dr(0).Item("DLDNI")
+
+            If UCase(dr(0).Item("DEASTS")) = "C" Then
+                ESTADOPAGARE = "CERRADO"
+            Else
+                Select Case dr(0).Item("DEADLC")
+                    Case 1 : ESTADOPAGARE = "VIGENTE"
+                    Case 2 : ESTADOPAGARE = "VENCIDO"
+                    Case 3 : ESTADOPAGARE = "ATRASADO"
+                    Case 4 : ESTADOPAGARE = "ABOGADO"
+                    Case 5 : ESTADOPAGARE = "C/JUDICIAL"
+                    Case Else : ESTADOPAGARE = ""
+                End Select
             End If
 
-            ldr = dsIBSDatosCastigo.Tables(0).Select("PAGARE = " + numeroPagare)
+        End If
 
-            'Si existe al menos una cuenta
-            If ldr.GetLength(0) > 0 Then
-                CASTIGORCD = "SI"
+    End Sub
+
+    'ASANCHEZP 20121005 - Obtener informacion de las Cuentas del Cliente
+    Protected Sub GetDatosCuentas(codigoCliente As String, numeroPagare As String, ByRef CUENTAAHORRO As String)
+        Dim ldr As DataRow()
+        Dim lCuentas() As String
+        Dim lTipoCuenta As String
+
+        CUENTAAHORRO = ""
+
+        If dsIBSDatosCuentas Is Nothing Then
+            dsIBSDatosCuentas = Seguimiento.getDatosCuentas(codigoCliente, "'" & ConfigurationManager.AppSettings("archivoPostConciliacionCuentas").Replace(",", "','") & "'")
+        End If
+
+        ldr = dsIBSDatosCuentas.Tables(0).Select("PAGARE = " + numeroPagare)
+
+        'Si existe al menos una cuenta
+        If ldr.GetLength(0) > 0 Then
+
+            'Si existe solo una cuenta escogemos la unica
+            If ldr.GetLength(0) = 1 Then
+                CUENTAAHORRO = ldr(0).Item("ACMACC")
+            Else
+                'Si existe mas de una cuenta tenemos que priorizar
+
+                'Obtenemos la priorizacion de las cuentas a mostrar
+                lCuentas = ConfigurationManager.AppSettings("archivoPostConciliacionCuentas").Split(",")
+
+                'Nos barremos los tipos de cuentas segun su prioridad
+                For Each lTipoCuenta In lCuentas
+
+                    'Nos barremos todas las cuentas disponibles
+                    For Each dr As DataRow In ldr
+                        If lTipoCuenta = dr.Item("ACMPRO") Then
+                            CUENTAAHORRO = dr.Item("ACMACC")
+                            Exit Sub
+                        End If
+                    Next
+                Next
+
+            End If
+        End If
+
+    End Sub
+
+    'ASANCHEZP 20121009 - Obtener informacion de los Castigos de los Clientes
+    Protected Sub GetDatosCastigo(codigoCliente As String, numeroPagare As String, ByRef CASTIGORCD As String)
+        Dim ldr As DataRow()
+
+        CASTIGORCD = ""
+
+        If dsIBSDatosCastigo Is Nothing Then
+            dsIBSDatosCastigo = Seguimiento.getDatosCastigo(codigoCliente)
+        End If
+
+        ldr = dsIBSDatosCastigo.Tables(0).Select("PAGARE = " + numeroPagare)
+
+        'Si existe al menos una cuenta
+        If ldr.GetLength(0) > 0 Then
+            CASTIGORCD = "SI"
+        End If
+
+    End Sub
+
+    Protected Sub GetDatosDevolucion(codigoCliente As String, numeroPagare As String, mAnio As String,
+                mMes As String, ByRef DEVOLUCION As String, ByRef MOTDEVOLUCION As String) 'EA2017-11386 SE AGREGA MOTIVO DEVOLUCION
+
+        Try
+            DEVOLUCION = "0.0"
+
+            If dsIBSDatosDevolucion Is Nothing Then
+                dsIBSDatosDevolucion = Seguimiento.getDatosDevolucion(codigoCliente, numeroPagare, mAnio, mMes)
             End If
 
-        End Function
-
-        Protected Sub getDatosDevolucion(ByVal codigoCliente As String, ByVal numeroPagare As String, ByVal mAnio As String, _
-                    ByVal mMes As String, ByRef DEVOLUCION As String, ByRef MOTDEVOLUCION As String) 'EA2017-11386 SE AGREGA MOTIVO DEVOLUCION
-
-            Try
-                DEVOLUCION = "0.0"
-
-                If dsIBSDatosDevolucion Is Nothing Then
-                    dsIBSDatosDevolucion = Seguimiento.getDatosDevolucion(codigoCliente, numeroPagare, mAnio, mMes)
-                End If
-
-                If dsIBSDatosDevolucion.Tables(0).Rows.Count() > 0 Then
-                    DEVOLUCION = dsIBSDatosDevolucion.Tables(0).Rows(0).Item("DLIDV")
-                    MOTDEVOLUCION = dsIBSDatosDevolucion.Tables(0).Rows(0).Item("DLMOT")
-                End If
-                dsIBSDatosDevolucion = Nothing
-            Catch ex As Exception
-                DEVOLUCION = "0.00"
-                dsIBSDatosDevolucion = Nothing
-            End Try
+            If dsIBSDatosDevolucion.Tables(0).Rows.Count() > 0 Then
+                DEVOLUCION = dsIBSDatosDevolucion.Tables(0).Rows(0).Item("DLIDV")
+                MOTDEVOLUCION = dsIBSDatosDevolucion.Tables(0).Rows(0).Item("DLMOT")
+            End If
+            dsIBSDatosDevolucion = Nothing
+        Catch ex As Exception
+            DEVOLUCION = "0.00"
+            dsIBSDatosDevolucion = Nothing
+        End Try
 
 
-        End Sub
+    End Sub
 
 #End Region
 
-        Public Function PintarBotonCalendario(ByVal IDContenedor As String, ByVal nombrecontrol As String) As String
-            Dim respuesta As String = ""
-            respuesta = "<A href=""""><img title=""Calendario"" onclick=""return showCalendar('" & IDContenedor & IIf(IsNothing(IDContenedor), "", "_") & nombrecontrol.ToString.Trim() & "', 'dd/mm/y');"" height=""18"" alt=""Calendario"" src=""../images/calendario.gif"" width=""18"" align=""absMiddle"" border=""0""></A>"
-            Return respuesta
-        End Function
+    Public Function PintarBotonCalendario(IDContenedor As String, nombrecontrol As String) As String
+        'Dim respuesta As String = ""
+        'respuesta = "<a href=""""><img title=""Calendario"" onclick=""return showCalendar('" & IDContenedor & IIf(IsNothing(IDContenedor), "", "_") & nombrecontrol.ToString.Trim() & "', 'dd/mm/y');"" height=""18"" alt=""Calendario"" src=""../images/calendario.gif"" width=""18"" align=""absMiddle"" border=""0""></A>"
+        'Return respuesta
 
-        'Obtenemos la informacion del numero de pagare desde el DataSet para poder 
-        'mostrarlo en pantalla
-        Protected Function getAmount(ByVal DLCC As String, ByVal numeroPagare As String, _
-                ByVal nombreTrabajador As String, ByVal moneda As String, ByVal cuotaMes As String, _
-                ByVal importeDescontado As String, ByVal deudaPeriodo As String, ByVal fechaProceso As Object, ByVal TotalPagosCliente As String) As String
-            Dim returnValue As String = "N.E."
+        Return "<a href=""""><img title=""Calendario"" onclick=""return showCalendar('" & nombrecontrol.ToString.Trim() & "', 'dd/mm/y');"" height=""18"" alt=""Calendario"" src=""../images/calendario.gif"" width=""18"" align=""absMiddle"" border=""0""></A>"
+    End Function
 
-            If TotalPagosCliente <> "0.00" Then
-                returnValue = "<a href =""javascript:ShowDetalle('" + DLCC + _
-                                "', '" + numeroPagare + "', '" + _
-                                GetSQLDate(txtFechaDesde.Text) + "', '" + _
-                                GetSQLDate(txtFechaHasta.Text) + "', '" + _
-                                nombreTrabajador.Replace("'", "") + "', '" + _
-                                TotalPagosCliente + "', '" + moneda + "','" + _
-                                cuotaMes + "','" + importeDescontado + _
-                                "', '" + deudaPeriodo + _
-                                "');"">" + TotalPagosCliente + "</a>"
-            Else
-                returnValue = "N.E."
-            End If
-            Return returnValue
-        End Function
+    'Obtenemos la informacion del numero de pagare desde el DataSet para poder 
+    'mostrarlo en pantalla
+    Protected Function GetAmount(DLCC As String, numeroPagare As String,
+            nombreTrabajador As String, moneda As String, cuotaMes As String,
+            importeDescontado As String, deudaPeriodo As String, fechaProceso As Object, TotalPagosCliente As String) As String
+        Dim returnValue As String
 
-        Private Sub ddlKind_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlKind.SelectedIndexChanged
-            dgProcesoResult.CurrentPageIndex = 0
-            Me.MostrarInformacionSeguimiento()
-            lblTotalReg.Text = (New DataView(dsData.Tables("Descuentos"), Me.getCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows)).Count
-        End Sub
+        If TotalPagosCliente <> "0.00" Then
+            returnValue = "<a href =""javascript:ShowDetalle('" + DLCC +
+                            "', '" + numeroPagare + "', '" +
+                            GetSQLDate(txtFechaDesde.Text) + "', '" +
+                            GetSQLDate(txtFechaHasta.Text) + "', '" +
+                            nombreTrabajador.Replace("'", "") + "', '" +
+                            TotalPagosCliente + "', '" + moneda + "','" +
+                            cuotaMes + "','" + importeDescontado +
+                            "', '" + deudaPeriodo +
+                            "');"">" + TotalPagosCliente + "</a>"
+        Else
+            returnValue = "N.E."
+        End If
+        Return returnValue
+    End Function
 
-        Private Sub ddlUGE_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlUGE.SelectedIndexChanged
-            dgProcesoResult.CurrentPageIndex = 0
-            MostrarInformacionSeguimiento()
-            lblTotalReg.Text = (New DataView(dsData.Tables("Descuentos"), Me.getCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows)).Count
-        End Sub
+    Private Sub ddlKind_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlKind.SelectedIndexChanged
+        dgProcesoResult.CurrentPageIndex = 0
+        Me.MostrarInformacionSeguimiento()
+        lblTotalReg.Text = (New DataView(dsData.Tables("Descuentos"), Me.GetCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows)).Count
+    End Sub
 
-        Private Sub ddlSituacion_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlSituacion.SelectedIndexChanged
-            dgProcesoResult.CurrentPageIndex = 0
-            MostrarInformacionSeguimiento()
-            lblTotalReg.Text = (New DataView(dsData.Tables("Descuentos"), Me.getCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows)).Count
-        End Sub
+    Private Sub ddlUGE_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlUGE.SelectedIndexChanged
+        dgProcesoResult.CurrentPageIndex = 0
+        MostrarInformacionSeguimiento()
+        lblTotalReg.Text = (New DataView(dsData.Tables("Descuentos"), Me.GetCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows)).Count
+    End Sub
 
-        Private Sub dgProcesoResult_ItemDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.DataGridItemEventArgs) Handles dgProcesoResult.ItemDataBound
-            If e.Item.ItemType = ListItemType.Footer Then
-                e.Item.Cells(2).CssClass = "SubHead"
-                e.Item.Cells(2).Text = "Total General"
-                e.Item.Cells(4).Text = Format(ViewState.Item("dblImporteInformado"), "#,###0.00")
-                e.Item.Cells(5).Text = Format(ViewState.Item("dblImporteInstitucion"), "#,###0.00")
-                e.Item.Cells(11).Text = Format(ViewState.Item("dblSaldoDeudorAcreedor"), "#,###0.00")
-                e.Item.Cells(13).Text = Format(ViewState.Item("dblImporteBIFActualizado"), "#,###0.00")
-                e.Item.Cells(12).Text = Format(ViewState.Item("dblPAGOIBSPROCESOCOBRANZA"), "#,###0.00")
-            End If
-        End Sub
+    Private Sub ddlSituacion_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlSituacion.SelectedIndexChanged
+        dgProcesoResult.CurrentPageIndex = 0
+        MostrarInformacionSeguimiento()
+        lblTotalReg.Text = (New DataView(dsData.Tables("Descuentos"), Me.GetCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows)).Count
+    End Sub
 
-        Private Sub dgProcesoResult_PageIndexChanged(ByVal source As Object, ByVal e As System.Web.UI.WebControls.DataGridPageChangedEventArgs) Handles dgProcesoResult.PageIndexChanged
+    Private Sub dgProcesoResult_ItemDataBound(sender As Object, e As Web.UI.WebControls.DataGridItemEventArgs) Handles dgProcesoResult.ItemDataBound
+        If e.Item.ItemType = ListItemType.Footer Then
+            e.Item.Cells(2).CssClass = "SubHead"
+            e.Item.Cells(2).Text = "Total General"
+            e.Item.Cells(4).Text = Format(ViewState.Item("dblImporteInformado"), "#,###0.00")
+            e.Item.Cells(5).Text = Format(ViewState.Item("dblImporteInstitucion"), "#,###0.00")
+            e.Item.Cells(11).Text = Format(ViewState.Item("dblSaldoDeudorAcreedor"), "#,###0.00")
+            e.Item.Cells(13).Text = Format(ViewState.Item("dblImporteBIFActualizado"), "#,###0.00")
+            e.Item.Cells(12).Text = Format(ViewState.Item("dblPAGOIBSPROCESOCOBRANZA"), "#,###0.00")
+        End If
+    End Sub
 
-            dgProcesoResult.CurrentPageIndex = IIf(dgProcesoResult.PageCount < e.NewPageIndex, 0, e.NewPageIndex)
-            Me.MostrarInformacionSeguimiento()
+    Private Sub dgProcesoResult_PageIndexChanged(source As Object, e As Web.UI.WebControls.DataGridPageChangedEventArgs) Handles dgProcesoResult.PageIndexChanged
 
-        End Sub
+        dgProcesoResult.CurrentPageIndex = IIf(dgProcesoResult.PageCount < e.NewPageIndex, 0, e.NewPageIndex)
+        MostrarInformacionSeguimiento()
 
-        Private Sub MostrarInformacionSeguimiento()
+    End Sub
 
-            Dim dv As DataView
-            Dim condicionFiltro As String = Me.getCondicionFiltro()
+    Private Sub MostrarInformacionSeguimiento()
 
-            If Not Session("dsDataPostConciliacion") Is Nothing Then
+        Dim dv As DataView
+        Dim condicionFiltro As String = Me.GetCondicionFiltro()
 
-                dsData = CType(Session("dsDataPostConciliacion"), DataSet)
+        If Not Session("dsDataPostConciliacion") Is Nothing Then
 
-                dv = (New DataView(dsData.Tables("Descuentos"), Me.getCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows))     'dsData.Tables(0).Select("SaldoDeudorAcreedor>0")
-                'dv = (New DataView(dsData.Tables(0), Me.getCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows))     'dsData.Tables(0).Select("SaldoDeudorAcreedor>0")
-                getCalculoResumenCarga(dv)
+            dsData = CType(Session("dsDataPostConciliacion"), DataSet)
 
-                dgProcesoResult.DataSource = dv
-                dgProcesoResult.DataBind()
+            dv = (New DataView(dsData.Tables("Descuentos"), Me.GetCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows))     'dsData.Tables(0).Select("SaldoDeudorAcreedor>0")
+            'dv = (New DataView(dsData.Tables(0), Me.getCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows))     'dsData.Tables(0).Select("SaldoDeudorAcreedor>0")
+            GetCalculoResumenCarga(dv)
 
-                lblTotalReg.Text = dv.Count
+            dgProcesoResult.DataSource = dv
+            dgProcesoResult.DataBind()
 
-            Else
+            lblTotalReg.Text = dv.Count
 
-                dsData = oproc.GetRegistrosResultadoProcesoDescuentos(hdParam1.Value.Trim(), Me.NumeroPagare, Me.NombreCliente)
-                actualizaInformacionDataSet(dsData)
-                dv = (New DataView(dsData.Tables("Descuentos"), Me.getCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows))     'dsData.Tables(0).Select("SaldoDeudorAcreedor>0")
-                getCalculoResumenCarga(dv)
+        Else
 
-                dgProcesoResult.DataSource = dv
-                dgProcesoResult.DataBind()
-                dgProcesoResult.Visible = True
+            dsData = oproc.GetRegistrosResultadoProcesoDescuentos(hdParam1.Value.Trim(), Me.NumeroPagare, Me.NombreCliente)
+            ActualizaInformacionDataSet(dsData)
+            dv = (New DataView(dsData.Tables("Descuentos"), Me.GetCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows))     'dsData.Tables(0).Select("SaldoDeudorAcreedor>0")
+            GetCalculoResumenCarga(dv)
 
-                lblTotalReg.Text = dv.Count
-            End If
-        End Sub
+            dgProcesoResult.DataSource = dv
+            dgProcesoResult.DataBind()
+            dgProcesoResult.Visible = True
+
+            lblTotalReg.Text = dv.Count
+        End If
+    End Sub
 
 
-        'Obtiene el calculo de los totales de la carga realizada 
-        Sub getCalculoResumenCarga(ByRef dv As DataView)
-            Dim dr As DataRowView
-            dblImporteInformado = 0
-            dblImporteInstitucion = 0
-            dblImporteBIFActualizado = 0
-            dblSaldoDeudorAcreedor = 0
-            dblPAGOIBSPROCESOCOBRANZA = 0
-            For Each dr In dv    '--dv.Table.Rows()
-                dblImporteInformado += dr("DLIC")
-                dblImporteInstitucion += dr("DLID")
-                dblImporteBIFActualizado += dr("ImporteBIFActualizada")
-                dblSaldoDeudorAcreedor += dr("SaldoDeudorAcreedor")
-                dblPAGOIBSPROCESOCOBRANZA += dr("PAGOIBSPROCESOCOBRANZA")
-            Next
-            ViewState.Add("dblImporteInformado", dblImporteInformado)
-            ViewState.Add("dblImporteInstitucion", dblImporteInstitucion)
-            ViewState.Add("dblImporteBIFActualizado", dblImporteBIFActualizado)
-            ViewState.Add("dblSaldoDeudorAcreedor", dblSaldoDeudorAcreedor)
-            ViewState.Add("dblPAGOIBSPROCESOCOBRANZA", dblPAGOIBSPROCESOCOBRANZA)
-        End Sub
+    'Obtiene el calculo de los totales de la carga realizada 
+    Sub GetCalculoResumenCarga(ByRef dv As DataView)
+        Dim dr As DataRowView
+        dblImporteInformado = 0
+        dblImporteInstitucion = 0
+        dblImporteBIFActualizado = 0
+        dblSaldoDeudorAcreedor = 0
+        dblPAGOIBSPROCESOCOBRANZA = 0
+        For Each dr In dv    '--dv.Table.Rows()
+            dblImporteInformado += dr("DLIC")
+            dblImporteInstitucion += dr("DLID")
+            dblImporteBIFActualizado += dr("ImporteBIFActualizada")
+            dblSaldoDeudorAcreedor += dr("SaldoDeudorAcreedor")
+            dblPAGOIBSPROCESOCOBRANZA += dr("PAGOIBSPROCESOCOBRANZA")
+        Next
+        ViewState.Add("dblImporteInformado", dblImporteInformado)
+        ViewState.Add("dblImporteInstitucion", dblImporteInstitucion)
+        ViewState.Add("dblImporteBIFActualizado", dblImporteBIFActualizado)
+        ViewState.Add("dblSaldoDeudorAcreedor", dblSaldoDeudorAcreedor)
+        ViewState.Add("dblPAGOIBSPROCESOCOBRANZA", dblPAGOIBSPROCESOCOBRANZA)
+    End Sub
 
 #Region "Parametros del formulario"
 
-        'Obtener la información del numero de pagare
-        Private ReadOnly Property NumeroPagare() As String
-            Get
-                Dim result As String = "0"
-                If ddlBuscarpor.SelectedItem.Value = "Codigo" And chkInclude.Checked Then
-                    result = IIf(IsNumeric(txtCampo.Text.Trim), txtCampo.Text, "-1")
-                End If
-                Return result
-            End Get
-        End Property
+    'Obtener la información del numero de pagare
+    Private ReadOnly Property NumeroPagare() As String
+        Get
+            Dim result As String = "0"
+            If ddlBuscarpor.SelectedItem.Value = "Codigo" And chkInclude.Checked Then
+                result = IIf(IsNumeric(txtCampo.Text.Trim), txtCampo.Text, "-1")
+            End If
+            Return result
+        End Get
+    End Property
 
-        'Obtener la información del nombre 
-        Private ReadOnly Property NombreCliente() As String
-            Get
-                Dim result As String = ""
-                If ddlBuscarpor.SelectedItem.Value = "Nombre" And chkInclude.Checked Then
-                    result = txtCampo.Text
-                End If
-                Return result
-            End Get
-        End Property
+    'Obtener la información del nombre 
+    Private ReadOnly Property NombreCliente() As String
+        Get
+            Dim result As String = ""
+            If ddlBuscarpor.SelectedItem.Value = "Nombre" And chkInclude.Checked Then
+                result = txtCampo.Text
+            End If
+            Return result
+        End Get
+    End Property
 
 #End Region
 
 
-    End Class
-End Namespace
+End Class

@@ -19,6 +19,8 @@ Namespace BIFConvenios
         Protected pass As Boolean
         Protected Pid As String = ""
 
+        Dim objWSConvenios As New wsBIFConvenios.WSBIFConveniosClient
+
 #Region " Web Form Designer Generated Code "
 
         'This call is required by the Web Form Designer.
@@ -140,8 +142,6 @@ Namespace BIFConvenios
                         flnArchivoDescuento.PostedFile.SaveAs(strFileName)
                         pass = True
 
-                        Dim objWSConvenios As New wsConvenios.WSBIFConvenios
-                        objWSConvenios.Credentials = System.Net.CredentialCache.DefaultCredentials
                         objWSConvenios.ImportaDescuentosEmpresa(Pid, lNombreArchivo, format, Context.User.Identity.Name)
 
                         lblResults.Text = "El archivo fue cargado exitosamente, recibirá una notificación con los resultados del proceso en unos instantes."
@@ -181,9 +181,6 @@ Namespace BIFConvenios
 
                             Try
                                 Dim strMensaje As String = String.Empty
-
-                                Dim objWSConvenios As New wsConvenios.WSBIFConvenios
-                                objWSConvenios.Credentials = System.Net.CredentialCache.DefaultCredentials
 
                                 strMensaje = objWSConvenios.ImportaDescuentoEmpresa(Pid, lNombreArchivo, Context.User.Identity.Name)
 
