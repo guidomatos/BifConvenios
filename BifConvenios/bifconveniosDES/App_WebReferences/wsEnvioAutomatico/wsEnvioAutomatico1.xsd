@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:51944/wsEnvioAutomatico.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Resource" />
+  <xs:element name="ValidarFinProcesoBatch">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="codigo_proceso" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ValidarFinProcesoBatchResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ValidarFinProcesoBatchResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerListaProcesosDisponiblesByFecha">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pintDia" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerListaProcesosDisponiblesByFechaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ObtenerListaProcesosDisponiblesByFechaResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataTable" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+              <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerListaProcesosDisponibles">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pstrFiltro" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerListaProcesosDisponiblesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ObtenerListaProcesosDisponiblesResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataTable" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+              <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProcesarEnvioNominasByCliente">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pintCodigoProcesoAutomatico" type="xs:int" />
+        <xs:element minOccurs="0" name="pstrCodigoIBS" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pstrTipoDocumento" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pstrNumeroDocumento" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pstrMesPeriodo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pstrAnioPeriodo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pstrFechaProcesoAS400" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pstrUsuario" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pintEstado" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProcesarEnvioNominasByClienteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ProcesarEnvioNominasByClienteResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pintEstado" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProcesarTodosClientes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="penuTipoEnvio" type="xs:int" />
+        <xs:element minOccurs="0" name="pstrUsuario" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProcesarTodosClientesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ProcesarTodosClientesResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegistrarLogEventoSistema">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pstrHilo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="penuNivel" type="xs:int" />
+        <xs:element minOccurs="0" name="pstrAccion" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pstrMensaje" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pstrExcepcion" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pstrUsuario" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegistrarLogEventoSistemaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RegistrarLogEventoSistemaResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegistrarLogEnvio">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pintCodigoProcesoAutomatico" type="xs:int" />
+        <xs:element minOccurs="0" name="pintCodigoCliente" type="xs:int" />
+        <xs:element minOccurs="0" name="pintCodigoIBS" type="xs:int" />
+        <xs:element minOccurs="0" name="penuTipoEnvio" type="xs:int" />
+        <xs:element minOccurs="0" name="pstrCodigoProceso" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pintAnioPeriodo" type="xs:int" />
+        <xs:element minOccurs="0" name="pintMesPeriodo" type="xs:int" />
+        <xs:element minOccurs="0" name="pstrMensaje" nillable="true" type="xs:string" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Resource" minOccurs="0" name="penuEstado" type="q1:enumLogEnvioCorreo" />
+        <xs:element minOccurs="0" name="pstrUsuario" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegistrarLogEnvioResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RegistrarLogEnvioResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegistrarLogProcesosAutomaticos">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pintTotal" type="xs:int" />
+        <xs:element minOccurs="0" name="pintProcesados" type="xs:int" />
+        <xs:element minOccurs="0" name="pintError" type="xs:int" />
+        <xs:element minOccurs="0" name="pstrMensaje" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pintEstado" type="xs:int" />
+        <xs:element minOccurs="0" name="pstrUsuario" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegistrarLogProcesosAutomaticosResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RegistrarLogProcesosAutomaticosResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ActualizarLogProcesosAutomaticos">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pintCodigoProcesoAutomatico" type="xs:int" />
+        <xs:element minOccurs="0" name="pintTotal" type="xs:int" />
+        <xs:element minOccurs="0" name="pintProcesados" type="xs:int" />
+        <xs:element minOccurs="0" name="pintError" type="xs:int" />
+        <xs:element minOccurs="0" name="pstrMensaje" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pintEstado" type="xs:int" />
+        <xs:element minOccurs="0" name="pstrUsuario" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ActualizarLogProcesosAutomaticosResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ActualizarLogProcesosAutomaticosResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
