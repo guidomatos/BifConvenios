@@ -6,12 +6,7 @@
 		<META HTTP-EQUIV="Expires" CONTENT="-1">
 		<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 		<title>BIFConvenios - Detalle de Pagos Procesados en IBS</title>
-		<meta name="GENERATOR" content="Microsoft Visual Studio.NET 7.0">
-		<meta name="CODE_LANGUAGE" content="Visual Basic 7.0">
-		<meta name="vs_defaultClientScript" content="JavaScript">
-		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
-		<LINK href="<%=Request.ApplicationPath%>/css/global.css" 
-type=text/css rel=stylesheet>
+		<link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
 		<BASE TARGET="_self">
 		<script language="javascript">
 		<!--

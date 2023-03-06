@@ -3,14 +3,6 @@
 <HTML>
 	<HEAD>
 		<title>ProcesarBloqueos</title>
-		<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
-		<META HTTP-EQUIV="Expires" CONTENT="-1">
-		<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-		<!--META HTTP-EQUIV="Refresh" CONTENT="5"-->
-		<meta name="GENERATOR" content="Microsoft Visual Studio.NET 7.0">
-		<meta name="CODE_LANGUAGE" content="Visual Basic 7.0">
-		<meta name="vs_defaultClientScript" content="JavaScript">
-		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
 	</HEAD>
 	<body topmargin="0" leftmargin="0">
 		<form id="Form1" method="post" runat="server">
@@ -26,7 +18,7 @@
 				</tr>
 				<tr>
 					<td valign="center">
-						<SCRIPT language="VBScript">
+						<script type="text/vbscript" language="VBScript">
 							<!--
 								Private i, x, MM_FlashControlVersion
 								On Error Resume Next
@@ -51,7 +43,7 @@
 								document.write "Procesando..."
 								End If
 								-->
-						</SCRIPT>
+						</script>
 					</td>
 				</tr>
 			</table>
