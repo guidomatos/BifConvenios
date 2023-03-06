@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="c087d3fa-5970-4d57-bb22-f727e110f097" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:51944/wsReportesAutomatico.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="wsReportesAutomatico.xsd" MetadataType="Schema" ID="1d113ea2-8a1e-4891-92f0-79b7e40638dd" SourceId="1" SourceUrl="http://localhost:51944/wsReportesAutomatico.svc?xsd=xsd1" />
+    <MetadataFile FileName="wsReportesAutomatico1.xsd" MetadataType="Schema" ID="a88731eb-decf-4de5-b322-670dc78454af" SourceId="1" SourceUrl="http://localhost:51944/wsReportesAutomatico.svc?xsd=xsd3" />
+    <MetadataFile FileName="wsReportesAutomatico2.xsd" MetadataType="Schema" ID="e88776ff-4e42-4f95-a3f3-bbf17c2aac8d" SourceId="1" SourceUrl="http://localhost:51944/wsReportesAutomatico.svc?xsd=xsd2" />
+    <MetadataFile FileName="wsReportesAutomatico.wsdl" MetadataType="Wsdl" ID="a99c1002-91a8-48d4-b9b2-73b85e3293c0" SourceId="1" SourceUrl="http://localhost:51944/wsReportesAutomatico.svc?wsdl" />
+    <MetadataFile FileName="wsReportesAutomatico.disco" MetadataType="Disco" ID="fd1582e5-dd50-4f3d-99bc-e45e6c9129c2" SourceId="1" SourceUrl="http://localhost:51944/wsReportesAutomatico.svc?disco" />
+    <MetadataFile FileName="wsReportesAutomatico3.xsd" MetadataType="Schema" ID="fa12e489-c8bf-4491-a4bd-41b267b9870d" SourceId="1" SourceUrl="http://localhost:51944/wsReportesAutomatico.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
