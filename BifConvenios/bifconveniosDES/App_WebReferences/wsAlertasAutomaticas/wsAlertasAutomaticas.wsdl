@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="wsAlertasAutomaticas" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:51944/wsAlertasAutomaticas.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:51944/wsAlertasAutomaticas.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:51944/wsAlertasAutomaticas.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Resource" />
+      <xsd:import schemaLocation="http://localhost:51944/wsAlertasAutomaticas.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IWsAlertasAutomaticas_RegistrarLogEventoSistema_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegistrarLogEventoSistema" />
+  </wsdl:message>
+  <wsdl:message name="IWsAlertasAutomaticas_RegistrarLogEventoSistema_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegistrarLogEventoSistemaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsAlertasAutomaticas_RegistrarLogEnvio_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegistrarLogEnvio" />
+  </wsdl:message>
+  <wsdl:message name="IWsAlertasAutomaticas_RegistrarLogEnvio_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegistrarLogEnvioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsAlertasAutomaticas_RegistrarLogProcesosAutomaticos_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegistrarLogProcesosAutomaticos" />
+  </wsdl:message>
+  <wsdl:message name="IWsAlertasAutomaticas_RegistrarLogProcesosAutomaticos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegistrarLogProcesosAutomaticosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsAlertasAutomaticas_ActualizarLogProcesosAutomaticos_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarLogProcesosAutomaticos" />
+  </wsdl:message>
+  <wsdl:message name="IWsAlertasAutomaticas_ActualizarLogProcesosAutomaticos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarLogProcesosAutomaticosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsAlertasAutomaticas_ConvertirBody_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConvertirBody" />
+  </wsdl:message>
+  <wsdl:message name="IWsAlertasAutomaticas_ConvertirBody_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConvertirBodyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsAlertasAutomaticas_ObtenerListClienteUltimoProceso_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerListClienteUltimoProceso" />
+  </wsdl:message>
+  <wsdl:message name="IWsAlertasAutomaticas_ObtenerListClienteUltimoProceso_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerListClienteUltimoProcesoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsAlertasAutomaticas_ProcesarAlerta_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProcesarAlerta" />
+  </wsdl:message>
+  <wsdl:message name="IWsAlertasAutomaticas_ProcesarAlerta_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProcesarAlertaResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IWsAlertasAutomaticas">
+    <wsdl:operation name="RegistrarLogEventoSistema">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsAlertasAutomaticas/RegistrarLogEventoSistema" message="tns:IWsAlertasAutomaticas_RegistrarLogEventoSistema_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsAlertasAutomaticas/RegistrarLogEventoSistemaResponse" message="tns:IWsAlertasAutomaticas_RegistrarLogEventoSistema_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogEnvio">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsAlertasAutomaticas/RegistrarLogEnvio" message="tns:IWsAlertasAutomaticas_RegistrarLogEnvio_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsAlertasAutomaticas/RegistrarLogEnvioResponse" message="tns:IWsAlertasAutomaticas_RegistrarLogEnvio_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogProcesosAutomaticos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsAlertasAutomaticas/RegistrarLogProcesosAutomaticos" message="tns:IWsAlertasAutomaticas_RegistrarLogProcesosAutomaticos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsAlertasAutomaticas/RegistrarLogProcesosAutomaticosResponse" message="tns:IWsAlertasAutomaticas_RegistrarLogProcesosAutomaticos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarLogProcesosAutomaticos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsAlertasAutomaticas/ActualizarLogProcesosAutomaticos" message="tns:IWsAlertasAutomaticas_ActualizarLogProcesosAutomaticos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsAlertasAutomaticas/ActualizarLogProcesosAutomaticosResponse" message="tns:IWsAlertasAutomaticas_ActualizarLogProcesosAutomaticos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConvertirBody">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsAlertasAutomaticas/ConvertirBody" message="tns:IWsAlertasAutomaticas_ConvertirBody_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsAlertasAutomaticas/ConvertirBodyResponse" message="tns:IWsAlertasAutomaticas_ConvertirBody_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerListClienteUltimoProceso">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsAlertasAutomaticas/ObtenerListClienteUltimoProceso" message="tns:IWsAlertasAutomaticas_ObtenerListClienteUltimoProceso_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsAlertasAutomaticas/ObtenerListClienteUltimoProcesoResponse" message="tns:IWsAlertasAutomaticas_ObtenerListClienteUltimoProceso_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcesarAlerta">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsAlertasAutomaticas/ProcesarAlerta" message="tns:IWsAlertasAutomaticas_ProcesarAlerta_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsAlertasAutomaticas/ProcesarAlertaResponse" message="tns:IWsAlertasAutomaticas_ProcesarAlerta_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IWsAlertasAutomaticas" type="tns:IWsAlertasAutomaticas">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RegistrarLogEventoSistema">
+      <soap:operation soapAction="http://tempuri.org/IWsAlertasAutomaticas/RegistrarLogEventoSistema" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogEnvio">
+      <soap:operation soapAction="http://tempuri.org/IWsAlertasAutomaticas/RegistrarLogEnvio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarLogProcesosAutomaticos">
+      <soap:operation soapAction="http://tempuri.org/IWsAlertasAutomaticas/RegistrarLogProcesosAutomaticos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarLogProcesosAutomaticos">
+      <soap:operation soapAction="http://tempuri.org/IWsAlertasAutomaticas/ActualizarLogProcesosAutomaticos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConvertirBody">
+      <soap:operation soapAction="http://tempuri.org/IWsAlertasAutomaticas/ConvertirBody" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerListClienteUltimoProceso">
+      <soap:operation soapAction="http://tempuri.org/IWsAlertasAutomaticas/ObtenerListClienteUltimoProceso" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcesarAlerta">
+      <soap:operation soapAction="http://tempuri.org/IWsAlertasAutomaticas/ProcesarAlerta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="wsAlertasAutomaticas">
+    <wsdl:port name="BasicHttpBinding_IWsAlertasAutomaticas" binding="tns:BasicHttpBinding_IWsAlertasAutomaticas">
+      <soap:address location="http://localhost:51944/wsAlertasAutomaticas.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

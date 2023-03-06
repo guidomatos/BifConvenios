@@ -16,7 +16,7 @@ Partial Class Alertas_frmAsignarAlertas
 
     Protected dtAlertasClientes As New DataTable()
 
-    Protected objWSAlertasAutomaticas As New wsConvenios.wsAlertasAutomaticas
+    Protected objWSAlertasAutomaticas As New wsAlertasAutomaticas.WsAlertasAutomaticasClient
 
     Protected strCodigoCliente As String = ""
 
@@ -145,8 +145,6 @@ Partial Class Alertas_frmAsignarAlertas
 
         pnlMensaje.Visible = False
         lblMensaje.Text = ""
-
-        objWSAlertasAutomaticas.Credentials = System.Net.CredentialCache.DefaultCredentials
 
         Dim strMensajeEnvio As String = ""
         Dim strValor As String = ""
