@@ -125,7 +125,7 @@
         <asp:HiddenField ID="hdAlertaClienteId" runat="server" />
         <asp:LinkButton ID="lnkEliminar" runat="server" Visible="false" />
         <asp:LinkButton ID="lnkCargarCliente" runat="server" Visible="false" />
-        <asp:ScriptManager ID="ScripManager1" runat="server"></asp:ScriptManager>
+        <%--<asp:ScriptManager ID="ScripManager1" runat="server"></asp:ScriptManager>--%>
         <div id="container" style="width:850px;">
             <div class="row">
                 <div class="cell container">

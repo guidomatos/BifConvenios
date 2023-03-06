@@ -111,7 +111,7 @@
                 </td>
             </tr>            
         </table>
-        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>        
+       <%-- <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>    --%>    
         <div id="container" style="width:750px;">
             <div class="row">
                 <div class="cell containercell">

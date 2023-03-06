@@ -349,8 +349,8 @@
         
 </head>
 <body style="margin-left:0; margin-top:0;" onload="MM_preloadImages('/BIFConvenios/images/regresar_on.jpg')">
-    <asp:ScriptManager ID="ScriptManager1" runat="server">
-    </asp:ScriptManager>
+    <%--<asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>--%>
     
     <form method="post" runat="server"  action="#">
     

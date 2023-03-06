@@ -132,7 +132,7 @@
         <asp:HiddenField ID="hdTipoGuardar" runat="server" />
         <asp:LinkButton ID="lnkEditar" runat="server" Visible="false"/>
         <asp:LinkButton ID="lnkEliminar" runat="server" Visible="false" />        
-        <asp:ScriptManager ID="ScripManager1" runat="server"></asp:ScriptManager>
+       <%-- <asp:ScriptManager ID="ScripManager1" runat="server"></asp:ScriptManager>--%>
         <div id="container" style="width:720px;">
             <div class="row">
                 <div class="cell containercell">

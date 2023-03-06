@@ -26,74 +26,115 @@
     <link href="<%= ResolveUrl("~/App_Themes/Default/Default.css") %>" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript">
- 
-            function ObtenerNombreEmpresa(nombre){
+
+        function ObtenerNombreEmpresa(nombre) {
             document.all('hdNombreEmpresa').value = nombre;
-            }
-            function ObtenerTipoDocumento(value){
+        }
+        function ObtenerTipoDocumento(value) {
             document.all('hdTipoDocumento').value = value;
-            }
-            function ObtenerNumeroDocumento(value){
+        }
+        function ObtenerNumeroDocumento(value) {
             document.all('hdNumeroDocumento').value = value;
-            }
-            function ObtenerCodigoIBS(value){
+        }
+        function ObtenerCodigoIBS(value) {
             document.all('hdCodigoIBS').value = value;
-            }
-            function ObtenerCodOficina(value){
+        }
+        function ObtenerCodOficina(value) {
             document.all('hdCodOficina').value = value;
-            }
-            function ObtenerNomOficina(value){
+        }
+        function ObtenerNomOficina(value) {
             document.all('hdNomOficina').value = value;
-            }
-            function ObtenerCodGestor(value){
+        }
+        function ObtenerCodGestor(value) {
             document.all('hdCodGestor').value = value;
-            }
-            function ObtenerNomGestor(value){
+        }
+        function ObtenerNomGestor(value) {
             document.all('hdNomGestor').value = value;
-            }
-            
-            function BuscarCliente(){
-                var returnValue = OpenFormatPageDialog('frmListadoEmpresasIBS.aspx',400,650);
-                if (fctTrim(returnValue) != ''){
-                    document.all('hdIdIBS').value = returnValue;                    
-                    __doPostBack('lnkCargarClienteIBS','');
-                    
+        }
+
+        function BuscarCliente() {
+            OpenFormatPageDialog('frmListadoEmpresasIBS.aspx', 400, 750);
+            /*var returnValue = OpenFormatPageDialog('frmListadoEmpresasIBS.aspx',400,650);*/
+            //if (fctTrim(returnValue) != ''){
+            //    document.all('hdIdIBS').value = returnValue;                    
+            //    __doPostBack('lnkCargarClienteIBS','');
+
+            //}
+        }
+
+        //         function OpenFormatPageDialog(url, height , width ) {
+        //		var returnValue = window.showModalDialog(url,'', 'dialogTop: 150px; dialogLeft: 150px;dialogWidth:' + width +  'px;dialogHeight:' + height+ 'px;status: no;help:no;'); 
+        //		if (typeof (returnValue) == "undefined"){
+        //			returnValue = '';
+        //		}
+        //		return returnValue;
+        //}
+        //function OpenFormatPageDialog(url, height, width) {
+        //   // var returnValue = window.open(url, '', 'dialogTop: 150px; dialogLeft: 150px;dialogWidth:' + width + 'px;dialogHeight:' + height + 'px;status: no;help:no;');
+        //    retval = window.open(url, '',
+        //        'height=' + height + 'px,width=' + width + 'px,toolbar=no,directories=no,status=no,continued from previous linemenubar = no, scrollbars = no, resizable = no, modal = yes');
+        //    retval.opener = window;
+
+        //    var returnValue = retval.returnValue;
+        //    if (typeof returnValue !== "undefined") {
+        //        // hacer algo con el valor de retorno
+        //        console.log(returnValue);
+        //    }
+        //}
+        var popup;
+        function OpenFormatPageDialog(url, height, width) {
+
+            // Obtener el tamaño de la ventana principal
+            var parentWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            var parentHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+            // Calcular la posición de la ventana secundaria
+            var left = (parentWidth - width) / 2;
+            var top = (parentHeight - height) / 2;
+
+
+            popup = window.open(url, '', 'left=' + left + ',top=' + top + ',height=' + height + 'px,width=' + width + 'px,toolbar=no,directories=no,status=no,continued from previous linemenubar = no, scrollbars = no, resizable = no, modal = yes');
+            popup.opener = window;
+
+            var timer = setInterval(function () {
+                if (popup.closed) {
+                    clearInterval(timer);
+                    var returnValue = popup.ReturnValueSeleccionado();
+                    if (typeof returnValue !== "undefined") {
+                        if (fctTrim(returnValue) != '') {
+                            document.all('hdIdIBS').value = returnValue;
+                            __doPostBack('lnkCargarClienteIBS', '');
+
+                        }
+                    }
                 }
-            }
-            
-            function OpenFormatPageDialog(url, height , width ) {
-					var returnValue = window.showModalDialog(url,'', 'dialogTop: 150px; dialogLeft: 150px;dialogWidth:' + width +  'px;dialogHeight:' + height+ 'px;status: no;help:no;'); 
-					if (typeof (returnValue) == "undefined"){
-						returnValue = '';
-					}
-					return returnValue;
-			}
-			
-			
-		
-                
-                function ShowEditModal(ExpanseID) {
-                    var _CodigoIBS = document.all('hdIdCliente').value;
-                    var frame = $get('IframeEdit');
-                    frame.src = "editarCodigoIBS.aspx?codigoIBS=" + _CodigoIBS;
-                    $find('EditModalPopup').show();
-                }
-                
-                function EditCancelScript() {
-                var frame = $get('IframeEdit');
-                frame.src = "Loading.aspx";
-                
-                }
-                
-                 function EditOkayScript() {
-                    $get('btnCancelar').click();
-                    EditCancelScript();
-                }
-			    
-			    function onExiste(){
-			        alert("El código IBS no existe");
-			    }
-		
+            }, 100);
+        }
+
+
+
+        function ShowEditModal(ExpanseID) {
+            var _CodigoIBS = document.all('hdIdCliente').value;
+            var frame = $get('IframeEdit');
+            frame.src = "editarCodigoIBS.aspx?codigoIBS=" + _CodigoIBS;
+            $find('EditModalPopup').show();
+        }
+
+        function EditCancelScript() {
+            var frame = $get('IframeEdit');
+            frame.src = "Loading.aspx";
+
+        }
+
+        function EditOkayScript() {
+            $get('btnCancelar').click();
+            EditCancelScript();
+        }
+
+        function onExiste() {
+            alert("El código IBS no existe");
+        }
+
     </script>
     
     <style type="text/css">
@@ -207,8 +248,8 @@
         <input type="hidden" runat="server" id="hdNomGestor" />
         
         <asp:HiddenField ID="hdTipoGuardar" runat="server" />
-        <asp:ScriptManager ID="ScriptManager1" runat="server">
-        </asp:ScriptManager>
+        <%--<asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>--%>
        
         <div id="container" style="width:600px;">
             <div class="row">
@@ -239,7 +280,7 @@
                                                 <input type="text" id="txtCodigoIBS" runat="server" style="font-family:Arial;font-size:8pt;width:80px;border:1px solid black;" maxlength="100" onblur="ObtenerCodigoIBS(this.value);" />
                                             </td>
                                             <td style="width:120px;" align="left">
-                                                <asp:Button ID="btnSearch" runat="server" Text="Seleccionar..." CssClass="button" OnClientClick="BuscarCliente();" Width="115px" />
+                                                <asp:Button ID="btnSearch" runat="server" Text="Seleccionar..." CssClass="button" OnClientClick="BuscarCliente(); return false;" UseSubmitBehavior="false" Width="115px" />
                                             </td>
                                             <td>
                                                 <asp:LinkButton ID="lnkCargarClienteIBS" runat="server" Visible="false" />
