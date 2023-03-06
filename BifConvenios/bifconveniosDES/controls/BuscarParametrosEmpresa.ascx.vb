@@ -40,6 +40,7 @@ Partial Class controls_BuscarParametrosEmpresa
 
     Private Sub ddlAnio_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlAnio.SelectedIndexChanged
         Call GetMonths()
+        mpeBuscarParametroEmpresa.Show()
     End Sub
 
     Private Sub BindGrid()

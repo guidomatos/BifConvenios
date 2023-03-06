@@ -144,31 +144,41 @@
 
 						<div class="row">
 							<div class="cell container">
-								<asp:GridView ID="dgDatos" runat="server" Width="100%" CellPadding="3" ForeColor="Black"
-                                    GridLines="Vertical" EnableViewState="False" BackColor="White"
-                                    BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px"
-                                    AutoGenerateColumns="False" AllowPaging="True" PageSize="15"
-                                    AllowSorting="True">
-                                    <Columns>
-                                        <asp:TemplateField>
-											<ItemTemplate>
-												<input type="radio" id="rData" name="rData" value='<%#DataBinder.Eval(Container.DataItem, "Codigo_proceso")%>|<%#DataBinder.Eval(Container.DataItem, "Anio_periodo")%>|<%#DataBinder.Eval(Container.DataItem, "Mes_Periodo")%>|<%#DataBinder.Eval(Container.DataItem, "Codigo_Cliente")%>|<%#DataBinder.Eval(Container.DataItem, "Nombre_Cliente")%>|<%#BIFConvenios.Periodo.GetMonthByNumber(DataBinder.Eval(Container.DataItem, "Mes_Periodo"))%> <%#DataBinder.Eval(Container.DataItem, "Anio_periodo")%>|<%#DataBinder.Eval(Container.DataItem, "TipoDocumento")%>|<%#DataBinder.Eval(Container.DataItem, "NumeroDocumento")%>|<%#DataBinder.Eval(Container.DataItem, "FInicial")%>|<%#DataBinder.Eval(Container.DataItem, "FFinal")%>'>
-											</ItemTemplate>
-										</asp:TemplateField>
-										<asp:BoundField DataField="Nombre_Cliente" HeaderText="Nombre Cliente"></asp:BoundField>
-										<asp:TemplateField HeaderText="Periodo">
-											<ItemTemplate>
-												<%#BIFConvenios.Periodo.GetMonthByNumber(DataBinder.Eval(Container.DataItem, "Mes_Periodo"))%>
-												<%#DataBinder.Eval(Container.DataItem, "Anio_periodo")%>
-											</ItemTemplate>
-										</asp:TemplateField>
-                                    </Columns>
-                                    <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-                                    <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="Primero" LastPageText="Ultimo" />
-                                    <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
-                                    <HeaderStyle CssClass="TablaNormalBoldBIF" VerticalAlign="Top"></HeaderStyle>
-                                    <AlternatingRowStyle BackColor="#CCCCCC" />
-                                </asp:GridView>
+                                <asp:UpdatePanel ID="upQuery" runat="server" UpdateMode="Conditional">
+                                    <ContentTemplate>
+								        <asp:GridView ID="dgDatos" runat="server" Width="100%" CellPadding="3" ForeColor="Black"
+                                            GridLines="Vertical" EnableViewState="False" BackColor="White"
+                                            BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px"
+                                            AutoGenerateColumns="False" AllowPaging="True" PageSize="15"
+                                            AllowSorting="True">
+                                            <Columns>
+                                                <asp:TemplateField>
+											        <ItemTemplate>
+												        <input type="radio" id="rData" name="rData" value='<%#DataBinder.Eval(Container.DataItem, "Codigo_proceso")%>|<%#DataBinder.Eval(Container.DataItem, "Anio_periodo")%>|<%#DataBinder.Eval(Container.DataItem, "Mes_Periodo")%>|<%#DataBinder.Eval(Container.DataItem, "Codigo_Cliente")%>|<%#DataBinder.Eval(Container.DataItem, "Nombre_Cliente")%>|<%#BIFConvenios.Periodo.GetMonthByNumber(DataBinder.Eval(Container.DataItem, "Mes_Periodo"))%> <%#DataBinder.Eval(Container.DataItem, "Anio_periodo")%>|<%#DataBinder.Eval(Container.DataItem, "TipoDocumento")%>|<%#DataBinder.Eval(Container.DataItem, "NumeroDocumento")%>|<%#DataBinder.Eval(Container.DataItem, "FInicial")%>|<%#DataBinder.Eval(Container.DataItem, "FFinal")%>'>
+											        </ItemTemplate>
+										        </asp:TemplateField>
+										        <asp:BoundField DataField="Nombre_Cliente" HeaderText="Nombre Cliente"></asp:BoundField>
+										        <asp:TemplateField HeaderText="Periodo">
+											        <ItemTemplate>
+												        <%#BIFConvenios.Periodo.GetMonthByNumber(DataBinder.Eval(Container.DataItem, "Mes_Periodo"))%>
+												        <%#DataBinder.Eval(Container.DataItem, "Anio_periodo")%>
+											        </ItemTemplate>
+										        </asp:TemplateField>
+                                            </Columns>
+                                            <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                                            <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="Primero" LastPageText="Ultimo" />
+                                            <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+                                            <HeaderStyle CssClass="TablaNormalBoldBIF" VerticalAlign="Top"></HeaderStyle>
+                                            <AlternatingRowStyle BackColor="#CCCCCC" />
+                                        </asp:GridView>
+                                    </ContentTemplate>
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="ddlAnio" EventName="SelectedIndexChanged" />
+                                        <asp:AsyncPostBackTrigger ControlID="ddlMes" EventName="SelectedIndexChanged" />
+                                        <asp:AsyncPostBackTrigger ControlID="dgDatos" EventName="PageIndexChanging" />
+                                        <asp:AsyncPostBackTrigger ControlID="dgDatos" EventName="Sorting" />
+                                    </Triggers>
+                                </asp:UpdatePanel>
 							</div>
 						</div>
 
