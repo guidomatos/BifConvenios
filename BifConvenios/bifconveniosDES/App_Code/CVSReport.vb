@@ -1,7 +1,5 @@
-Imports System.Text
 Imports System.Data.SqlClient
 Imports System.IO
-Imports System.Web
 
 Public Class CSVWebReport
 
@@ -11,7 +9,6 @@ Public Class CSVWebReport
         Dim sb As New StringBuilder()   ' para contener el archivo CSV
         Dim j As Integer
         Dim k As Integer
-        Dim replVal As String = String.Empty
 
         RemoveFiles(ruta)
         'Crear el encabezado y la hoja...
@@ -31,7 +28,7 @@ Public Class CSVWebReport
                 If myReader.GetValue(k).ToString() = Nothing Then
                     sb.Append("""""" + myReader.GetValue(k).ToString() + " " + ",")
                 Else
-                    replVal = myReader.GetValue(k).ToString().Replace("""", quoter)
+                    Dim replVal As String = myReader.GetValue(k).ToString().Replace("""", quoter)
                     replVal += " ,"
                     sb.Append(replVal)
                 End If
@@ -47,7 +44,7 @@ Public Class CSVWebReport
         myReader.Close()
         myReader = Nothing
 
-        Dim strFile As String = "report" + System.DateTime.Now.Ticks.ToString() + ".csv"
+        Dim strFile As String = "report" + Date.Now.Ticks.ToString() + ".csv"
         Dim strFileContent As String = sb.ToString()
 
         If fileName.Trim <> "" Then
@@ -56,22 +53,20 @@ Public Class CSVWebReport
 
         Dim fi As New FileInfo(ruta + strFile) 'System.Web.HttpContext.Current.Server.MapPath(ruta + strFile))
         Dim sWriter As FileStream = fi.Open(FileMode.Create, FileAccess.Write, FileShare.ReadWrite)
-        sWriter.Write(System.Text.Encoding.ASCII.GetBytes(strFileContent), 0, strFileContent.Length)
+        sWriter.Write(Encoding.ASCII.GetBytes(strFileContent), 0, strFileContent.Length)
         sWriter.Flush()
         sWriter.Close()
-        fi = Nothing
-        sWriter = Nothing
-        Dim strMachineName As String = System.Web.HttpContext.Current.Request.ServerVariables("SERVER_NAME")
+        Dim strMachineName As String = HttpContext.Current.Request.ServerVariables("SERVER_NAME")
 
         'Devolvemos solo la ruta o la ruta con un enlace
         If Not blnOnlyPath Then
-            Return "<A href=http://" + strMachineName + virtualPath + strFile + " target=_blank>" + TextoEnlace + "</a>"
+            Return "<a href=http://" + strMachineName + virtualPath + strFile + " target='_blank'>" + TextoEnlace + "</a>"
         Else
             Return virtualPath + strFile
         End If
     End Function
 
-    Protected Sub RemoveFiles(ByVal strPath As String)
+    Protected Sub RemoveFiles(strPath As String)
         Dim di As New DirectoryInfo(strPath)
         Dim fiArr As FileInfo() = di.GetFiles()
         Dim fri As FileInfo
@@ -79,7 +74,7 @@ Public Class CSVWebReport
         For Each fri In fiArr
             If fri.Extension.ToString() = ".xls" Or fri.Extension.ToString() = ".csv" Then
                 Dim min As New TimeSpan(0, 0, 60, 0, 0)
-                If (fri.CreationTime < DateTime.Now.Subtract(min)) Then
+                If (fri.CreationTime < Date.Now.Subtract(min)) Then
                     fri.Delete()
                 End If
             End If

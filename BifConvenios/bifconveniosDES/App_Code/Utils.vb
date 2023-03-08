@@ -1,8 +1,6 @@
-Imports System.Configuration.ConfigurationSettings
 Imports System.Web.Mail
 Imports System.Data.SqlClient
 Imports System.Reflection
-Imports BroadcasterClass.GOIntranet
 Imports BIFData.GOIntranet
 Imports System.IO
 
@@ -91,7 +89,7 @@ Namespace BIFConvenios
                 Return returnValue
             Else
                 returnValue = "Ha ocurrido un error: " + e.ToString
-                Utils.SendNotification("BIFConvenios@bif.com.pe", AppSettings("NotificarA"), "", "Error", returnValue)
+                Utils.SendNotification("BIFConvenios@bif.com.pe", ConfigurationManager.AppSettings("NotificarA"), "", "Error", returnValue)
             End If
             Return returnValue
         End Function
@@ -103,7 +101,7 @@ Namespace BIFConvenios
             '--------Usado en la verificacion
             Dim objSender As BroadcasterClass.GOIntranet.SubmitSuscription
             Dim objEventSink As BroadcasterClass.GOIntranet.EventSink
-            Dim ComputerName As String = System.Configuration.ConfigurationSettings.AppSettings("RemotingServer")
+            Dim ComputerName As String = ConfigurationManager.AppSettings("RemotingServer")
             Dim serverUriSubmition As String
             Dim serverUriSink As String
             Dim args As Object() = {}
@@ -112,8 +110,8 @@ Namespace BIFConvenios
             '------fin de variables usadas en la validacion
 
             Try
-                serverUriSubmition = "tcp://" & ComputerName & ":" + AppSettings("ipPort") + "/BIFRemotingSubmition"
-                serverUriSink = "tcp://" & ComputerName & ":" + AppSettings("ipPort") + "/BIFRemotingEventSink"
+                serverUriSubmition = "tcp://" & ComputerName & ":" + ConfigurationManager.AppSettings("ipPort") + "/BIFRemotingSubmition"
+                serverUriSink = "tcp://" & ComputerName & ":" + ConfigurationManager.AppSettings("ipPort") + "/BIFRemotingEventSink"
 
                 objSender = CType(Activator.GetObject(GetType(BroadcasterClass.GOIntranet.SubmitSuscription), serverUriSubmition), BroadcasterClass.GOIntranet.SubmitSuscription)
                 objEventSink = CType(Activator.GetObject(GetType(BroadcasterClass.GOIntranet.EventSink), serverUriSink), BroadcasterClass.GOIntranet.EventSink)
@@ -185,8 +183,8 @@ Namespace BIFConvenios
             End If
 
             ' external SMTP server
-            If AppSettings("SMTPServer") <> "" Then
-                SmtpMail.SmtpServer = AppSettings("SMTPServer")
+            If ConfigurationManager.AppSettings("SMTPServer") <> "" Then
+                SmtpMail.SmtpServer = ConfigurationManager.AppSettings("SMTPServer")
             End If
 
             Try
