@@ -1,6 +1,6 @@
 Imports System.IO
 Partial Class DownloadFile
-    Inherits System.Web.UI.Page
+    Inherits Page
 
 #Region " Web Form Designer Generated Code "
 
@@ -17,14 +17,14 @@ Partial Class DownloadFile
 
 #End Region
 
-    Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Put user code to initialize the page here
         Dim strPath As String = Request.Params("File").ToString()
 
         'Dim dnPath As String = Server.MapPath(Request.Params("File"))
         'Dim dnPath As String = Server.MapPath(strPath)
         'Dim dnFile As FileInfo = New FileInfo(dnPath)
-        Dim dnFile As FileInfo = New FileInfo(strPath)
+        Dim dnFile As New FileInfo(strPath)
 
         Response.Clear()
         Response.AddHeader("Content-Disposition", "attachment; filename=" & dnFile.Name)

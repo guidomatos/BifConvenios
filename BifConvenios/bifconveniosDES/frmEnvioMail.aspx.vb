@@ -1,5 +1,4 @@
 ﻿Imports BIFConvenios
-Imports System.Configuration
 Imports System.Data.SqlClient
 
 Imports BIFConvenios.BE
@@ -7,7 +6,7 @@ Imports BIFConvenios.BL
 Imports Resource
 
 Partial Class frmEnvioMail
-    Inherits System.Web.UI.Page
+    Inherits Page
 
     Protected strMails As String = String.Empty
     Protected strCEFuncionarios As String = String.Empty
@@ -52,7 +51,7 @@ Partial Class frmEnvioMail
 
     End Sub
 
-    Private Sub Page_Init(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Init
+    Private Sub Page_Init(sender As Object, e As EventArgs) Handles MyBase.Init
         'CODEGEN: This method call is required by the Web Form Designer
         'Do not modify it using the code editor.
         InitializeComponent()
@@ -64,7 +63,7 @@ Partial Class frmEnvioMail
     Protected Class MailSource
         Private mmail As String
 
-        Sub New(ByVal mail As String)
+        Sub New(mail As String)
             mmail = mail
         End Sub
 
@@ -72,7 +71,7 @@ Partial Class frmEnvioMail
             Get
                 Return mmail
             End Get
-            Set(ByVal Value As String)
+            Set(Value As String)
                 mmail = Value
             End Set
         End Property
@@ -86,11 +85,11 @@ Partial Class frmEnvioMail
         End Try
     End Sub
 
-    Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Put user code to initialize the page here
         'id='+ id +"&nombre=" + nombre + "&anio=" + anio + "&mes=" + mes + "&fechaProcesoAS400=" 
 
-        strCodigoProceso = CType(Request.Params("id"), String)
+        strCodigoProceso = Request.Params("id").ToString()
         strCodIBS = Request.Params("ibs").ToString()
         strConsultar = Request.Params("consultar").ToString()
 
@@ -100,11 +99,10 @@ Partial Class frmEnvioMail
         If Not Page.IsPostBack Then
             Dim strEmailCliente As String = String.Empty
             Dim dr1 As SqlDataReader = oCliente.GetEmails(strCodigoProceso)
-            Dim CorreoElectronico As String = String.Empty
-            Dim CEFuncionario As String = String.Empty
 
             CargarParametrosEnvioMail(_dtParametrosEnvioMail)
 
+            Dim CorreoElectronico As String
             If Context.User.Identity.Name.ToString() = "" Then
                 CorreoElectronico = _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.MailEnvio))("vValor").ToString().Trim()
             Else
@@ -144,9 +142,7 @@ Partial Class frmEnvioMail
 
             'Listado de Funcionarios, segun requerimiento de cambio.
 
-            Dim _dtFuncionarios As New DataTable()
-
-            _dtFuncionarios = objClienteBL.ObtenerListaFuncionariosConveniosDesdeAS400()
+            Dim _dtFuncionarios As DataTable = objClienteBL.ObtenerListaFuncionariosConveniosDesdeAS400()
 
             ar.Clear()
             strEmailCliente = ""
@@ -157,7 +153,6 @@ Partial Class frmEnvioMail
                         If Len(strEmailCliente) = 0 Then
                             strEmailCliente = _dr("FUNCOR").ToString()
                         Else
-
                             strEmailCliente = strEmailCliente & "," & _dr("FUNCOR").ToString()
                         End If
                     End If
@@ -177,17 +172,14 @@ Partial Class frmEnvioMail
 
             'listado de Responsables de oficina, segun requerimiento de cambio.
 
-            Dim _dtCliente As New DataTable()
-            Dim _dtResponsableOficina As New DataTable()
-
-            _dtCliente = objClienteBL.ObtenerClienteDesdeAS400PorCodIBS(strCodIBS)
+            Dim _dtCliente As DataTable = objClienteBL.ObtenerClienteDesdeAS400PorCodIBS(strCodIBS)
 
             objResponsableOficina.iResponsableId = 0
             objResponsableOficina.vOficina = _dtCliente.Rows(0)("NOMOFICINA").ToString()
             objResponsableOficina.vNombreResponsable = ""
 
             Try
-                _dtResponsableOficina = objResponsableOficinaBL.ObtenerResponsableOficinaPorCriterio(objResponsableOficina)
+                Dim _dtResponsableOficina As DataTable = objResponsableOficinaBL.ObtenerResponsableOficinaPorCriterio(objResponsableOficina)
 
                 ar.Clear()
                 strEmailCliente = ""
@@ -215,7 +207,7 @@ Partial Class frmEnvioMail
                 pnlMensaje.Visible = True
                 lblMensaje.Text = "No se encuentra el correo del Responsable de la Oficina: " & objResponsableOficina.vOficina & ". Se mostrará la Lista Vacia"
             End Try
-            
+
             'fin de listado de responsables de oficina
 
             'txtComentario.Text = ConfigurationManager.AppSettings("mailCFBody").ToString.Replace("#1", Periodo.GetMonthByNumber(Mes_Periodo)).Replace("#2", Anio_periodo)
@@ -224,20 +216,19 @@ Partial Class frmEnvioMail
         End If
     End Sub
 
-    Private Sub lnkEnviarEmail_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lnkEnviarEmail.Click
+    Private Sub lnkEnviarEmail_Click(sender As Object, e As EventArgs) Handles lnkEnviarEmail.Click
         CargarParametrosEnvioMail(_dtParametrosEnvioMail)
 
         Dim strMails As String
         'Dim strPath As String = System.Configuration.ConfigurationManager.AppSettings("ArchivosConvenio").ToString()
         Dim strPath As String = _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.RutaDescargaNominas))("vValor").ToString().Trim()
-        Dim strC As String = String.Empty
         'Dim intAnio As Integer = Year(DateTime.Now)
         'Dim intMonth As Integer = Month(DateTime.Now)
         Dim strProcessType As String = enumProcessType.Envio.ToString()
         Dim strNameFile As String = String.Empty
         Dim strPathFile As String = String.Empty
 
-        strCodigoProceso = CType(Request.Params("id"), String)
+        strCodigoProceso = Request.Params("id")
         strCodIBS = Request.Params("ibs").ToString()
 
         lblMensaje.Text = ""
@@ -248,7 +239,7 @@ Partial Class frmEnvioMail
         strEstadoTrabajador = Session("EstadoTrabajador").ToString()
         strZonaUse = CType(Session("ZonaUse"), String)
 
-        strC = Session("strCliente").ToString().Trim()
+        Dim strC As String = Session("strCliente").ToString().Trim()
 
         'Si no este TEST hacemos el envio regular
         Dim strTestOnly As String = _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.ModoPrueba))("vValor").ToString().Trim()
@@ -266,8 +257,6 @@ Partial Class frmEnvioMail
             strMails = strMails + "," + strCorreoFun
         End If
 
-        Dim strNombreArchivoProceso As String = String.Empty
-        Dim _dtExportaRegistroProceso As New DataTable()
         Dim intResult As Integer
 
         Dim strAnioPeriodo As String = hdAnio.Value
@@ -280,7 +269,7 @@ Partial Class frmEnvioMail
         Try
 
             '_dtExportaRegistroProceso = oProceso.ExportRegistrosResultadoProceso(strCodigoProceso, strDocumento, Str, Pagare, EstadoTrabajador, ZonaUse).Tables(0)
-            _dtExportaRegistroProceso = objProcesoBL.ExportaRegistroResultadoProcesoPorFiltros(strCodigoProceso, strDocumento, strTrabajador, decPagare, strEstadoTrabajador, strZonaUse)
+            Dim _dtExportaRegistroProceso As DataTable = objProcesoBL.ExportaRegistroResultadoProcesoPorFiltros(strCodigoProceso, strDocumento, strTrabajador, decPagare, strEstadoTrabajador, strZonaUse)
 
             intResult = clsFiles.ExportToExcel(_dtExportaRegistroProceso, "xls", strPath, strC + "-" + strCodIBS, Convert.ToInt32(strAnioPeriodo), Convert.ToInt32(strMesPeriodo), strProcessType, strNameFile, strPathFile, strMensaje)
 
@@ -307,12 +296,12 @@ Partial Class frmEnvioMail
                     strCEFuncionarios = txtDE.Text
                 End If
 
-                Utils.SendNotification(txtDE.Text, _
-                                        strMails, _
-                                        strCEFuncionarios, _
-                                        _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.AsuntoNomina))("vValor").ToString().Trim(), _
-                                        txtComentario.Text, _
-                                        strFullName, _
+                Utils.SendNotification(txtDE.Text,
+                                        strMails,
+                                        strCEFuncionarios,
+                                        _dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.AsuntoNomina))("vValor").ToString().Trim(),
+                                        txtComentario.Text,
+                                        strFullName,
                                         notifyTo:=(_dtParametrosEnvioMail.Rows(Convert.ToInt32(enumParametroEnvioMail.MailEnvio))("vValor").ToString().Trim()))
 
 
@@ -387,14 +376,14 @@ Partial Class frmEnvioMail
         For i = 0 To gvCoordinadores.Rows.Count - 1
             chk = gvCoordinadores.Rows(i).FindControl("chk")
             If chk.Checked Then
-                strMails = strMails & gvCoordinadores.Rows(i).Cells(1).Text + ","
+                strMails &= gvCoordinadores.Rows(i).Cells(1).Text + ","
             End If
         Next
 
         For i = 0 To gvFuncionarios.Rows.Count - 1
             chk = gvFuncionarios.Rows(i).FindControl("chk")
             If chk.Checked Then
-                strMails = strMails & gvFuncionarios.Rows(i).Cells(1).Text + ","
+                strMails &= gvFuncionarios.Rows(i).Cells(1).Text + ","
             End If
         Next
 
@@ -409,25 +398,24 @@ Partial Class frmEnvioMail
         For i = 0 To gvFuncionarios.Rows.Count - 1
             chk = gvFuncionarios.Rows(i).FindControl("chk")
             If chk.Checked Then
-                strMails = strMails & gvFuncionarios.Rows(i).Cells(1).Text + ","
+                strMails &= gvFuncionarios.Rows(i).Cells(1).Text + ","
             End If
         Next
 
         Return strMails
     End Function
 
-    Protected Sub lnkFinish_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lnkFinish.Click
+    Protected Sub lnkFinish_Click(sender As Object, e As EventArgs) Handles lnkFinish.Click
         Session("Criterio") = Nothing
         Session("Valor") = Nothing
 
-        Response.Redirect(Request.ApplicationPath + "/cargageneracioncf.aspx", True)
+        Response.Redirect(ResolveUrl("cargageneracioncf.aspx"), True)
     End Sub
 
-    Protected Sub lnkCancelar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lnkCancelar.Click
+    Protected Sub lnkCancelar_Click(sender As Object, e As EventArgs) Handles lnkCancelar.Click
         Session("Criterio") = Nothing
         Session("Valor") = Nothing
 
-        Response.Redirect(Request.ApplicationPath + "/ResultadoProcesoCronogramaFuturo.aspx?id=" & strCodigoProceso + "&codIBS=" + strCodIBS + "&consultar=" + strConsultar.ToString())
-        'Response.Redirect(Request.ApplicationPath + "/cargageneracioncf.aspx", True)
+        Response.Redirect(ResolveUrl("ResultadoProcesoCronogramaFuturo.aspx?id=" & strCodigoProceso + "&codIBS=" + strCodIBS + "&consultar=" + strConsultar.ToString()))
     End Sub
 End Class

@@ -7,32 +7,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>BIFConvenios - Generación Archivo de Cobranzas</title>
-    <meta content="Microsoft Visual Studio.NET 7.0" name="GENERATOR" />
-    <meta content="Visual Basic 7.0" name="CODE_LANGUAGE" />
-    <meta content="JavaScript" name="vs_defaultClientScript" />
-    <meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema" />
-    <link href="<%=Request.ApplicationPath%>/css/global.css" type="text/css" rel="stylesheet" />
-
-    <script language="javascript" type="text/javascript" src="<%Response.Write(Request.ApplicationPath)%>/js/global.js"></script>
+    <link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
+    <script src='<%=ResolveUrl("~/js/global.js") %>' language ="javascript" type="text/javascript"></script>
 
     <script type="text/javascript">
-		<!--
 			//rutina de eliminacion de la informacion de proceso
-			function EliminaProceso(id, nombre, anio, mes, fechaProcesoAS400) {
-				if (confirm ( '¿Desea eliminar la información de proceso actual para la empresa: ' + nombre + '\ndel periodo: ' + mes + ' - ' + anio + ', procesado en IBS el '+ fechaProcesoAS400 + '?' )) {
-					document.all('hdData').value = id;
-					__doPostBack('lnkDeleteProcess','');
-				}
-			}
-			
-			function GenerarArchivo (id, nombre, anio, mes, fechaProcesoAS400){
-				var returnValue = OpenFormatPageDialog('selectFileFormat.aspx?id='+ id +"&nombre=" + nombre + "&anio=" + anio + "&mes=" + mes + "&fechaProcesoAS400=" + fechaProcesoAS400, 250,500 );
-				//alert(returnValue)				
-				if ( fctTrim(returnValue) != '' ){ 
-					document.all('hdId').value = returnValue;
-					__doPostBack('lnkGenerarArchivo','');
-				}
-			}
+        function EliminaProceso(id, nombre, anio, mes, fechaProcesoAS400) {
+            if (confirm('¿Desea eliminar la información de proceso actual para la empresa: ' + nombre + '\ndel periodo: ' + mes + ' - ' + anio + ', procesado en IBS el ' + fechaProcesoAS400 + '?')) {
+                document.all('hdData').value = id;
+                __doPostBack('lnkDeleteProcess', '');
+            }
+        }
+        function GenerarArchivo(id, nombre, anio, mes, fechaProcesoAS400) {
+            var returnValue = OpenFormatPageDialog('selectFileFormat.aspx?id=' + id + "&nombre=" + nombre + "&anio=" + anio + "&mes=" + mes + "&fechaProcesoAS400=" + fechaProcesoAS400, 250, 500);
+            if (fctTrim(returnValue) != '') {
+                document.all('hdId').value = returnValue;
+                __doPostBack('lnkGenerarArchivo', '');
+            }
+        }
 			/*
 			function GenerarArchivo2(id, idIBS) {
 			
@@ -41,32 +33,63 @@
 				
 				__doPostBack('lnkConsultar','');
 			}*/
-			function GenerarArchivo2(id, idCodigo, tipoDocumento, numeroDocumento) {
-			
-			    document.all('hdCodigoCliente').value = id;
-				document.all('hdCodigo').value = idCodigo;
-				document.all('hdTipoDocumento').value = tipoDocumento;
-				document.all('hdNumeroDocumento').value = numeroDocumento;
-				
-				__doPostBack('lnkConsultar','');
-			}
-			
-			function GenerarReporte(id, nombre, anio, mes, fechaProcesoAS400){
-				var returnValue = OpenFormatPageDialog('selectFilterReport.aspx?id='+ id +"&nombre=" + nombre + "&anio=" + anio + "&mes=" + mes + "&fechaProcesoAS400=" + fechaProcesoAS400, 250,500);
-				if ( fctTrim(returnValue) != '' ){ 
-					document.all('hdFilter').value = returnValue;
-					__doPostBack('lnkGenerarReporte','');								
-				}
-			}			
-			
-			function OpenFormatPageDialog(url, height , width ) {
-					var returnValue = window.showModalDialog(url,'', 'dialogTop: 200px; dialogLeft: 200px;dialogWidth:' + width +  'px;dialogHeight:' + height+ 'px;status: no;help:no;'); 
-					if (typeof (returnValue) == "undefined"){
-						returnValue = '';
-					}
-					return returnValue;
-			}			
-		-->
+        function GenerarArchivo2(id, idCodigo, tipoDocumento, numeroDocumento) {
+
+            document.all('hdCodigoCliente').value = id;
+            document.all('hdCodigo').value = idCodigo;
+            document.all('hdTipoDocumento').value = tipoDocumento;
+            document.all('hdNumeroDocumento').value = numeroDocumento;
+
+            __doPostBack('lnkConsultar', '');
+        }
+
+        //function fnGenerarReporte(id, nombre, anio, mes, fechaProcesoAS400) {
+        //    var returnValue = OpenFormatPageDialog('selectFilterReport.aspx?id=' + id + "&nombre=" + nombre + "&anio=" + anio + "&mes=" + mes + "&fechaProcesoAS400=" + fechaProcesoAS400, 250, 500);
+        //    if (fctTrim(returnValue) != '') {
+        //        document.all('hdFilter').value = returnValue;
+        //        __doPostBack('lnkGenerarReporte', '');
+        //    }
+        //}
+        //function OpenFormatPageDialog(url, height, width) {
+        //    var returnValue = window.showModalDialog(url, '', 'dialogTop: 200px; dialogLeft: 200px;dialogWidth:' + width + 'px;dialogHeight:' + height + 'px;status: no;help:no;');
+        //    if (typeof (returnValue) == "undefined") {
+        //        returnValue = '';
+        //    }
+        //    return returnValue;
+        //}
+
+        var popupGenerarReporte;
+        function fnOpenPopupGenerarReporte(url, height, width) {
+
+            // Obtener el tamaño de la ventana principal
+            var parentWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            var parentHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+            // Calcular la posición de la ventana secundaria
+            var left = (parentWidth - width) / 2;
+            var top = (parentHeight - height) / 2;
+
+            popupGenerarReporte = window.open(url, '', 'left=' + left + ',top=' + top + ',height=' + height + 'px,width=' + width + 'px,toolbar=no,directories=no,status=no,continued from previous linemenubar = no, scrollbars = no, resizable = no, modal = yes');
+            popupGenerarReporte.opener = window;
+
+            var timer = setInterval(function () {
+                if (popupGenerarReporte.closed) {
+                    clearInterval(timer);
+                    var returnValue = popupGenerarReporte.ReturnValueSeleccionado();
+
+                    if (typeof returnValue !== "undefined") {
+                        if (fctTrim(returnValue) != '') {
+                            document.all('hdFilter').value = returnValue;
+                            __doPostBack('lnkGenerarReporte', '');
+                        }
+                    }
+                }
+            }, 100);
+
+        }
+        function fnGenerarReporte(id, nombre, anio, mes, fechaProcesoAS400) {
+            fnOpenPopupGenerarReporte("selectFilterReport.aspx?id=" + id + "&nombre=" + nombre + "&anio=" + anio + "&mes=" + mes + "&fechaProcesoAS400=" + fechaProcesoAS400, 250, 500);
+        }
     </script>
 
 </head>
@@ -176,7 +199,7 @@
                                                 <asp:BoundColumn DataField="GeneracionArchivo" HeaderText="Comentarios"></asp:BoundColumn>
                                                 <asp:TemplateColumn HeaderText="Reporte">
                                                     <ItemTemplate>
-                                                        <a href="javascript:GenerarReporte('<%#Eval("Codigo_Proceso") %>','<%#Eval("Nombre_Cliente")%>','<%#Eval("Anio_periodo")%>','<%#Eval("Mes_Periodo")%>','<%#Eval("Fecha_ProcesoAS400")%>')">
+                                                        <a href="javascript:fnGenerarReporte('<%#Eval("Codigo_Proceso") %>','<%#Eval("Nombre_Cliente")%>','<%#Eval("Anio_periodo")%>','<%#Eval("Mes_Periodo")%>','<%#Eval("Fecha_ProcesoAS400")%>')">
                                                             <img src='images/agenda.gif' border='0' alt='Generar Listado de Cuotas por Vencer'></a>
                                                     </ItemTemplate>
                                                 </asp:TemplateColumn>

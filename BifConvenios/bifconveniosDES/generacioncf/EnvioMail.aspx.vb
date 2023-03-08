@@ -1,17 +1,16 @@
-Imports system.data.sqlclient
-Imports System.Configuration.ConfigurationManager
+Imports System.Data.SqlClient
 
 Namespace BIFConvenios
 
     Partial Class EnvioMail
-        Inherits System.Web.UI.Page
-        Protected WithEvents lblEnviarEmail As System.Web.UI.WebControls.Label
+        Inherits Page
+        Protected WithEvents lblEnviarEmail As Label
         Protected formatoArchivo As String = ""
         Protected formatoArchivoDesc As String = ""
         Protected tipoCliente As String = ""
         Protected strEmailCliente As String
         Protected PID As String = ""
-        Protected oCliente As New BIFConvenios.Cliente()
+        Protected oCliente As New Cliente()
         Protected oProceso As New Proceso()
         Protected strNombreArchivo As String = ""
         Protected situacionTrabajador As String = ""
@@ -31,7 +30,7 @@ Namespace BIFConvenios
 
         End Sub
 
-        Private Sub Page_Init(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Init
+        Private Sub Page_Init(sender As Object, e As EventArgs) Handles MyBase.Init
             'CODEGEN: This method call is required by the Web Form Designer
             'Do not modify it using the code editor.
             InitializeComponent()
@@ -39,13 +38,13 @@ Namespace BIFConvenios
 
 #End Region
 
-        Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-            If Not Request.Params("idP") Is Nothing And Not Request.Params("formatoArchivo") Is Nothing Then
+            If Request.Params("idP") IsNot Nothing And Not Request.Params("formatoArchivo") Is Nothing Then
 
-                PID = CType(Request.Params("idP"), String)
-                formatoArchivo = CType(Request.Params("formatoArchivo"), String)
-                tipoCliente = CType(Request.Params("tipoCliente"), String)
+                PID = Request.Params("idP")
+                formatoArchivo = Request.Params("formatoArchivo")
+                tipoCliente = Request.Params("tipoCliente")
                 'situacionTrabajador = CType(Request.Params("situacionTrabajador"), String)
                 'tipoCliente = cargarDatosMail(situacionTrabajador)
 
@@ -92,7 +91,7 @@ Namespace BIFConvenios
 
             If Not Page.IsPostBack Then
                 'If Not Request.Params("idP") Is Nothing And Not Request.Params("formatoArchivo") Is Nothing And pnlMensaje.Visible = True Then
-                If Not Request.Params("idP") Is Nothing And Not Request.Params("formatoArchivo") Is Nothing Then
+                If Request.Params("idP") IsNot Nothing And Request.Params("formatoArchivo") IsNot Nothing Then
                     'Dim Nombre_funcionario As String = ""
                     'Dim Correo_funcionario As String = ""
                     'Dim Telefono_funcionario As String = ""
@@ -102,7 +101,7 @@ Namespace BIFConvenios
                     'Dim Cuerpo_Mensaje As String = ""
                     'Dim Asunto_Mensaje As String = ""
                     'Dim Codigo_Cliente As String = DocumentoCobranza.getClienteProceso(CType(Request.Params("idP"), String))
-                    Dim dr As SqlDataReader = oCliente.GetEmails(CType(Request.Params("idP"), String))
+                    Dim dr As SqlDataReader = oCliente.GetEmails(Request.Params("idP"))
 
                     'Dim dr As SqlDataReader = oProceso.GetInfoProcesoCliente(CType(Request.Params("idP"), String))
                     If dr.Read Then
@@ -116,7 +115,7 @@ Namespace BIFConvenios
                         Mes_Periodo = CType(dr("Mes_Periodo"), String)
                     End If
 
-                    txtComentario.Text = CType(AppSettings("mailCFBody"), String).Replace("#1", Periodo.GetMonthByNumber(Mes_Periodo)).Replace("#2", Anio_periodo)
+                    txtComentario.Text = ConfigurationManager.AppSettings("mailCFBody").Replace("#1", Periodo.GetMonthByNumber(Mes_Periodo)).Replace("#2", Anio_periodo)
 
                     Dim ar As New ArrayList()
 
@@ -196,7 +195,7 @@ Namespace BIFConvenios
             For i = 0 To dgGen.Items.Count - 1
                 chk = dgGen.Items(i).FindControl("chk")
                 If chk.Checked Then
-                    strMails = strMails & dgGen.Items(i).Cells(1).Text + ","
+                    strMails &= dgGen.Items(i).Cells(1).Text + ","
                 End If
             Next
 
@@ -226,7 +225,7 @@ Namespace BIFConvenios
         Protected Class MailSource
             Private mmail As String
 
-            Sub New(ByVal mail As String)
+            Sub New(mail As String)
                 mmail = mail
             End Sub
 
@@ -234,7 +233,7 @@ Namespace BIFConvenios
                 Get
                     Return mmail
                 End Get
-                Set(ByVal Value As String)
+                Set(Value As String)
                     mmail = Value
                 End Set
             End Property
@@ -242,41 +241,41 @@ Namespace BIFConvenios
 
         End Class
 
-        Private Sub lnkEnviarEmail_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lnkEnviarEmail.Click
+        Private Sub lnkEnviarEmail_Click(sender As Object, e As EventArgs) Handles lnkEnviarEmail.Click
             Dim strMails As String
             'Si no este TEST hacemos el envio regular
-            If CType(AppSettings("testOnly"), String).Trim = "0" Then
+            If ConfigurationManager.AppSettings("testOnly").Trim = "0" Then
                 strMails = GetCheckedMails()
             Else    ' en otro caso enviamos el correo a una direccion de prueba
-                strMails = CType(AppSettings("mailBcc"), String)
+                strMails = ConfigurationManager.AppSettings("mailBcc")
             End If
 
 
             Dim strNombreArchivoProceso As String
 
-            strNombreArchivoProceso = CType(AppSettings("GenFolder"), String) + _
+            strNombreArchivoProceso = ConfigurationManager.AppSettings("GenFolder") +
                                         oProceso.GetNombreArchivoProceso(PID) + tipoCliente + "." + formatoArchivo
 
 
             'TODO: colocar el cuerpo del correo electronico con los atachados
-            Utils.SendNotification(CType(AppSettings("mailSender"), String), strMails, _
-                                    CType(AppSettings("mailBcc"), String), _
-                                    CType(AppSettings("mailCFSubject"), String), _
+            Utils.SendNotification(ConfigurationManager.AppSettings("mailSender"), strMails,
+                                    ConfigurationManager.AppSettings("mailBcc"),
+                                    ConfigurationManager.AppSettings("mailCFSubject"),
                                     txtComentario.Text, strNombreArchivoProceso)
 
-            oProceso.UpdateFechaObtencionArchivo(PID, True, context.User.Identity.Name)
+            oProceso.UpdateFechaObtencionArchivo(PID, True, Context.User.Identity.Name)
             pnlClose.Visible = True
         End Sub
 
         'Rutina para mostrar un error generico
-        'Private Sub MostrarMensajeGeneral(ByVal b As Boolean, ByVal str As String)
+        'Private Sub MostrarMensajeGeneral(b As Boolean, str As String)
         '    pnlMensaje.Visible = b
         '    'pnlMail.Visible = Not b
         '    pnlSwf.Visible = Not b
         '    lblMensaje.Text = str
         'End Sub
 
-        'Private Function GetMesTexto(ByVal mes As String)
+        'Private Function GetMesTexto(mes As String)
         '    Dim mesTexto As String = ""
         '    Select Case mes.Trim()
         '        Case "1"
@@ -309,7 +308,7 @@ Namespace BIFConvenios
         '    Return mesTexto
         'End Function
 
-        'Private Function GetNombreFormatoArchivo(ByVal formatoArchivo As String, ByVal formatoArchivoDesc As String, ByVal pSituacionTrabajador As String, ByVal NombreArchivo As String, ByVal tipoCliente As String)
+        'Private Function GetNombreFormatoArchivo(formatoArchivo As String, formatoArchivoDesc As String, pSituacionTrabajador As String, NombreArchivo As String, tipoCliente As String)
         '    Dim extension As String = ""
         '    Dim NombreCompleto As String = ""
         '    NombreCompleto = NombreArchivo + tipoCliente + formatoArchivoDesc
@@ -371,7 +370,7 @@ Namespace BIFConvenios
         '    Return NombreCompleto + "." + extension
         'End Function
 
-        'Protected Function cargarDatosMail(ByVal situacionTrabajador As String)
+        'Protected Function cargarDatosMail(situacionTrabajador As String)
         '    Dim strTipoCliente As String
         '    If situacionTrabajador.Trim <> "" Then
         '        If situacionTrabajador.Trim = "-" Then
