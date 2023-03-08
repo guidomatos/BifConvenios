@@ -1,6 +1,6 @@
 Imports BIFConvenios
 Partial Class selectFileFormat
-    Inherits System.Web.UI.Page
+    Inherits Page
 
     Protected idP As String
     Protected nombre As String
@@ -19,7 +19,7 @@ Partial Class selectFileFormat
 
     End Sub
 
-    Private Sub Page_Init(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Init
+    Private Sub Page_Init(ByVal sender As Object, e As EventArgs) Handles MyBase.Init
         'CODEGEN: This method call is required by the Web Form Designer
         'Do not modify it using the code editor.
         InitializeComponent()
@@ -27,15 +27,15 @@ Partial Class selectFileFormat
 
 #End Region
 
-    Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Put user code to initialize the page here
         'id='+ id +"&nombre=" + nombre + "&anio=" + anio + "&mes=" + mes + "&fechaProcesoAS400=" 
         If Not Page.IsPostBack Then
-            idP = CType(Request.Params("id"), String)
-            nombre = CType(Request.Params("nombre"), String)
-            anio = CType(Request.Params("anio"), String)
-            mes = CType(Request.Params("mes"), String)
-            fechaProcesoAS400 = CType(Request.Params("fechaProcesoAS400"), String)
+            idP = Request.Params("id")
+            nombre = Request.Params("nombre")
+            anio = Request.Params("anio")
+            mes = Request.Params("mes")
+            fechaProcesoAS400 = Request.Params("fechaProcesoAS400")
 
             'ADD JCHAVEZH 21/10/2014
             'lstModalidad.DataSource = oProceso.GetModalidad(idP)
@@ -46,15 +46,13 @@ Partial Class selectFileFormat
             Dim dr As SqlClient.SqlDataReader = Proceso.getFormatoExportacion(idP)
 
             Dim s As String
-            Dim TipoFormatoArchivo
-            Dim DescripcionFormatoArchivo As String = ""
 
             Dim i As Integer = 0
 
             While dr.Read
                 s = dr.Item("FormatoArchivo")
-                TipoFormatoArchivo = dr.Item("TipoFormatoArchivo")
-                DescripcionFormatoArchivo = dr.Item("DescripcionFormatoArchivo")
+                Dim TipoFormatoArchivo = dr.Item("TipoFormatoArchivo")
+                Dim DescripcionFormatoArchivo As String = dr.Item("DescripcionFormatoArchivo")
                 'End If
                 If i = 0 And s.Trim <> "default" Then
                     lstFormatFile.Items.Clear()
@@ -81,7 +79,7 @@ Partial Class selectFileFormat
 
                     'lstFormatFile.Items.Add(New ListItem("Formato Estándar - MS Excel (.xls)", "defaultXls"))
                 End If
-                i = i + 1
+                i += 1
             End While
 
             If lstFormatFile.Items.Count > 0 Then

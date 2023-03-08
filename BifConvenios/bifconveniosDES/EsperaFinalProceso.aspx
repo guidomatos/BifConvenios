@@ -4,18 +4,11 @@
 <%@ OutputCache Location="None"%>
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
-<HEAD>
+<head>
 		<title>Procesando archivo... por favor espere unos instantes mientras se procesa en 
 			el servidor</title>
-		<meta name="GENERATOR" content="Microsoft Visual Studio.NET 7.0">
-		<meta name="CODE_LANGUAGE" content="Visual Basic 7.0">
-		<meta name="vs_defaultClientScript" content="JavaScript">
-		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-		<META HTTP-EQUIV="Expires" CONTENT="-1">
-		<LINK href="<%=Request.ApplicationPath%>/css/global.css" type=text/css rel=stylesheet>
-		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
-		<META HTTP-EQUIV="Refresh" CONTENT="5">
-	</HEAD>
+		<link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
+	</head>
 	<body leftmargin="0" topmargin="0" bottommargin="0" rightmargin="0">
 		<form id="Form1" method="post" runat="server">
 			<table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
@@ -23,8 +16,8 @@
 					<td>
 						<asp:Literal id="ltrlScript" runat="server" Visible="False"></asp:Literal>
 						<asp:Label Runat="server" ID="lblMensaje"></asp:Label>
-						<asp:literal ID="lrtlSwf" Runat="server" Visible="False">
-							<SCRIPT language="VBScript">
+						<asp:Literal ID="lrtlSwf" Runat="server" Visible="False">
+							<script type="text/vbscript" language="VBScript">
 							<!--
 								Private i, x, MM_FlashControlVersion
 								On Error Resume Next
@@ -49,8 +42,8 @@
 								document.write "Procesando..."
 								End If
 								-->
-							</SCRIPT>
-						</asp:literal>
+							</script>
+						</asp:Literal>
 					</td>
 				</tr>
 			</table>

@@ -7,7 +7,7 @@ Partial Class descuentos_ContainerDocumentoCobranza
     Protected ds As New DataSetDocumentoCobranza()
     Protected dsC As New DataSetCuotasPendientes()
 
-    Private Sub Page_Load(sender As Object, e As System.EventArgs) Handles MyBase.Load
+    Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not Page.IsPostBack Then
 
             'Put user code to initialize the page here
@@ -21,10 +21,12 @@ Partial Class descuentos_ContainerDocumentoCobranza
             'Dim dsProceso As DataSet
             Dim lstrCodigo_Cliente As String
 
-            Dim rdsDataset As New ReportDataSource()
-            rdsDataset.Name = "DataSet1"
-            Dim rdsCobranza As New ReportDataSource()
-            rdsCobranza.Name = "DatosCobranza"
+            Dim rdsDataset As New ReportDataSource With {
+                .Name = "DataSet1"
+            }
+            Dim rdsCobranza As New ReportDataSource With {
+                .Name = "DatosCobranza"
+            }
 
             If Not Request.Params("dt") Is Nothing And Not Request.Params("p") Is Nothing Then
                 documentType = Request.Params("dt")
@@ -38,7 +40,7 @@ Partial Class descuentos_ContainerDocumentoCobranza
 
                 If documentType.Trim = "N" Then
 
-                    ds = CType(Seguimiento.GetDocumentoPagosPendientesMontosPendientes(pagares, amounts, anio, mes), DataSetDocumentoCobranza)
+                    ds = Seguimiento.GetDocumentoPagosPendientesMontosPendientes(pagares, amounts, anio, mes)
 
                     'RESPINOZA 20070523 - Obtenemos la informacion de los montos pendientes de pago debido al cobro parcial de cuotas 
                     'para establecer ese monto en el documento de cobranza en vez del mostrado en IBS

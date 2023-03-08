@@ -3,29 +3,21 @@
 <html>
 <head>
         <title>Seleccione los filtros del reporte</title>
-		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-		<META HTTP-EQUIV="Expires" CONTENT="-1">
-		<meta name="GENERATOR" content="Microsoft Visual Studio.NET 7.0">
-		<meta name="CODE_LANGUAGE" content="Visual Basic 7.0">
-		<meta name="vs_defaultClientScript" content="JavaScript">
-		<LINK href="<%=Request.ApplicationPath%>/css/global.css" type="text/css" rel="stylesheet">
-		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">    
-		<script language="javascript">
-		<!--
-		function GenerarReporte(id){
-		    //alert('enviomail.aspx?idp='+ id +  '&formatoArchivo=' + formatoArchivo +'&tipoCliente='+tipoCliente)
-			//openPage( 'enviomail.aspx?idp='+ id +  '&formatoArchivo=' + formatoArchivo +'&tipoCliente='+tipoCliente, 430,500 );
-			//top.returnValue	= id + "|" + formatoArchivo + "|" + situacionTrabajador;			
-			top.returnValue	= id + "|" + document.all('lstModalidad').value + "|" + document.all('ddlEstadoTrabajador').value;			
-			this.close();			
-		}		
-		
-		function Cerrar2() {
-			top.returnValue	= '';
-			this.close();
-		}		
-		-->
-		</script>
+		<link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
+		<script type="text/javascript" language="javascript">
+
+			var tipoReporteSeleccionado = '';
+            function fnGenerarReporte(id) {
+				tipoReporteSeleccionado = id + "|" + document.all('lstModalidad').value + "|" + document.all('ddlEstadoTrabajador').value;
+                window.close();
+			}
+            function fnCerrarVentana() {
+                window.close();
+			}
+            function ReturnValueSeleccionado() {
+                return tipoReporteSeleccionado;
+            }
+        </script>
 </head>
 <body leftmargin="20" topmargin="10">
 		<form id="Form1" method="post" runat="server">
@@ -80,9 +72,8 @@
 									<font class="Normal">&nbsp; Modalidad&nbsp;:&nbsp; </font>
 								</td>
 								<td style="height: 24px">
-									<asp:DropDownList Runat="server" ID="lstModalidad" DataTextField="textoModalidad" DataValueField="codigoModalidad">									   
+									<asp:DropDownList runat="server" ID="lstModalidad" DataTextField="textoModalidad" DataValueField="codigoModalidad">									   
 									</asp:DropDownList>
-
 								</td>
 							</tr>
 						</table>
@@ -97,9 +88,9 @@
 						<table border="0" cellpadding="0" cellspacing="0" width="100%">
 							<tr>
 								<td class="SubHead" align="middle">
-									<a href="#" onclick="JavaScript:GenerarReporte('<%=idP%>')"  >
+									<a href="#" onclick="javascript:fnGenerarReporte('<%=idP%>')"  >
 									Generar Listado</a> &nbsp;&nbsp;&nbsp;&nbsp;
-									<a href="#" onclick="JavaScript:Cerrar2();">Cancelar</a>
+									<a href="#" onclick="JavaScript:fnCerrarVentana();">Cancelar</a>
 								</td>
 							</tr>
 						</table>

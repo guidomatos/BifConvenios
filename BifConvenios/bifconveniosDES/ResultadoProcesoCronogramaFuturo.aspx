@@ -2,9 +2,6 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
-<%@ Register Assembly="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
-    Namespace="System.Web.UI" TagPrefix="asp" %>
-
 <%@ Register TagPrefix="uc1" TagName="Banner" Src="controls/Banner.ascx" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
@@ -12,16 +9,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>BIFConvenios - Reporte de Carga y proceso</title>
-	<meta content="Microsoft Visual Studio.NET 7.0" name="GENERATOR" />
-	<meta content="Visual Basic 7.0" name="CODE_LANGUAGE" />
-	<meta content="JavaScript" name="vs_defaultClientScript" />
-	<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema" />
-	<link href="<%=Request.ApplicationPath%>/css/global.css" type="text/css" rel="stylesheet" />
-	<script language="javascript" type="text/javascript" src="<%Response.Write(Request.ApplicationPath)%>/js/global.js"></script>
+	<link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
+    <script src='<%=ResolveUrl("~/js/global.js") %>' language ="javascript" type="text/javascript"></script>
               
-
-    <link href="css/StylePopup.css" rel="stylesheet" type="text/css" />        
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveUrl("~/css/StylePopup.css") %>" rel="Stylesheet" type="text/css" />
+    <link href="<%=ResolveUrl("~/css/style.css") %>" rel="Stylesheet" type="text/css" />
                     
     <style type="text/css">    
     
@@ -120,24 +112,73 @@
         
     </style>
 
-	<script type="text/javascript">				 
-	    
-	    function GenerarArchivo (id, nombre, anio, mes, fechaProcesoAS400){			    
-		    var returnValue = OpenFormatPageDialog('selectFileFormat.aspx?id='+ id +"&nombre=" + nombre + "&anio=" + anio + "&mes=" + mes + "&fechaProcesoAS400=" + fechaProcesoAS400, 250,580 );
-		    if ( fctTrim(returnValue) != '' ){ 
-			    document.all('hdId').value = returnValue;
-			    __doPostBack('lnkGenerarArchivo','');
-		    }
-	    }
-	    
-	    function GenerarReporte(id, nombre, anio, mes, fechaProcesoAS400){
-		    var returnValue = OpenFormatPageDialog('selectFilterReport.aspx?id='+ id +"&nombre=" + nombre + "&anio=" + anio + "&mes=" + mes + "&fechaProcesoAS400=" + fechaProcesoAS400, 250,500);
-		
-		    if ( fctTrim(returnValue) != '' ){ 			
-			    document.all('hdFilter').value = returnValue;
-			    __doPostBack('lnkObtenerReporte','');								
-		    }
-	}				
+	<script type="text/javascript">
+
+        var popupGenerarArchivo;
+        function fnOpenPopupGenerarArchivo(url, height, width) {
+
+            // Obtener el tamaño de la ventana principal
+            var parentWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            var parentHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+            // Calcular la posición de la ventana secundaria
+            var left = (parentWidth - width) / 2;
+            var top = (parentHeight - height) / 2;
+
+            popupGenerarArchivo = window.open(url, '', 'left=' + left + ',top=' + top + ',height=' + height + 'px,width=' + width + 'px,toolbar=no,directories=no,status=no,continued from previous linemenubar = no, scrollbars = no, resizable = no, modal = yes');
+            popupGenerarArchivo.opener = window;
+
+            var timer = setInterval(function () {
+                if (popupGenerarArchivo.closed) {
+                    clearInterval(timer);
+                    var returnValue = popupGenerarArchivo.ReturnValueSeleccionado();
+
+                    if (typeof returnValue !== "undefined") {
+                        if (fctTrim(returnValue) != '') {
+                            document.all('hdId').value = returnValue;
+                            __doPostBack('lnkGenerarArchivo', '');
+                        }
+                    }
+                }
+            }, 100);
+        }
+
+        function fnGenerarArchivo(id, nombre, anio, mes, fechaProcesoAS400) {
+            fnOpenPopupGenerarArchivo("selectFileFormat.aspx?id=" + id + "&nombre=" + nombre + "&anio=" + anio + "&mes=" + mes + "&fechaProcesoAS400=" + fechaProcesoAS400, 250, 580);
+        }
+
+        var popupGenerarReporte;
+        function fnOpenPopupGenerarReporte(url, height, width) {
+
+            // Obtener el tamaño de la ventana principal
+            var parentWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            var parentHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+            // Calcular la posición de la ventana secundaria
+            var left = (parentWidth - width) / 2;
+            var top = (parentHeight - height) / 2;
+
+            popupGenerarReporte = window.open(url, '', 'left=' + left + ',top=' + top + ',height=' + height + 'px,width=' + width + 'px,toolbar=no,directories=no,status=no,continued from previous linemenubar = no, scrollbars = no, resizable = no, modal = yes');
+            popupGenerarReporte.opener = window;
+
+            var timer = setInterval(function () {
+                if (popupGenerarReporte.closed) {
+                    clearInterval(timer);
+                    var returnValue = popupGenerarReporte.ReturnValueSeleccionado();
+
+                    if (typeof returnValue !== "undefined") {
+                        if (fctTrim(returnValue) != '') {
+                            document.all('hdFilter').value = returnValue;
+                            __doPostBack('lnkObtenerReporte', '');
+                        }
+                    }
+                }
+            }, 100);
+        }
+
+        function GenerarReporte(id, nombre, anio, mes, fechaProcesoAS400) {
+            fnOpenPopupGenerarReporte("selectFilterReport.aspx?id=" + id + "&nombre=" + nombre + "&anio=" + anio + "&mes=" + mes + "&fechaProcesoAS400=" + fechaProcesoAS400, 250, 580);
+        }
 	
 	/* MOD NCA 08/07/2014 EA2013-273 OPT. PROCESOS CONVENIOS
 		function EnviarReporte(id, formatoArchivo, tipoCliente){
@@ -146,136 +187,126 @@
 	//END
     */			
     /* ADD NCA 08/07/2014 EA2013-273 OPT. PROCESOS CONVENIOS */
-		function EnviarReporte(id, formatoArchivo, tipoCliente){
-			document.all('hdId').value = id;
-			__doPostBack('lnkEnviarMail','');
-		}
+        function EnviarReporte(id, formatoArchivo, tipoCliente) {
+            document.all('hdId').value = id;
+            __doPostBack('lnkEnviarMail', '');
+        }
 	/* END */	
-	
-	function OpenFormatPageDialog(url, height , width ) {
-				var returnValue = window.showModalDialog(url,'', 'dialogTop: 200px; dialogLeft: 200px;dialogWidth:' + width +  'px;dialogHeight:' + height+ 'px;status: no;help:no;'); 
-				if (typeof (returnValue) == "undefined"){
-					returnValue = '';
-				}
-				return returnValue;
-		}						
-    -->                
 
-</script>
+
+        -->
+
+    </script>
 
     <script type="text/javascript">
 
-        function validar()
-        {
-        
-            //pagare = document.Form1.paga.value                        
-            
-            
-                if ( fctTrim (document.all("txtPagare").value ) == '' ) {
-				    alert ('Ingrese el número de pagaré');
-				    document.all("txtPagare").focus();
-				    args.IsValid = false;
-				    return;
-			    }
-				
-	            if ( fctTrim (document.all("txtNombre").value ) == '' ) {
-				    alert ('Ingrese el nombre');
-				    document.all("txtNombre").focus();
-				    args.IsValid = false;
-				    return;
-			    }							
-				
-			    if ( fctTrim (document.all("txtApellidoP").value ) == '' ) {
-				    alert ('Ingrese el Apellido Paterno');
-				    document.all("txtApellidoP").focus();
-				    args.IsValid = false;
-				    return;
-			    }							
-				
-			    if ( fctTrim (document.all("txtApelllidoM").value ) == '' ) {
-				    alert ('Ingrese el Apellido Materno');
-				    document.all("txtApelllidoM").focus();
-				    args.IsValid = false;
-				    return;
-			    }							
-				
-			    if ( fctTrim (document.all("txtDocumento").value ) == '' ) {
-				    alert ('Ingrese el Documento de Identidad');
-				    document.all("txtDocumento").focus();
-				    args.IsValid = false;
-				    return;
-			    }							
-				
-			    if ( fctTrim (document.all("txtDeuda").value ) == '' ) {
-				    alert ('Ingrese el valor de la Deuda');
-				    document.all("txtDeuda").focus();
-				    args.IsValid = false;
-				    return;
-			    }							
-				
-			    if ( fctTrim (document.all("txtImporteNew").value ) == '' ) {
-				    alert ('Ingrese el valor del Importe');
-				    document.all("txtImporteNew").focus();
-				    args.IsValid = false;
-				    return;
-			    }							
-				
-			    if ( fctTrim (document.all("txtMontoOriginal").value ) == '' ) {
-				    alert ('Ingrese el valor del Monto Original');
-				    document.all("txtMontoOriginal").focus();
-				    args.IsValid = false;
-				    return;
-			    }							
-				
-			    if ( fctTrim (document.all("txtCuotaInformada").value ) == '' ) {
-				    alert ('Ingrese el valor de Cuota Informada');
-				    document.all("txtCuotaInformada").focus();
-				    args.IsValid = false;
-				    return;
-			    }							
-				
-			    if ( fctTrim (document.all("txtCuota").value ) == '' ) {
-				    alert ('Ingrese el valor de Cuota');
-				    document.all("txtCuota").focus();
-				    args.IsValid = false;
-				    return;
-			    }							
-				
-			    if ( fctTrim (document.all("txtCuotaPactada").value ) == '' ) {
-				    alert ('Ingrese el valor de Cuota Pactada');
-				    document.all("txtCuotaPactada").focus();
-				    args.IsValid = false;
-				    return;
-			    }							
-				
-			    if ( fctTrim (document.all("txtCuotaPagada").value ) == '' ) {
-				    alert ('Ingrese el valor de Cuota Pagada');
-				    document.all("txtCuotaPagada").focus();
-				    args.IsValid = false;
-				    return;
-			    }									
-         
-        }    
+            function validar() {
+
+                //pagare = document.Form1.paga.value                        
+
+
+                if (fctTrim(document.all("txtPagare").value) == '') {
+                    alert('Ingrese el número de pagaré');
+                    document.all("txtPagare").focus();
+                    args.IsValid = false;
+                    return;
+                }
+
+                if (fctTrim(document.all("txtNombre").value) == '') {
+                    alert('Ingrese el nombre');
+                    document.all("txtNombre").focus();
+                    args.IsValid = false;
+                    return;
+                }
+
+                if (fctTrim(document.all("txtApellidoP").value) == '') {
+                    alert('Ingrese el Apellido Paterno');
+                    document.all("txtApellidoP").focus();
+                    args.IsValid = false;
+                    return;
+                }
+
+                if (fctTrim(document.all("txtApelllidoM").value) == '') {
+                    alert('Ingrese el Apellido Materno');
+                    document.all("txtApelllidoM").focus();
+                    args.IsValid = false;
+                    return;
+                }
+
+                if (fctTrim(document.all("txtDocumento").value) == '') {
+                    alert('Ingrese el Documento de Identidad');
+                    document.all("txtDocumento").focus();
+                    args.IsValid = false;
+                    return;
+                }
+
+                if (fctTrim(document.all("txtDeuda").value) == '') {
+                    alert('Ingrese el valor de la Deuda');
+                    document.all("txtDeuda").focus();
+                    args.IsValid = false;
+                    return;
+                }
+
+                if (fctTrim(document.all("txtImporteNew").value) == '') {
+                    alert('Ingrese el valor del Importe');
+                    document.all("txtImporteNew").focus();
+                    args.IsValid = false;
+                    return;
+                }
+
+                if (fctTrim(document.all("txtMontoOriginal").value) == '') {
+                    alert('Ingrese el valor del Monto Original');
+                    document.all("txtMontoOriginal").focus();
+                    args.IsValid = false;
+                    return;
+                }
+
+                if (fctTrim(document.all("txtCuotaInformada").value) == '') {
+                    alert('Ingrese el valor de Cuota Informada');
+                    document.all("txtCuotaInformada").focus();
+                    args.IsValid = false;
+                    return;
+                }
+
+                if (fctTrim(document.all("txtCuota").value) == '') {
+                    alert('Ingrese el valor de Cuota');
+                    document.all("txtCuota").focus();
+                    args.IsValid = false;
+                    return;
+                }
+
+                if (fctTrim(document.all("txtCuotaPactada").value) == '') {
+                    alert('Ingrese el valor de Cuota Pactada');
+                    document.all("txtCuotaPactada").focus();
+                    args.IsValid = false;
+                    return;
+                }
+
+                if (fctTrim(document.all("txtCuotaPagada").value) == '') {
+                    alert('Ingrese el valor de Cuota Pagada');
+                    document.all("txtCuotaPagada").focus();
+                    args.IsValid = false;
+                    return;
+                }
+
+            }
 	
-        function OnKeyPressTextNumeros(evt)
-        {                    
-            var charCode = (evt.wich)? evt.wich : event.keyCode
-            if(charCode > 31 && (charCode < 48 || charCode > 57))
-            return false;
-	       
-           return true;
-        }	
+        function OnKeyPressTextNumeros(evt) {
+            var charCode = (evt.wich) ? evt.wich : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+
+            return true;
+        }
 			
-			
-        function OnKeyPressTextDecimales(evt)
-        {                    
-            var charCode = (evt.which)? evt.which : event.keyCode
-            
-            if(charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57))
-            return false;
-	       
-           return true;
-        }	
+        function OnKeyPressTextDecimales(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode
+
+            if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+
+            return true;
+        }
     </script>
 </head>	
 <body style="margin-left:0; margin-top:0;">	
@@ -287,7 +318,6 @@
                 </td>
             </tr>
         </table>    
-        <asp:ScriptManager ID="scriptmn1" runat="server"></asp:ScriptManager>
 	    <div id="container" style="width:1300px;">
             <div class="row">
                 <div class="cell containercell">
@@ -430,15 +460,15 @@
                                             <thead>	
                                                 <tr>
                                                     <th>                        
-                                                        <img src="<%=Request.ApplicationPath%>/images/bar_begin.gif" height="17" alt="" />
+                                                        <img src="<%= ResolveUrl("~/images/bar_begin.gif") %>" height="17" alt="" />
                                                     </th>
                                                     <th>
-	                                                    <a href='javascript:GenerarArchivo("<%=Request.Params("id")%>","<asp:literal id="ltrlNombre" runat="server"/>","<asp:literal id="ltrlAnhio" runat="server"/>","<asp:literal id="ltrlMes" runat="server"/>","<asp:literal id="ltrlFechaIBS" runat="server"/>");'>
+	                                                    <a href='javascript:fnGenerarArchivo("<%=Request.Params("id")%>","<asp:literal id="ltrlNombre" runat="server"/>","<asp:literal id="ltrlAnhio" runat="server"/>","<asp:literal id="ltrlMes" runat="server"/>","<asp:literal id="ltrlFechaIBS" runat="server"/>");'>
 		                                                    Generar archivo
 		                                                </a>
 	                                                </th>
                                                     <th>
-                                                        <img src="<%=Request.ApplicationPath%>/images/bar_div.gif" width="17" height="18" alt="" />
+                                                        <img src="<%= ResolveUrl("~/images/bar_div.gif") %>" width="17" height="18" alt="" />
                                                     </th>
                                                     <th>
                                                         <a href='javascript:GenerarReporte("<%=Request.Params("id")%>","<asp:literal id="ltrlNombre1" runat="server"/>","<asp:literal id="ltrlAnhio1" runat="server"/>","<asp:literal id="ltrlMes1" runat="server"/>","<asp:literal id="ltrlFechaIBS1" runat="server"/>");'>
@@ -448,16 +478,16 @@
                                                         <input id="hdFilter" type="hidden" name="hdFilter" runat="server"/>
                                                     </th>
                                                     <th>
-                                                        <img src="<%=Request.ApplicationPath%>/images/bar_div.gif" width="17" height="18" alt="" />
+                                                        <img src="<%= ResolveUrl("~/images/bar_div.gif") %>" width="17" height="18" alt="" />
                                                     </th>																								
                                                     <th>
                                                         <asp:LinkButton Runat="server" ID="LnkNuevo" Text="Nuevo Cliente" />
                                                         <input id="HdnGrabar" type="hidden" name="HdnGrabar" runat="server"/>
-                                                        <asp:ModalPopupExtender ID="MdlPupTrabajador" runat="server" BackgroundCssClass="FondoAplicacion" Enabled="true" PopupControlID="pnlDialog" TargetControlID="HdnGrabar">
+                                                        <asp:ModalPopupExtender ID="MdlPupTrabajador" runat="server" BackgroundCssClass="FondoAplicacion" Enabled="True" PopupControlID="pnlDialog" TargetControlID="HdnGrabar">
                                                         </asp:ModalPopupExtender>
                                                     </th>
                                                     <th>
-		                                                <img src="<%=Request.ApplicationPath%>/images/bar_begin.gif"  height="17" alt="" />
+		                                                <img src="<%= ResolveUrl("~/images/bar_begin.gif") %>" height="17" alt="" />
 	                                                </th>
                                                 </tr>																		                            
                                             </thead>
@@ -468,7 +498,7 @@
                                         <asp:TextBox ID="importeAnterior" runat="server" Visible="False" />
                                     </th>
                                     <td class="SubHead" style="height: 19px">Total &nbsp; &nbsp; de Registros&nbsp;:
-                                        <asp:label CssClass="Text" id="lblTotalReg" Runat="server"></asp:label>
+                                        <asp:Label CssClass="Text" id="lblTotalReg" Runat="server"></asp:Label>
                                     </td>
                                     <td style="height: 19px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     </td>
@@ -482,7 +512,7 @@
                                     <td style="height: 19px"><asp:Label Runat="server" ID="lblMontoTotalDolares" CssClass="Text"></asp:Label></td>					
                                     <td style="width:30px;"></td>
                                     <td colspan="2">
-                                        <asp:linkbutton id="lnkBack" Runat="server"><img src='/BIFConvenios/images/regresar.jpg' name='Image1' border="0" alt='Regresar' /></asp:linkbutton>
+                                        <asp:LinkButton id="lnkBack" Runat="server"><img  src="<%= ResolveUrl("~/images/regresar.jpg") %>" name='Image1' border="0" alt='Regresar' /></asp:LinkButton>
                                     </td>
                                 </tr>
                             </table>
@@ -496,7 +526,7 @@
                     <div class="cell container">
                         <asp:UpdatePanel ID="upQuery" runat="server">
                             <ContentTemplate>
-                                <asp:datagrid id="dgProcesoResult" runat="server" Visible="False" CellPadding="3" CellSpacing="3" 
+                                <asp:DataGrid id="dgProcesoResult" runat="server" Visible="False" CellPadding="3" CellSpacing="3" 
                                         BackColor="white" ForeColor="black"
 						                BorderWidth="1px" AutoGenerateColumns="False" Width="100%" DataKeyField="DLCC" PageSize="500"
 						                OnClick="return Eliminar();">
@@ -533,7 +563,7 @@
 				       
 				                        <asp:TemplateColumn HeaderText="Fecha Desembolso" ItemStyle-Width="80px">
 					                        <ItemTemplate>															
-								                <asp:Label ID="lblFecDesembolso" runat="server" Text='<%# Bind("FechaDesembolso","{0:d}") %>'></asp:Label>
+								                <asp:Label ID="lblFecDesembolso" runat="server" Text='<%# Bind("FechaDesembolso", "{0:d}") %>'></asp:Label>
 							                </ItemTemplate>
 					                    </asp:TemplateColumn>
                                         				       
@@ -572,7 +602,7 @@
 						
 						                <asp:TemplateColumn HeaderText="Periodo" ItemStyle-Width="70px" Visible="false">
 							                <ItemTemplate>
-								                <%# ( BIFConvenios.Periodo.GetMonthByNumber( DataBinder.Eval(Container, "DataItem.DLMP")) + "&nbsp;"+ DataBinder.Eval(Container.DataItem, "DLAP").ToString() )%>
+								                <%# (BIFConvenios.Periodo.GetMonthByNumber(DataBinder.Eval(Container, "DataItem.DLMP")) + "&nbsp;" + DataBinder.Eval(Container.DataItem, "DLAP").ToString())%>
 							                </ItemTemplate>
 						                </asp:TemplateColumn>
 						
@@ -620,7 +650,7 @@
 					    
 					                    <asp:TemplateColumn HeaderText="Fecha Cargo" ItemStyle-Width="80px">
 					                        <ItemTemplate>
-								                <asp:Label ID="lblFecCargo" runat="server" Text='<%# Bind("FechaCargo","{0:d}") %>'></asp:Label>
+								                <asp:Label ID="lblFecCargo" runat="server" Text='<%# Bind("FechaCargo", "{0:d}") %>'></asp:Label>
 							                </ItemTemplate>
 					                    </asp:TemplateColumn>
 					    
@@ -647,7 +677,7 @@
 						
 					                </Columns>
 					                <PagerStyle VerticalAlign="Middle" HorizontalAlign="Left" Position="TopAndBottom" CssClass="CommandButton" Mode="NumericPages"></PagerStyle>
-				                </asp:datagrid>            
+				                </asp:DataGrid>            
                             </ContentTemplate>
                         </asp:UpdatePanel>
                         <input id="hdId" type="hidden" name="hdId" runat="server"/>
@@ -664,21 +694,11 @@
 				    </tr>
 			    </table>
 		    </asp:Panel>
-            <asp:Panel Runat="server" ID="pnlGenArchivos" Visible="False">		
-			    <table cellspacing="0" cellpadding="10" border="0">
-				    <tr>
-					    <td>
-						    <asp:Label id="lblMensaje" Runat="server" CssClass="SubHead"></asp:Label>
-					    </td>
-				    </tr>
-			    </table>
-			
-			    <script type="text/javascript">						
-				    //openPage('/BIFConvenios/generacionCf/enviomail.aspx?idp=<%=idP%>&formatoArchivo=<%=formatoArchivo%>&situacionTrabajador=<%=situacionTrabajador%>&modalidad=<%=modalidad%>', 430,500 );
-					openPage('<%Response.Write(Request.ApplicationPath)%>/generacionCf/EsperaFinalGeneracionCf.aspx?id=<%=idGenFile%>&cantidad=<asp:literal id="lblTotalReg1" runat="server"/>&montosoles=<asp:literal id="lblMontoTotalSoles1" runat="server"/>&montodolares=<asp:literal id="lblMontoTotalDolares1" runat="server"/>', 300, 390);
-			    </script>
-		    </asp:Panel>
-		    <asp:Panel Runat="server" ID="pnlGenReporte" Visible="False">
+            <asp:Literal id="lblTotalReg1" runat="server" Visible="false"/>
+            <asp:Literal id="lblMontoTotalSoles1" runat="server" Visible="false"/>
+            <asp:Literal id="lblMontoTotalDolares1" runat="server" Visible="false"/>
+
+		    <asp:Panel runat="server" ID="pnlGenReporte" Visible="false">
 			    <table cellspacing="0" cellpadding="10" border="0">
 				    <tr>
 					    <td>

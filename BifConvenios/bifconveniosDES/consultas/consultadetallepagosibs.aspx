@@ -2,18 +2,13 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>
 	<HEAD>
-		<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
-		<META HTTP-EQUIV="Expires" CONTENT="-1">
-		<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 		<title>BIFConvenios - Detalle de Pagos Procesados en IBS</title>
 		<link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
 		<BASE TARGET="_self">
 		<script language="javascript">
-		<!--
 			function Cerrar(){
 				window.close();
 			}
-		-->
 		</script>
 	</HEAD>
 	<body topmargin="5" leftmargin="15">

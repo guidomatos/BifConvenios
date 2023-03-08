@@ -7,13 +7,6 @@
 <html>
 <head>
     <title>Espere un momento mientras generamos el archivo...</title>
-    <meta name="GENERATOR" content="Microsoft Visual Studio.NET 7.0">
-    <meta name="CODE_LANGUAGE" content="Visual Basic 7.0">
-    <meta name="vs_defaultClientScript" content="JavaScript">
-    <meta http-equiv="Refresh" content="5">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="-1">
-    <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
 </head>
 <body leftmargin="0" topmargin="0" rightmargin="0">
     <form id="Form1" method="post" runat="server">
@@ -22,7 +15,7 @@
                 <tr>
                     <td>
 
-                        <script language="VBScript">
+                        <script type="text/vbscript" language="VBScript">
 							<!--
 								Private i, x, MM_FlashControlVersion
 								On Error Resume Next
@@ -63,14 +56,10 @@
         </asp:Panel>
         <asp:Panel ID="pnlFinal" Visible="False" runat="server">
 
-            <script language="javascript">
-            <!--
-            //Mostramos los reportes de la carga
+            <script type="text/javascript" language="javascript">
             	if ( window.opener != null ) {
-            		window.opener.location.href = "<%Response.Write(Request.ApplicationPath)%>/generacioncf/AccesoArchivoGenerado.aspx?id=<%=Pid%>";  
-            		window.close();
+                    location.href = "<%ResolveUrl("/generacioncf/AccesoArchivoGenerado.aspx?id=" + Pid)%>";
             	}
-            -->
             </script>
 
         </asp:Panel>

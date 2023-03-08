@@ -5,40 +5,31 @@
 <html>
 <head>
     <title>Seleccione los correos electronicos</title>
-    <meta name="GENERATOR" content="Microsoft Visual Studio.NET 7.0">
-    <meta name="CODE_LANGUAGE" content="Visual Basic 7.0">
-    <meta name="vs_defaultClientScript" content="JavaScript">
-    <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="-1">
-    <link href="<%=Request.ApplicationPath%>/css/global.css" type="text/css" rel="stylesheet">
+    <link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
 
-    <script language="javascript">
-		<!--
-			function Cerrar(){
-				window.close();
-			}
-			
-			function SendMail(controls){
-				var a = controls.split(',');
-				var i = 0 ;
-				var anyChecked = false;
-				for ( i = 0; i<= a.length -1; i++ ) {
-					if ( document.all( a[i] ).checked ) {
-						anyChecked = true;
-					}
-				}   
-				
-				if ( !anyChecked ) {
-					alert ( 'Debe seleccionar por lo menos un correo electronico.');
-				}
-				else{
-					if ( confirm ( '¿Desea enviar el correo electronico con el archivo de cuotas?')){
-						__doPostBack('lnkEnviarEmail', '');	
-					}
-				}
-			}
-		-->
+    <script type="text/javascript" language="javascript">
+        function Cerrar() {
+            window.close();
+        }
+        function SendMail(controls) {
+            var a = controls.split(',');
+            var i = 0;
+            var anyChecked = false;
+            for (i = 0; i <= a.length - 1; i++) {
+                if (document.all(a[i]).checked) {
+                    anyChecked = true;
+                }
+            }
+
+            if (!anyChecked) {
+                alert('Debe seleccionar por lo menos un correo electronico.');
+            }
+            else {
+                if (confirm('¿Desea enviar el correo electronico con el archivo de cuotas?')) {
+                    __doPostBack('lnkEnviarEmail', '');
+                }
+            }
+        }
     </script>
 
 </head>
@@ -129,10 +120,8 @@
                         &nbsp;
                         <asp:Panel ID="pnlClose" runat="server" Visible="False">
 
-                            <script language="javascript">
-				<!--
-					window.close ();
-				-->
+                            <script type="text/javascript" language="javascript">
+                                window.close();
                             </script>
 
                         </asp:Panel>

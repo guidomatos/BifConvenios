@@ -1,6 +1,5 @@
 ﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="ContainerDocumentoCobranza.aspx.vb" Inherits="descuentos_ContainerDocumentoCobranza" %>
 
-
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 
 <!DOCTYPE html>

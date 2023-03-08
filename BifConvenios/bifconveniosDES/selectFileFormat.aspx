@@ -4,43 +4,34 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Seleccione el formato del archivo</title>
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="-1" />
-    <meta name="GENERATOR" content="Microsoft Visual Studio.NET 7.0" />
-    <meta name="CODE_LANGUAGE" content="Visual Basic 7.0" />
-    <meta name="vs_defaultClientScript" content="JavaScript" />
-    <link href="<%=Request.ApplicationPath%>/css/global.css" type="text/css" rel="stylesheet" />
-    <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5" />
+    <link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
 
     <script type="text/javascript">	
-		
-		function EnviaCorreo(id){
-		    //alert('enviomail.aspx?idp='+ id +  '&formatoArchivo=' + formatoArchivo +'&tipoCliente='+tipoCliente)
-			//openPage( 'enviomail.aspx?idp='+ id +  '&formatoArchivo=' + formatoArchivo +'&tipoCliente='+tipoCliente, 430,500 );
-			//top.returnValue	= id + "|" + formatoArchivo + "|" + situacionTrabajador;					
-			top.returnValue	= id + "|" + document.all('lstFormatFile').value + "|-"
-			this.close();			
-		}		
-		
-		function Cerrar2() {
-			top.returnValue	= '';
-			this.close();
-		}
-		
-		function ShowModalidad(){
-		var val = document.getElementById("lstFormatFile").value;
-		
-		    if(val== 'standardXls')
-		    { 
-		        document.getElementById('lblModalidad').style.display = 'inline'
-		        document.all('lstModalidad').style.display= 'inline'
-		    }else{
-		        document.getElementById('lblModalidad').style.display= 'none'
-		        document.all('lstModalidad').style.display= 'none'
-		    }
-		    
-		}
-		-->
+
+        var tipoFormatoSeleccionado = '';
+
+        function fnSeleccionarTipoArchivo(id) {
+            tipoFormatoSeleccionado = id + "|" + document.all('lstFormatFile').value + "|-";
+            window.close();
+        }
+        function fnCerrarVentana() {
+            window.close();
+        }
+        function ShowModalidad() {
+            var val = document.getElementById("lstFormatFile").value;
+
+            if (val == 'standardXls') {
+                document.getElementById('lblModalidad').style.display = 'inline'
+                document.all('lstModalidad').style.display = 'inline'
+            } else {
+                document.getElementById('lblModalidad').style.display = 'none'
+                document.all('lstModalidad').style.display = 'none'
+            }
+
+        }
+        function ReturnValueSeleccionado() {
+            return tipoFormatoSeleccionado;
+        }
     </script>
 
 </head>
@@ -141,9 +132,9 @@
                         <tr>
                             <td class="SubHead" align="center">
                                 <!--onclick="JavaScript:Send('<%=idP%>');"-->
-                                <a href="#" onclick="JavaScript:EnviaCorreo('<%=idP%>')">
+                                <a href="#" onclick="JavaScript:fnSeleccionarTipoArchivo('<%=idP%>')">
                                     <%--Enviar archivo en correo electronico--%>
-                                    Obtener archivo </a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" onclick="JavaScript:Cerrar2();">
+                                    Obtener archivo </a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" onclick="JavaScript:fnCerrarVentana();">
                                         Cancelar</a>
                             </td>
                         </tr>

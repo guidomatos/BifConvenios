@@ -1,10 +1,9 @@
-Imports System.Configuration.ConfigurationSettings
-Imports system.data.sqlclient
+Imports System.Data.SqlClient
 
 Namespace BIFConvenios
 
     Partial Class EsperaFinalGeneracionCF
-        Inherits System.Web.UI.Page
+        Inherits Page
         Protected oProceso As New Proceso()
         Protected Pid As String = ""
         Protected cantidad As String = ""
@@ -22,7 +21,7 @@ Namespace BIFConvenios
 
         End Sub
 
-        Private Sub Page_Init(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Init
+        Private Sub Page_Init(sender As Object, e As EventArgs) Handles MyBase.Init
             'CODEGEN: This method call is required by the Web Form Designer
             'Do not modify it using the code editor.
             InitializeComponent()
@@ -30,10 +29,10 @@ Namespace BIFConvenios
 
 #End Region
 
-        Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             'Put user code to initialize the page here
-            If Not Request.Params("id") Is Nothing Then
-                Pid = CType(Request.Params("id"), String)
+            If Request.Params("id") IsNot Nothing Then
+                Pid = Request.Params("id").ToString()
                 cantidad = CType(IIf(Request.Params("cantidad") Is Nothing, "", Request.Params("cantidad")), String)
                 montosoles = CType(IIf(Request.Params("montosoles") Is Nothing, "", Request.Params("montosoles")), String)
                 montodolares = CType(IIf(Request.Params("montodolares") Is Nothing, "", Request.Params("montodolares")), String)
@@ -86,8 +85,9 @@ Namespace BIFConvenios
                 End If
                 'Esperamos el final de la generacion del archivo
                 If oProceso.GetFinalGeneracionArchivo(Pid, Context.User.Identity.Name) Then
-                    pnlFinal.Visible = True
+                    'pnlFinal.Visible = True
                     oProceso.InsertaNominaEntradaSalida(Pid, cantidad, montosoles, montodolares, tipoNomina, indicadorFormato, tipoProceso, Context.User.Identity.Name)
+                    Response.Redirect(ResolveUrl("/generacioncf/AccesoArchivoGenerado.aspx?id=" + Pid))
                 Else
                     pnlSwf.Visible = True
                 End If
@@ -95,7 +95,7 @@ Namespace BIFConvenios
         End Sub
 
         'Rutina para mostrar un error generico
-        Private Sub MostrarMensajeGeneral(ByVal b As Boolean, ByVal str As String)
+        Private Sub MostrarMensajeGeneral(b As Boolean, str As String)
             pnlMensaje.Visible = b
             pnlFinal.Visible = Not b
             pnlSwf.Visible = Not b

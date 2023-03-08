@@ -1,19 +1,13 @@
 ﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="ContainerListadoConsultaEnvioFinCierre.aspx.vb" Inherits="BIFConvenios.ContainerListadoConsultaEnvioFinCierre" %>
 
-<%-- MIGRAR INNOVA FALTA
-	<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
-    Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>--%>
+<%@ Register assembly="Microsoft.ReportViewer.WebForms" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
 <%@ Register TagPrefix="uc1" TagName="Banner" Src="../controls/Banner.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
         <title>BIFConvenios - Listado de Importes por Vencer</title>
-		<meta name="GENERATOR" content="Microsoft Visual Studio.NET 7.0">
-		<meta name="CODE_LANGUAGE" content="Visual Basic 7.0">
-		<meta name="vs_defaultClientScript" content="JavaScript">
-		<link href="<%=Request.ApplicationPath%>/css/global.css" type="text/css" rel="stylesheet" />
-		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+		<link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
 		
 		<script type="text/javascript">
 		/* ADD NCA 08/07/2014 EA2013-273 OPT. PROCESOS CONVENIOS */
@@ -38,7 +32,7 @@
 			<thead>
 			    <tr>
 			        <th>
-						<img alt="" src="<%=Request.ApplicationPath%>/images/bar_begin.gif" height="17"/>
+						<img alt="" src="<%= ResolveUrl("~/images/bar_begin.gif") %>" height="17"/>
 					</th>
 			        <th>
 			            <a href="javascript:EnviarReporte('<%=Request.Params("idx")%>');">Exportar Archivo Descuentos</a>
@@ -46,16 +40,15 @@
 			        
 			        </th>
 			        <th>
-						<img src="<%=Request.ApplicationPath%>/images/bar_end.gif" height="17"/>
+						<img alt="" src="<%= ResolveUrl("~/images/bar_end.gif") %>" height="17"/>
 				    </th>
 			        <th>
 			        </th>
 			    </tr>
 			</thead>
 			</table>
-           <%--  MIGRAR INNOVA FALTA
-			   <rsweb:ReportViewer ID="ReportViewer1" runat="server">
-            </rsweb:ReportViewer>--%>
+			<rsweb:ReportViewer ID="ReportViewer1" runat="server">
+            </rsweb:ReportViewer>
 			
 			<!-- END -->
 			    

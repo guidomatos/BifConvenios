@@ -1,15 +1,14 @@
-Imports system.data.sqlclient
-Imports System.Configuration.ConfigurationSettings
+Imports System.Data.SqlClient
 
 Namespace BIFConvenios
 
     Partial Class EnvioReporteMail
-        Inherits System.Web.UI.Page
+        Inherits Page
         Protected archivo As String = ""
 
         Protected strEmailCliente As String
         Protected PID As String = ""
-        Protected oCliente As New BIFConvenios.Cliente()
+        Protected oCliente As New Cliente()
         Protected oProceso As New Proceso()
 
 #Region " Web Form Designer Generated Code "
@@ -19,7 +18,7 @@ Namespace BIFConvenios
 
         End Sub
 
-        Private Sub Page_Init(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Init
+        Private Sub Page_Init(sender As Object, e As EventArgs) Handles MyBase.Init
             'CODEGEN: This method call is required by the Web Form Designer
             'Do not modify it using the code editor.
             InitializeComponent()
@@ -27,18 +26,18 @@ Namespace BIFConvenios
 
 #End Region
 
-        Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-            If Not Request.Params("idP") Is Nothing And Not Request.Params("Archivo") Is Nothing Then
-                PID = CType(Request.Params("idP"), String)
-                archivo = CType(Request.Params("Archivo"), String)
+            If Request.Params("idP") IsNot Nothing And Request.Params("Archivo") IsNot Nothing Then
+                PID = Request.Params("idP")
+                archivo = Request.Params("Archivo")
             End If
 
             If Not Page.IsPostBack Then
-                If Not Request.Params("idP") Is Nothing And Not Request.Params("Archivo") Is Nothing Then
-                    Dim Anio_periodo As String
-                    Dim Mes_Periodo As String
-                    Dim dr As SqlDataReader = oCliente.GetEmails(CType(Request.Params("idP"), String))
+                If Request.Params("idP") IsNot Nothing And Request.Params("Archivo") IsNot Nothing Then
+                    Dim Anio_periodo As String = ""
+                    Dim Mes_Periodo As String = ""
+                    Dim dr As SqlDataReader = oCliente.GetEmails(Request.Params("idP"))
                     If dr.Read Then
                         lblCliente.Text = CType(dr("Nombre_Cliente"), String)
                         strEmailCliente = CType(dr("CorreoElectronico"), String)
@@ -46,7 +45,7 @@ Namespace BIFConvenios
                         Mes_Periodo = CType(dr("Mes_Periodo"), String)
                     End If
 
-                    txtComentario.Text = CType(AppSettings("mailCFBody"), String).Replace("#1", Periodo.GetMonthByNumber(Mes_Periodo)).Replace("#2", Anio_periodo)
+                    txtComentario.Text = ConfigurationManager.AppSettings("mailCFBody").Replace("#1", Periodo.GetMonthByNumber(Mes_Periodo)).Replace("#2", Anio_periodo)
 
                     Dim ar As New ArrayList()
 
@@ -65,7 +64,7 @@ Namespace BIFConvenios
         Protected Class MailSource
             Private mmail As String
 
-            Sub New(ByVal mail As String)
+            Sub New(mail As String)
                 mmail = mail
             End Sub
 
@@ -73,19 +72,19 @@ Namespace BIFConvenios
                 Get
                     Return mmail
                 End Get
-                Set(ByVal Value As String)
+                Set(Value As String)
                     mmail = Value
                 End Set
             End Property
         End Class
 
-        Private Sub lnkEnviarEmail_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lnkEnviarEmail.Click
+        Private Sub lnkEnviarEmail_Click(sender As Object, e As EventArgs) Handles lnkEnviarEmail.Click
             Dim strMails As String
             'Si no este TEST hacemos el envio regular
-            If CType(AppSettings("testOnly"), String).Trim = "0" Then
+            If ConfigurationManager.AppSettings("testOnly").Trim = "0" Then
                 strMails = GetCheckedMails()
             Else    ' en otro caso enviamos el correo a una direccion de prueba
-                strMails = CType(AppSettings("mailBcc"), String)
+                strMails = ConfigurationManager.AppSettings("mailBcc")
             End If
 
             Dim strNombreArchivoProceso As String
@@ -95,12 +94,12 @@ Namespace BIFConvenios
             'strMails, _
             '"respinoza@bif.com.pe", _
             'TODO: colocar el cuerpo del correo electronico con los atachados
-            Utils.SendNotification(CType(AppSettings("mailSender"), String), strMails, _
-                                    CType(AppSettings("mailBcc"), String), _
-                                    CType(AppSettings("mailCFSubject"), String), _
-                                    txtComentario.Text, strNombreArchivoProceso, notifyTo:=CType(AppSettings("mailSender"), String))
+            Utils.SendNotification(ConfigurationManager.AppSettings("mailSender"), strMails,
+                                    ConfigurationManager.AppSettings("mailBcc"),
+                                    ConfigurationManager.AppSettings("mailCFSubject"),
+                                    txtComentario.Text, strNombreArchivoProceso, notifyTo:=ConfigurationManager.AppSettings("mailSender"))
 
-            oProceso.UpdateFechaObtencionArchivo(PID, True, context.User.Identity.Name)
+            oProceso.UpdateFechaObtencionArchivo(PID, True, Context.User.Identity.Name)
             pnlClose.Visible = True
         End Sub
         'Obtiene la lista de correos electronicos que han sido seleccionados
@@ -112,7 +111,7 @@ Namespace BIFConvenios
             For i = 0 To dgGen.Items.Count - 1
                 chk = dgGen.Items(i).FindControl("chk")
                 If chk.Checked Then
-                    strMails = strMails & dgGen.Items(i).Cells(1).Text + ","
+                    strMails &= dgGen.Items(i).Cells(1).Text + ","
                 End If
             Next
 
