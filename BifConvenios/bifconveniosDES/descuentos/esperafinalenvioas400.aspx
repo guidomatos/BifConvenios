@@ -1,23 +1,16 @@
 <%@ Page Language="vb" AutoEventWireup="false" Inherits="BIFConvenios.EsperaFinalEnvioAS400" CodeFile="EsperaFinalEnvioAS400.aspx.vb" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML>
-	<HEAD>
+<html>
+	<head>
 		<title>Espere un momento, estamos enviando la información...</title>
-		<meta content="Microsoft Visual Studio.NET 7.0" name="GENERATOR">
-		<meta content="Visual Basic 7.0" name="CODE_LANGUAGE">
-		<meta content="JavaScript" name="vs_defaultClientScript">
-		<META http-equiv="Refresh" content="5">
-		<META http-equiv="Pragma" content="no-cache">
-		<META http-equiv="Expires" content="-1">
-		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
-	</HEAD>
+	</head>
 	<body leftMargin="0" topMargin="0" rightMargin="0">
 		<form id="Form1" method="post" runat="server">
-			<asp:panel id="pnlSwf" Visible="False" Runat="server" BorderWidth=0 >
-				<TABLE height="100%" cellSpacing="0" cellPadding="0" width="100%" border="0">
-					<TR>
-						<TD>
-							<SCRIPT language="VBScript">
+			<asp:Panel id="pnlSwf" Visible="False" Runat="server" BorderWidth=0 >
+				<table height="100%" cellSpacing="0" cellPadding="0" width="100%" border="0">
+					<tr>
+						<td>
+							<script type="text/vbscript" language="VBScript">
 							<!--
 								Private i, x, MM_FlashControlVersion
 								On Error Resume Next
@@ -42,26 +35,29 @@
 								document.write "Procesando..."
 								End If
 								-->
-							</SCRIPT>
-						</TD>
-					</TR>
+							</script>
+						</td>
+					</tr>
 					<TR>
-						<TD align=center>
-							<asp:Label id="lblAvance" Runat="server"  Font-Names=Verdana Font-Size=8   Font-Bold=True ForeColor=Silver ></asp:Label></TD>
+						<td align="center">
+							<asp:Label id="lblAvance" runat="server" Font-Names="Verdana" Font-Size="8" Font-Bold="True" ForeColor="Silver" ></asp:Label>
+						</td>
 					</TR>
-				</TABLE>
-			</asp:panel><asp:panel id="pnlMensaje" Visible="False" Runat="server">
-				<asp:label id="lblMensaje" Runat="server"></asp:label>
-			</asp:panel><asp:panel id="pnlFinal" Visible="False" Runat="server">
-				<SCRIPT language="javascript">
-            <!--
-            //Mostramos los reportes de la carga
-            	if ( window.opener != null ) {
-            		window.opener.location.href = "ReporteProcesoDescuento.aspx";  
-            		window.close();
-            	}
-            -->
-				</SCRIPT>
-			</asp:panel></form>
+				</table>
+			</asp:Panel>
+			<asp:Panel id="pnlMensaje" Visible="false" runat="server">
+				<asp:Label id="lblMensaje" Runat="server"></asp:Label>
+			</asp:Panel>
+			<asp:Panel id="pnlFinal" Visible="False" Runat="server">
+				<script type="text/javascript" language="javascript">
+					<!--
+					//Mostramos los reportes de la carga
+            			if ( window.opener != null ) {
+            				window.opener.location.href = "ReporteProcesoDescuento.aspx";  
+            				window.close();
+            			}
+					-->
+				</script>
+			</asp:Panel></form>
 	</body>
-</HTML>
+</html>

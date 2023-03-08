@@ -1,6 +1,6 @@
 Namespace BIFConvenios
     Partial Class ProcesarBloqueosWaitEnd
-        Inherits System.Web.UI.Page
+        Inherits Page
 
 #Region " Web Form Designer Generated Code "
 
@@ -17,7 +17,7 @@ Namespace BIFConvenios
 
 #End Region
 
-        Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
             Try
                 If Not Bloqueo.isLoteBloqueoProcesado(Request.Params("numeroLote")) Then

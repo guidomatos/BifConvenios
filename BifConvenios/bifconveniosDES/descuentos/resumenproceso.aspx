@@ -6,31 +6,19 @@
 <html>
 <head>
     <title>BIFConvenios - Enviar Información a IBS</title>
-    <link href="<%=Request.ApplicationPath%>/css/global.css" type="text/css" rel="stylesheet" />
-    <meta content="Microsoft Visual Studio.NET 7.0" name="GENERATOR" />
-    <meta content="Visual Basic 7.0" name="CODE_LANGUAGE" />
-    <meta content="JavaScript" name="vs_defaultClientScript" />
-    <meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema" />
+    <link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
+    <script src='<%=ResolveUrl("~/js/global.js") %>' language ="javascript" type="text/javascript"></script>
 
-    <script language="javascript" src="<%Response.Write(Request.ApplicationPath)%>/js/global.js"
-        type="text/javascript"></script>
-
-    <script language="javascript">
-		<!--
-		function Procesar ( id ) {
-			if ( confirm ( '¿Desea enviar el archivo de cuotas recibido de la Empresa a IBS?') ) {
-				document.all('hdIdEnvio').value = id;
-				__doPostBack('lnkEnviar', '');			
-			}
-		}
-		
-		function MsgAlerta(){
-			alert("No cuenta con fondos suficientes para realizar la operación.");
-		}
-		-->
-		
-		
-		
+    <script type="text/javascript" language="javascript">
+        function Procesar(id) {
+            if (confirm('¿Desea enviar el archivo de cuotas recibido de la Empresa a IBS?')) {
+                document.all('hdIdEnvio').value = id;
+                __doPostBack('lnkEnviar', '');
+            }
+        }
+        function MsgAlerta() {
+            alert("No cuenta con fondos suficientes para realizar la operación.");
+        }
     </script>
 
 </head>
@@ -59,7 +47,7 @@
                                             <td class="SubHead">
                                                 Empresa</td>
                                             <td class="Normal" width="75%">
-                                                <asp:Literal ID="ltrlCliente" runat="server"></asp:Literal></FONT></td>
+                                                <asp:Literal ID="ltrlCliente" runat="server"></asp:Literal></td>
                                         </tr>
                                         <tr>
                                             <td class="SubHead">
@@ -71,13 +59,13 @@
                                             <td class="SubHead">
                                                 Estado</td>
                                             <td class="Normal">
-                                                <asp:Literal ID="ltrlEstado" runat="server"></asp:Literal></FONT></td>
+                                                <asp:Literal ID="ltrlEstado" runat="server"></asp:Literal></td>
                                         </tr>
                                         <tr>
                                             <td class="SubHead">
                                                 Periodo</td>
                                             <td class="Normal">
-                                                <asp:Literal ID="ltrlPeriodo" runat="server"></asp:Literal></FONT></td>
+                                                <asp:Literal ID="ltrlPeriodo" runat="server"></asp:Literal></td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">
@@ -125,11 +113,11 @@
                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                     <asp:Label ID="lblMensaje" CssClass="SubHead" runat="server"></asp:Label>
 
-                                    <script language="javascript">
-							<!--
-							//procedimiento para mostrar la ventana de espera del proceso
-								openPage('EsperaFinalEnvioAS400.aspx?id=<%=Pid%>', 300, 390);							
-							-->
+                                    <script type="text/javascript" language="javascript">
+							        <!--
+							        //procedimiento para mostrar la ventana de espera del proceso
+								        openPage('EsperaFinalEnvioAS400.aspx?id=<%=Pid%>', 300, 390);							
+							        -->
                                     </script>
 
                                 </asp:Panel>

@@ -1,5 +1,5 @@
 Partial Class EsperaFinalAnulacion
-    Inherits System.Web.UI.Page
+    Inherits Page
     Protected oProcess As New BIFConvenios.Proceso()
 
 #Region " Web Form Designer Generated Code "
@@ -17,7 +17,7 @@ Partial Class EsperaFinalAnulacion
 
 #End Region
 
-    Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Put user code to initialize the page here
         If Not Request.Params("id") Is Nothing Then
 

@@ -1,8 +1,6 @@
-Imports System.Configuration.ConfigurationSettings
-
 Namespace BIFConvenios
     Partial Class reporteProcesoDescuento
-        Inherits System.Web.UI.Page
+        Inherits Page
         Protected oProc As New Proceso()
         Protected idProcess As String = ""
         Protected objWSConvenios As New wsBIFConvenios.WSBIFConveniosClient
@@ -10,11 +8,11 @@ Namespace BIFConvenios
 #Region " Web Form Designer Generated Code "
 
         'This call is required by the Web Form Designer.
-        <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
+        <Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
 
         End Sub
 
-        Private Sub Page_Init(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Init
+        Private Sub Page_Init(sender As Object, e As EventArgs) Handles MyBase.Init
             'CODEGEN: This method call is required by the Web Form Designer
             'Do not modify it using the code editor.
             InitializeComponent()
@@ -22,7 +20,7 @@ Namespace BIFConvenios
 
 #End Region
 
-        Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             If Not Page.IsPostBack Then
                 '-------Informacion del año
                 ddlAnio.DataSource = oProc.GetAniosProcesoDescuentosCompletado()
@@ -54,20 +52,20 @@ Namespace BIFConvenios
             ddlMes.Items.Insert(0, New ListItem("-- Todos los meses --", ""))
             ddlMes.SelectedIndex = ddlMes.Items.IndexOf(ddlMes.Items.FindByValue(Now.Month.ToString()))
         End Sub
-        Private Sub ddlMes_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ddlMes.SelectedIndexChanged
+        Private Sub ddlMes_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlMes.SelectedIndexChanged
             Call BindGrid()
         End Sub
 
-        Private Sub ddlAnio_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ddlAnio.SelectedIndexChanged
+        Private Sub ddlAnio_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlAnio.SelectedIndexChanged
             Call GetMonths()
         End Sub
 
-        Protected Function MostrarEnlace(ByVal codigo_proceso As Guid, ByVal b As Boolean, _
-                        ByVal nombrecliente As String, ByVal anio As String, ByVal mes As String, ByVal MensajeEnvio As Object, ByVal Fecha_ProcesoAS400 As String) As String
+        Protected Function MostrarEnlace(codigo_proceso As Guid, b As Boolean,
+                        nombrecliente As String, anio As String, mes As String, MensajeEnvio As Object, Fecha_ProcesoAS400 As String) As String
             Dim returnValue As String = ""
             If b Then
                 'returnValue = "<a href=""JavaScript:Procesar('" & codigo_proceso.ToString & "', '" & nombrecliente & "','" & anio & "','" & mes & "');"">Enviar información a AS/400</a>"
-                returnValue = "<a href=""JavaScript:Procesar('" & codigo_proceso.ToString & "', '" & nombrecliente.Replace("'", "") & "','" & anio & "','" & mes & "','" + BIFConvenios.Utils.GetFechaCanonica(Fecha_ProcesoAS400) + _
+                returnValue = "<a href=""JavaScript:Procesar('" & codigo_proceso.ToString & "', '" & nombrecliente.Replace("'", "") & "','" & anio & "','" & mes & "','" + BIFConvenios.Utils.GetFechaCanonica(Fecha_ProcesoAS400) +
                                 "');"">" & MensajeEnvio & "</a>"
             Else
 
@@ -78,12 +76,13 @@ Namespace BIFConvenios
 
         ' Funcion que devuelve la cadena conteniendo el enlace para realizar la anulacion del proceso
         ' del archivo de descuentos
-        Protected Function MostrarEnlaceAnulacionProceso(ByVal codigo_proceso As Guid, ByVal CanProcess As Boolean, _
-                ByVal nombrecliente As String, ByVal anio As String, ByVal mes As String, ByVal Fecha_ProcesoAS400 As String)
-            Dim returnValue As String = ""
+        Protected Function MostrarEnlaceAnulacionProceso(codigo_proceso As Guid, CanProcess As Boolean,
+                nombrecliente As String, anio As String, mes As String, Fecha_ProcesoAS400 As String)
+            Dim returnValue As String
+
             If CanProcess Then
-                returnValue = "<a href=""JavaScript:AnularProceso('" & codigo_proceso.ToString & "', '" & _
-                                nombrecliente.Replace("'", "") & "','" & anio & "','" & mes & "','" + BIFConvenios.Utils.GetFechaCanonica(Fecha_ProcesoAS400) + _
+                returnValue = "<a href=""JavaScript:AnularProceso('" & codigo_proceso.ToString & "', '" &
+                                nombrecliente.Replace("'", "") & "','" & anio & "','" & mes & "','" + Utils.GetFechaCanonica(Fecha_ProcesoAS400) +
                                 "');"">Anular proceso de Archivo de cuotas</a>"
             Else
                 returnValue = ""
@@ -92,12 +91,12 @@ Namespace BIFConvenios
         End Function
 
 
-        Private Sub lnkEnviar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lnkEnviar.Click
+        Private Sub lnkEnviar_Click(sender As Object, e As EventArgs) Handles lnkEnviar.Click
 
             '--------Usado en la llamada remoting
             Dim objSender As BroadcasterClass.GOIntranet.SubmitSuscription
             Dim objEventSink As BroadcasterClass.GOIntranet.EventSink
-            Dim ComputerName As String = System.Configuration.ConfigurationSettings.AppSettings("RemotingServer")
+            Dim ComputerName As String = ConfigurationManager.AppSettings("RemotingServer")
             Dim serverUriSubmition As String
             Dim serverUriSink As String
             Dim args As Object() = {}
@@ -109,8 +108,8 @@ Namespace BIFConvenios
                 idProcess = hdIdEnvio.Value
                 'Realizamos la llamada remoting
 
-                serverUriSubmition = "tcp://" & ComputerName & ":" + AppSettings("ipPort") + "/BIFRemotingSubmition"
-                serverUriSink = "tcp://" & ComputerName & ":" + AppSettings("ipPort") + "/BIFRemotingEventSink"
+                serverUriSubmition = "tcp://" & ComputerName & ":" + ConfigurationManager.AppSettings("ipPort") + "/BIFRemotingSubmition"
+                serverUriSink = "tcp://" & ComputerName & ":" + ConfigurationManager.AppSettings("ipPort") + "/BIFRemotingEventSink"
 
                 objSender = CType(Activator.GetObject(GetType(BroadcasterClass.GOIntranet.SubmitSuscription), serverUriSubmition), BroadcasterClass.GOIntranet.SubmitSuscription)
                 objEventSink = CType(Activator.GetObject(GetType(BroadcasterClass.GOIntranet.EventSink), serverUriSink), BroadcasterClass.GOIntranet.EventSink)
@@ -132,11 +131,11 @@ Namespace BIFConvenios
 
         End Sub
 
-        Private Sub lnkAnularProceso_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lnkAnularProceso.Click
+        Private Sub lnkAnularProceso_Click(sender As Object, e As EventArgs) Handles lnkAnularProceso.Click
             '--------Usado en la llamada remoting
             'Dim objSender As BroadcasterClass.GOIntranet.SubmitSuscription
             'Dim objEventSink As BroadcasterClass.GOIntranet.EventSink
-            'Dim ComputerName As String = System.Configuration.ConfigurationSettings.AppSettings("RemotingServer")
+            'Dim ComputerName As String = Configuration.ConfigurationSettings.AppSettings("RemotingServer")
             'Dim serverUriSubmition As String
             'Dim serverUriSink As String
             'Dim args As Object() = {}
