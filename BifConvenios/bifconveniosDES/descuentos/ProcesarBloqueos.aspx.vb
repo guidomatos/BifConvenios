@@ -1,7 +1,7 @@
 Namespace BIFConvenios
 
     Partial Class ProcesarBloqueos
-        Inherits System.Web.UI.Page
+        Inherits Page
 
 #Region " Web Form Designer Generated Code "
 
@@ -18,21 +18,21 @@ Namespace BIFConvenios
 
 #End Region
 
-        Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             'Put user code to initialize the page here
             Dim pagares As String
             Dim proceso As String
             Dim loteBloqueo As Integer
             'TODO: REspinoza - en este punto comenzamos a necesitar COM+ para soportar entorno transaccional
             'nada garantizado
-            If Not Request.Params("pagares") Is Nothing Then
+            If Request.Params("pagares") IsNot Nothing Then
                 pagares = Request.Params("pagares").Replace("!", "")
                 proceso = Request.Params("proceso")
                 Dim userName As String
-                If context.User.Identity.Name.IndexOf("\") > 0 Then
-                    userName = context.User.Identity.Name.Split("\")(1)
+                If Context.User.Identity.Name.IndexOf("\") > 0 Then
+                    userName = Context.User.Identity.Name.Split("\")(1)
                 End If
-                loteBloqueo = Bloqueo.procesaBloqueo(proceso, pagares, context.User.Identity.Name)
+                loteBloqueo = Bloqueo.procesaBloqueo(proceso, pagares, Context.User.Identity.Name)
                 Response.Redirect("ProcesarBloqueosWaitEnd.aspx?numeroLote=" + CStr(loteBloqueo))
             Else
                 lblMensaje.Text = "Envío inválido"

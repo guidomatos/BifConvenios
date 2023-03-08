@@ -3,54 +3,47 @@
 <HTML>
 	<HEAD>
 		<title>ProcesarBloqueosTestWait</title>
-		<meta name="GENERATOR" content="Microsoft Visual Studio.NET 7.0">
-		<meta name="CODE_LANGUAGE" content="Visual Basic 7.0">
-		<meta name="vs_defaultClientScript" content="JavaScript">
-		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
-		<LINK href="<%=Request.ApplicationPath%>/css/global.css" 
-type=text/css rel=stylesheet>
-		<script language="javascript">
-		<!--
-			function send(){
+		<link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
+		<script type="text/javascript" language="javascript">
+			function send() {
 				document.forms["frmWait"].submit();
 			}
 			
-			function close(){
-					top.document.all ( "divFrame").className = "hide1";
-					top.document.all('dvData').className='show';		
-					top.document.all('fraProccess').src='';	
+			function close() {
+				top.document.all("divFrame").className = "hide1";
+				top.document.all('dvData').className = 'show';
+				top.document.all('fraProccess').src = '';
 			}
-		-->
 		</script>
 	</HEAD>
 	<body>
 		<form id="Form1" method="post" runat="server">
 			<asp:Panel ID="pnlError" Runat="server" visible="False">
-				<TABLE cellSpacing="0" cellPadding="0" border="0">
-					<TR>
-						<TD width="20" rowSpan="2">&nbsp;</TD>
-						<TD class="PageTitle" colSpan="2">Bloqueo</TD>
-					</TR>
-					<TR>
-						<TD>
-							<asp:Label id="lblMensaje" Runat="server"></asp:Label></TD>
-					</TR>
-				</TABLE>
+				<table cellSpacing="0" cellPadding="0" border="0">
+					<tr>
+						<td width="20" rowSpan="2">&nbsp;</td>
+						<td class="PageTitle" colSpan="2">Bloqueo</td>
+					</tr>
+					<tr>
+						<td>
+							<asp:Label id="lblMensaje" Runat="server"></asp:Label></td>
+					</tr>
+				</table>
 			</asp:Panel>
-			<asp:literal ID="lrtlSwf" Runat="server" Visible="False">
-				<TABLE cellSpacing="0" cellPadding="0" width="100%" border="0">
-					<TR>
-						<TD width="80" rowSpan="2">&nbsp;</TD>
-						<TD><BR>
-							<BR>
-							<BR>
-							<BR>
-							<BR>
-						</TD>
-					</TR>
-					<TR>
-						<TD vAlign="center">
-							<SCRIPT language="VBScript">
+			<asp:Literal ID="lrtlSwf" Runat="server" Visible="False">
+				<table cellSpacing="0" cellPadding="0" width="100%" border="0">
+					<tr>
+						<td width="80" rowSpan="2">&nbsp;</td>
+						<td><br>
+							<br>
+							<br>
+							<br>
+							<br>
+						</td>
+					</tr>
+					<tr>
+						<td vAlign="center">
+							<script type="text/vbscript" language="VBScript">
 							<!--
 								Private i, x, MM_FlashControlVersion
 								On Error Resume Next
@@ -75,21 +68,21 @@ type=text/css rel=stylesheet>
 								document.write "Procesando..."
 								End If
 								-->
-							</SCRIPT>
-						</TD>
-					</TR>
-				</TABLE>
-			</asp:literal>
+							</script>
+						</td>
+					</tr>
+				</table>
+			</asp:Literal>
 		</form>
 		<form action="ProcesarBloqueos.aspx" method="post" id="frmWait" name="frmWait">
-			<input type="hidden" name="pagares" runat="server"  id="pagares" value="<%=pagares%>"> <input type="hidden"  runat ="server" name="proceso" id="proceso" value="<%=proceso%>" >
+			<input type="hidden" name="pagares" runat="server" id="pagares" value="<%=pagares%>"> <input type="hidden" runat="server" name="proceso" id="proceso" value="<%=proceso%>" >
 		</form>
 		<asp:Literal id="ltrlScript" runat="server" Visible="False">
-			<SCRIPT language="javascript">
+			<script type="text/javascript" language="javascript">
 				<!--
 					send ();
 				-->
-			</SCRIPT>
+			</script>
 		</asp:Literal>
 	</body>
 </HTML>

@@ -1,8 +1,9 @@
 Namespace BIFConvenios
 
-    Partial Class BuscarParametrosEmpresaSeguimiento
+    Partial Class BuscarParametrosEmpresa
         Inherits Page
 
+        Protected oProc As New Proceso()
 #Region " Web Form Designer Generated Code "
 
         'This call is required by the Web Form Designer.
@@ -22,7 +23,7 @@ Namespace BIFConvenios
             'Put user code to initialize the page here
             If Not Page.IsPostBack Then
                 '-------Informacion del año
-                ddlAnio.DataSource = Proceso.GetAniosProcesoSeguimiento()
+                ddlAnio.DataSource = oProc.GetAnioEnvioArchivoAS400()
                 ddlAnio.DataBind()
                 ddlAnio.Items.Insert(0, New ListItem("-- Seleccione --", ""))
                 ddlAnio.SelectedIndex = ddlAnio.Items.IndexOf(ddlAnio.Items.FindByValue(Now.Year.ToString()))
@@ -30,7 +31,9 @@ Namespace BIFConvenios
                 'Informacion del mes
                 Call GetMonths()
                 Call BindGrid()
+
             End If
+
         End Sub
 
         Private Sub ddlMes_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlMes.SelectedIndexChanged
@@ -39,7 +42,7 @@ Namespace BIFConvenios
 
 
         Private Sub GetMonths()
-            ddlMes.DataSource = Periodo.GetMonthsByReaderWithOutZero(Proceso.GetMesesProcesoSeguimiento(ddlAnio.SelectedItem.Value))
+            ddlMes.DataSource = Periodo.GetMonthsByReaderWithOutZero(oProc.GetMesesEnvioArchivoAS400(ddlAnio.SelectedItem.Value))
             ddlMes.DataBind()
             ddlMes.Items.Insert(0, New ListItem("-- Seleccione --", ""))
             ddlMes.SelectedIndex = ddlMes.Items.IndexOf(ddlMes.Items.FindByValue(Now.Month.ToString()))
@@ -50,7 +53,7 @@ Namespace BIFConvenios
         End Sub
 
         Private Sub BindGrid()
-            dgDatos.DataSource = Proceso.GetProcesosSeguimiento(ddlAnio.SelectedItem.Value, ddlMes.SelectedItem.Value)
+            dgDatos.DataSource = oProc.GetProcesosEnvioArchivoAS400(ddlAnio.SelectedItem.Value, ddlMes.SelectedItem.Value)
             dgDatos.DataBind()
             lblNumReg.Text = dgDatos.Items.Count.ToString
             '            If dgDatos.Items.Count = 0 Then

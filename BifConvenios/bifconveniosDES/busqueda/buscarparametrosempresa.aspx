@@ -1,16 +1,15 @@
-<%@ Page Language="vb" AutoEventWireup="false" Inherits="BIFConvenios.BuscarParametrosEmpresaSeguimiento" CodeFile="BuscarParametrosEmpresaSeguimiento.aspx.vb" %>
+<%@ Page Language="vb" AutoEventWireup="false" Inherits="BIFConvenios.BuscarParametrosEmpresa" CodeFile="BuscarParametrosEmpresa.aspx.vb" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML>
-	<HEAD>
+<html>
+	<head>
 		<title>Selección de Empresa y Periodo</title>
 		<BASE TARGET="_self">
 		<link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
-		<script src='<%=ResolveUrl("~/js/global.js") %>' language ="javascript" type="text/javascript"></script>
+		<script src ='<%=ResolveUrl("~/js/global.js") %>' language="javascript" type="text/javascript"></script>
 		<script type="text/javascript" language="javascript">
 
-            var dataEmpresaSeleccionada = undefined;
-			function fnSeleccionarEmpresaPeriodo() {
-				
+			var dataEmpresaSeleccionada = undefined;
+            function fnSeleccionarEmpresaPeriodo() {
 				if (getSelectedRadio(document.all("rData")) != -1) {
                     dataEmpresaSeleccionada = getSelectedRadioValue(document.all("rData"));
 					window.close();
@@ -18,17 +17,17 @@
 				else {
 					alert('Seleccione una empresa y periodo');
 				}
-			}
 
-			function fnCerrarVentana() {
+			}
+            function fnCerrarVentana() {
 				window.close();
 			}
-
 			function ReturnValueSeleccionado() {
-                return dataEmpresaSeleccionada;
-			}
+				return dataEmpresaSeleccionada;
+            }
+
         </script>
-	</HEAD>
+	</head>
 	<body topmargin="10" leftmargin="15">
 		<form id="Form1" method="post" runat="server">
 			<table border="0" cellpadding="0" width="100%">
@@ -48,7 +47,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2" align="middle">
+					<td colspan="2" align="center">
 						<table border="0" cellspacing="0" cellpadding="0">
 							<tr>
 								<td class="CommandButton"><a href="javascript:fnSeleccionarEmpresaPeriodo();">Seleccionar</a>&nbsp;</td>
@@ -65,7 +64,7 @@
 							<Columns>
 								<asp:TemplateColumn>
 									<ItemTemplate>
-										<input type="radio" id="rData" name="rData" value='<%#DataBinder.Eval(Container.DataItem,"Codigo_proceso")%>|<%#DataBinder.Eval(Container.DataItem,"Anio_periodo")%>|<%#DataBinder.Eval(Container.DataItem,"Mes_Periodo")%>|<%#DataBinder.Eval(Container.DataItem,"Codigo_Cliente")%>|<%#DataBinder.Eval(Container.DataItem,"Nombre_Cliente")%>|<%#BIFConvenios.Periodo.GetMonthByNumber ( DataBinder.Eval (Container.DataItem, "Mes_Periodo"))%> <%#DataBinder.Eval (Container.DataItem, "Anio_periodo")%>|<%#DataBinder.Eval (Container.DataItem, "TipoDocumento")%>|<%#DataBinder.Eval (Container.DataItem, "NumeroDocumento")%>|<%#DataBinder.Eval (Container.DataItem, "Fecha_CorteSeguimiento")%>'>
+										<input type="radio" id="rData" name="rData" value='<%#DataBinder.Eval(Container.DataItem,"Codigo_proceso")%>|<%#DataBinder.Eval(Container.DataItem,"Anio_periodo")%>|<%#DataBinder.Eval(Container.DataItem,"Mes_Periodo")%>|<%#DataBinder.Eval(Container.DataItem,"Codigo_Cliente")%>|<%#DataBinder.Eval(Container.DataItem,"Nombre_Cliente")%>|<%#BIFConvenios.Periodo.GetMonthByNumber ( DataBinder.Eval (Container.DataItem, "Mes_Periodo"))%> <%#DataBinder.Eval (Container.DataItem, "Anio_periodo")%>|<%#DataBinder.Eval (Container.DataItem, "TipoDocumento")%>|<%#DataBinder.Eval (Container.DataItem, "NumeroDocumento")%>|<%#DataBinder.Eval (Container.DataItem, "FInicial")%>|<%#DataBinder.Eval (Container.DataItem, "FFinal")%>'>
 									</ItemTemplate>
 								</asp:TemplateColumn>
 								<asp:BoundColumn DataField="Nombre_Cliente" HeaderText="Nombre Cliente"></asp:BoundColumn>
@@ -85,7 +84,7 @@
 						<asp:Label id="lblNumReg" Width="10" CssClass="Text" Runat="server"></asp:Label></TD>
 				</TR>
 				<tr>
-					<td colspan="2" align="middle">
+					<td colspan="2" align="center">
 						<table border="0" cellspacing="0" cellpadding="0">
 							<tr>
 								<td class="CommandButton"><a href="javascript:fnSeleccionarEmpresaPeriodo();">Seleccionar</a>&nbsp;</td>
@@ -97,4 +96,4 @@
 			</table>
 		</form>
 	</body>
-</HTML>
+</html>

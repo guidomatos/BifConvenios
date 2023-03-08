@@ -1,7 +1,7 @@
 
 Namespace BIFConvenios
     Partial Class ProcesarBloqueosTestWait
-        Inherits System.Web.UI.Page
+        Inherits Page
 
 
 #Region " Web Form Designer Generated Code "
@@ -19,7 +19,7 @@ Namespace BIFConvenios
 
 #End Region
 
-        Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
             '20121016: AHSP(BANBIF) - Cambio del Proceso de Bloqueo
             'If Not Utils.TestServer() Then
@@ -35,7 +35,7 @@ Namespace BIFConvenios
             '    pagares.Value = Request.Params("pagares")
             '    proceso.Value = Request.Params("proceso")
             'End If
-            
+
             lrtlSwf.Visible = True
             ltrlScript.Visible = True
             lblMensaje.Visible = False
