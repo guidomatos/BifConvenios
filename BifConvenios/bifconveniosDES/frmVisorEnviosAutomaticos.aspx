@@ -11,14 +11,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
     <title>BIFConvenios - Visor de Envios Automaticos</title>
-    <meta content="Microsoft Visual Studio.NET 7.0" name="GENERATOR" />
-    <meta content="Visual Basic 7.0" name="CODE_LANGUAGE" />
-    <meta content="JavaScript" name="vs_defaultClientScript" />
-    <meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema" />
 
-    <link href="css/global.css" rel="stylesheet" type="text/css" />
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <script src="js/global.js" type="text/javascript"></script>
+    <link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
+    <link href="<%=ResolveUrl("~/css/style.css") %>" rel="Stylesheet" type="text/css" />
+    <script src='<%=ResolveUrl("~/js/global.js") %>' language ="javascript" type="text/javascript"></script>
         
     <script type="text/javascript">
         function ProcesarEnvioAutomatico() {
@@ -104,7 +100,6 @@
                 </td>
             </tr>
         </table>
-        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <div id="container" style="width:1200px;">
             <div class="row">
                 <div class="cell containercell">
@@ -124,9 +119,9 @@
                                                 <asp:Button ID="btnSearch" runat="server" Text="Filtrar" CssClass="button" />
                                             </td>
                                             <td style="width:150px;" align="right">
-                                                <asp:linkbutton id="lnkBack" Runat="server" Height="15px">
-                                                    <img src='/BIFConvenios/images/regresar.jpg' name='Image1' border="0" alt='Regresar' />
-                                                </asp:linkbutton>
+                                                <asp:LinkButton id="lnkBack" Runat="server" Height="15px">
+                                                    <img src="<%= ResolveUrl("~/images/regresar.jpg") %>" name='Image1' border="0" alt='Regresar' />
+                                                </asp:LinkButton>
                                             </td>
                                         </tr>
                                     </table>
