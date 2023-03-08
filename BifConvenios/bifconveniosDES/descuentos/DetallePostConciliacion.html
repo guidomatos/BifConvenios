@@ -3,20 +3,24 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>BIFConvenios - Generacion de documentos de cobranza</title>
-		<LINK href="../css/global.css" type="text/css" rel="stylesheet">
-			<link rel="stylesheet" type="text/css" href="../css/pop_style.css" />
-			<script type="text/javascript" language="JavaScript1.2" src="../js/common.js"></script>
+		<link href="../css/global.css" type="text/css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/pop_style.css" />
+		<script type="text/javascript" language="JavaScript1.2" src="../js/common.js"></script>
 	</head>
 	<body topmargin="10" leftmargin="15">
 		<script type="text/javascript" language="JavaScript1.2" src="../js/pop_events.js"></script>
 		<BASE TARGET="_self">
 		<script language="javascript">
-<!--
-	function seleccionaDocumento(){
-		top.returnValue = document.all("tipoDocumento").value;
-		window.close();
-	}
--->
+
+            var tipoDocumentoSeleccionado = '';
+
+			function seleccionaDocumento() {
+                tipoDocumentoSeleccionado = document.all("tipoDocumento").value;
+				window.close();
+			}
+            function ReturnValueSeleccionado() {
+                return tipoDocumentoSeleccionado;
+            }
 		</script>
 		<form ID="Form1">
 			<table border="0" cellpadding="0" cellspacing="0" width="400" ID="Table1">

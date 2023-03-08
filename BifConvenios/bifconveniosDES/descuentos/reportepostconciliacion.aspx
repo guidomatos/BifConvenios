@@ -1,24 +1,23 @@
-<%@ Page Language="vb" AutoEventWireup="false" Inherits="ReportePostConciliacion" CodeFile="ReportePostConciliacion.aspx.vb" EnableEventValidation="false"  %>
+ï»¿<%@ Page Language="vb" AutoEventWireup="false" Inherits="ReportePostConciliacion" CodeFile="ReportePostConciliacion.aspx.vb" EnableEventValidation="false"  %>
 <%@ Register TagPrefix="uc1" TagName="Banner" Src="../controls/Banner.ascx" %>
-<%@ Register TagPrefix="uc2" TagName="pnlBusParamEmpresa" Src="~/controls/BuscarParametrosEmpresa.ascx" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 	<head>
 	
-		<title>BIFConvenios - Post Conciliación</title>
+		<title>BIFConvenios - Post ConciliaciÃ³n</title>
 
 		<link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
-		<script src ='<%=ResolveUrl("~/js/global.js") %>' language ="javascript" type="text/javascript"></script>
+		<script src ='<%=ResolveUrl("~/js/global.js") %>' language="javascript" type="text/javascript"></script>
 
 		<link media="all" href="<%=ResolveUrl("~/css/calendar.css") %>" rel="Stylesheet" type="text/css" />
-		<script src ='<%=ResolveUrl("~/js/calendar.js") %>' language ="javascript" type="text/javascript"></script>
-		<script src ='<%=ResolveUrl("~/js/calendar-es.js") %>' language ="javascript" type="text/javascript"></script>
+		<script src='<%=ResolveUrl("~/js/calendar.js") %>' language="javascript" type="text/javascript"></script>
+		<script src='<%=ResolveUrl("~/js/calendar-es.js") %>' language="javascript" type="text/javascript"></script>
 		
 		<script language="javascript" type="text/javascript">
-				<!--
-			//Código para mostrar el calendario
+
+			//CÃ³digo para mostrar el calendario
 			var oldLink = null;
 
 			function selected(cal, date) {
@@ -51,7 +50,8 @@
 			}
 
 			function ShowDetalle(codEmpresa, numPagare, fechaDesde, fechaHasta, nombreTrabajador, montoTotal, moneda, cuotaMes, importeDescontado, deudaPeriodo) {
-				openDialog('<%=Request.ApplicationPath%>/consultas/ConsultaDetallePagosIBS.aspx?p1=' + codEmpresa + '&p2=' + numPagare + '&p3=' + fechaDesde + '&p4=' + fechaHasta + '&nt=' + nombreTrabajador + '&amount=' + montoTotal + '&mon=' + moneda + '&cuotaMes=' + cuotaMes + '&importeDescontado=' + importeDescontado + '&deudaPeriodo=' + deudaPeriodo, 380, 785);
+				// openDialog('<%=Request.ApplicationPath%>/consultas/ConsultaDetallePagosIBS.aspx?p1=' + codEmpresa + '&p2=' + numPagare + '&p3=' + fechaDesde + '&p4=' + fechaHasta + '&nt=' + nombreTrabajador + '&amount=' + montoTotal + '&mon=' + moneda + '&cuotaMes=' + cuotaMes + '&importeDescontado=' + importeDescontado + '&deudaPeriodo=' + deudaPeriodo, 380, 785);
+                openDialog('<%= ResolveUrl("~/consultas/ConsultaDetallePagosIBS.aspx") %>?p1=' + codEmpresa + '&p2=' + numPagare + '&p3=' + fechaDesde + '&p4=' + fechaHasta + '&nt=' + nombreTrabajador + '&amount=' + montoTotal + '&mon=' + moneda + '&cuotaMes=' + cuotaMes + '&importeDescontado=' + importeDescontado + '&deudaPeriodo=' + deudaPeriodo, 380, 785);
 			}
 
 			function Valida(obj, args) {
@@ -68,6 +68,50 @@
 					args.IsValid = true;
 				}
 			}
+
+            var popupBuscarEmpresa;
+            function fnOpenPopupBuscarEmpresa(url, height, width) {
+
+                // Obtener el tamaï¿½o de la ventana principal
+                var parentWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+                var parentHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+                // Calcular la posiciï¿½n de la ventana secundaria
+                var left = (parentWidth - width) / 2;
+                var top = (parentHeight - height) / 2;
+
+                popupBuscarEmpresa = window.open(url, '', 'left=' + left + ',top=' + top + ',height=' + height + 'px,width=' + width + 'px,toolbar=no,directories=no,status=no,continued from previous linemenubar = no, scrollbars = no, resizable = no, modal = yes');
+                popupBuscarEmpresa.opener = window;
+
+                var timer = setInterval(function () {
+                    if (popupBuscarEmpresa.closed) {
+                        clearInterval(timer);
+                        var result = popupBuscarEmpresa.ReturnValueSeleccionado();
+
+                        if (typeof result !== "undefined") {
+                            document.all('hdParam1').value = getvalue(result, 1, '|'); // Proceso 
+                            document.all('hdParam2').value = getvalue(result, 2, '|'); // AÃ±o
+                            document.all('hdParam3').value = getvalue(result, 3, '|'); // Mes
+                            document.all('hdParam4').value = getvalue(result, 7, '|'); // Tipo Documento
+                            document.all('hdParam5').value = getvalue(result, 8, '|'); // Numero Documento
+                            document.all('txtPeriodo').value = getvalue(result, 6, '|');
+                            document.all('hdCodigoEmpresa').value = getvalue(result, 4, '|');
+                            document.all('txtNombreEmpresa').value = getvalue(result, 5, '|');
+                            document.all('txtFechaDesde').value = getvalue(result, 9, '|');
+                            document.all('txtFechaHasta').value = getvalue(result, 10, '|');
+
+                            if (document.all('dvData') != null) {
+                                document.all('dvData').className = 'hide';
+                            }
+                        }
+                    }
+                }, 100);
+
+            }
+
+            function openBusqueda() {
+                fnOpenPopupBuscarEmpresa("<%= ResolveUrl("~/busqueda/BuscarParametrosEmpresa.aspx") %>", 380, 500);
+            }
 				
 				/***********************mostrar informacion acerca del documento a ser generado**************/
 			function checkall() {
@@ -98,37 +142,58 @@
 
                     procesarProrroga();
                 }
-            }
-		
-			function processGdChecks() {
-                document.getElementById('btnAbrirPanelProcesarTipoDocumentoCobranza').click();
 			}
 
-            function seleccionarTipoDocumentoCobranza() {
-				var tipoDocumentoSeleccionado = document.getElementById("cboTipoDocumentoCobranza").value;
-				document.getElementById('btnCerrarPanelProcesarTipoDocumentoCobranza').click();
 
+            var popupGenerarDocumentoCobranza;
+			function fnOpenPopupGenerarDocumentoCobranza(url, height, width) {
 
-                var data = getSelectedCheckboxValue(document.forms[0].chkData);
-                var pagares = '';
-                var amounts = '';
-                //Obtenemos la informacion de pagares para abrirlos en la ventana de impresion
-                for (var i = 0; i < data.length; i++) {
-                    pagares = pagares + "!" + data[i] + "!,";
-                    amounts = amounts + "!" + data[i] + '=' + document.all('dvAmount' + data[i]).value + "!,";
+				// Obtener el tamaï¿½o de la ventana principal
+				var parentWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+				var parentHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
-                }
-                pagares = pagares.substring(0, pagares.length - 1) + 'end';
-                amounts = amounts.substring(0, amounts.length - 1) + 'end';
-                document.forms["frmData"].dt.value = tipoDocumentoSeleccionado;
-                document.forms["frmData"].a.value = amounts;
-                document.forms["frmData"].p.value = pagares;
-                document.forms["frmData"].proceso.value = document.all('hdParam1').value;
-                document.forms["frmData"].anio.value = document.all('hdParam2').value; // Año
-                document.forms["frmData"].mes.value = document.all('hdParam3').value;
-                document.forms["frmData"].submit();
+				// Calcular la posiciï¿½n de la ventana secundaria
+				var left = (parentWidth - width) / 2;
+				var top = (parentHeight - height) / 2;
 
-            }
+				popupGenerarDocumentoCobranza = window.open(url, '', 'left=' + left + ',top=' + top + ',height=' + height + 'px,width=' + width + 'px,toolbar=no,directories=no,status=no,continued from previous linemenubar = no, scrollbars = no, resizable = no, modal = yes');
+				popupGenerarDocumentoCobranza.opener = window;
+
+				var timer = setInterval(function () {
+					if (popupGenerarDocumentoCobranza.closed) {
+						clearInterval(timer);
+						var result = popupGenerarDocumentoCobranza.ReturnValueSeleccionado();
+
+						if (typeof result !== "undefined") {
+							var data = getSelectedCheckboxValue(document.forms[0].chkData);
+							var pagares = '';
+							var amounts = '';
+							//Obtenemos la informacion de pagares para abrirlos en la ventana de impresion
+							for (var i = 0; i < data.length; i++) {
+								pagares = pagares + "!" + data[i] + "!,";
+								amounts = amounts + "!" + data[i] + '=' + document.all('dvAmount' + data[i]).value + "!,";
+
+							}
+							pagares = pagares.substring(0, pagares.length - 1) + 'end';
+							amounts = amounts.substring(0, amounts.length - 1) + 'end';
+							//openPage ( 'ContainerDocumentoCobranza.aspx?dt='+result + '&p=' +pagares , 600, 800);
+							document.forms["frmData"].dt.value = result;
+							document.forms["frmData"].a.value = amounts;
+							//alert ( amounts);					
+							document.forms["frmData"].p.value = pagares;
+							document.forms["frmData"].proceso.value = document.all('hdParam1').value;
+							document.forms["frmData"].anio.value = document.all('hdParam2').value; // AÃ±o					
+							document.forms["frmData"].mes.value = document.all('hdParam3').value;
+							document.forms["frmData"].submit();
+						}
+					}
+				}, 100);
+
+			}
+
+            function processGdChecks() {
+                fnOpenPopupGenerarDocumentoCobranza("DetallePostConciliacion.html", 180, 450);
+			}
 			
 			window.onload = function () {
 				MM_preloadImages('<%=ResolveUrl("~/images/procesar_on.jpg")%>');
@@ -155,7 +220,7 @@
 				document.all("divFrame").className = "show1";
 				document.all('dvData').className = 'hide';
 			}
-			//-->
+			
         </script>
 	</HEAD>
 	
@@ -171,7 +236,7 @@
 			
 			<table cellSpacing="0" cellPadding="0" width="100%" border="0">
 				<tr>
-					<td><uc1:banner id="Banner1" title="Post Conciliación" runat="server"></uc1:banner></td>
+					<td><uc1:banner id="Banner1" title="Post ConciliaciÃ³n" runat="server"></uc1:banner></td>
 				</tr>
 				<tr>
 					<td>
@@ -199,7 +264,7 @@
 														    <input id="hdCodigoEmpresa" type="hidden" name="hdCodigoEmpresa" runat="server">
 														</td>
 														<td>
-															<uc2:pnlBusParamEmpresa id="ucBuscarParanetroEmpresa" runat="server"></uc2:pnlBusParamEmpresa>
+														    <a href="javascript:openBusqueda()"><img alt="buscar" src="../images/texto.gif" border="0"></a>
 														</td>
 													</tr>
 												</table>
@@ -226,12 +291,12 @@
 										</tr>
 										<tr>
 											<td>
-												<asp:CheckBox runat="server" ID="chkInclude" Text="Filtrar también"></asp:CheckBox>
+												<asp:CheckBox runat="server" ID="chkInclude" Text="Filtrar tambiÃ©n"></asp:CheckBox>
 											</td>
 											<td colspan="2">
 												<asp:DropDownList ID="ddlBuscarpor" runat="server" Enabled="false">
 													<asp:ListItem Value="Nombre">Nombre de Cliente</asp:ListItem>
-													<asp:ListItem Value="Codigo">Código de Pagaré</asp:ListItem>
+													<asp:ListItem Value="Codigo">CÃ³digo de PagarÃ©</asp:ListItem>
 												</asp:DropDownList>
 
 												<asp:TextBox ID="txtCampo" runat="server" Enabled="false"></asp:TextBox>
@@ -260,9 +325,9 @@
 						&nbsp;Mostrar:
 						</div>
 					</td>
-					<td id=tdddl runat="server" visible="false">
-						<div id="dvddl"><!--<asp:ListItem  Value ="(SaldoDeudorAcreedor > 0) AND (DLID =0) And ( TotalPagosCliente ='0.00') And ( PAGOIBSPROCESOCOBRANZA='0.00') ">Págares para prorroga</asp:ListItem> -->
-							<table border=0 cellpadding=0 cellpadding=0 width=100% >
+					<td id="tdddl" runat="server" visible="false">
+						<div id="dvddl"><!--<asp:ListItem  Value ="(SaldoDeudorAcreedor > 0) AND (DLID =0) And ( TotalPagosCliente ='0.00') And ( PAGOIBSPROCESOCOBRANZA='0.00') ">PÃ¡gares para prorroga</asp:ListItem> -->
+							<table border="0" cellpadding="0" cellpadding="0" width="100%" >
 								<tr>
 									<td>
 										<asp:DropDownList ID="ddlKind" Runat="server"  AutoPostBack="True">
@@ -271,13 +336,13 @@
 											<asp:ListItem Value ="SaldoDeudorAcreedor=0">Sin diferencias</asp:ListItem>
 											<asp:ListItem Value ="SaldoDeudorAcreedor>0">Con diferencias en contra</asp:ListItem> 
 											<asp:ListItem Value ="ImporteBIFActualizada>0">Con DEUDA en IBS</asp:ListItem>
-											<asp:ListItem Value ="(((PAGOIBSPROCESOCOBRANZA<>'0.00' AND  DLID <>0) OR (DLID=0) )  AND PAGOPARCIAL = '0.00' AND ImporteBIFActualizada <>0 AND NUMCUOTASACTUAL = 1)">Información para Prorroga</asp:ListItem>
+											<asp:ListItem Value ="(((PAGOIBSPROCESOCOBRANZA<>'0.00' AND  DLID <>0) OR (DLID=0) )  AND PAGOPARCIAL = '0.00' AND ImporteBIFActualizada <>0 AND NUMCUOTASACTUAL = 1)">InformaciÃ³n para Prorroga</asp:ListItem>
 											<asp:ListItem Value ="prorrogado='si'">Documentos prorrogados</asp:ListItem>
 											<asp:ListItem Value ="(NUMCUOTASACTUAL=1)">Con una cuota vencida</asp:ListItem>                     
 										</asp:DropDownList>
 										<!--
-										<asp:ListItem Value ="(DLID =0  AND TotalPagosCliente = '0.00' AND ImporteBIFActualizada <>0 AND NUMCUOTASACTUAL = 1)">Información para Prorroga</asp:ListItem>
-										<asp:ListItem Value ="DLID=0  AND TotalPagosCliente = '0.00' AND ImporteBIFActualizada <>0 AND NUMCUOTAS = 1">Información para Prorroga</asp:ListItem>
+										<asp:ListItem Value ="(DLID =0  AND TotalPagosCliente = '0.00' AND ImporteBIFActualizada <>0 AND NUMCUOTASACTUAL = 1)">InformaciÃ³n para Prorroga</asp:ListItem>
+										<asp:ListItem Value ="DLID=0  AND TotalPagosCliente = '0.00' AND ImporteBIFActualizada <>0 AND NUMCUOTAS = 1">InformaciÃ³n para Prorroga</asp:ListItem>
 										-->
 									</td>
 									<td>
@@ -322,9 +387,9 @@
 								    </th>
 							        <th>
 							            <asp:LinkButton Runat=server ID=lnkGenerarReporte CausesValidation=False>Obtener informacion en archivo</asp:LinkButton>
-							        </th>								
+							        </th>
 									<th>
-										<img src="<%=ResolveUrl("~/images/bar_div.gif") %>" width="17" height="18" alt="">
+										<img src="<%=ResolveUrl("~/images/bar_end.gif") %>" width="17" height="18" alt="">
 									</th>
 								</tr>
 							</thead>
@@ -353,13 +418,13 @@
 									</ItemTemplate>
 								</asp:TemplateColumn>
 						
-								<asp:BoundColumn DataField="DLNP" HeaderText="Pagaré" ItemStyle-Width="80"></asp:BoundColumn>
+								<asp:BoundColumn DataField="DLNP" HeaderText="PagarÃ©" ItemStyle-Width="80"></asp:BoundColumn>
 								<asp:BoundColumn DataField="DLNE" HeaderText="Trabajador" ItemStyle-Width="250"></asp:BoundColumn>
 								<asp:BoundColumn DataField="DLMO" HeaderText="Mon" ItemStyle-Width="10px"></asp:BoundColumn>
 								<asp:BoundColumn DataField="DLIC" HeaderText="Importe BIF Informado" DataFormatString="{0:#.00}" Visible="True" ItemStyle-Width="80" ItemStyle-BackColor="#ffffcc">
 									<ItemStyle HorizontalAlign="Right"></ItemStyle>
 								</asp:BoundColumn>
-								<asp:BoundColumn DataField="DLID" HeaderText="Importe de Institución" DataFormatString="{0:#.00}" ItemStyle-Width="80" ItemStyle-BackColor="#ffffcc">
+								<asp:BoundColumn DataField="DLID" HeaderText="Importe de InstituciÃ³n" DataFormatString="{0:#.00}" ItemStyle-Width="80" ItemStyle-BackColor="#ffffcc">
 									<ItemStyle HorizontalAlign="Right"></ItemStyle>
 								</asp:BoundColumn>
 
@@ -372,7 +437,7 @@
 									<%#DataBinder.Eval(Container.DataItem, "PAGOINTERNET")%>
 									</ItemTemplate>
 								</asp:TemplateColumn>
-								<asp:TemplateColumn headertext="Total Otros – IBS"  Visible=False   ItemStyle-BackColor="#e0ffff"  ItemStyle-HorizontalAlign="Right"  HeaderStyle-Width="55" ItemStyle-Width="55"  >
+								<asp:TemplateColumn headertext="Total Otros â€“ IBS"  Visible=False   ItemStyle-BackColor="#e0ffff"  ItemStyle-HorizontalAlign="Right"  HeaderStyle-Width="55" ItemStyle-Width="55"  >
 									<ItemTemplate>
 									<%#DataBinder.Eval(Container.DataItem, "PAGOIBS")%>
 									</ItemTemplate>
@@ -387,7 +452,7 @@
 								</asp:BoundColumn>
 								<asp:BoundColumn DataField="SaldoDeudorAcreedor" ItemStyle-BackColor="LemonChiffon"  ItemStyle-HorizontalAlign="Right"   HeaderStyle-Width="75" ItemStyle-Width="75"  HeaderText="Saldo Deudor(+)/<br>Acreedor(-)"></asp:BoundColumn> 
 
-								<asp:BoundColumn DataField="PAGOIBSPROCESOCOBRANZA" HeaderText="Importe de Institución PROCESADO (IBS)" DataFormatString="{0:#.00}" ItemStyle-Width="80" ItemStyle-BackColor="#ffffcc">
+								<asp:BoundColumn DataField="PAGOIBSPROCESOCOBRANZA" HeaderText="Importe de InstituciÃ³n PROCESADO (IBS)" DataFormatString="{0:#.00}" ItemStyle-Width="80" ItemStyle-BackColor="#ffffcc">
 									<ItemStyle HorizontalAlign="Right"></ItemStyle>
 								</asp:BoundColumn>
 						
@@ -419,78 +484,6 @@
 					</table>
 			</div>
 			<asp:CustomValidator id="cvValida" runat="server" ClientValidationFunction="Valida" Display="None" ErrorMessage="CustomValidator"></asp:CustomValidator>
-		
-			
-
-
-
-
-
-			<asp:Panel ID="pnlBuscarTipoDocumentoCobranza" runat="server">
-				<div id="container" style="width:800px;">
-					<div class="row">
-						<div class="cell containercell">
-							<div class="searchborder">
-								<div class="search" style="background-color:#E6F5FF;">
-									<div class="row">
-										<div class="cell">
-											<table style="border:0; width:100%;" cellpadding="0" cellspacing="0">
-												<tr>
-													<td>
-														<h2>
-															<asp:Literal ID="ltrTitulo" Text="Detalle - Generación de Documentos de Cobranza" runat="server" />
-														</h2>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														Seleccione el tipo de documento:
-													</td>
-													<td>
-														<select id="cboTipoDocumentoCobranza" name="cboTipoDocumentoCobranza">
-															<option value="C">Carta de Cobranza</option>
-															<!--<option value="CN">Carta de Cobranza - Notarial</option>-->
-														</select>
-													</td>
-												</tr>
-											</table>
-										</div>
-									</div>
-									<br />
-									<div class="row">
-										<div class="cell">
-											<table border="0" cellpadding="2" cellspacing="0" class="box">
-												<thead>
-													<tr>
-														<th><img src="../images/bar_begin.gif" height="17" alt=""></th>
-														<th><a href="javascript:seleccionarTipoDocumentoCobranza();">&nbsp;Descargar</a></th>
-														<th><img src="../images/bar_end.gif" width="17" height="18" alt=""></th>
-													</tr>
-												</thead>
-											</table>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</asp:Panel>
-
-			<asp:Button ID="btnAbrirPanelProcesarTipoDocumentoCobranza" runat="server" style="display: none"  />
-			<asp:Button ID="btnCerrarPanelProcesarTipoDocumentoCobranza" runat="server" style="display: none"  />
-
-			<cc1:ModalPopupExtender ID="mpeBuscarTipoDocumentoCobranza" runat="server"
-				TargetControlID="btnAbrirPanelProcesarTipoDocumentoCobranza"
-				PopupControlID="pnlBuscarTipoDocumentoCobranza"
-				CancelControlID="btnCerrarPanelProcesarTipoDocumentoCobranza"
-				X="460" Y="200" />
-
-
-
-
-
-		
 		</form>
 		
 		<div id="divFrame" name="divFrame" class="hide1">

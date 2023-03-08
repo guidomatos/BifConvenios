@@ -3,13 +3,8 @@
 <HTML>
 	<HEAD>
 		<title>ProcesarBloqueosWaitEnd</title>
-		<META HTTP-EQUIV="Refresh" CONTENT="5">
-		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-		<META HTTP-EQUIV="Expires" CONTENT="-1">
 		<script type="text/javascript" language="javascript">
-		<!--
-			var ubicacion = '<%=Request.ApplicationPath%>';
-		-->
+			<%--var ubicacion = '<%=Request.ApplicationPath%>';--%>
 		</script>
 	</HEAD>
 	<body>
@@ -28,7 +23,7 @@
 					<td>
 
 						<asp:Label Runat="server" ID="lblMensaje"></asp:Label>
-						<asp:literal ID="lrtlSwf" Runat="server" Visible="False">
+						<asp:Literal ID="lrtlSwf" Runat="server" Visible="False">
 							<script type="text/javascript" language="VBScript">
 							<!--
 								Private i, x, MM_FlashControlVersion
@@ -55,7 +50,7 @@
 								End If
 								-->
 							</script>
-						</asp:literal>
+						</asp:Literal>
 						<asp:Literal id="ltrlScript" runat="server" Visible="False">
 							<script type="text/javascript" language="javascript">
 						<!--

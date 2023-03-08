@@ -39,29 +39,8 @@ Partial Class ReportePostConciliacion
 
 #End Region
 
-    Private Sub ResultadoBusquedaEmpresa(resultadoBusqueda As String)
-        Dim resultadoArray() As String = Split(resultadoBusqueda, "|")
-
-        hdParam1.Value = resultadoArray(0) 'Proceso
-        hdParam2.Value = resultadoArray(1) 'Año
-        hdParam3.Value = resultadoArray(2) 'Mes
-        hdParam4.Value = resultadoArray(6) 'Tipo Documento
-        hdParam5.Value = resultadoArray(7) 'Numero Documento
-        txtPeriodo.Text = resultadoArray(5) 'Numero Documento
-        hdCodigoEmpresa.Value = resultadoArray(3)
-        txtNombreEmpresa.Text = resultadoArray(4)
-        txtFechaDesde.Text = resultadoArray(8)
-        txtFechaHasta.Text = resultadoArray(9)
-
-        dvData.Visible = False
-
-    End Sub
-
     Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Put user code to initialize the page here
-
-        AddHandler ucBuscarParanetroEmpresa.UpdateEvent, AddressOf ResultadoBusquedaEmpresa
-
 
         If Not Page.IsPostBack Then
             txtFechaDesde.Text = Format(DateSerial(Year(Now), Month(Now), 1), "dd/MM/yyyy")
