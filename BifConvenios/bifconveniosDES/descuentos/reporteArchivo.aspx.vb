@@ -3,7 +3,7 @@ Imports System.Data.SqlClient
 Namespace BIFConvenios
 
     Partial Class reporteArchivo
-        Inherits System.Web.UI.Page
+        Inherits Page
         Protected oproc As New Proceso()
 
 #Region " Web Form Designer Generated Code "
@@ -13,7 +13,7 @@ Namespace BIFConvenios
 
         End Sub
 
-        Private Sub Page_Init(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Init
+        Private Sub Page_Init(sender As Object, e As EventArgs) Handles MyBase.Init
             'CODEGEN: This method call is required by the Web Form Designer
             'Do not modify it using the code editor.
             InitializeComponent()
@@ -21,12 +21,12 @@ Namespace BIFConvenios
 
 #End Region
 
-        Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             Dim id As String
             Dim dr As SqlDataReader
 
             If Not Page.IsPostBack Then
-                Utils.AddSwap(lnkBack, "Image1", "/BIFConvenios/images/regresar_on.jpg")
+                Utils.AddSwap(lnkBack, "Image1", ResolveUrl("/images/regresar_on.jpg"))
 
                 Try
                     If Not Request.Params("id") Is Nothing Then
@@ -36,14 +36,14 @@ Namespace BIFConvenios
                             ltrlCliente.Text = CType(dr("Nombre_Cliente"), String)
                             ltrlDocumento.Text = CType(dr("TipoDocumento"), String) + " - " + CType(dr("NumeroDocumento"), String)
                             ltrlEstado.Text = CType(dr("CodigoNombre"), String)
-                            ltrlPeriodo.Text = MonthName(CType(dr("Mes_Periodo"), Integer)) + " " + dr("Anio_periodo")
+                            ltrlPeriodo.Text = MonthName(dr("Mes_Periodo")) + " " + dr("Anio_periodo")
                             ltrlFechaProceso.Text = CType(dr("Fecha_ProcesoAD"), String)
                             ltrlProcesoAS400.Text = Utils.GetFechaCanonica(CType(dr("Fecha_ProcesoAS400"), String))
                         End If
-                        dgData.DataSource = BIFConvenios.ArchivosDescuento.getErroresArchivo(id)
+                        dgData.DataSource = ArchivosDescuento.getErroresArchivo(id)
                         dgData.DataBind()
 
-                        dgInformacionNoProcesada.DataSource = BIFConvenios.ArchivosDescuento.getDatosArchivoTexto(id)
+                        dgInformacionNoProcesada.DataSource = ArchivosDescuento.getDatosArchivoTexto(id)
                         dgInformacionNoProcesada.DataBind()
                     End If
                 Catch ex As Exception
@@ -52,23 +52,19 @@ Namespace BIFConvenios
             End If
         End Sub
 
-
-
-
-        Private Sub lnkBack_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lnkBack.Click
-            If Not Request.Params("id") Is Nothing Then
+        Private Sub lnkBack_Click(sender As Object, e As EventArgs) Handles lnkBack.Click
+            If Request.Params("id") IsNot Nothing Then
                 Response.Redirect(ResolveUrl("reporteProcesoDescuentosresumen.aspx?id=" & CType(Request.Params("id"), String)))
             End If
         End Sub
 
-
-        Private Sub lnkDownload_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lnkDownload.Click
+        Private Sub lnkDownload_Click(sender As Object, e As EventArgs) Handles lnkDownload.Click
             If Not Request.Params("id") Is Nothing Then
                 Dim id As String = CType(Request.Params("id"), String)
-                Dim dr As SqlDataReader = BIFConvenios.ArchivosDescuento.getErroresArchivo(id)
+                Dim dr As SqlDataReader = ArchivosDescuento.getErroresArchivo(id)
 
                 Response.Clear()
-                Dim s As New System.IO.StreamWriter(Response.OutputStream, System.Text.Encoding.UTF8)
+                Dim s As New IO.StreamWriter(Response.OutputStream, Encoding.UTF8)
 
                 While dr.Read
                     s.WriteLine(dr("lineainformacion"))
