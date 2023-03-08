@@ -1,7 +1,5 @@
 Imports System.Data.SqlClient
-Imports System.Configuration.ConfigurationSettings
 Imports System.IO
-Imports System.Guid
 Imports Resource
 '*****************pase - copiar - Ticket 59416*************************
 Imports BIFConvenios.Logica
@@ -10,7 +8,7 @@ Imports BIFConvenios.Logica
 Namespace BIFConvenios
 
     Partial Class processfile
-        Inherits System.Web.UI.Page
+        Inherits Page
         Protected oproc As New Proceso()
         '*****************pase - copiar - Ticket 59416*************************
         Protected oprocesoBL As New ProcesoBL
@@ -28,7 +26,7 @@ Namespace BIFConvenios
 
         End Sub
 
-        Private Sub Page_Init(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Init
+        Private Sub Page_Init(sender As Object, e As EventArgs) Handles MyBase.Init
             'CODEGEN: This method call is required by the Web Form Designer
             'Do not modify it using the code editor.
             InitializeComponent()
@@ -36,16 +34,16 @@ Namespace BIFConvenios
 
 #End Region
 
-        Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             'Put user code to initialize the page here
             If Not Page.IsPostBack Then
                 'If Not oproc.ArchivoDescuentosEnProceso Then
                 If Not False Then
-                    If Not Request.Params("id") Is Nothing Then
+                    If Request.Params("id") IsNot Nothing Then
                         pnlResults.Visible = False
                         pnlControls.Visible = True
                         Dim dr As SqlDataReader
-                        Pid = CType(Request.Params("id"), String)
+                        Pid = Request.Params("id")
                         dr = oproc.InformeProceso(Pid)
                         If dr.Read Then
                             ltrlCliente.Text = CType(dr("Nombre_Cliente"), String)
@@ -54,7 +52,7 @@ Namespace BIFConvenios
                             hdCodigoIBS.Value = dr("Codigo_IBS").ToString()
                             hdAnio.Value = dr("Anio_periodo").ToString()
                             hdMes.Value = dr("Mes_Periodo").ToString()
-                            ltrlPeriodo.Text = MonthName(CType(dr("Mes_Periodo"), Integer)) + " " + dr("Anio_periodo")
+                            ltrlPeriodo.Text = MonthName(dr("Mes_Periodo")) + " " + dr("Anio_periodo")
                             ltrlFechaProceso.Text = CType(dr("Fecha_CargaAS400"), String)
                             ltrlProcesoAS400.Text = BIFConvenios.Utils.GetFechaCanonica(CType(dr("Fecha_ProcesoAS400"), String))
                             hdIdProceso.Value = dr("Codigo_proceso").ToString()
@@ -71,8 +69,8 @@ Namespace BIFConvenios
 
                             lstFormatFile.Items(0).Selected = True
                         End If
-                        Utils.AddSwap(lnkProcesar, "Image1", "/BIFConvenios/images/procesar_on.jpg")
-                        Utils.AddSwap(lnkCancelar, "Image2", "/BIFConvenios/images/cancelar_on.jpg")
+                        Utils.AddSwap(lnkProcesar, "Image1", "/images/procesar_on.jpg")
+                        Utils.AddSwap(lnkCancelar, "Image2", "/images/cancelar_on.jpg")
                     End If
                 Else
                     pnlResults.Visible = True
@@ -84,14 +82,13 @@ Namespace BIFConvenios
 
 
         'Muestra/oculta los paneles con los mensajes
-        Private Sub Result(ByVal bln As Boolean)
+        Private Sub Result(bln As Boolean)
             pnlControls.Visible = Not bln
             pnlResults.Visible = bln
-            pnlEsperaFinal.VISIBLE = bln
+            pnlEsperaFinal.Visible = bln
         End Sub
 
-        Private Sub lnkProcesar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lnkProcesar.Click
-            Dim intTipoProceso As Integer = 0
+        Private Sub lnkProcesar_Click(sender As Object, e As EventArgs) Handles lnkProcesar.Click
             Dim strSeparador As String = "\\"
 
             If oproc.ConsultaFlagCargaAutomatica Then
@@ -100,13 +97,12 @@ Namespace BIFConvenios
                 lblMensaje.Text = ""
                 oproc.ActualizaFlagCargaAutomatica("L", 1)
                 Dim format As String
-                Dim extension As String = ""
-                Dim lRuta As String = ""
                 Dim lRutaArchivo As String = ""
-                Dim lNombreArchivo As String = ""
 
                 format = lstFormatFile.Value.Trim.ToUpper
 
+                Dim intTipoProceso As Integer
+                Dim extension As String
                 Select Case format
                     Case "SDBF", "VDBF"
                         extension = ".dbf"
@@ -128,9 +124,11 @@ Namespace BIFConvenios
                         intTipoProceso = 1
                 End Select
 
+                Dim lNombreArchivo As String
+
                 If intTipoProceso = 1 Then
                     lNombreArchivo = "AD" + format + hdIdProceso.Value + extension
-                    
+
                     Dim strFileName As String = ConfigurationManager.AppSettings("LoadFolder").ToString() + lNombreArchivo
                     Pid = hdIdProceso.Value
 
@@ -159,7 +157,7 @@ Namespace BIFConvenios
                         Return
                     End Try
                 ElseIf intTipoProceso = 2 Then
-                    lRuta = ConfigurationManager.AppSettings("ArchivosConvenio").ToString()
+                    Dim lRuta As String = ConfigurationManager.AppSettings("ArchivosConvenio").ToString()
                     Dim intResult As Integer = clsFiles.VerifyPath(lRuta, ltrlCliente.Text.Trim() + "-" + hdCodigoIBS.Value, Convert.ToInt32(hdAnio.Value.ToString()), clsFiles.ConvertMes(Convert.ToInt32(hdMes.Value.ToString())), enumProcessType.Recepcion.ToString(), lRutaArchivo)
 
                     'Verifica Columna
@@ -168,7 +166,7 @@ Namespace BIFConvenios
                     Pid = hdIdProceso.Value
 
                     If intResult = 1 Then
-                        lNombreArchivo = lRutaArchivo + strSeparador + ltrlCliente.Text.Trim() + "-" + hdCodigoIBS.Value + "(" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + "-" + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + ")" + extension
+                        lNombreArchivo = lRutaArchivo + strSeparador + ltrlCliente.Text.Trim() + "-" + hdCodigoIBS.Value + "(" + Date.Now.Year.ToString() + Date.Now.Month.ToString() + Date.Now.Day.ToString() + "-" + Date.Now.Hour.ToString() + Date.Now.Minute.ToString() + Date.Now.Second.ToString() + ")" + extension
 
                         If File.Exists(lNombreArchivo) Then
                             File.Delete(lNombreArchivo)
@@ -249,13 +247,13 @@ Namespace BIFConvenios
 
         End Sub
 
-        Private Function ValidarColumna(ByVal lstrRuta As String) As Integer
+        Private Function ValidarColumna(lstrRuta As String) As Integer
 
             Dim lintResultado As Integer = 1
             'Dim lstrMensaje As String = ""
             Dim excelPath As String = Server.MapPath("~/files/") + Path.GetFileName(flnArchivoDescuento.PostedFile.FileName)
             flnArchivoDescuento.PostedFile.SaveAs(excelPath)
-            Dim text() As String = System.IO.File.ReadAllLines(excelPath)
+            Dim text() As String = File.ReadAllLines(excelPath)
 
             For index As Integer = 1 To (text.Length - 1)
 
@@ -298,7 +296,7 @@ Namespace BIFConvenios
 
         End Function
 
-        Private Sub lnkCancelar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lnkCancelar.Click
+        Private Sub lnkCancelar_Click(sender As Object, e As EventArgs) Handles lnkCancelar.Click
             Response.Redirect(ResolveUrl("ProcesarArchivoDescuento.aspx"))
         End Sub
     End Class

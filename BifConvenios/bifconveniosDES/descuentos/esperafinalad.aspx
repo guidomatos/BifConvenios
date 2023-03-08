@@ -4,15 +4,7 @@
 	<HEAD>
 		<title>Procesando archivo de cuotas... por favor espere unos instantes mientras se 
 			procesa en el servidor</title>
-		<meta name="GENERATOR" content="Microsoft Visual Studio.NET 7.0">
-		<meta name="CODE_LANGUAGE" content="Visual Basic 7.0">
-		<meta name="vs_defaultClientScript" content="JavaScript">
-		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-		<META HTTP-EQUIV="Expires" CONTENT="-1">
-		<LINK href="<%=Request.ApplicationPath%>/css/global.css" 
-type=text/css rel=stylesheet>
-		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
-		<META HTTP-EQUIV="Refresh" CONTENT="5">
+		<link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
 	</HEAD>
 	<body leftmargin="0" topmargin="0" bottommargin="0" rightmargin="0">
 		<form id="Form1" method="post" runat="server">
@@ -20,7 +12,7 @@ type=text/css rel=stylesheet>
 				<TABLE height="100%" cellSpacing="0" cellPadding="0" width="100%" border="0">
 					<TR>
 						<TD>
-							<SCRIPT language="VBScript">
+							<script type="text/vbscript" language="VBScript">
 							<!--
 								Private i, x, MM_FlashControlVersion
 								On Error Resume Next
@@ -45,7 +37,7 @@ type=text/css rel=stylesheet>
 								document.write "Procesando..."
 								End If
 								-->
-							</SCRIPT>
+							</script>
 						</TD>
 					</TR>
 				</TABLE>
@@ -54,7 +46,7 @@ type=text/css rel=stylesheet>
 				<asp:Label ID="lblMensaje" Runat="server" CssClass="Normal"></asp:Label>
 			</asp:Panel>
 			<asp:Panel ID="pnlFinal" Visible="False" Runat="server">
-				<SCRIPT language="javascript">
+				<script type="text/javascript" language="javascript">
             <!--
             //Mostramos los reportes de la carga
             	if ( window.opener != null ) {
@@ -62,7 +54,7 @@ type=text/css rel=stylesheet>
             		window.close();
             	}
             -->
-				</SCRIPT>
+				</script>
 			</asp:Panel>
 		</form>
 	</body>

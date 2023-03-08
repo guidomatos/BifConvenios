@@ -1,7 +1,7 @@
 Namespace BIFConvenios
 
     Partial Class EsperaFinalAD
-        Inherits System.Web.UI.Page
+        Inherits Page
         Protected oProceso As New Proceso()
         Protected Pid As String = ""
 
@@ -20,9 +20,9 @@ Namespace BIFConvenios
 
 #End Region
 
-        Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             'Put user code to initialize the page here
-            If Not Request.Params("id") Is Nothing Then
+            If Request.Params("id") IsNot Nothing Then
                 'Revisamos que el servidor siga disponible
                 'If Not Utils.TestServer() Then
                 '    lblMensaje.Text = Utils.SERVER_UNAVAILABLE
@@ -31,7 +31,7 @@ Namespace BIFConvenios
                 '    pnlMensaje.Visible = True
                 '    Exit Sub
                 'End If
-                Pid = CType(Request.Params("id"), String)
+                Pid = Request.Params("id")
                 Try
                     If oProceso.FinalProcesoCargaDescuentos(Pid) Then
                         pnlFinal.Visible = True

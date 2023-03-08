@@ -1,25 +1,16 @@
-<%@ Page Language="vb" AutoEventWireup="false" Inherits="BIFConvenios.processfile"
-    CodeFile="processfile.aspx.vb" %>
+<%@ Page Language="vb" AutoEventWireup="false" Inherits="BIFConvenios.processfile" CodeFile="processfile.aspx.vb" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
-<%@ Register Assembly="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
-    Namespace="System.Web.UI" TagPrefix="asp" %>
-    
+<%@ Register Assembly="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI" TagPrefix="asp" %>
 <%@ Register TagPrefix="uc1" TagName="Banner" Src="../controls/Banner.ascx" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>BIFConvenios - Procesar Archivo de cuotas</title>
-    <meta content="Microsoft Visual Studio.NET 7.0" name="GENERATOR" />
-    <meta content="Visual Basic 7.0" name="CODE_LANGUAGE" />
-    <meta content="JavaScript" name="vs_defaultClientScript" />
-    <link href="../css/global.css" type="text/css" rel="stylesheet" />
-
-    <script language="javascript" src="<%Response.Write(Request.ApplicationPath)%>/js/global.js"
-        type="text/javascript"></script>
-
-    <meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema" />
+    
+    <link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
+    <script src='<%=ResolveUrl("~/js/global.js") %>' language ="javascript" type="text/javascript"></script>
 
     <script type="text/javascript">
 		
@@ -107,7 +98,7 @@
     </style>
 
 </head>
-<body style="margin-left:0; margin-top:0; margin-right:0;" onload="MM_preloadImages('/BIFConvenios/images/procesar_on.jpg', '/BIFConvenios/images/cancelar_on.jpg')">
+<body style="margin-left:0; margin-top:0; margin-right:0;">
     <form id="Form1" method="post" enctype="multipart/form-data" runat="server">
         <table style="border:0; width:100%;" cellspacing="0" cellpadding="0">
             <tr>
@@ -116,11 +107,10 @@
                 </td>
             </tr>
         </table>
-        <asp:ScriptManager ID="ScriptManager1" runat="server" />        
         <table style="border:0; width:100%;" cellspacing="0" cellpadding="0">            
             <tr>
                 <td>
-                    <table style="height:550px; width:650;">                        
+                    <table style="height:550px; width:650px;">                        
                         <tr>
                             <td>
                                 &nbsp;</td>
@@ -208,9 +198,13 @@
                                             <td>
                                             </td>
                                             <td>
-                                                <asp:LinkButton ID="lnkProcesar" runat="server" Text="<img src='/BIFConvenios/images/procesar.jpg' name='Image1' border=0 alt='Procesar archivo'/>"></asp:LinkButton>&nbsp;
+                                                <asp:LinkButton ID="lnkProcesar" runat="server">
+                                                    <img src="<%= ResolveUrl("~/images/procesar.jpg") %>" alt='Procesar' />
+                                                </asp:LinkButton>
                                                 <asp:LinkButton ID="lnkCancelar" runat="server" CausesValidation="False">
-														<img src='/BIFConvenios/images/cancelar.jpg' alt='Cancelar' /></asp:LinkButton></td>
+                                                    <img src="<%= ResolveUrl("~/images/cancelar.jpg") %>" alt='Cancelar' />
+                                                </asp:LinkButton>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
