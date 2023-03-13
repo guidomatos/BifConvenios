@@ -1,5 +1,7 @@
+Imports BIFConvenios
+
 Partial Class ConsultaDetallePagosIBSFechas
-    Inherits System.Web.UI.Page
+    Inherits Page
     'Protected WithEvents lblFechaDesde As System.Web.UI.WebControls.Label
     'Protected WithEvents lblFechaHasta As System.Web.UI.WebControls.Label
 
@@ -15,7 +17,7 @@ Partial Class ConsultaDetallePagosIBSFechas
 
     End Sub
 
-    Private Sub Page_Init(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Init
+    Private Sub Page_Init(sender As Object, e As EventArgs) Handles MyBase.Init
         'CODEGEN: This method call is required by the Web Form Designer
         'Do not modify it using the code editor.
         InitializeComponent()
@@ -23,7 +25,7 @@ Partial Class ConsultaDetallePagosIBSFechas
 
 #End Region
 
-    Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Put user code to initialize the page here
         codEmpresa = Request.Params("p1")
         numeroPagare = Request.Params("p2")
@@ -45,16 +47,16 @@ Partial Class ConsultaDetallePagosIBSFechas
                 'lblFechaDesde.Text = BIFConvenios.Utils.GetFechaCanonica(fechaDesde)
                 'lblFechaHasta.Text = BIFConvenios.Utils.GetFechaCanonica(fechaHasta)
 
-                txtFechaDesde.Text = BIFConvenios.Utils.GetFechaCanonica(fechaDesde)
-                txtFechaHasta.Text = BIFConvenios.Utils.GetFechaCanonica(fechaHasta)
-                dgData.DataSource = BIFConvenios.PostConciliacion.getDetallePagosIBS(codEmpresa, numeroPagare, fechaDesde, fechaHasta)
+                txtFechaDesde.Text = Utils.GetFechaCanonica(fechaDesde)
+                txtFechaHasta.Text = Utils.GetFechaCanonica(fechaHasta)
+                dgData.DataSource = PostConciliacion.getDetallePagosIBS(codEmpresa, numeroPagare, fechaDesde, fechaHasta)
                 dgData.DataBind()
                 dgData.Visible = True
             End If
         End If
     End Sub
 
-    Public Function PintarBotonCalendario(ByVal IDContenedor As String, ByVal nombrecontrol As String) As String
+    Public Function PintarBotonCalendario(IDContenedor As String, nombrecontrol As String) As String
         Dim respuesta As String = ""
 
 
@@ -63,8 +65,8 @@ Partial Class ConsultaDetallePagosIBSFechas
         Return respuesta
     End Function
 
-    Private Sub lnkEnviar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lnkEnviar.Click
-        dgData.DataSource = BIFConvenios.PostConciliacion.getDetallePagosIBS(codEmpresa, numeroPagare, BIFConvenios.Utils.GetSQLDate(txtFechaDesde.Text), BIFConvenios.Utils.GetSQLDate(txtFechaHasta.Text))
+    Private Sub lnkEnviar_Click(sender As Object, e As EventArgs) Handles lnkEnviar.Click
+        dgData.DataSource = PostConciliacion.getDetallePagosIBS(codEmpresa, numeroPagare, Utils.GetSQLDate(txtFechaDesde.Text), Utils.GetSQLDate(txtFechaHasta.Text))
         dgData.DataBind()
         dgData.Visible = True
     End Sub

@@ -1,67 +1,56 @@
 <%@ Page Language="vb" AutoEventWireup="false" Inherits="BIFConvenios.reporteArchivo" CodeFile="reporteArchivo.aspx.vb" %>
 <%@ Register TagPrefix="uc1" TagName="Banner" Src="../controls/Banner.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML>
-	<HEAD>
+<html>
+	<head>
 		<title>BIFConvenios - Errores en archivo</title>
-		<meta content="Microsoft Visual Studio.NET 7.0" name="GENERATOR">
-		<meta content="Visual Basic 7.0" name="CODE_LANGUAGE">
-		<meta content="JavaScript" name="vs_defaultClientScript">
-		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
-		<LINK href="<%=Request.ApplicationPath%>/css/global.css" 
-type=text/css rel=stylesheet>
-		<LINK href="<%=Request.ApplicationPath%>/css/tabs.css" 
-type=text/css rel=stylesheet>
-		<script language=javascript 
-src="<%Response.Write(Request.ApplicationPath)%>/js/global.js" 
-type=text/javascript></script>
-		<script language="javascript">
-	<!--
-		function ShowHide(obj){
-			if(document.all(obj).className=='show'){
-				document.all(obj).className='hide';
+		<link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
+		<link href="<%=ResolveUrl("~/css/tabs.css") %>" rel="Stylesheet" type="text/css" />
+		<script src='<%=ResolveUrl("~/js/global.js") %>' language="javascript" type="text/javascript"></script>
+
+		<script type="text/javascript" language="javascript">
+	
+			function ShowHide(obj) {
+				if (document.all(obj).className == 'show') {
+					document.all(obj).className = 'hide';
+				}
+				else {
+					document.all(obj).className = 'show';
+				}
 			}
-			else{
-				document.all(obj).className='show';
+			function show(obj) {
+				document.all(obj).className = 'show';
 			}
-		}
-		
-		function show (obj){
-				document.all(obj).className='show';
-		} 
-		function hide (obj){
-				document.all(obj).className='hide';
-		} 
-		
-		function showObject(id){
-			if ( id =='dvNoProcesada'){
-				show(id);
-				hide('dvNoProcesadaArchivo');
-				document.all("uno").className = 'on';
-				document.all("dos").className = '';
-				document.all("uno").title="seleccionado";
-				document.all("dos").title="";
-				document.all("uno").innerHTML = "<a href=\"javascript:showObject('dvNoProcesada');\"><STRONG><EM>Vista Legible</EM></strong></A>";
-				document.all("dos").innerHTML = "<A href= \"javascript:showObject('dvNoProcesadaArchivo');\"><EM>Vista de Archivo</EM></A> ";
-				
+			function hide(obj) {
+				document.all(obj).className = 'hide';
 			}
-			if ( id =='dvNoProcesadaArchivo'){
-				show(id);
-				hide('dvNoProcesada');
-				document.all("uno").className = '';
-				document.all("dos").className = 'on';
-				document.all("uno").title="";
-				document.all("dos").title="seleccionado";
-				document.all("uno").innerHTML = "<a href=\"javascript:showObject('dvNoProcesada');\"><EM>Vista Legible</EM></A>";
-				document.all("dos").innerHTML = "<A href= \"javascript:showObject('dvNoProcesadaArchivo');\"><STRONG><EM>Vista de Archivo</EM></strong></A> ";
-				
+			function showObject(id) {
+				if (id == 'dvNoProcesada') {
+					show(id);
+					hide('dvNoProcesadaArchivo');
+					document.all("uno").className = 'on';
+					document.all("dos").className = '';
+					document.all("uno").title = "seleccionado";
+					document.all("dos").title = "";
+					document.all("uno").innerHTML = "<a href=\"javascript:showObject('dvNoProcesada');\"><STRONG><EM>Vista Legible</EM></strong></A>";
+					document.all("dos").innerHTML = "<A href= \"javascript:showObject('dvNoProcesadaArchivo');\"><EM>Vista de Archivo</EM></A> ";
+
+				}
+				if (id == 'dvNoProcesadaArchivo') {
+					show(id);
+					hide('dvNoProcesada');
+					document.all("uno").className = '';
+					document.all("dos").className = 'on';
+					document.all("uno").title = "";
+					document.all("dos").title = "seleccionado";
+					document.all("uno").innerHTML = "<a href=\"javascript:showObject('dvNoProcesada');\"><EM>Vista Legible</EM></A>";
+					document.all("dos").innerHTML = "<A href= \"javascript:showObject('dvNoProcesadaArchivo');\"><STRONG><EM>Vista de Archivo</EM></strong></A> ";
+
+				}
 			}
-		}
-		
-	-->
 		</script>
-	</HEAD>
-	<body onload="MM_preloadImages('/BIFConvenios/images/regresar_on.jpg')" topmargin="0" leftmargin="0">
+	</head>
+	<body onload="MM_preloadImages('<%=ResolveUrl("~/images/regresar_on.jpg")%>')" topmargin="0" leftmargin="0">
 		<form id="Form1" method="post" runat="server">
 			<table cellSpacing="0" cellPadding="0" width="100%" border="0">
 				<tr>
@@ -69,81 +58,81 @@ type=text/javascript></script>
 				</tr>
 				<tr>
 					<td>
-						<TABLE id="Table1" cellSpacing="0" cellPadding="0" width="100%" border="0">
-							<TR>
-								<TD width="30">&nbsp;</TD>
-								<TD colSpan="2">&nbsp;</TD>
-							</TR>
-							<TR>
-								<TD width="30"></TD>
-								<TD colSpan="2">
-									<TABLE class="InputField" cellSpacing="0" cellPadding="0" width="750" border="0">
-										<TR>
-											<TD width="30">&nbsp;</TD>
-											<TD colSpan="2">
-												<table cellSpacing="4" cellPadding="0" width="100%" border="0">
-													<TR>
-														<TD class="SubHead" width="120">Empresa</TD>
-														<TD class="Normal"><asp:literal id="ltrlCliente" runat="server"></asp:literal></TD>
-													</TR>
-													<TR>
-														<TD class="SubHead" width="120">Documento</TD>
-														<TD class="Normal"><asp:literal id="ltrlDocumento" runat="server"></asp:literal></TD>
-													</TR>
-													<TR>
-														<TD class="SubHead" width="120">Proceso de Archivo</TD>
-														<TD class="Normal"><asp:literal id="ltrlFechaProceso" runat="server"></asp:literal></TD>
-													</TR>
-													<TR>
-														<TD class="SubHead" width="120">Estado</TD>
-														<TD class="Normal"><asp:literal id="ltrlEstado" runat="server"></asp:literal></TD>
-													</TR>
-													<TR>
-														<TD class="SubHead" width="120">Periodo</TD>
-														<TD class="Normal"><asp:literal id="ltrlPeriodo" runat="server"></asp:literal></TD>
-													</TR>
-													<TR>
-														<TD class="SubHead" width="120">Fecha de Proceso IBS</TD>
-														<TD class="Normal"><asp:literal id="ltrlProcesoAS400" runat="server"></asp:literal></TD>
-													</TR>
-												</table>
-											</TD>
-										</TR>
-									</TABLE>
-								</TD>
-							</TR>
-							<TR>
-								<TD width="30"></TD>
-								<TD colSpan="2">&nbsp;&nbsp;
-								</TD>
-							</TR>
+						<table id="Table1" cellSpacing="0" cellPadding="0" width="100%" border="0">
 							<tr>
-								<TD width="30"></TD>
-								<td colspan="2" align="left">
-									<asp:linkbutton id="lnkDownload" Runat="server">Descargar registros no procesados</asp:linkbutton>
+								<td width="30">&nbsp;</td>
+								<td colSpan="2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="30"></td>
+								<td colSpan="2">
+									<table class="InputField" cellSpacing="0" cellPadding="0" width="750" border="0">
+										<tr>
+											<td width="30">&nbsp;</td>
+											<td colSpan="2">
+												<table cellSpacing="4" cellPadding="0" width="100%" border="0">
+													<tr>
+														<td class="SubHead" width="120">Empresa</td>
+														<td class="Normal"><asp:Literal id="ltrlCliente" runat="server"></asp:Literal></td>
+													</tr>
+													<tr>
+														<td class="SubHead" width="120">Documento</td>
+														<td class="Normal"><asp:Literal id="ltrlDocumento" runat="server"></asp:Literal></td>
+													</tr>
+													<tr>
+														<td class="SubHead" width="120">Proceso de Archivo</td>
+														<td class="Normal"><asp:Literal id="ltrlFechaProceso" runat="server"></asp:Literal></td>
+													</tr>
+													<tr>
+														<td class="SubHead" width="120">Estado</td>
+														<td class="Normal"><asp:Literal id="ltrlEstado" runat="server"></asp:Literal></td>
+													</tr>
+													<tr>
+														<td class="SubHead" width="120">Periodo</td>
+														<td class="Normal"><asp:Literal id="ltrlPeriodo" runat="server"></asp:Literal></td>
+													</tr>
+													<tr>
+														<td class="SubHead" width="120">Fecha de Proceso IBS</td>
+														<td class="Normal"><asp:Literal id="ltrlProcesoAS400" runat="server"></asp:Literal></td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table>
 								</td>
 							</tr>
-							<TR>
-								<TD width="30"></TD>
-								<TD colSpan="2">&nbsp;&nbsp;
-								</TD>
-							</TR>
 							<tr>
-								<TD width="30">&nbsp;</TD>
+								<td width="30"></td>
+								<td colSpan="2">&nbsp;&nbsp;
+								</td>
+							</tr>
+							<tr>
+								<td width="30"></td>
+								<td colspan="2" align="left">
+									<asp:LinkButton id="lnkDownload" Runat="server">Descargar registros no procesados</asp:LinkButton>
+								</td>
+							</tr>
+							<tr>
+								<td width="30"></td>
+								<td colSpan="2">&nbsp;&nbsp;
+								</td>
+							</tr>
+							<tr>
+								<td width="30">&nbsp;</td>
 								<td colspan="2">
 									<!----Tabs visuales------>
-									<DIV class="navset" id="nav">
-										<DIV class="hd">
-											<UL>
-												<LI id="uno" name="uno" class="on">
-													<a href="javascript:showObject('dvNoProcesada');"><STRONG><EM>Vista Legible</EM></STRONG></a>
-												</LI>
-												<LI id="dos" name="dos">
-													<A href="javascript:showObject('dvNoProcesadaArchivo');"><EM>Vista de Archivo</EM></A>
-												</LI>
-											</UL>
-										</DIV>
-										<DIV class="show" id="dvNoProcesada" name="dvNoProcesada">
+									<div class="navset" id="nav">
+										<div class="hd">
+											<ul>
+												<li id="uno" name="uno" class="on">
+													<a href="javascript:showObject('dvNoProcesada');"><strong><em>Vista Legible</em></strong></a>
+												</li>
+												<li id="dos" name="dos">
+													<a href="javascript:showObject('dvNoProcesadaArchivo');"><em>Vista de Archivo</em></a>
+												</li>
+											</ul>
+										</div>
+										<div class="show" id="dvNoProcesada" name="dvNoProcesada">
 											<div class="bd">
 												<UL>
 													<asp:DataGrid Runat="server" ID="dgInformacionNoProcesada" CellPadding="3" CellSpacing="3">
@@ -160,11 +149,11 @@ type=text/javascript></script>
 													</asp:DataGrid>
 												</UL>
 											</div>
-										</DIV>
-										<DIV class="hide" id="dvNoProcesadaArchivo" name="dvNoProcesadaArchivo">
+										</div>
+										<div class="hide" id="dvNoProcesadaArchivo" name="dvNoProcesadaArchivo">
 											<div class="bd">
-												<UL>
-													<br>
+												<ul>
+													<br/>
 													<asp:datagrid id="dgData" Runat="server" AutoGenerateColumns="False">
 														<ItemStyle Font-Name="Courier" VerticalAlign="Top"></ItemStyle>
 														<HeaderStyle Height="30px" CssClass="head" VerticalAlign="Top"></HeaderStyle>
@@ -176,29 +165,29 @@ type=text/javascript></script>
 															</asp:TemplateColumn>
 														</Columns>
 													</asp:datagrid>
-												</UL>
+												</ul>
 											</div>
-										</DIV>
-									</DIV>
+										</div>
+									</div>
 									<!------fin de tabs ----->
 								</td>
 							</tr>
-							<TR>
-								<TD width="30"></TD>
-								<TD colSpan="2">&nbsp;&nbsp;
-								</TD>
-							</TR>
 							<tr>
-								<TD width="30"></TD>
-								<TD colSpan="2" align="left">
-									<asp:linkbutton id="lnkBack" Runat="server">
-										<img src='/BIFConvenios/images/regresar.jpg' name='Image1' border="0" alt='Procesar archivo' /></asp:linkbutton>
-								</TD>
+								<td width="30"></td>
+								<td colSpan="2">&nbsp;&nbsp;
+								</td>
 							</tr>
-						</TABLE>
+							<tr>
+								<td width="30"></td>
+								<td colSpan="2" align="left">
+									<asp:LinkButton id="lnkBack" Runat="server">
+										<img src="<%= ResolveUrl("~/images/regresar.jpg") %>" name='Image1' border="0" alt='Regresar' /></asp:LinkButton>
+								</td>
+							</tr>
+						</table>
 					</td>
 				</tr>
 			</table>
 		</form>
 	</body>
-</HTML>
+</html>

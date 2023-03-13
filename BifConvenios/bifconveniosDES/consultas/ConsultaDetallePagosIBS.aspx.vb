@@ -1,5 +1,7 @@
+Imports BIFConvenios
+
 Partial Class ConsultaDetallePagosIBS
-    Inherits System.Web.UI.Page
+    Inherits Page
 
     Protected codEmpresa As String
     Protected fechaDesde As String
@@ -16,7 +18,7 @@ Partial Class ConsultaDetallePagosIBS
 
     End Sub
 
-    Private Sub Page_Init(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Init
+    Private Sub Page_Init(sender As System.Object, e As System.EventArgs) Handles MyBase.Init
         'CODEGEN: This method call is required by the Web Form Designer
         'Do not modify it using the code editor.
         InitializeComponent()
@@ -24,7 +26,7 @@ Partial Class ConsultaDetallePagosIBS
 
 #End Region
 
-    Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Put user code to initialize the page here
         If Not Page.IsPostBack Then
             If Not (Request.Params("p1") Is Nothing And Request.Params("p2") Is Nothing And Request.Params("p3") Is Nothing And Request.Params("p4") Is Nothing) Then
@@ -41,10 +43,10 @@ Partial Class ConsultaDetallePagosIBS
 
                 lblNombreTrabajador.Text = nombreTrabajador
                 lblNumeroPagare.Text = numeroPagare
-                lblFechaDesde.Text = BIFConvenios.Utils.GetFechaCanonica(fechaDesde)
-                lblFechaHasta.Text = BIFConvenios.Utils.GetFechaCanonica(fechaHasta)
+                lblFechaDesde.Text = Utils.GetFechaCanonica(fechaDesde)
+                lblFechaHasta.Text = Utils.GetFechaCanonica(fechaHasta)
 
-                dgData.DataSource = BIFConvenios.PostConciliacion.getDetallePagosIBS(codEmpresa, numeroPagare, fechaDesde, fechaHasta)
+                dgData.DataSource = PostConciliacion.getDetallePagosIBS(codEmpresa, numeroPagare, fechaDesde, fechaHasta)
                 dgData.DataBind()
                 dgData.Visible = True
             End If

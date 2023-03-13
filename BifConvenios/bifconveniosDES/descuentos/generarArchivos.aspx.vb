@@ -1,10 +1,9 @@
 Imports System.Data.SqlClient
-Imports System.Configuration.ConfigurationSettings
 
 Namespace BIFConvenios
 
     Partial Class generarArchivos
-        Inherits System.Web.UI.Page
+        Inherits Page
 
 #Region " Web Form Designer Generated Code "
 
@@ -21,17 +20,17 @@ Namespace BIFConvenios
 
 #End Region
 
-        Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             'Put user code to initialize the page here
-            If Not Request.Params("id") Is Nothing And Not Request.Params("type") Is Nothing Then
+            If Request.Params("id") IsNot Nothing And Request.Params("type") IsNot Nothing Then
                 Dim id As String = Request.Params("id")
                 Dim type As String = Request.Params("type")
 
                 Dim oReport As New CSVWebReport()
                 Dim dr As SqlDataReader = Proceso.GetRegistrosResultadoProcesoDescuentosErrores(id, True)
                 'ltrlEnlace.Text = oReport.GenerateCSVReport(dr, AppSettings("GenFolder"), AppSettings("virtualPath"), False, False, "Descargar Archivo")
-                ltrlEnlace.Text = "<a href='" + ResolveUrl("../DownloadFile.aspx?File=") + _
-                oReport.GenerateCSVReport(dr, AppSettings("GenFolder"), AppSettings("virtualPath"), True, False, "Descargar Archivo", _
+                ltrlEnlace.Text = "<a href='" + ResolveUrl("../DownloadFile.aspx?File=") +
+                oReport.GenerateCSVReport(dr, ConfigurationManager.AppSettings("GenFolder"), ConfigurationManager.AppSettings("virtualPath"), True, False, "Descargar Archivo",
                 "", True) + "'>Descargar Archivo</a>"
 
             End If

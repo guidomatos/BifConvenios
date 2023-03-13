@@ -6,6 +6,7 @@ using System.IO;
 using System.Security.AccessControl;
 using System.Text;
 using Microsoft.Office.Interop.Excel;
+using System.Security.Principal;
 
 namespace Resource
 {   
@@ -99,11 +100,11 @@ namespace Resource
             }
         }
 
-        public static Int32 VerifyPath(string pstrRoot, string pstrFactory, Int32 pintYear, string pintMonth, string pstrProcessType, ref string pstrPath)
+        public static int VerifyPath(string pstrRoot, string pstrFactory, int pintYear, string pintMonth, string pstrProcessType, ref string pstrPath)
         {
-            Int32 intResult = 0;
             string userAccount = ConfigurationManager.AppSettings["UserArchivoConvenio"].ToString();
 
+            int intResult;
             //DirectorySecurity dsFolder = new DirectorySecurity();
             //dsFolder.AddAccessRule(new FileSystemAccessRule(userAccount, FileSystemRights.FullControl, AccessControlType.Allow));
 
@@ -168,7 +169,7 @@ namespace Resource
                         }
                     }
                 }
-                
+
                 intResult = 1;
                 return intResult;
             }
@@ -186,43 +187,30 @@ namespace Resource
             {
                 case 1:
                     return "ENE";
-                    break;
                 case 2:
                     return "FEB";
-                    break;
                 case 3:
                     return "MAR";
-                    break;
                 case 4:
                     return "ABR";
-                    break;
                 case 5:
                     return "MAY";
-                    break;
                 case 6:
                     return "JUN";
-                    break;
                 case 7:
                     return "JUL";
-                    break;
                 case 8:
                     return "AGO";
-                    break;
                 case 9:
                     return "SEP";
-                    break;
                 case 10:
                     return "OCT";
-                    break;
                 case 11:
                     return "NOV";
-                    break;
                 case 12:
                     return "DIC";
-                    break;
                 default:
                     return "";
-                    break;
             }
 
         }
@@ -333,9 +321,7 @@ namespace Resource
 
             strNameFile = pstrFactory + "(" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + "-" + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + ")" + "." + pstrType;
 
-            Int32 intResult;
-            string strFullName = string.Empty;
-            
+            int intResult;
             try
             {
                 if (dt == null || dt.Columns.Count == 0)
@@ -352,7 +338,7 @@ namespace Resource
 
                 if (intResult == 1)
                 {
-                    strFullName = strPathFile + strSeparator + strNameFile;
+                    string strFullName = strPathFile + strSeparator + strNameFile;
 
                     StringBuilder outPut = new StringBuilder();
 
@@ -375,7 +361,7 @@ namespace Resource
                         outPut.Append(strRowSeparator);
                     }
 
-                    StreamWriter sw = new StreamWriter(strFullName, false, System.Text.Encoding.GetEncoding("iso-8859-1"));
+                    StreamWriter sw = new StreamWriter(strFullName, false, Encoding.GetEncoding("iso-8859-1"));
 
                     sw.Write(outPut.ToString());
                     sw.Close();

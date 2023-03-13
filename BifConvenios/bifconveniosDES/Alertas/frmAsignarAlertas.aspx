@@ -15,34 +15,68 @@
     <meta name="CODE_LANGUAGE" content="Visual Basic 7.0" />
     <meta name="vs_defaultClientScript" content="JavaScript" />
     <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5" />
-    <link href="<%=Request.ApplicationPath%>/css/global.css" type="text/css" rel="stylesheet" />
-    
-    <script language="javascript" src="<%Response.Write(Request.ApplicationPath)%>/js/global.js"
-        type="text/javascript"></script>
+     <%--<LINK href="<%=Request.ApplicationPath%>/css/global.css" type=text/css rel=stylesheet>--%>
+    <LINK href="<%= ResolveUrl("~/css/global.css") %>" type="text/css" rel="stylesheet" />
+    <%--<script language=javascript src="<%Response.Write(Request.ApplicationPath)%>/js/global.js" type=text/javascript></script>--%>
+    <script language="javascript" src="<%= ResolveUrl("~/js/global.js") %>" type="text/javascript"></script>
         
     <script type="text/javascript">
         function CambiarEstadoAlertaCliente(id,name) {
             if (confirm('¿Desea Eliminar la Alerta: ' + name + ' de la empresa ?')) {
                 document.all("hdAlertaClienteId").value = id;
                 __doPostBack('lnkEliminar','');
-            }
+            } 
         }
         
         function BuscarCliente() {
-            var returnValue = OpenFormatPageDialog('frmListaEmpresasBifConvenios.aspx',400,875);
-            if (fctTrim(returnValue) != ''){
-                    document.all('hdCodCliente').value = returnValue;                    
-                    __doPostBack('lnkCargarCliente','');
-                }
+            //var returnValue = OpenFormatPageDialog('frmListaEmpresasBifConvenios.aspx',400,875);
+            //if (fctTrim(returnValue) != ''){
+            //        document.all('hdCodCliente').value = returnValue;                    
+            //        __doPostBack('lnkCargarCliente','');
+            //}
+
+            OpenFormatPageDialog('frmListaEmpresasBifConvenios.aspx', 400, 875);
+
         }
+
+        var popup;
+        function OpenFormatPageDialog(url, height, width) {
+
+            // Obtener el tamaño de la ventana principal
+            var parentWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            var parentHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+            // Calcular la posición de la ventana secundaria
+            var left = (parentWidth - width) / 2;
+            var top = (parentHeight - height) / 2;
+
+
+            popup = window.open(url, '', 'left=' + left + ',top=' + top + ',height=' + height + 'px,width=' + width + 'px,toolbar=no,directories=no,status=no,continued from previous linemenubar = no, scrollbars = no, resizable = no, modal = yes');
+            popup.opener = window;
+
+            var timer = setInterval(function () {
+                if (popup.closed) {
+                    clearInterval(timer);
+                    var returnValue = popup.ReturnValueSeleccionado();
+                    if (typeof returnValue !== "undefined") {
+                        if (fctTrim(returnValue) != '') {
+                            document.all('hdCodCliente').value = returnValue;
+                            __doPostBack('lnkCargarCliente', '');
+
+                        }
+                    }
+                }
+            }, 100);
+        }
+
         
-        function OpenFormatPageDialog(url, height , width ) {
-			var returnValue = window.showModalDialog(url,'', 'dialogTop: 150px; dialogLeft: 150px;dialogWidth:' + width +  'px;dialogHeight:' + height+ 'px;status: no;help:no;'); 
-			if (typeof (returnValue) == "undefined"){
-				returnValue = '';
-			}
-			return returnValue;
-		}
+  //      function OpenFormatPageDialog(url, height , width ) {
+		//	var returnValue = window.showModalDialog(url,'', 'dialogTop: 150px; dialogLeft: 150px;dialogWidth:' + width +  'px;dialogHeight:' + height+ 'px;status: no;help:no;'); 
+		//	if (typeof (returnValue) == "undefined"){
+		//		returnValue = '';
+		//	}
+		//	return returnValue;
+		//}
     </script>
         
     <style type="text/css">
@@ -125,7 +159,7 @@
         <asp:HiddenField ID="hdAlertaClienteId" runat="server" />
         <asp:LinkButton ID="lnkEliminar" runat="server" Visible="false" />
         <asp:LinkButton ID="lnkCargarCliente" runat="server" Visible="false" />
-        <asp:ScriptManager ID="ScripManager1" runat="server"></asp:ScriptManager>
+        <%--<asp:ScriptManager ID="ScripManager1" runat="server"></asp:ScriptManager>--%>
         <div id="container" style="width:850px;">
             <div class="row">
                 <div class="cell container">
@@ -145,7 +179,7 @@
                                                 <asp:TextBox ID="txtNomEmpresa" runat="server" Width="320px" Enabled="false" />
                                             </td>
                                             <td style="width:100px;"> 
-                                                <asp:Button ID="btnBuscar" runat="server" Text="Seleccionar" CssClass="button" OnClientClick="BuscarCliente();"/>
+                                                <asp:Button ID="btnBuscar" runat="server" Text="Seleccionar" CssClass="button" OnClientClick="BuscarCliente(); return false;" UseSubmitBehavior="false" />
                                             </td>
                                             <td style="width:120px;">
                                                 <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="button" />

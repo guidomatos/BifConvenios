@@ -1,15 +1,10 @@
-﻿Imports System.Collections
-Imports System.Collections.Generic
-Imports System.Data
-Imports System.Data.SqlClient
-Imports System.Configuration
-
+﻿Imports BIFConvenios
 Imports BIFConvenios.BE
 Imports BIFConvenios.BL
 Imports Resource
 
 Partial Class frmDetalleEnviosAutomaticos
-    Inherits System.Web.UI.Page
+    Inherits Page
 
     Protected objLogEnvioCorreo As New clsLogEnvioCorreo()
     Protected objSystemParameters As New clsSystemParameters()
@@ -22,7 +17,7 @@ Partial Class frmDetalleEnviosAutomaticos
 
     Private intCodigoProcesoAutomatico As Integer
 
-    Private Sub BindDG(ByVal pintProcesoAutomatico As Integer, ByVal pintCodigoCliente As String, ByVal pintCodigoIBS As String, ByVal pintTipoEnvioCorreo As Integer, ByVal pintEstadoEnvio As Integer)
+    Private Sub BindDG(pintProcesoAutomatico As Integer, pintCodigoCliente As String, pintCodigoIBS As String, pintTipoEnvioCorreo As Integer, pintEstadoEnvio As Integer)
         pnlQueryResult.Visible = True
         pnlMensaje.Visible = False
         lblMensaje.Text = ""
@@ -50,7 +45,6 @@ Partial Class frmDetalleEnviosAutomaticos
     Private Sub LlenarCombos()
         Dim dtTipoEnvio As New DataTable()
         Dim dtEstadoEnvio As New DataTable()
-        Dim strCriterio As String = String.Empty
 
         dtSystemParameters = objSystemParametersBL.Seleccionar(ConfigurationManager.AppSettings(clsTiposSystemParameters.TipoEnvioCorreo).ToString())
 
@@ -69,10 +63,10 @@ Partial Class frmDetalleEnviosAutomaticos
         ddlEstado.Items(0).Selected = True
     End Sub
 
-    Protected Sub gvQuery_PageIndexChanging(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewPageEventArgs) Handles gvQuery.PageIndexChanging
-        Dim strValor As String = String.Empty
-
+    Protected Sub gvQuery_PageIndexChanging(sender As Object, e As GridViewPageEventArgs) Handles gvQuery.PageIndexChanging
         gvQuery.PageIndex = e.NewPageIndex
+
+        Dim strValor As String
 
         If Len(txtValor.Text) > 0 Then
             strValor = txtValor.Text
@@ -89,8 +83,8 @@ Partial Class frmDetalleEnviosAutomaticos
         End If
     End Sub
 
-    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        If Not Request.Params("id") Is Nothing Then
+    Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If Request.Params("id") IsNot Nothing Then
             intCodigoProcesoAutomatico = Convert.ToInt32(Request.Params("id").ToString())
         Else
             intCodigoProcesoAutomatico = 0
@@ -106,8 +100,8 @@ Partial Class frmDetalleEnviosAutomaticos
         End If
     End Sub
 
-    Protected Sub btnSearch_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-        Dim strValor As String = String.Empty
+    Protected Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        Dim strValor As String
 
         If Len(txtValor.Text) > 0 Then
             strValor = txtValor.Text
@@ -127,7 +121,7 @@ Partial Class frmDetalleEnviosAutomaticos
         End If
     End Sub
 
-    Protected Sub lnkBack_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lnkBack.Click
-        Response.Redirect(Request.ApplicationPath + "/frmVisorEnviosAutomaticos.aspx", True)
+    Protected Sub lnkBack_Click(sender As Object, e As EventArgs) Handles lnkBack.Click
+        Response.Redirect(Utils.getUrlPathApplicationRedirectPage("/frmVisorEnviosAutomaticos.aspx"))
     End Sub
 End Class

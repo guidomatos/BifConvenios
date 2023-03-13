@@ -351,7 +351,8 @@ Namespace BIFConvenios
                     Try
                         intResult = objClienteBL.ActualizarCliente(objCliente)
 
-                        Response.Redirect("Clientes.aspx")
+                        'Response.Redirect("Clientes.aspx")
+                        Response.Redirect(Utils.getUrlPathApplicationRedirectPage("/clientes/clientes.aspx"))
                     Catch ex1 As HandledException
                         lblMensaje.Text = ex1.ErrorMessage + ": " + ex1.ErrorMessageFull
                     Catch ex2 As Exception
@@ -411,7 +412,7 @@ Namespace BIFConvenios
                 intResult = objClienteBL.EliminarCliente(objCliente.CodigoCliente, Context.User.Identity.Name)
 
                 'Response.Redirect("/Clientes.aspx")
-                Response.Redirect(Utils.getUrlPathApplicationRedirectPage("/Clientes.aspx"))
+                Response.Redirect(Utils.getUrlPathApplicationRedirectPage("/clientes/clientes.aspx"))
             Catch ex1 As HandledException
                 lblMensaje.Text = ex1.ErrorMessage + ": " + ex1.ErrorMessageFull
             Catch ex2 As Exception

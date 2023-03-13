@@ -3,40 +3,32 @@
 <HTML>
 	<HEAD>
 		<title>Seleccione los correos electronicos</title>
-		<META http-equiv="Pragma" content="no-cache">
-		<META http-equiv="Expires" content="-1">
-		<LINK href="<%=Request.ApplicationPath%>/css/global.css" type=text/css rel=stylesheet>
-		<meta content="Microsoft Visual Studio.NET 7.0" name="GENERATOR">
-		<meta content="Visual Basic 7.0" name="CODE_LANGUAGE">
-		<meta content="JavaScript" name="vs_defaultClientScript">
-		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
-		<script language="javascript">
-		<!--
-			function Cerrar(){
+		<link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
+		<script type="text/javascript" language="javascript">
+		
+			function Cerrar() {
 				window.close();
 			}
-			
-			
-			function SendMail(controls){
+			function SendMail(controls) {
 				var a = controls.split(',');
-				var i = 0 ;
+				var i = 0;
 				var anyChecked = false;
-				for ( i = 0; i<= a.length -1; i++ ) {
-					if ( document.all( a[i] ).checked ) {
+				for (i = 0; i <= a.length - 1; i++) {
+					if (document.all(a[i]).checked) {
 						anyChecked = true;
 					}
-				}   
-				
-				if ( !anyChecked ) {
-					alert ( 'Debe seleccionar por lo menos un correo electronico.');
 				}
-				else{
-					if ( confirm ( '¿Desea enviar el correo electronico con el archivo de cuotas?')){
-						__doPostBack('lnkEnviarEmail', '');	
+
+				if (!anyChecked) {
+					alert('Debe seleccionar por lo menos un correo electronico.');
+				}
+				else {
+					if (confirm('¿Desea enviar el correo electronico con el archivo de cuotas?')) {
+						__doPostBack('lnkEnviarEmail', '');
 					}
 				}
 			}
-		-->
+		
 		</script>
 	</HEAD>
 	<body leftMargin="20" topMargin="10">

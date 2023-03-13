@@ -14,13 +14,9 @@
     <title>Seleccione el formato del archivo</title>
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="-1" />
-    <meta name="GENERATOR" content="Microsoft Visual Studio.NET 7.0" />
-    <meta name="CODE_LANGUAGE" content="Visual Basic 7.0" />
-    <meta name="vs_defaultClientScript" content="JavaScript" />
-    <link href="<%=Request.ApplicationPath%>/css/global.css" type="text/css" rel="stylesheet" />
     
-    <script language="javascript" src="<%Response.Write(Request.ApplicationPath)%>/js/global.js"
-        type="text/javascript"></script>
+    <link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
+    <script src='<%=ResolveUrl("~/js/global.js") %>' language ="javascript" type="text/javascript"></script>
 
     <script type="text/javascript">
     
@@ -54,11 +50,11 @@
             var val = document.getElementById("lstFormatFile").value;
 
             if (val == 'standardXls') {
-                document.getElementById('lblModalidad').style.display = 'inline'
-                document.all('lstModalidad').style.display = 'inline'
+                document.getElementById('lblModalidad').style.display = 'inline';
+                document.all('lstModalidad').style.display = 'inline';
             } else {
-                document.getElementById('lblModalidad').style.display = 'none'
-                document.all('lstModalidad').style.display = 'none'
+                document.getElementById('lblModalidad').style.display = 'none';
+                document.all('lstModalidad').style.display = 'none';
             }
 
         }

@@ -14,7 +14,8 @@
     <meta name="CODE_LANGUAGE" content="Visual Basic 7.0" />
     <meta name="vs_defaultClientScript" content="JavaScript" />
     <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5" />
-    <link href="../css/global.css" type="text/css" rel="stylesheet" />
+    <%--<LINK href="<%=Request.ApplicationPath%>/css/global.css" type=text/css rel=stylesheet>--%>
+    <LINK href="<%= ResolveUrl("~/css/global.css") %>" type="text/css" rel="stylesheet" />
 
     <script language="javascript" src="../js/global.js"
         type="text/javascript"></script>
@@ -145,7 +146,7 @@
         <asp:LinkButton ID="lnkEditar" runat="server" Visible="false"/>
         <asp:LinkButton ID="lnkEliminar" runat="server" Visible="false" />
         
-        <asp:ScriptManager ID="ScripManager1" runat="server"></asp:ScriptManager>        
+       <%-- <asp:ScriptManager ID="ScripManager1" runat="server"></asp:ScriptManager>     --%>   
         
         <div id="container" style="width:800px;">
             <div class="row">

@@ -6,12 +6,14 @@ Imports ADODB
 Namespace BIFConvenios
 
     Public Class Prorroga
+
+
         'Establece si el lote de Prorroga ha sido procesado 
-        Public Shared Function isLoteProrrogaProcesado(ByVal numeroLote As String) As Boolean
+        Public Shared Function isLoteProrrogaProcesado(numeroLote As String) As Boolean
             Dim myConnection As New SqlConnection(GetDBConnectionString)
             Dim returnValue As Integer
-            Dim myCommand As SqlCommand = SqlCommandGenerator.GenerateCommand(myConnection, _
-                CType(MethodBase.GetCurrentMethod(), MethodInfo), _
+            Dim myCommand As SqlCommand = SqlCommandGenerator.GenerateCommand(myConnection,
+                CType(MethodBase.GetCurrentMethod(), MethodInfo),
                 New Object() {numeroLote})
 
             myConnection.Open()
@@ -25,28 +27,28 @@ Namespace BIFConvenios
 
         'Adicionar la informacion de los pagares a bloquear antes de procesarlo
         'RESPINOZA 20070621 - SE ADICIONA LA INFORMACION DE PERIODO AL PROCESO 
-        Public Shared Function addPagare(ByVal myConnection As ADODB.Connection, ByVal numeroLote As String, _
-                                            ByVal numeroPagare As String, _
-                                            ByVal fechaProceso As String, ByVal horaProceso As String, _
-                                            ByVal usuario As String, ByVal anioPeriodo As String, ByVal mesPeriodo As String) As Integer ', ByVal flagProrroga As String
+        Public Shared Function addPagare(myConnection As ADODB.Connection, numeroLote As String,
+                                            numeroPagare As String,
+                                            fechaProceso As String, horaProceso As String,
+                                            usuario As String, anioPeriodo As String, mesPeriodo As String) As Integer ', flagProrroga As String
 
             Dim strQuery As String
             ', EDLFLAG) " + _
-            strQuery = "INSERT INTO EDL6378W (EDLLOTE, EDLNPGR, EDLFECR, EDLHORA, EDLUSER, EDLAPER, EDLMPER)" + _
-                                 "      VALUES ( '" + numeroLote + "', '" + numeroPagare + "', '" + fechaProceso + "', '" + horaProceso + "', '" + usuario.Substring(0, 10).ToUpper + "','" + anioPeriodo + "','" + mesPeriodo + "')"
+            strQuery = "INSERT INTO EDL6378W (EDLLOTE, EDLNPGR, EDLFECR, EDLHORA, EDLUSER, EDLAPER, EDLMPER)" +
+                                 "      VALUES ( '" + numeroLote + "', '" + numeroPagare + "', '" + fechaProceso + "', '" + horaProceso + "', '" + usuario + "','" + anioPeriodo + "','" + mesPeriodo + "')"
             ', '" + flagProrroga + "' )"
 
-            Dim cmd As New ADODB.CommandClass()
-            cmd.ActiveConnection = myConnection
-            cmd.CommandText = strQuery
-            cmd.Prepared = True
+            Dim cmd As New CommandClass With {
+                .ActiveConnection = myConnection,
+                .CommandText = strQuery,
+                .Prepared = True
+            }
 
-            Dim ra As Object
-            cmd.Execute(ra, System.Reflection.Missing.Value, ADODB.CommandTypeEnum.adCmdText + ADODB.ExecuteOptionEnum.adExecuteNoRecords)
+            cmd.Execute(Nothing, Missing.Value, CommandTypeEnum.adCmdText + ExecuteOptionEnum.adExecuteNoRecords)
         End Function
 
 
-        'Public Shared Function adicionaPagares(ByVal lote As String, ByVal pagare As String, ByVal userName As String)
+        'Public Shared Function adicionaPagares(lote As String, pagare As String, userName As String)
         '    Dim myConnection As New ADODB.Connection()
 
         '    Dim s As String() = pagare.Split(",")
@@ -76,10 +78,10 @@ Namespace BIFConvenios
         Dim myConnection As New SqlConnection(GetDBConnectionString)
         Dim transaction As SqlTransaction
         'obtener un código de Prorroga para procesar los demas lotes
-        Protected Function creaLoteProrroga(ByVal Codigo_proceso As String, ByVal userId As String) As Integer
+        Protected Function creaLoteProrroga(Codigo_proceso As String, userId As String) As Integer
             Dim returnValue As Integer
-            Dim myCommand As SqlCommand = SqlCommandGenerator.GenerateCommand(myConnection, _
-                CType(MethodBase.GetCurrentMethod(), MethodInfo), _
+            Dim myCommand As SqlCommand = SqlCommandGenerator.GenerateCommand(myConnection,
+                CType(MethodBase.GetCurrentMethod(), MethodInfo),
                 New Object() {Codigo_proceso, userId})
 
             myCommand.Transaction = transaction
@@ -89,10 +91,10 @@ Namespace BIFConvenios
         End Function
 
         'adiciona un Prorroga al grupo
-        Protected Function addProrroga(ByVal Codigo_proceso As String, ByVal codigoLote As Integer, ByVal dlnp As String) As Boolean
+        Protected Function addProrroga(Codigo_proceso As String, codigoLote As Integer, dlnp As String) As Boolean
             Dim returnValue As Boolean
-            Dim myCommand As SqlCommand = SqlCommandGenerator.GenerateCommand(myConnection, _
-                CType(MethodBase.GetCurrentMethod(), MethodInfo), _
+            Dim myCommand As SqlCommand = SqlCommandGenerator.GenerateCommand(myConnection,
+                CType(MethodBase.GetCurrentMethod(), MethodInfo),
                 New Object() {Codigo_proceso, codigoLote, dlnp})
 
             myCommand.Transaction = transaction
@@ -102,7 +104,7 @@ Namespace BIFConvenios
         End Function
 
         'Obtener informacion del periodo de proceso 
-        Protected Sub getPeriodoProceso(ByVal codigo_proceso As String, ByRef anioPeriodo As String, ByRef mesPeriodo As String)
+        Protected Sub getPeriodoProceso(codigo_proceso As String, ByRef anioPeriodo As String, ByRef mesPeriodo As String)
             Dim dr As SqlDataReader
             anioPeriodo = ""
             mesPeriodo = ""
@@ -119,18 +121,15 @@ Namespace BIFConvenios
 
 #Region "Proceso de la operación de Prorroga"
         'procesamos la informacion de los Prorrogas
-        Public Shared Function procesaProrroga(ByVal codigo_proceso As String, ByVal pagares As String, ByVal userName As String) As Integer
-            Dim b As New BIFConvenios.Prorroga()
+        Public Shared Function procesaProrroga(codigo_proceso As String, pagares As String, userName As String) As Integer
+            Dim b As New Prorroga()
             Dim loteProrroga As Integer
 
             Dim vpagares As String() = pagares.Split(",")
 
-            Dim index As Integer = 1
-            'Dim vProrrogas As String()
-
             Dim pagare As String
             Dim Prorroga As Boolean
-            Dim Prorrogas As New System.Collections.Hashtable()
+            Dim Prorrogas As New Hashtable()
 
 
             Dim anioPeriodo As String = ""
@@ -161,10 +160,10 @@ Namespace BIFConvenios
             End Try
 
             '------------- En este punto empezamos a procesar la información para AS/400
-            Dim myConnectionAS400 As ADODB.Connection
-            myConnectionAS400 = New ADODB.Connection()
+            Dim myConnectionAS400 As Connection
+            myConnectionAS400 = New Connection()
 
-            Dim s As String() = pagare.Split(",")
+            'Dim s As String() = pagare.Split(",")
             Try
                 'myConnectionAS400.Open(BIFUtils.WS.Utils.CadenaConexion("AS400-ConnectionString-Generales"))
                 myConnectionAS400.Open(BIFUtils.WS.Utils.CadenaConexion("AS400-ConnectionString-Generales"))
@@ -189,10 +188,9 @@ Namespace BIFConvenios
             ''Aqui enviamos el mensaje al motor .net para que procese la aplicacion 
             'Remoting.sendMessage("ProcesoProrroga", CStr(loteProrroga))
 
-            Dim objWSConvenios As New wsConvenios.WSBIFConvenios
 
-            objWSConvenios.Credentials = System.Net.CredentialCache.DefaultCredentials
-            objWSConvenios.ProcesaProrroga(CStr(loteProrroga), userName)
+            Dim objWSConvenios As New wsBIFConvenios.WSBIFConveniosClient
+            objWSConvenios.ProcesaProrroga(loteProrroga, userName)
 
             Return loteProrroga
         End Function

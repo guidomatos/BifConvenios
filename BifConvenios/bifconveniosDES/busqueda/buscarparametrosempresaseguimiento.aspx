@@ -3,32 +3,31 @@
 <HTML>
 	<HEAD>
 		<title>Selección de Empresa y Periodo</title>
-		<meta name="GENERATOR" content="Microsoft Visual Studio.NET 7.0">
-		<meta name="CODE_LANGUAGE" content="Visual Basic 7.0">
-		<meta name="vs_defaultClientScript" content="JavaScript">
-		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
 		<BASE TARGET="_self">
-		<script language="javascript" src="<%Response.Write(Request.ApplicationPath)%>/js/global.js" 
-type="text/javascript"></script>
-		<LINK href="<%=Request.ApplicationPath%>/css/global.css" type="text/css" rel=stylesheet>
-		<script language="javascript">
-<!--
-	function Seleccionar(){
-		if ( getSelectedRadio ( Form1.document.all ("rData") ) !=-1){
-			top.returnValue = getSelectedRadioValue( Form1.document.all ("rData") ); 
-			window.close();
-		}
-		else{
-			alert ( 'Seleccione una empresa y periodo');
-		}
-		
-	}
-	
-	function Cancelar(){
-		window.close();
-	}
--->
-		</script>
+		<link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
+		<script src='<%=ResolveUrl("~/js/global.js") %>' language ="javascript" type="text/javascript"></script>
+		<script type="text/javascript" language="javascript">
+
+            var dataEmpresaSeleccionada = undefined;
+			function fnSeleccionarEmpresaPeriodo() {
+				
+				if (getSelectedRadio(document.all("rData")) != -1) {
+                    dataEmpresaSeleccionada = getSelectedRadioValue(document.all("rData"));
+					window.close();
+				}
+				else {
+					alert('Seleccione una empresa y periodo');
+				}
+			}
+
+			function fnCerrarVentana() {
+				window.close();
+			}
+
+			function ReturnValueSeleccionado() {
+                return dataEmpresaSeleccionada;
+			}
+        </script>
 	</HEAD>
 	<body topmargin="10" leftmargin="15">
 		<form id="Form1" method="post" runat="server">
@@ -52,8 +51,8 @@ type="text/javascript"></script>
 					<td colspan="2" align="middle">
 						<table border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td class="CommandButton"><a href="javascript:Seleccionar();">Seleccionar</a>&nbsp;</td>
-								<td class="CommandButton"><a href="javascript:Cancelar();">Cancelar</a></td>
+								<td class="CommandButton"><a href="javascript:fnSeleccionarEmpresaPeriodo();">Seleccionar</a>&nbsp;</td>
+								<td class="CommandButton"><a href="javascript:fnCerrarVentana();">Cancelar</a></td>
 							</tr>
 						</table>
 					</td>
@@ -89,8 +88,8 @@ type="text/javascript"></script>
 					<td colspan="2" align="middle">
 						<table border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td class="CommandButton"><a href="javascript:Seleccionar();">Seleccionar</a>&nbsp;</td>
-								<td class="CommandButton"><a href="javascript:Cancelar();">Cancelar</a></td>
+								<td class="CommandButton"><a href="javascript:fnSeleccionarEmpresaPeriodo();">Seleccionar</a>&nbsp;</td>
+								<td class="CommandButton"><a href="javascript:fnCerrarVentana();">Cancelar</a></td>
 							</tr>
 						</table>
 					</td>

@@ -1,20 +1,13 @@
 <%@ Page Language="vb" AutoEventWireup="false" Inherits="BIFConvenios.reporteProcesoDescuentosDetalle" CodeFile="reporteProcesoDescuentosDetalle.aspx.vb" %>
 <%@ Register TagPrefix="uc1" TagName="Banner" Src="../controls/Banner.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML>
-	<HEAD>
+<html>
+	<head>
 		<title>BIFConvenios - Detalle del proceso del archivo de Cuotas</title>
-		<meta name="GENERATOR" content="Microsoft Visual Studio.NET 7.0">
-		<meta name="CODE_LANGUAGE" content="Visual Basic 7.0">
-		<meta name="vs_defaultClientScript" content="JavaScript">
-		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
-		<LINK href="<%=Request.ApplicationPath%>/css/global.css" 
-type=text/css rel=stylesheet>
-		<script language=javascript 
-src="<%Response.Write(Request.ApplicationPath)%>/js/global.js" 
-type=text/javascript></script>
-	</HEAD>
-	<body leftmargin="0" topmargin="0" onload="MM_preloadImages('/BIFConvenios/images/regresar_on.jpg')">
+		<link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
+		<script src='<%=ResolveUrl("~/js/global.js") %>' language ="javascript" type="text/javascript"></script>
+	</head>
+	<body leftmargin="0" topmargin="0" onload="MM_preloadImages('<%=ResolveUrl("~/images/regresar_on.jpg") %>')">
 		<form id="Form1" method="post" runat="server">
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr>
@@ -23,59 +16,59 @@ type=text/javascript></script>
 				</tr>
 				<tr>
 					<td>
-						<TABLE id="Table1" cellSpacing="0" cellPadding="0" width="100%" border="0">
-							<TR>
-								<TD width="30">&nbsp;</TD>
-								<TD colSpan="2">&nbsp;</TD>
-							</TR>
-							<TR>
-								<TD width="30"></TD>
-								<TD colSpan="2">
-									<TABLE cellSpacing="0" class="InputField" cellPadding="0" width="750" border="0">
-										<TR>
-											<TD width="30">&nbsp;</TD>
-											<TD colSpan="2">
+						<table id="Table1" cellSpacing="0" cellPadding="0" width="100%" border="0">
+							<tr>
+								<td width="30">&nbsp;</td>
+								<td colSpan="2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="30"></td>
+								<td colSpan="2">
+									<table cellSpacing="0" class="InputField" cellPadding="0" width="750" border="0">
+										<tr>
+											<td width="30">&nbsp;</td>
+											<td colSpan="2">
 												<table cellSpacing="4" cellPadding="0" width="100%" border="0">
-													<TR>
-														<TD width="120" class="SubHead">Empresa</TD>
-														<TD class="Normal"><asp:literal id="ltrlCliente" runat="server"></asp:literal></TD>
-													</TR>
-													<TR>
-														<TD width="120" class="SubHead">Documento</TD>
-														<TD class="Normal"><asp:literal id="ltrlDocumento" runat="server"></asp:literal></TD>
-													</TR>
+													<tr>
+														<td width="120" class="SubHead">Empresa</td>
+														<td class="Normal"><asp:Literal id="ltrlCliente" runat="server"></asp:Literal></td>
+													</tr>
+													<tr>
+														<td width="120" class="SubHead">Documento</td>
+														<td class="Normal"><asp:Literal id="ltrlDocumento" runat="server"></asp:Literal></td>
+													</tr>
 													<!--<TR>
 														<TD width="120" class="SubHead">Fecha de Proceso</TD>
 														<TD class="Normal"><asp:literal id="ltrlFechaProceso" runat="server"></asp:literal></TD>
 													</TR>-->
-													<TR>
-														<TD width="120" class="SubHead">Estado</TD>
-														<TD class="Normal"><asp:literal id="ltrlEstado" runat="server"></asp:literal></TD>
-													</TR>
-													<TR>
-														<TD width="120" class="SubHead">Periodo</TD>
-														<TD class="Normal"><asp:literal id="ltrlPeriodo" runat="server"></asp:literal></TD>
-													</TR>
-													<TR>
-														<TD width="120" class="SubHead">Fecha de Carga</TD>
-														<TD class="Normal"><asp:literal id="ltrlProcesoAS400" runat="server"></asp:literal></TD>
-													</TR>
+													<tr>
+														<td width="120" class="SubHead">Estado</td>
+														<td class="Normal"><asp:Literal id="ltrlEstado" runat="server"></asp:Literal></td>
+													</tr>
+													<tr>
+														<td width="120" class="SubHead">Periodo</td>
+														<td class="Normal"><asp:Literal id="ltrlPeriodo" runat="server"></asp:Literal></td>
+													</tr>
+													<tr>
+														<td width="120" class="SubHead">Fecha de Carga</td>
+														<td class="Normal"><asp:Literal id="ltrlProcesoAS400" runat="server"></asp:Literal></td>
+													</tr>
 												</table>
-											</TD>
-										</TR>
-									</TABLE>
-								</TD>
-							</TR>
-							<TR>
-								<TD width="30"></TD>
-								<TD colSpan="2">&nbsp;</TD>
-							</TR>
-							<TR>
-								<TD width="30"></TD>
-								<TD colSpan="2">
-									<DIV id="dvDia" class="DRCuerpoNormal" style="OVERFLOW: auto; WIDTH: 750px; HEIGHT: 250px" width="100%">
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td width="30"></td>
+								<td colSpan="2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="30"></td>
+								<td colSpan="2">
+									<div id="dvDia" class="DRCuerpoNormal" style="OVERFLOW: auto; WIDTH: 750px; HEIGHT: 250px" width="100%">
 										<div class="tabla">
-											<asp:datagrid id="dgProcesoResult" runat="server" Visible="False" AutoGenerateColumns="False" Width="1200" BorderWidth="1px" CellPadding="3" CellSpacing="3" AllowSorting="True" AllowPaging="True" PageSize="500">
+											<asp:DataGrid id="dgProcesoResult" runat="server" Visible="False" AutoGenerateColumns="False" Width="1200" BorderWidth="1px" CellPadding="3" CellSpacing="3" AllowSorting="True" AllowPaging="True" PageSize="500">
 												<ItemStyle CssClass="TablaNormalBIF" VerticalAlign="Top"></ItemStyle>
 												<HeaderStyle CssClass="TablaNormalBoldBIF" VerticalAlign="Top" Height="35"></HeaderStyle>
 												<AlternatingItemStyle CssClass="odd"></AlternatingItemStyle>
@@ -102,39 +95,40 @@ type=text/javascript></script>
 													<asp:BoundColumn DataField="Estado" HeaderText="Estado&#160;Registro" ItemStyle-Width="220"></asp:BoundColumn>
 												</Columns>
 												<PagerStyle VerticalAlign="Middle" HorizontalAlign="Left" Position="TopAndBottom" CssClass="CommandButton" Mode="NumericPages"></PagerStyle>
-											</asp:datagrid>
+											</asp:DataGrid>
 										</div>
-									</DIV>
-								</TD>
-							</TR>
-							<TR>
-								<TD width="30"></TD>
-								<TD colSpan="2">&nbsp;&nbsp;
-								</TD>
-							</TR>
-							<TR>
-								<TD width="30"></TD>
-								<TD colSpan="2">
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td width="30"></td>
+								<td colSpan="2">&nbsp;&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="30"></td>
+								<td colSpan="2">
 									<table cellSpacing="0" cellPadding="0" border="0">
 										<tr>
 											<td class="SubHead">Total de Registros&nbsp;&nbsp;
-												<asp:label CssClass="Text" id="lblTotalReg" Runat="server"></asp:label></td>
+												<asp:Label CssClass="Text" id="lblTotalReg" Runat="server"></asp:Label></td>
 										</tr>
 									</table>
-								</TD>
-							</TR>
-							<TR>
-								<TD width="30">&nbsp;</TD>
-								<TD colSpan="2">&nbsp;</TD>
-							</TR>
-							<tr>
-								<TD width="30"></TD>
-								<TD colSpan="2"><asp:linkbutton id="lnkBack" Runat="server"><img src='/BIFConvenios/images/regresar.jpg' name='Image1' border="0" alt='Regresar' /></asp:linkbutton></TD>
+								</td>
 							</tr>
-						</TABLE>
+							<tr>
+								<td width="30">&nbsp;</td>
+								<td colSpan="2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="30"></td>
+								<td colSpan="2">
+									<asp:LinkButton id="lnkBack" Runat="server"><img src="<%= ResolveUrl("~/images/regresar.jpg") %>" name='Image1' border="0" alt='Regresar' /></asp:LinkButton>
+								</td>
+							</tr>
+						</table>
 					</td>
 				</tr>
 			</table>
 		</form>
 	</body>
-</HTML>
+</html>

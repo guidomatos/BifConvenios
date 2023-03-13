@@ -2,9 +2,9 @@ Imports System.Data.SqlClient
 Namespace BIFConvenios
 
     Partial Class ReporteCronogramaFuturo
-        Inherits System.Web.UI.Page
-        Protected WithEvents pnlClientes As System.Web.UI.WebControls.Panel
-        Protected WithEvents hdDataFile As System.Web.UI.HtmlControls.HtmlInputHidden
+        Inherits Page
+        Protected WithEvents pnlClientes As Panel
+        Protected WithEvents hdDataFile As HtmlInputHidden
         Protected idGenFile As String = ""
         Protected oproc As New Proceso()
         Protected oCliente As New Cliente()
@@ -27,7 +27,7 @@ Namespace BIFConvenios
 
         'End Sub
 
-        Private Sub Page_Init(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Init
+        Private Sub Page_Init(sender As Object, e As EventArgs) Handles MyBase.Init
             'CODEGEN: This method call is required by the Web Form Designer
             'Do not modify it using the code editor.
             'Modificacion: Alan Azabache
@@ -36,7 +36,7 @@ Namespace BIFConvenios
 
 #End Region
 
-        Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             'Put user code to initialize the page here
             If Not Page.IsPostBack Then
 
@@ -68,36 +68,36 @@ Namespace BIFConvenios
             pnlGenReporte.Visible = False
         End Sub
 
-        Private Sub ddlMes_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ddlMes.SelectedIndexChanged
+        Private Sub ddlMes_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlMes.SelectedIndexChanged
             Call BindGrid()
         End Sub
 
-        Private Sub ddlAnio_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ddlAnio.SelectedIndexChanged
+        Private Sub ddlAnio_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlAnio.SelectedIndexChanged
             Call BindMonth()
             Call BindGrid()
         End Sub
 
         'Permite mostrar el elemento de eliminacion si el proceso puede ser eliminado
-        Protected Function MostrarElemento(ByVal b As Boolean, ByVal codigo_proceso As Guid, ByVal nombre As String, ByVal anio As String, ByVal mes As String, ByVal fechaProcesoAS400 As String) As String
+        Protected Function MostrarElemento(b As Boolean, codigo_proceso As Guid, nombre As String, anio As String, mes As String, fechaProcesoAS400 As String) As String
             Dim returnValue As String = "El proceso no puede ser eliminado"
             If b Then
-                returnValue = "<a href='javascript:EliminaProceso(""" + codigo_proceso.ToString + """, """ + nombre.Replace("'", "") + """, """ + anio + """, """ + mes + """, """ + BIFConvenios.Utils.GetFechaCanonica(fechaProcesoAS400) + """ )' " + _
+                returnValue = "<a href='javascript:EliminaProceso(""" + codigo_proceso.ToString + """, """ + nombre.Replace("'", "") + """, """ + anio + """, """ + mes + """, """ + BIFConvenios.Utils.GetFechaCanonica(fechaProcesoAS400) + """ )' " +
                 ">Eliminar</a>"
             End If
             Return returnValue
         End Function
 
-        Protected Function MostrarGenFile(ByVal b As Boolean, ByVal codigo_proceso As Guid, ByVal nombre As String, ByVal anio As String, ByVal mes As String, ByVal fechaProcesoAS400 As String) As String
+        Protected Function MostrarGenFile(b As Boolean, codigo_proceso As Guid, nombre As String, anio As String, mes As String, fechaProcesoAS400 As String) As String
             Dim returnValue As String = "No puede generar archivo"
             If b Then
-                returnValue = "<a href='javascript:GenerarArchivo(""" + codigo_proceso.ToString + """, """ + nombre.Replace("'", "") + """, """ + anio + """, """ + BIFConvenios.Periodo.GetMonthByNumber(mes) + """, """ + BIFConvenios.Utils.GetFechaCanonica(fechaProcesoAS400) + """ )' " + _
+                returnValue = "<a href='javascript:GenerarArchivo(""" + codigo_proceso.ToString + """, """ + nombre.Replace("'", "") + """, """ + anio + """, """ + BIFConvenios.Periodo.GetMonthByNumber(mes) + """, """ + BIFConvenios.Utils.GetFechaCanonica(fechaProcesoAS400) + """ )' " +
                 ">Consultar/Editar</a>"
             End If
 
             Return returnValue
         End Function
 
-        Protected Function MostrarPaginaConsulta(ByVal codigo_proceso As Guid, ByVal codigo_cliente As String) As String
+        Protected Function MostrarPaginaConsulta(codigo_proceso As Guid, codigo_cliente As String) As String
             Dim returnValue As String = "No se puede Modificar"
 
             Using dr As SqlDataReader = oCliente.GetCliente(codigo_cliente)
@@ -109,7 +109,7 @@ Namespace BIFConvenios
                     CustomerNumber = oCliente.GetCustomerNumber(TipoDocumento, NumeroDocumento)
                 End If
 
-                returnValue = "<a href='javascript:GenerarArchivo2(""" + codigo_proceso.ToString + """, """ + CustomerNumber + """ )' " + _
+                returnValue = "<a href='javascript:GenerarArchivo2(""" + codigo_proceso.ToString + """, """ + CustomerNumber + """ )' " +
                     ">Consultar/Editar</a>"
 
             End Using
@@ -117,14 +117,14 @@ Namespace BIFConvenios
             Return returnValue
         End Function
 
-        Protected Sub RedirectReporte(ByVal codigo_proceso_ As String, ByVal modalidad As String, ByVal situacionTrabajador As String)
+        Protected Sub RedirectReporte(codigo_proceso_ As String, modalidad As String, situacionTrabajador As String)
             Session.Add("Info", Me.getDataSetListadoCuotasFin(codigo_proceso_, modalidad, situacionTrabajador))
             Response.Redirect(ResolveUrl("consultas/ContainerListadoConsultaEnvio.aspx?idx=" & codigo_proceso_))
         End Sub
 
 
         'Eliminar un proceso de carga
-        Private Sub lnkDeleteProcess_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lnkDeleteProcess.Click
+        Private Sub lnkDeleteProcess_Click(sender As Object, e As EventArgs) Handles lnkDeleteProcess.Click
             If hdData.Value <> "" Then
                 oproc.DelProceso(hdData.Value.Trim(), Context.User.Identity.Name)
                 hdData.Value = ""
@@ -133,10 +133,10 @@ Namespace BIFConvenios
         End Sub
 
 
-        Private Sub lnkGenerarArchivo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lnkGenerarArchivo.Click
-            If Not hdId.Value Is Nothing And hdId.Value.Trim <> "" Then
-                oproc.UpdRestauraEstadoInicial(CType(hdId.Value.Trim.Split("|")(0), String), Context.User.Identity.Name)
-                idGenFile = CType(hdId.Value.Trim, String)
+        Private Sub lnkGenerarArchivo_Click(sender As Object, e As EventArgs) Handles lnkGenerarArchivo.Click
+            If hdId.Value IsNot Nothing And hdId.Value.Trim <> "" Then
+                oproc.UpdRestauraEstadoInicial(hdId.Value.Trim.Split("|")(0), Context.User.Identity.Name)
+                idGenFile = hdId.Value.Trim
                 pnlGenArchivos.Visible = True
                 hdId.Value = ""
                 idP = idGenFile.Trim.Split("|")(0)
@@ -149,7 +149,7 @@ Namespace BIFConvenios
         End Sub
 
 
-        'Private Sub dgProcesos_ItemCommand(ByVal source As Object, ByVal e As System.Web.UI.WebControls.DataGridCommandEventArgs) Handles dgProcesos.ItemCommand
+        'Private Sub dgProcesos_ItemCommand(source As Object, e As DataGridCommandEventArgs) Handles dgProcesos.ItemCommand
         '    If e.CommandName = "report" Then
         '        'Session.Add("id", e.CommandArgument.ToString())
         '        ' Server.Transfer(ResolveUrl("consultas/ContainerListadoConsultaEnvio.aspx"))
@@ -160,10 +160,9 @@ Namespace BIFConvenios
         '    End If
         'End Sub
 
-        Private Function getDataSetListadoCuotasFin(ByVal id As String, ByVal modalidad As String, ByVal situacionTrabajador As String) As DataSetListadoCuotasFin
+        Private Function getDataSetListadoCuotasFin(id As String, modalidad As String, situacionTrabajador As String) As DataSetListadoCuotasFin
             Dim ds As New DataSetListadoCuotasFin()
             Dim ds3 As DataSet
-            Dim dt As DataTable
             Dim Codigo_proceso As String
 
             ds.Reset()
@@ -188,16 +187,16 @@ Namespace BIFConvenios
         End Function
 
 
-        Protected Sub lnkGenerarReporte_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lnkGenerarReporte.Click
-            If Not hdFilter.Value Is Nothing And hdFilter.Value.Trim <> "" Then
+        Protected Sub lnkGenerarReporte_Click(sender As Object, e As EventArgs) Handles lnkGenerarReporte.Click
+            If hdFilter.Value IsNot Nothing And hdFilter.Value.Trim <> "" Then
                 pnlGenReporte.Visible = True
-                idP = CType(hdFilter.Value.Trim, String).Trim.Split("|")(0)
-                modalidad = CType(hdFilter.Value.Trim, String).Trim.Split("|")(1)
-                situacionTrabajador = CType(hdFilter.Value.Trim, String).Trim.Split("|")(2)
+                idP = hdFilter.Value.Trim.Trim.Split("|")(0)
+                modalidad = hdFilter.Value.Trim.Trim.Split("|")(1)
+                situacionTrabajador = hdFilter.Value.Trim.Trim.Split("|")(2)
             End If
         End Sub
 
-        Protected Sub lnkConsultar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lnkConsultar.Click
+        Protected Sub lnkConsultar_Click(sender As Object, e As EventArgs) Handles lnkConsultar.Click
 
             'Obtenemos el tipo y el numero de documento del cliente
 
@@ -211,9 +210,9 @@ Namespace BIFConvenios
             'Response.Redirect("ResultadoProcesoCronogramaFuturo.aspx?id=" & Codigo_proceso + "&codIBS=" + CustomerNumber + "&consultar=1")
             'End If
 
-            If (hdCodigoCliente.Value.Trim <> "" And _
-                        hdCodigo.Value.Trim <> "" And _
-                        hdTipoDocumento.Value.Trim <> "" And _
+            If (hdCodigoCliente.Value.Trim <> "" And
+                        hdCodigo.Value.Trim <> "" And
+                        hdTipoDocumento.Value.Trim <> "" And
                         hdNumeroDocumento.Value.Trim <> "") Then
 
                 Codigo_proceso = hdCodigoCliente.Value

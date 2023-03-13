@@ -12,12 +12,7 @@
 ' - Nombre  : export
 ' - Descripcion: Determina si se realiza exportacion directa del formato
 
-'Imports CrystalDecisions.CrystalReports.Engine
-'******************************************************
-
 Imports System.Data.SqlClient
-Imports System.IO
-'Imports CrystalDecisions.Shared
 Imports Microsoft.Reporting.WebForms
 
 Namespace BIFConvenios
@@ -45,7 +40,7 @@ Namespace BIFConvenios
 
         End Sub
 
-        Private Sub Page_Init(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Init
+        Private Sub Page_Init(sender As Object, e As EventArgs) Handles MyBase.Init
             'CODEGEN: This method call is required by the Web Form Designer
             'Do not modify it using the code editor.
             InitializeComponent()
@@ -53,21 +48,23 @@ Namespace BIFConvenios
 
 #End Region
 
-        Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
             If Not Page.IsPostBack Then
                 'ADD: AAZ - 2017/12/06 - Incidencia 26
                 'Inicializamos e instanciamos el objeto CrystalReportViewer, DataSet
                 'Dim oRepListadoCuotasPorVencer As New RepListadoCuotasPorVencer()
                 Dim ds As New DataSetListadoCuotasFin()
-                Dim rdsDlinfo As New ReportDataSource()
-                rdsDlinfo.Name = "DLinfo"
-                Dim rdsCliente As New ReportDataSource()
-                rdsCliente.Name = "Cliente"
+                Dim rdsDlinfo As New ReportDataSource With {
+                    .Name = "DLinfo"
+                }
+                Dim rdsCliente As New ReportDataSource With {
+                    .Name = "Cliente"
+                }
                 'FIN ADD
 
                 If Request.Params("idp") Is Nothing Then
-                    If (Not Session.Item("Info") Is Nothing) Then
+                    If (Session.Item("Info") IsNot Nothing) Then
 
                         ds = CType(Session.Item("Info"), DataSetListadoCuotasFin)
                         'ds.WriteXml("C:/DATASET.TXT")
@@ -92,7 +89,7 @@ Namespace BIFConvenios
                     'END
 
                     'Session.Add("Info", ArchivosDescuento.getDataSetListadoCuotasFin(idp))
-                    ds = CType(ArchivosDescuento.getDataSetListadoCuotasFin(idp, "-", "-"), DataSetListadoCuotasFin)
+                    ds = ArchivosDescuento.getDataSetListadoCuotasFin(idp, "-", "-")
 
                     'ds.WriteXml("C:/DATASET.TXT")
                     ' oRepListadoCuotasPorVencer.SetDataSource(ds)
@@ -102,7 +99,7 @@ Namespace BIFConvenios
                             rdsCliente.Value = ds.Tables(1)
                         End If
                     End If
-                    Dim oProceso As New BIFConvenios.Proceso()
+                    Dim oProceso As New Proceso()
                     oProceso.UpdateFechaObtencionArchivo(idp, False, Context.User.Identity.Name)
                     oProceso.UpdEstadoGeneracionExito(idp, Context.User.Identity.Name)
 
@@ -182,18 +179,15 @@ Namespace BIFConvenios
         End Sub
 
         'ADD 24/06 NCA: REQ EA2013-273 GENERACION ARCHIVO DESCUENTOS.
-        Protected Sub lnkExportarArchivoDescuentos_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lnkExportarArchivoDescuentos.Click
+        Protected Sub lnkExportarArchivoDescuentos_Click(sender As Object, e As EventArgs) Handles lnkExportarArchivoDescuentos.Click
             Dim strNombreArchivo As String = getWebServerDateId() & ".xls"
             Call (New ArchivosDescuento).GenerarArchivExcelDescuentos(hdId.Value, strNombreArchivo, "-", 0, 0, 0, "-")
             Call Utils.InvocarArchivo(ConfigurationManager.AppSettings("GenFolder"), strNombreArchivo)
         End Sub
 
-        Protected Function getDataTableListadoCuotasFin(ByVal strCodigoProceso As String) As DataTable
+        Protected Function getDataTableListadoCuotasFin(strCodigoProceso As String) As DataTable
             Dim ds As New DataSetListadoCuotasFin()
             Dim dsListadoCuotas As DataSet
-            Dim dt As DataTable
-
-            Dim dtRet As DataTable = Nothing
 
             Dim dr As SqlDataReader = oCliente.GetInfoClienteProceso(strCodigoProceso)
             If dr.Read Then
@@ -206,7 +200,7 @@ Namespace BIFConvenios
             Dim dsInfoContactoConvenio As DataSet = oCliente.GetInfoContactoConvenio(TipoDocumento, NumeroDocumento, Anio_periodo, Mes_Periodo)
             dsListadoCuotas = oCliente.GetDatosArchivoCuotasPorVencerCliente(strCodigoProceso)
 
-            dtRet = dsListadoCuotas.Tables(0).Copy
+            Dim dtRet As DataTable = dsListadoCuotas.Tables(0).Copy
             Return dtRet
         End Function
 

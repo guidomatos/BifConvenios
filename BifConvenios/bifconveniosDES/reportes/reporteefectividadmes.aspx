@@ -8,8 +8,10 @@
         <meta content="Microsoft Visual Studio.NET 7.0" name="GENERATOR">
 		<meta content="Visual Basic 7.0" name="CODE_LANGUAGE">
 		<meta content="JavaScript" name="vs_defaultClientScript">    
-		<script language=javascript src="<%Response.Write(Request.ApplicationPath)%>/js/global.js" type=text/javascript></script>
-		<LINK href="<%=Request.ApplicationPath%>/css/global.css" type=text/css rel=stylesheet>
+		 <%--<LINK href="<%=Request.ApplicationPath%>/css/global.css" type=text/css rel=stylesheet>--%>
+    <LINK href="<%= ResolveUrl("~/css/global.css") %>" type="text/css" rel="stylesheet" />
+    <%--<script language=javascript src="<%Response.Write(Request.ApplicationPath)%>/js/global.js" type=text/javascript></script>--%>
+    <script language="javascript" src="<%= ResolveUrl("~/js/global.js") %>" type="text/javascript"></script>
 		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
 </head>
 <body leftMargin="0" topMargin="0">

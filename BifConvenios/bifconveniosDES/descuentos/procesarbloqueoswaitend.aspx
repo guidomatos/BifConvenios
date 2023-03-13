@@ -3,17 +3,8 @@
 <HTML>
 	<HEAD>
 		<title>ProcesarBloqueosWaitEnd</title>
-		<meta name="GENERATOR" content="Microsoft Visual Studio.NET 7.0">
-		<meta name="CODE_LANGUAGE" content="Visual Basic 7.0">
-		<meta name="vs_defaultClientScript" content="JavaScript">
-		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
-		<META HTTP-EQUIV="Refresh" CONTENT="5">
-		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-		<META HTTP-EQUIV="Expires" CONTENT="-1">
-		<script language="javascript">
-		<!--
-			var ubicacion = '<%=Request.ApplicationPath%>';
-		-->
+		<script type="text/javascript" language="javascript">
+			<%--var ubicacion = '<%=Request.ApplicationPath%>';--%>
 		</script>
 	</HEAD>
 	<body>
@@ -32,8 +23,8 @@
 					<td>
 
 						<asp:Label Runat="server" ID="lblMensaje"></asp:Label>
-						<asp:literal ID="lrtlSwf" Runat="server" Visible="False">
-							<SCRIPT language="VBScript">
+						<asp:Literal ID="lrtlSwf" Runat="server" Visible="False">
+							<script type="text/vbscript" language="VBScript">
 							<!--
 								Private i, x, MM_FlashControlVersion
 								On Error Resume Next
@@ -58,16 +49,16 @@
 								document.write "Procesando..."
 								End If
 								-->
-							</SCRIPT>
-						</asp:literal>
+							</script>
+						</asp:Literal>
 						<asp:Literal id="ltrlScript" runat="server" Visible="False">
-							<SCRIPT language="javascript">
+							<script type="text/javascript" language="javascript">
 						<!--
 							//top.location.href  = ubicacion + '/descuentos/ReporteSeguimiento.aspx';
 							top.__doPostBack('lnkBuscar',''); 
 						
 						-->
-							</SCRIPT>
+							</script>
 						</asp:Literal>						
 					</td>
 				</tr>

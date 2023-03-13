@@ -2,69 +2,55 @@
 <%@ Register TagPrefix="uc1" TagName="Banner" Src="../controls/Banner.ascx" %>
 <%@ Page Language="vb" AutoEventWireup="false" Inherits="BIFConvenios.reporteProcesoDescuentosCat" CodeFile="reporteProcesoDescuentosCat.aspx.vb" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML>
-	<HEAD>
+<html>
+	<head>
 		<title>BIFConvenios - Detalle del proceso del archivo de cuotas</title>
-		<META http-equiv="Content-Type" content="text/html; charset=windows-1252">
-		<meta content="Microsoft Visual Studio.NET 7.0" name="GENERATOR">
-		<meta content="Visual Basic 7.0" name="CODE_LANGUAGE">
-		<meta content="JavaScript" name="vs_defaultClientScript">
-		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
-		<LINK href="<%=Request.ApplicationPath%>/css/global.css" 
-type=text/css rel=stylesheet>
-		<script language=javascript 
-src="<%Response.Write(Request.ApplicationPath)%>/js/global.js" 
-type=text/javascript></script>
-		<script language="javascript">
-<!--
-	function generarArchivo() {
-			location.href="generarArchivos.aspx?id=<%=Request.Params("id")%>&type=<%=Request.Params("type")%>";
-	}
-	
-	
-	function Send (){
-	var  controls  = '<%=BIFConvenios.Utils.GetControlNames(dgProcesoResultErr, "chk")%>';
-	if ( controls == '' ){
-		return;
-	}
-		var a = controls.split(',');
-		var i = 0;
-		var anyChecked = false;
-		for ( i = 0; i<=a.length-1; i++){
-			if ( document.all( a[i] ).checked ) {
-				anyChecked = true;
-			}
-		} 
-		
+		<link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
+		<script src='<%=ResolveUrl("~/js/global.js") %>' language ="javascript" type="text/javascript"></script>
+		<script type="text/javascript" language="javascript">
 
-		if ( !anyChecked ) {
-			alert ( 'Debe seleccionar por lo menos un prestamo.');
-		}
-		else{
-			if ( confirm ( '¿Desea establecer el monto del importe descontado en 0 en los prestamos seleccionados?')){
-				__doPostBack('lnkEnviaPrestamos', '');	
+			function generarArchivo() {
+				location.href = "generarArchivos.aspx?id=<%=Request.Params("id")%>&type=<%=Request.Params("type")%>";
 			}
-		}
-		
-	}
+			function Send() {
+				var controls = '<%=BIFConvenios.Utils.GetControlNames(dgProcesoResultErr, "chk")%>';
+				if (controls == '') {
+					return;
+				}
+				var a = controls.split(',');
+				var i = 0;
+				var anyChecked = false;
+				for (i = 0; i <= a.length - 1; i++) {
+					if (document.all(a[i]).checked) {
+						anyChecked = true;
+					}
+				}
+
+				if (!anyChecked) {
+					alert('Debe seleccionar por lo menos un prestamo.');
+				}
+				else {
+					if (confirm('¿Desea establecer el monto del importe descontado en 0 en los prestamos seleccionados?')) {
+						__doPostBack('lnkEnviaPrestamos', '');
+					}
+				}
+			}
 	
-	
-	/**
-	* Función para checkar todos los controles
-	**/
-	function checkall(bln){
-		var controls = '<%=BIFConvenios.Utils.GetControlNames(dgProcesoResultErr, "chk")%>';
-		var a = controls.split(',');
-		var i = 0;
-		var anyChecked = false;
-		for ( i = 0; i<=a.length-1; i++){
-			 document.all( a[i] ).checked = bln;
-		} 
-	}
--->
+			/**
+			* Función para checkar todos los controles
+			**/
+			function checkall(bln) {
+				var controls = '<%=BIFConvenios.Utils.GetControlNames(dgProcesoResultErr, "chk")%>';
+				var a = controls.split(',');
+				var i = 0;
+				for (i = 0; i <= a.length - 1; i++) {
+					document.all(a[i]).checked = bln;
+				}
+			}
+
 		</script>
-	</HEAD>
-	<body leftMargin="0" topMargin="0" onload="MM_preloadImages('/BIFConvenios/images/regresar_on.jpg')" rightMargin="0">
+	</head>
+	<body leftMargin="0" topMargin="0" onload="MM_preloadImages('<%=ResolveUrl("~/images/regresar_on.jpg")%>')" rightMargin="0">
 		<form id="Form1" method="post" runat="server">
 			<table cellSpacing="0" cellPadding="0" width="100%" border="0">
 				<tr>
@@ -72,65 +58,67 @@ type=text/javascript></script>
 				</tr>
 				<tr>
 					<td>
-						<TABLE id="Table1" cellSpacing="0" cellPadding="0" width="100%" border="0">
-							<TR>
-								<TD width="30">&nbsp;</TD>
-								<TD colSpan="2">&nbsp;</TD>
-							</TR>
-							<TR>
-								<TD width="30"></TD>
-								<TD colSpan="2">
-									<TABLE class="InputField" cellSpacing="0" cellPadding="0" width="750" border="0">
-										<TR>
-											<TD width="30">&nbsp;</TD>
-											<TD colSpan="2">
+						<table id="Table1" cellSpacing="0" cellPadding="0" width="100%" border="0">
+							<tr>
+								<td width="30">&nbsp;</td>
+								<td colSpan="2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="30"></td>
+								<td colSpan="2">
+									<table class="InputField" cellSpacing="0" cellPadding="0" width="750" border="0">
+										<tr>
+											<td width="30">&nbsp;</td>
+											<td colSpan="2">
 												<table cellSpacing="4" cellPadding="0" width="100%" border="0">
-													<TR>
-														<TD class="SubHead" width="120">Empresa</TD>
-														<TD class="Normal"><asp:literal id="ltrlCliente" runat="server"></asp:literal></TD>
-													</TR>
-													<TR>
-														<TD class="SubHead" width="120">Documento</TD>
-														<TD class="Normal"><asp:literal id="ltrlDocumento" runat="server"></asp:literal></TD>
-													</TR>
-													<TR>
-														<TD class="SubHead" width="120">Estado</TD>
-														<TD class="Normal"><asp:literal id="ltrlEstado" runat="server"></asp:literal></TD>
-													</TR>
-													<TR>
-														<TD class="SubHead" width="120">Periodo</TD>
-														<TD class="Normal"><asp:literal id="ltrlPeriodo" runat="server"></asp:literal></TD>
-													</TR>
-													<TR>
-														<TD class="SubHead" width="120">Fecha de Carga</TD>
-														<TD class="Normal"><asp:literal id="ltrlFechaProceso" runat="server"></asp:literal></TD>
-													</TR>
+													<tr>
+														<td class="SubHead" width="120">Empresa</td>
+														<td class="Normal"><asp:Literal id="ltrlCliente" runat="server"></asp:Literal></td>
+													</tr>
+													<tr>
+														<td class="SubHead" width="120">Documento</td>
+														<td class="Normal"><asp:Literal id="ltrlDocumento" runat="server"></asp:Literal></td>
+													</tr>
+													<tr>
+														<td class="SubHead" width="120">Estado</td>
+														<td class="Normal"><asp:Literal id="ltrlEstado" runat="server"></asp:Literal></td>
+													</tr>
+													<tr>
+														<td class="SubHead" width="120">Periodo</td>
+														<td class="Normal"><asp:Literal id="ltrlPeriodo" runat="server"></asp:Literal></td>
+													</tr>
+													<tr>
+														<td class="SubHead" width="120">Fecha de Carga</td>
+														<td class="Normal"><asp:Literal id="ltrlFechaProceso" runat="server"></asp:Literal></td>
+													</tr>
 													<!--<TR>
 														<TD class="SubHead" width="120">Fecha de Proceso IBS</TD>
 														<TD class="Normal"><asp:literal id="ltrlProcesoAS400" runat="server"></asp:literal></TD>
 													</TR>-->
 												</table>
-											</TD>
-										</TR>
-									</TABLE>
-								</TD>
-							</TR>
-							<TR>
-								<TD width="30"></TD>
-								<TD colSpan="2"><asp:panel id="pnlCuota" CssClass="Normal" Runat="server" Visible="False"><BR>
-										<A href="JavaScript:Send();">Establecer cuota a Cero</A>&nbsp;|&nbsp;<A href="JavaScript:generarArchivo();">Generar 
-											Archivo</A>
-										
-										<BR>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td width="30"></td>
+								<td colSpan="2">
+									<asp:Panel id="pnlCuota" CssClass="Normal" runat="server" Visible="False"><BR>
+										<a href="JavaScript:Send();">Establecer cuota a Cero</a>&nbsp;|&nbsp;<a href="JavaScript:generarArchivo();">Generar 
+											Archivo</a>
+										<br>
 										<asp:LinkButton id="lnkEnviaPrestamos" Runat="server"></asp:LinkButton>
-									</asp:panel>&nbsp;</TD>
-							</TR>
-							<TR>
-								<TD width="30"></TD>
-								<TD colSpan="2">
+									</asp:Panel>
+									&nbsp;
+								</td>
+							</tr>
+							<tr>
+								<td width="30"></td>
+								<td colSpan="2">
 									<!--<DIV class="DRCuerpoNormal" id="dvDia" style="OVERFLOW: auto; WIDTH: 750px; HEIGHT: 250px" width="100%">-->
 									<div class="tabla">
-										<asp:datagrid id="dgProcesoResultVA" runat="server" AutoGenerateColumns="False" Width="1000" BorderWidth="1px" CellPadding="3" CellSpacing="3" Visible="False" AllowSorting="True" AllowPaging="True" PageSize="500">
+										<asp:DataGrid id="dgProcesoResultVA" runat="server" AutoGenerateColumns="False" Width="1000" BorderWidth="1px" CellPadding="3" CellSpacing="3" Visible="False" AllowSorting="True" AllowPaging="True" PageSize="500">
 											<ItemStyle CssClass="TablaNormalBIF" VerticalAlign="Top"></ItemStyle>
 											<HeaderStyle CssClass="TablaNormalBoldBIF" VerticalAlign="Top"></HeaderStyle>
 											<AlternatingItemStyle CssClass="odd"></AlternatingItemStyle>
@@ -191,8 +179,8 @@ type=text/javascript></script>
 												</asp:TemplateColumn>
 											</Columns>
 											<PagerStyle VerticalAlign="Middle" HorizontalAlign="Left" Position="TopAndBottom" CssClass="CommandButton" Mode="NumericPages"></PagerStyle>
-										</asp:datagrid>
-										<asp:datagrid id="dgProcesoResultErr" runat="server" AutoGenerateColumns="False" Width="780" BorderWidth="1px" CellPadding="3" CellSpacing="3" Visible="False" AllowSorting="True" AllowPaging="True" PageSize="500">
+										</asp:DataGrid>
+										<asp:DataGrid id="dgProcesoResultErr" runat="server" AutoGenerateColumns="False" Width="780" BorderWidth="1px" CellPadding="3" CellSpacing="3" Visible="False" AllowSorting="True" AllowPaging="True" PageSize="500">
 											<ItemStyle Height="27px" CssClass="TablaNormalBIF" VerticalAlign="Top"></ItemStyle>
 											<HeaderStyle CssClass="TablaNormalBoldBIF" VerticalAlign="Top"></HeaderStyle>
 											<AlternatingItemStyle CssClass="odd"></AlternatingItemStyle>
@@ -230,7 +218,8 @@ type=text/javascript></script>
 												</asp:BoundColumn>
 											</Columns>
 											<PagerStyle VerticalAlign="Middle" HorizontalAlign="Left" Position="TopAndBottom" CssClass="CommandButton" Mode="NumericPages"></PagerStyle>
-										</asp:datagrid><asp:datagrid id="dgProcesoResultErrTabla" runat="server" AutoGenerateColumns="False" Width="1000" BorderWidth="1px" CellPadding="3" CellSpacing="3" Visible="False">
+										</asp:DataGrid>
+										<asp:DataGrid id="dgProcesoResultErrTabla" runat="server" AutoGenerateColumns="False" Width="1000" BorderWidth="1px" CellPadding="3" CellSpacing="3" Visible="False">
 											<ItemStyle Height="27px" CssClass="TablaNormalBIF" VerticalAlign="Top"></ItemStyle>
 											<HeaderStyle CssClass="TablaNormalBoldBIF" VerticalAlign="Top"></HeaderStyle>
 											<AlternatingItemStyle CssClass="odd"></AlternatingItemStyle>
@@ -244,37 +233,38 @@ type=text/javascript></script>
 												<asp:BoundColumn DataField="Cuota" HeaderText="Cuota" DataFormatString="{0:#.00}" ItemStyle-HorizontalAlign="Right"></asp:BoundColumn>
 												<asp:BoundColumn DataField="MontoDescuento" HeaderText="Monto Descuento" DataFormatString="{0:#.00}" ItemStyle-HorizontalAlign="Right"></asp:BoundColumn>
 											</Columns>
-										</asp:datagrid></div>
+										</asp:DataGrid>
+									</div>
 									<!--</DIV>-->
-								</TD>
-							</TR>
-							<TR>
-								<TD width="30"></TD>
-								<TD colSpan="2">&nbsp;&nbsp;</TD>
-							</TR>
-							<TR>
-								<TD width="30"></TD>
-								<TD colSpan="2">
+								</td>
+							</tr>
+							<tr>
+								<td width="30"></td>
+								<td colSpan="2">&nbsp;&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="30"></td>
+								<td colSpan="2">
 									<table cellSpacing="0" cellPadding="0" border="0">
 										<tr>
 											<td class="SubHead">Total de Registros&nbsp;&nbsp;
-												<asp:label id="lblTotalReg" CssClass="Text" Runat="server"></asp:label></td>
+												<asp:label id="lblTotalReg" CssClass="Text" runat="server"></asp:label></td>
 										</tr>
 									</table>
-								</TD>
-							</TR>
-							<TR>
-								<TD width="30">&nbsp;</TD>
-								<TD colSpan="2">&nbsp;</TD>
-							</TR>
-							<tr>
-								<TD width="30"></TD>
-								<TD colSpan="2"><asp:linkbutton id="lnkBack" Runat="server"><img src='/BIFConvenios/images/regresar.jpg' name='Image1' border="0" alt='Procesar archivo' /></asp:linkbutton></TD>
+								</td>
 							</tr>
-						</TABLE>
+							<tr>
+								<td width="30">&nbsp;</td>
+								<td colSpan="2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="30"></td>
+								<td colSpan="2"><asp:LinkButton id="lnkBack" runat="server"><img src='<%=ResolveUrl("~/images/regresar.jpg") %>' name='Image1' border="0" alt='Procesar archivo' /></asp:LinkButton></td>
+							</tr>
+						</table>
 					</td>
 				</tr>
 			</table>
 		</form>
 	</body>
-</HTML>
+</html>

@@ -1,11 +1,9 @@
-Imports System.Data
-Imports System.Data.SqlClient
-Imports System.Configuration.ConfigurationSettings
 Imports System.IO
+
 Namespace BIFConvenios
 
     Partial Class ReporteSeguimiento
-        Inherits System.Web.UI.Page
+        Inherits Page
 
         Protected dsIBSCuotas As DataSet  'Información actualizada de las cuotas
         Protected dsIBSBloqueoPagare As DataSet  'Información actualizada de las cuotas
@@ -26,7 +24,7 @@ Namespace BIFConvenios
 
         End Sub
 
-        Private Sub Page_Init(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Init
+        Private Sub Page_Init(sender As Object, e As EventArgs) Handles MyBase.Init
             'CODEGEN: This method call is required by the Web Form Designer
             'Do not modify it using the code editor.
             InitializeComponent()
@@ -34,11 +32,30 @@ Namespace BIFConvenios
 
 #End Region
 
-        Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        'Private Sub ResultadoBusquedaEmpresa(resultadoBusqueda As String)
+        '    Dim resultadoArray() As String = Split(resultadoBusqueda, "|")
+
+        '    hdParam1.Value = resultadoArray(0) 'Proceso
+        '    hdParam2.Value = resultadoArray(1) 'Año
+        '    hdParam3.Value = resultadoArray(2) 'Mes
+        '    hdParam4.Value = resultadoArray(6) 'Tipo Documento
+        '    hdParam5.Value = resultadoArray(7) 'Numero Documento
+        '    txtPeriodo.Text = resultadoArray(5) 'Numero Documento
+        '    hdCodigoEmpresa.Value = resultadoArray(3)
+        '    txtNombreEmpresa.Text = resultadoArray(4)
+
+        '    dvData.Visible = False
+
+        'End Sub
+
+        Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             'Put user code to initialize the page here
+
+            'AddHandler ucBuscarParanetroEmpresa.UpdateEvent, AddressOf ResultadoBusquedaEmpresa
+
             If Not Page.IsPostBack Then
-                Utils.AddSwap(lnkBuscar, "Image1", "/BIFConvenios/images/buscar_on.jpg")
-                If Not Request.Params("keep") Is Nothing Then
+                Utils.AddSwap(lnkBuscar, "Image1", ResolveUrl("/images/buscar_on.jpg"))
+                If Request.Params("keep") IsNot Nothing Then
 
                 End If
             End If
@@ -48,21 +65,21 @@ Namespace BIFConvenios
 
 
         'RESPINOZA 20070529 - Obtener la informacion filtrada en un reporte para poder ser revisado de forma diferente por el usuario
-        Private Sub lnkGenerarReporte_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lnkGenerarReporte.Click
+        Private Sub lnkGenerarReporte_Click(sender As Object, e As EventArgs) Handles lnkGenerarReporte.Click
             Dim dv As New DataView()
             Dim fileName As String = Utils.getWebServerDateId() + ".xls"
 
-            Me.MostrarInformacionSeguimiento()
-            dv = New DataView(dsData.Tables("Descuentos"), Me.getCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows)
+            MostrarInformacionSeguimiento()
+            dv = New DataView(dsData.Tables("Descuentos"), getCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows)
 
             'LREM.Tools.Reporting.Excel.ReportGenerator.Generate(dv, AppSettings("GenFolder"), fileName, "DLMO,DLNP,DLCM,DLNE,DLAP,DLMP,DLIC,DLID,DeudaPeriodo,TotalPagosCliente,SaldoDeudorAcreedor,ImporteBIFActualizada,ImporteBIFActualizadaReporte,UGE,NUMCUOTAS", "MONEDA,PAGARE,MODULAR,NOMBRE,ANIO,MES,CUOTA,DESCUENTO,DEUDA,Total Pagos Cliente (IBS),Saldo Deudor(+)/Acreedor(-),Deuda Actual Proyectada (IBS),DEUDA NOTA,UGE,NUMCUOTAS")
-            LREM.Tools.Reporting.Excel.ReportGenerator.Generate(dv, AppSettings("GenFolder"), fileName, AppSettings("archivoSeguimientoCampos"), AppSettings("archivoSeguimientoTitulos"))
+            LREM.Tools.Reporting.Excel.ReportGenerator.Generate(dv, ConfigurationManager.AppSettings("GenFolder"), fileName, ConfigurationManager.AppSettings("archivoSeguimientoCampos"), ConfigurationManager.AppSettings("archivoSeguimientoTitulos"))
 
             Dim ms As System.IO.MemoryStream
-            Dim fileS As FileStream = File.OpenRead(AppSettings("GenFolder") + fileName)
+            Dim fileS As FileStream = File.OpenRead(ConfigurationManager.AppSettings("GenFolder") + fileName)
 
             ms = New MemoryStream(fileS.Length)
-            Dim br As BinaryReader = New BinaryReader(fileS)
+            Dim br As New BinaryReader(fileS)
             Dim bytesRead As Byte() = br.ReadBytes(fileS.Length)
 
             ms.Write(bytesRead, 0, fileS.Length)
@@ -78,11 +95,7 @@ Namespace BIFConvenios
 
         End Sub
 
-
-
-
-
-        Private Sub lnkBuscar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lnkBuscar.Click
+        Private Sub lnkBuscar_Click(sender As Object, e As EventArgs) Handles lnkBuscar.Click
             Dim dv As DataView
             dsData = Proceso.GetRegistrosDeudasResultadoProcesoDescuentos(hdParam1.Value.Trim(), Me.NumeroPagare, Me.NombreCliente)
             actualizaInformacionDataSet(dsData)
@@ -99,7 +112,7 @@ Namespace BIFConvenios
             End If
 
 
-            dv = (New DataView(dsData.Tables("Descuentos"), Me.getCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows))  'dsData
+            dv = (New DataView(dsData.Tables("Descuentos"), getCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows))  'dsData
             getCalculoResumenCarga(dv)
             dgProcesoResult.CurrentPageIndex = 0
             dgProcesoResult.DataSource = dv
@@ -203,9 +216,9 @@ Namespace BIFConvenios
 
         'Obtenemos la informacion del numero de pagare desde el DataSet para 
         'poder filtrar los clientes que necesitan bloqueo
-        Protected Function getInformacionBloqueo(ByVal DLCC As String, ByVal numeroPagare As String, _
-                    ByVal mAnio As String, _
-                    ByVal mMes As String) As String
+        Protected Function getInformacionBloqueo(DLCC As String, numeroPagare As String,
+                    mAnio As String,
+                    mMes As String) As String
             Dim dr As DataRow()
             Dim returnValue As String = "0"
 
@@ -225,9 +238,9 @@ Namespace BIFConvenios
 
         'Obtenemos la informacion del numero de pagare desde el DataSet para poder 
         'mostrar en pantalla el monto a descuento y las cuotas actualizadas
-        Protected Function getAmountUpdatedDiscount(ByVal DLCC As String, ByVal numeroPagare As String, _
-                    ByVal mAnio As String, _
-                    ByVal mMes As String, ByRef NUMCUOTASACTUAL As String) As String
+        Protected Function getAmountUpdatedDiscount(DLCC As String, numeroPagare As String,
+                    mAnio As String,
+                    mMes As String, ByRef NUMCUOTASACTUAL As String) As String
             Dim dr As DataRow()
             Dim returnValue As String = "0.00"
 
@@ -248,7 +261,7 @@ Namespace BIFConvenios
         End Function
 
         'RESPINOZA 20070914 - Obtener informacion de datos adicionales del cliente desde IBS
-        Protected Function getDatosAdicionales(ByVal codigoCliente As String, ByVal numeroPagare As String, ByRef SITUACIONLABORAL As String, ByRef DIRECCION As String, ByRef CUIDAD As String, ByRef TELCASA As String, ByRef TELTRABAJO As String, ByRef TELOTRO As String)
+        Protected Function getDatosAdicionales(codigoCliente As String, numeroPagare As String, ByRef SITUACIONLABORAL As String, ByRef DIRECCION As String, ByRef CUIDAD As String, ByRef TELCASA As String, ByRef TELTRABAJO As String, ByRef TELOTRO As String)
             Dim dr As DataRow()
 
             SITUACIONLABORAL = ""
@@ -274,8 +287,8 @@ Namespace BIFConvenios
 
         End Function
 
-        Protected Function getTotalPagosCliente(ByVal codigoCliente As String, ByVal fechaInicial As String, _
-        ByVal fechaFinal As String, ByVal numeroPagare As String, ByVal lote As String, ByRef PAGOVENTANILLA As String, _
+        Protected Function getTotalPagosCliente(codigoCliente As String, fechaInicial As String,
+        fechaFinal As String, numeroPagare As String, lote As String, ByRef PAGOVENTANILLA As String,
         ByRef PAGOINTERNET As String, ByRef PAGOIBS As String, ByRef PAGOIBSPROCESOCOBRANZA As String)
             Dim dr As DataRow()
             Dim returnValue As String = "0.00"
@@ -305,20 +318,20 @@ Namespace BIFConvenios
 
         'Obtenemos la informacion del numero de pagare desde el DataSet para poder 
         'mostrarlo en pantalla
-        Protected Function getAmount(ByVal DLCC As String, ByVal numeroPagare As String, _
-                ByVal nombreTrabajador As String, ByVal moneda As String, ByVal cuotaMes As String, _
-                ByVal importeDescontado As String, ByVal deudaPeriodo As String, ByVal fechaProceso As Object, ByVal TotalPagosCliente As String) As String
-            Dim returnValue As String = "N.E."
+        Protected Function getAmount(DLCC As String, numeroPagare As String,
+                nombreTrabajador As String, moneda As String, cuotaMes As String,
+                importeDescontado As String, deudaPeriodo As String, fechaProceso As Object, TotalPagosCliente As String) As String
+            Dim returnValue As String
 
             If TotalPagosCliente <> "0.00" Then
-                returnValue = "<a href =""javascript:ShowDetalle('" + DLCC + _
-                                "', '" + numeroPagare + "', '" + _
-                                Format(fechaProceso, "yyyyMMdd") + "', '" + _
-                                Format(DateAdd(DateInterval.Month, 1, fechaProceso), "yyyyMMdd") + "', '" + _
-                                nombreTrabajador.Replace("'", "") + "', '" + _
-                                TotalPagosCliente + "', '" + moneda + "','" + _
-                                cuotaMes + "','" + importeDescontado + _
-                                "', '" + deudaPeriodo + _
+                returnValue = "<a href =""javascript:ShowDetalle('" + DLCC +
+                                "', '" + numeroPagare + "', '" +
+                                Format(fechaProceso, "yyyyMMdd") + "', '" +
+                                Format(DateAdd(DateInterval.Month, 1, fechaProceso), "yyyyMMdd") + "', '" +
+                                nombreTrabajador.Replace("'", "") + "', '" +
+                                TotalPagosCliente + "', '" + moneda + "','" +
+                                cuotaMes + "','" + importeDescontado +
+                                "', '" + deudaPeriodo +
                                 "');"">" + TotalPagosCliente + "</a>"
             Else
                 returnValue = "N.E."
@@ -326,27 +339,27 @@ Namespace BIFConvenios
             Return returnValue
         End Function
 
-        Private Sub ddlKind_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlKind.SelectedIndexChanged
+        Private Sub ddlKind_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlKind.SelectedIndexChanged
             dgProcesoResult.CurrentPageIndex = 0
             MostrarInformacionSeguimiento()
-            lblTotalReg.Text = (New DataView(dsData.Tables("Descuentos"), Me.getCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows)).Count
+            lblTotalReg.Text = (New DataView(dsData.Tables("Descuentos"), getCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows)).Count
         End Sub
 
-        Private Sub ddlUGE_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlUGE.SelectedIndexChanged
+        Private Sub ddlUGE_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlUGE.SelectedIndexChanged
             dgProcesoResult.CurrentPageIndex = 0
             MostrarInformacionSeguimiento()
 
-            lblTotalReg.Text = (New DataView(dsData.Tables("Descuentos"), Me.getCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows)).Count
+            lblTotalReg.Text = (New DataView(dsData.Tables("Descuentos"), getCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows)).Count
         End Sub
 
-        Private Sub ddlSituacion_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlSituacion.SelectedIndexChanged
+        Private Sub ddlSituacion_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlSituacion.SelectedIndexChanged
             dgProcesoResult.CurrentPageIndex = 0
             MostrarInformacionSeguimiento()
-            lblTotalReg.Text = (New DataView(dsData.Tables("Descuentos"), Me.getCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows)).Count
+            lblTotalReg.Text = (New DataView(dsData.Tables("Descuentos"), getCondicionFiltro, "SaldoDeudorAcreedor desc", DataViewRowState.CurrentRows)).Count
         End Sub
 
 
-        Private Sub dgProcesoResult_PageIndexChanged(ByVal source As Object, ByVal e As System.Web.UI.WebControls.DataGridPageChangedEventArgs) Handles dgProcesoResult.PageIndexChanged
+        Private Sub dgProcesoResult_PageIndexChanged(source As Object, e As DataGridPageChangedEventArgs) Handles dgProcesoResult.PageIndexChanged
             dgProcesoResult.CurrentPageIndex = IIf(dgProcesoResult.PageCount < e.NewPageIndex, 0, e.NewPageIndex)
             MostrarInformacionSeguimiento()
         End Sub
@@ -355,9 +368,8 @@ Namespace BIFConvenios
         'Establecemos el filtro adicional a la informacion que se esta mostrando 
         Private Function getCondicionFiltro() As String
             Dim condicionFiltro As String = ""
-            Dim condicionFiltro2 As String = ""
-            condicionFiltro2 = ddlKind.SelectedItem.Value
-            If Not ddlUGE.SelectedItem Is Nothing Then
+            Dim condicionFiltro2 As String = ddlKind.SelectedItem.Value
+            If ddlUGE.SelectedItem IsNot Nothing Then
                 condicionFiltro = IIf(ddlUGE.SelectedItem.Value.Trim <> "", " UGE='" + ddlUGE.SelectedItem.Value.Trim + "'", "")
                 If condicionFiltro = " UGE='CH'" Then
                     condicionFiltro = " (UGE='AV' or UGE='AW' or UGE='AX')"
@@ -376,7 +388,7 @@ Namespace BIFConvenios
                 condicionFiltro = condicionFiltro2 + IIf(condicionFiltro.Trim() <> "" And condicionFiltro2.Trim() <> "", " AND ", "") + condicionFiltro
             End If
 
-            
+
 
             ''condicionFiltro = condicionFiltro + IIf(ddlSituacion.SelectedItem.Value.Trim <> "", IIf(condicionFiltro.Trim <> "", " AND ", "") + ddlSituacion.SelectedItem.Value, "")
             ''condicionFiltro = condicionFiltro2 + IIf(ddlSituacion.SelectedItem.Value.Trim <> "", IIf(condicionFiltro.Trim <> "", " AND ", "") + ddlSituacion.SelectedItem.Value, "")
@@ -392,7 +404,7 @@ Namespace BIFConvenios
 
         Private Sub MostrarInformacionSeguimiento()
             Dim dv As DataView
-            Dim condicionFiltro As String = Me.getCondicionFiltro()
+            Dim condicionFiltro As String = getCondicionFiltro()
             ''condicionFiltro = " UGE='CU'"
             If Not Session("dsDataSeguimiento") Is Nothing Then
 
@@ -432,15 +444,15 @@ Namespace BIFConvenios
 
 
 
-        Private Sub dgProcesoResult_ItemDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.DataGridItemEventArgs) Handles dgProcesoResult.ItemDataBound
+        Private Sub dgProcesoResult_ItemDataBound(sender As Object, e As DataGridItemEventArgs) Handles dgProcesoResult.ItemDataBound
             'Se establecen los totales generales 
             If e.Item.ItemType = ListItemType.Footer Then
                 e.Item.Cells(2).CssClass = "SubHead"
                 e.Item.Cells(2).Text = "Total General"
-                e.Item.Cells(4).Text = Format(viewstate.Item("dblImporteInformado"), "#,###0.00")
-                e.Item.Cells(5).Text = Format(viewstate.Item("dblImporteInstitucion"), "#,###0.00")
-                e.Item.Cells(11).Text = Format(viewstate.Item("dblSaldoDeudorAcreedor"), "#,###0.00")
-                e.Item.Cells(12).Text = Format(viewstate.Item("dblImporteBIFActualizado"), "#,###0.00")
+                e.Item.Cells(4).Text = Format(ViewState.Item("dblImporteInformado"), "#,###0.00")
+                e.Item.Cells(5).Text = Format(ViewState.Item("dblImporteInstitucion"), "#,###0.00")
+                e.Item.Cells(11).Text = Format(ViewState.Item("dblSaldoDeudorAcreedor"), "#,###0.00")
+                e.Item.Cells(12).Text = Format(ViewState.Item("dblImporteBIFActualizado"), "#,###0.00")
             End If
 
         End Sub

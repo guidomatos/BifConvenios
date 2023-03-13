@@ -3,7 +3,7 @@ Imports System.Data.SqlClient
 Namespace BIFConvenios
 
     Partial Class reporteProcesoDescuentosResumen
-        Inherits System.Web.UI.Page
+        Inherits Page
         Protected oProceso As New Proceso()
 
 #Region " Web Form Designer Generated Code "
@@ -21,14 +21,14 @@ Namespace BIFConvenios
 
 #End Region
 
-        Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             'Put user code to initialize the page here
             If Not Page.IsPostBack Then
                 ' Utils.AddSwap(lnkRegresar, "Image12", "/BIFConvenios/images/regresar_on.jpg")
-                If Not Request.Params("id") Is Nothing Then
+                If Request.Params("id") IsNot Nothing Then
 
                     Dim dr0 As SqlDataReader
-                    dr0 = oProceso.InformeProceso(CType(Request.Params("id"), String))
+                    dr0 = oProceso.InformeProceso(Request.Params("id"))
                     If dr0.Read Then
                         ltrlCliente.Text = CType(dr0("Nombre_Cliente"), String)
                         ltrlDocumento.Text = CType(dr0("TipoDocumento"), String) + " - " + CType(dr0("NumeroDocumento"), String)
@@ -40,44 +40,39 @@ Namespace BIFConvenios
                         If CType(dr0("Estado"), String).Trim = "ED" Then
                             tblnfo.Visible = False
                         End If
-
-
                     End If
 
-
-
-                    Dim dr As SqlDataReader = oProceso.GetResumenProcesoDescuentos(CType(Request.Params("id"), String))
+                    Dim dr As SqlDataReader = oProceso.GetResumenProcesoDescuentos(Request.Params("id"))
                     If dr.Read Then
                         hpErrores.Text = CType(dr("ErroresArchivo"), String)
 
                         hpValidos.Text = CType(dr("Validos"), String)
-                        hpValidos.NavigateUrl += "?id=" & CType(Request.Params("id"), String) & "&type=" & "val"
+                        hpValidos.NavigateUrl += "?id=" & Request.Params("id") & "&type=" & "val"
 
                         hlValidos.Text = CType(dr("Validos"), String)
-                        hlValidos.NavigateUrl += "?id=" & CType(Request.Params("id"), String) & "&type=" & "val"
-
+                        hlValidos.NavigateUrl += "?id=" & Request.Params("id") & "&type=" & "val"
 
                         hpTotal.Text = CType(dr("Total"), String)
-                        hpTotal.NavigateUrl += "?id=" & CType(Request.Params("id"), String)
+                        hpTotal.NavigateUrl += "?id=" & Request.Params("id")
 
                         hlTotal.Text = CType(dr("TotalArchivo"), String)
                         hlErrorenvio.Text = CType(dr("ErroresTablaEnvio"), String)
 
                         hlErrorArchivo.Text = CType(dr("ErroresArchivoDescuento"), String)
 
-                        hlErrorArchivo.NavigateUrl += "?id=" & CType(Request.Params("id"), String)
+                        hlErrorArchivo.NavigateUrl += "?id=" & Request.Params("id")
 
                         If CType(dr("flgCorreccion"), String) Then
-                            hlErrorenvio.NavigateUrl += "reporteProcesoDescuentosCat.aspx?id=" & CType(Request.Params("id"), String) & "&type=" & "Err"
+                            hlErrorenvio.NavigateUrl += "reporteProcesoDescuentosCat.aspx?id=" & Request.Params("id") & "&type=" & "Err"
                         Else
-                            hpErrores.NavigateUrl += "reporteProcesoDescuentosCat.aspx?id=" & CType(Request.Params("id"), String) & "&type=" & "Err"
+                            hpErrores.NavigateUrl += "reporteProcesoDescuentosCat.aspx?id=" & Request.Params("id") & "&type=" & "Err"
                         End If
                     End If
                 End If
             End If
         End Sub
 
-        Private Sub lnkRegresar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lnkRegresar.Click
+        Private Sub lnkRegresar_Click(sender As Object, e As EventArgs) Handles lnkRegresar.Click
             Response.Redirect(ResolveUrl("ReporteProcesoDescuento.aspx"))
         End Sub
     End Class

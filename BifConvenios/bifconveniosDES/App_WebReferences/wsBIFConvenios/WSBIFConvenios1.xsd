@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="AnulaEnvioCobranzaIBS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pCodigo_proceso" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pUsuario" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AnulaEnvioCobranzaIBSResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AnulaEnvioCobranzaIBSResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EnviaInformacionIBS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pCodigo_proceso" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pUsuario" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EnviaInformacionIBSResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="EnviaInformacionIBSResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GeneraCronogramaFuturo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pCodigo_proceso" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pTipoFormatoArchivo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pSituacionTrabajador" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pUsuario" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GeneraCronogramaFuturoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GeneraCronogramaFuturoResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ImportaDescuentoEmpresa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pCodigo_proceso" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pNombreArchivo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pUsuario" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ImportaDescuentoEmpresaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ImportaDescuentoEmpresaResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ImportaDescuentosEmpresa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pCodigo_proceso" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pNombreArchivo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pTipoFormatoArchivo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pUsuario" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ImportaDescuentosEmpresaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ImportaDescuentosEmpresaResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultaPagaresDeIBS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pCodigo_ClienteIBS" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pAnio" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pMes" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pFecha_ProcesoAS400" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pCodigo_Cliente" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pUsuario" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultaPagaresDeIBSResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ConsultaPagaresDeIBSResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataTable" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+              <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ImportaPagaresDeIBS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pCodigo_ClienteIBS" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pAnio" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pMes" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pFecha_ProcesoAS400" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pCodigo_Cliente" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pUsuario" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ImportaPagaresDeIBSResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ImportaPagaresDeIBSResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProcesaBloqueo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pNumeroLote" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pUsuario" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProcesaBloqueoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ProcesaBloqueoResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProcesaProrroga">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pNumeroLote" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pUsuario" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProcesaProrrogaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ProcesaProrrogaResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarMotivoIBS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pCodigo_proceso" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pCodigo_Cliente" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pAnio" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pMes" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarMotivoIBSResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ConsultarMotivoIBSResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataSet" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:element ref="xs:schema" />
+              <xs:any />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerCabeceraCasillero">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pCodigo_Cliente" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pAnio" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pMes" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerCabeceraCasilleroResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ObtenerCabeceraCasilleroResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataSet" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:element ref="xs:schema" />
+              <xs:any />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerDetalleCasillero">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pCodigo_Cliente" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pAnio" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pMes" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerDetalleCasilleroResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ObtenerDetalleCasilleroResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataSet" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:element ref="xs:schema" />
+              <xs:any />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

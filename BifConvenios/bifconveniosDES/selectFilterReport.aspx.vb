@@ -1,6 +1,6 @@
 ﻿Imports BIFConvenios
 Partial Class selectFilterReport
-    Inherits System.Web.UI.Page
+    Inherits Page
 
     Protected idP As String
     Protected nombre As String
@@ -9,15 +9,14 @@ Partial Class selectFilterReport
     Protected oProceso As New Proceso()
     Protected fechaProcesoAS400 As String
 
-
-    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         If Not Page.IsPostBack Then
-            idP = CType(Request.Params("id"), String)
-            nombre = CType(Request.Params("nombre"), String)
-            anio = CType(Request.Params("anio"), String)
-            mes = CType(Request.Params("mes"), String)
-            fechaProcesoAS400 = CType(Request.Params("fechaProcesoAS400"), String)
+            idP = Request.Params("id")
+            nombre = Request.Params("nombre")
+            anio = Request.Params("anio")
+            mes = Request.Params("mes")
+            fechaProcesoAS400 = Request.Params("fechaProcesoAS400")
 
             ddlEstadoTrabajador.DataSource = oProceso.GetEstadosTrabajador(idP)
             ddlEstadoTrabajador.DataBind()

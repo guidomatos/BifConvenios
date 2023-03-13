@@ -1,9 +1,7 @@
-Imports BIFConvenios
 Namespace BIFConvenios
 
-
     Partial Class BuscarParametrosEmpresa
-        Inherits System.Web.UI.Page
+        Inherits Page
 
         Protected oProc As New Proceso()
 #Region " Web Form Designer Generated Code "
@@ -13,7 +11,7 @@ Namespace BIFConvenios
 
         End Sub
 
-        Private Sub Page_Init(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Init
+        Private Sub Page_Init(sender As Object, e As EventArgs) Handles MyBase.Init
             'CODEGEN: This method call is required by the Web Form Designer
             'Do not modify it using the code editor.
             InitializeComponent()
@@ -21,7 +19,7 @@ Namespace BIFConvenios
 
 #End Region
 
-        Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             'Put user code to initialize the page here
             If Not Page.IsPostBack Then
                 '-------Informacion del año
@@ -38,19 +36,19 @@ Namespace BIFConvenios
 
         End Sub
 
-        Private Sub ddlMes_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ddlMes.SelectedIndexChanged
+        Private Sub ddlMes_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlMes.SelectedIndexChanged
             Call BindGrid()
         End Sub
 
 
         Private Sub GetMonths()
-            ddlMes.DataSource = BIFConvenios.Periodo.GetMonthsByReaderWithOutZero(oProc.GetMesesEnvioArchivoAS400(ddlAnio.SelectedItem.Value))
+            ddlMes.DataSource = Periodo.GetMonthsByReaderWithOutZero(oProc.GetMesesEnvioArchivoAS400(ddlAnio.SelectedItem.Value))
             ddlMes.DataBind()
             ddlMes.Items.Insert(0, New ListItem("-- Seleccione --", ""))
             ddlMes.SelectedIndex = ddlMes.Items.IndexOf(ddlMes.Items.FindByValue(Now.Month.ToString()))
         End Sub
 
-        Private Sub ddlAnio_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ddlAnio.SelectedIndexChanged
+        Private Sub ddlAnio_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlAnio.SelectedIndexChanged
             Call GetMonths()
         End Sub
 

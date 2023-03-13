@@ -14,18 +14,13 @@
 <head runat="server">
 
         <title>Registro Cliente</title>    
-        <meta content="Microsoft Visual Studio.NET 7.0" name="GENERATOR" />
-		<meta content="Visual Basic 7.0" name="CODE_LANGUAGE" />
-		<meta content="JavaScript" name="vs_defaultClientScript" />
-		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema" />
-	
-	       
-		<link href="css/global.css" rel="stylesheet" type="text/css" />
-        <link href="css/tcal.css" rel="stylesheet" type="text/css" />
-        <link href="css/style.css" rel="stylesheet" type="text/css" />
-        <script src="js/tcal.js" type="text/javascript"></script>		
-        <script src="js/global.js" type="text/javascript"></script>		
+	    
+        <link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
+        <link href="<%=ResolveUrl("~/css/tcal.css") %>" rel="Stylesheet" type="text/css" />
+        <link href="<%=ResolveUrl("~/css/style.css") %>" rel="Stylesheet" type="text/css" />
 
+        <script src='<%=ResolveUrl("~/js/tcal.js") %>' language ="javascript" type="text/javascript"></script>
+        <script src='<%=ResolveUrl("~/js/global.js") %>' language ="javascript" type="text/javascript"></script>
     
     <style type="text/css">    
         
@@ -317,40 +312,34 @@
          
         }    
         
-            function OnKeyPressTextNumeros(evt)
-        {                    
-            var charCode = (evt.wich)? evt.wich : event.keyCode
-            if(charCode > 31 && (charCode < 48 || charCode > 57))
-            return false;
-	       
-	       return true;
-        }	
-			
-			
-	    function OnKeyPressTextDecimales(evt)
-        {                    
-            var charCode = (evt.which)? evt.which : event.keyCode
-            
-            if(charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57))
-            return false;
-	       
-	       return true;
-        }	
-        
-        function ConvertirMayuscula(date)
-        {
-            date.value = date.value.toUpperCase();
-            
-            return date;
+        function OnKeyPressTextNumeros(evt) {
+            var charCode = (evt.wich) ? evt.wich : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+
+            return true;
+        }
+        function OnKeyPressTextDecimales(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode
+
+            if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+
+            return true;
         }
         
+        function ConvertirMayuscula(date) {
+            date.value = date.value.toUpperCase();
+
+            return date;
+        }
         
     </script>					
         
 </head>
 <body style="margin-left:0; margin-top:0;" onload="MM_preloadImages('/BIFConvenios/images/regresar_on.jpg')">
-    <asp:ScriptManager ID="ScriptManager1" runat="server">
-    </asp:ScriptManager>
+    <%--<asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>--%>
     
     <form method="post" runat="server"  action="#">
     

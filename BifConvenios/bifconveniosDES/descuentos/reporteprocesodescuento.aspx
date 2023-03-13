@@ -1,85 +1,75 @@
-<%@ Register TagPrefix="uc1" TagName="Banner" Src="../controls/Banner.ascx" %>
 <%@ Page Language="vb" AutoEventWireup="false" Inherits="BIFConvenios.reporteProcesoDescuento" CodeFile="reporteProcesoDescuento.aspx.vb" %>
+<%@ Register TagPrefix="uc1" TagName="Banner" Src="../controls/Banner.ascx" %>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML>
-	<HEAD>
+<html>
+	<head>
 		<title>BIFConvenios - Enviar Cobranza a IBS</title>
-		<meta content="Microsoft Visual Studio.NET 7.0" name="GENERATOR">
-		<meta content="Visual Basic 7.0" name="CODE_LANGUAGE">
-		<meta content="JavaScript" name="vs_defaultClientScript">
-		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
-		<LINK href="<%=Request.ApplicationPath%>/css/global.css" 
-type=text/css rel=stylesheet>
-		<script language=javascript 
-src="<%Response.Write(Request.ApplicationPath)%>/js/global.js" 
-type=text/javascript></script>
-		<script language="javascript">
-	<!--
-		function Procesar ( id , nombre, anio, mes, fechaProcesoAS400) {
-			if ( confirm ( '¿Desea enviar la informacion de pagos a IBS de la Empresa ' + nombre + '\npara el periodo ' + mes + '-' + anio + ', procesado el ' + fechaProcesoAS400 +  ' en IBS?') ) {
-				document.all('hdIdEnvio').value = id;
-				__doPostBack('lnkEnviar', '');			
+		<link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
+		<script src='<%=ResolveUrl("~/js/global.js") %>' language="javascript" type="text/javascript"></script>
+		<script type="text/javascript" language="javascript">
+			function Procesar(id, nombre, anio, mes, fechaProcesoAS400) {
+				if (confirm('¿Desea enviar la informacion de pagos a IBS de la Empresa ' + nombre + '\npara el periodo ' + mes + '-' + anio + ', procesado el ' + fechaProcesoAS400 + ' en IBS?')) {
+					document.all('hdIdEnvio').value = id;
+					__doPostBack('lnkEnviar', '');
+				}
 			}
-		}
-		
-		function AnularProceso( id , nombre, anio, mes, fechaProcesoAS400) {
-			if ( confirm ( '¿Desea anular el proceso del archivo de cuotas de la Empresa ' + nombre + '\npara el periodo ' + mes + '-' + anio + ', procesado el ' + fechaProcesoAS400 +  ' en IBS?\nEsto eliminará tambien la información que ha sido enviada a IBS.') ) {
-				document.all('hdIdAnulacionProceso').value = id;
-				__doPostBack('lnkAnularProceso', '');			
+			function AnularProceso(id, nombre, anio, mes, fechaProcesoAS400) {
+				if (confirm('¿Desea anular el proceso del archivo de cuotas de la Empresa ' + nombre + '\npara el periodo ' + mes + '-' + anio + ', procesado el ' + fechaProcesoAS400 + ' en IBS?\nEsto eliminará tambien la información que ha sido enviada a IBS.')) {
+					document.all('hdIdAnulacionProceso').value = id;
+					__doPostBack('lnkAnularProceso', '');
+				}
 			}
-		}
-	
-	//-->
 		</script>
-	</HEAD>
+	</head>
 	<body leftMargin="0" topMargin="0">
 		<form id="Form1" method="post" runat="server">
 			<table cellSpacing="0" cellPadding="0" width="100%" border="0">
 				<tr>
-					<td><uc1:banner id="Banner1" title="Enviar Cobranza a IBS" runat="server"></uc1:banner></td>
+					<td><uc1:Banner id="Banner1" title="Enviar Cobranza a IBS" runat="server"></uc1:Banner></td>
 				</tr>
 				<tr>
-					<td><asp:panel id="pnlControl" Visible="true" Runat="server">
-							<TABLE cellSpacing="0" cellPadding="0" width="750" border="0">
-								<TR>
-									<TD width="30"></TD>
-									<TD colSpan="2">&nbsp;</TD>
-								</TR>
-								<TR>
-									<TD>&nbsp;</TD>
-									<TD colSpan="2">
-										<TABLE class="InputField" height="100" cellSpacing="0" cellPadding="0" width="100%" border="0">
-											<TR>
-												<TD width="70">&nbsp;</TD>
-												<TD width="80">&nbsp;</TD>
-												<TD>&nbsp;</TD>
-											</TR>
-											<TR>
-												<TD width="30"></TD>
-												<TD class="SubHead">Año</TD>
-												<TD width="650">
-													<asp:DropDownList id="ddlAnio" runat="server" AutoPostBack="True" DataTextField="Anio_periodo" DataValueField="Anio_periodo" Width="200px"></asp:DropDownList></TD>
-											</TR>
-											<TR>
-												<TD>&nbsp;</TD>
-												<TD class="SubHead">Mes</TD>
-												<TD width="650">
-													<asp:DropDownList id="ddlMes" runat="server" AutoPostBack="True" DataTextField="MonthName" DataValueField="MonthOrder" Width="200px"></asp:DropDownList></TD>
-											</TR>
-											<TR>
-												<TD>&nbsp;</TD>
-												<TD>&nbsp;</TD>
-												<TD>&nbsp;</TD>
-											</TR>
-										</TABLE>
-									</TD>
-								</TR>
-								<TR>
-									<TD colSpan="3">&nbsp;</TD>
-								</TR>
-								<TR>
-									<TD></TD>
-									<TD colSpan="2">
+					<td><asp:Panel id="pnlControl" Visible="true" Runat="server">
+							<table cellSpacing="0" cellPadding="0" width="750" border="0">
+								<tr>
+									<td width="30"></td>
+									<td colSpan="2">&nbsp;</td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td colSpan="2">
+										<table class="InputField" height="100" cellSpacing="0" cellPadding="0" width="100%" border="0">
+											<tr>
+												<td width="70">&nbsp;</td>
+												<td width="80">&nbsp;</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td width="30"></td>
+												<td class="SubHead">Año</td>
+												<td width="650">
+													<asp:DropDownList id="ddlAnio" runat="server" AutoPostBack="True" DataTextField="Anio_periodo" DataValueField="Anio_periodo" Width="200px"></asp:DropDownList></td>
+											</tr>
+											<tr>
+												<td>&nbsp;</td>
+												<td class="SubHead">Mes</td>
+												<td width="650">
+													<asp:DropDownList id="ddlMes" runat="server" AutoPostBack="True" DataTextField="MonthName" DataValueField="MonthOrder" Width="200px"></asp:DropDownList></td>
+											</tr>
+											<tr>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr>
+									<td colSpan="3">&nbsp;</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td colSpan="2">
 										<div class="tabla">
 											<asp:DataGrid id="dgDatos" runat="server" Width="100%" BorderWidth="1" AutoGenerateColumns="False" CellPadding="3" CellSpacing="3">
 												<HeaderStyle CssClass="TablaNormalBoldBIF" VerticalAlign="Top"></HeaderStyle>
@@ -132,20 +122,21 @@ type=text/javascript></script>
 											</asp:DataGrid>
 											<!--'DataBinder.Eval(Container.DataItem, "CanProcess")-->
 										</div>
-									</TD>
-								</TR>
-								<TR>
-									<TD colSpan="3">&nbsp;</TD>
-								</TR>
-								<TR>
-									<TD>&nbsp;</TD>
-									<TD colSpan="2">
-										<TABLE cellSpacing="0" cellPadding="0" border="0">
-											<TR>
-												<TD colspan="2">
+									</td>
+								</tr>
+								<tr>
+									<td colSpan="3">&nbsp;</td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td colSpan="2">
+										<table cellSpacing="0" cellPadding="0" border="0">
+											<tr>
+												<td colspan="2">
 													<span class="SubHead">Número de Registros&nbsp;:&nbsp;</span>
-													<asp:Label id="lblNumReg" Width="10" CssClass="Text" Runat="server"></asp:Label></TD>
-											</TR>
+													<asp:Label id="lblNumReg" Width="10" CssClass="Text" Runat="server"></asp:Label>
+												</td>
+											</tr>
 											<tr>
 												<td colspan="2" class="NormalLite">Click en el código de la Empresa para establecer 
 													los pagos y no pagos</td>
@@ -154,39 +145,42 @@ type=text/javascript></script>
 												<td colspan="2" class="NormalLite">Click en el nombre de la Empresa para ver los 
 													detalles del proceso</td>
 											</tr>
-										</TABLE>
+										</table>
 										<asp:LinkButton id="lnkEnviar" Runat="server"></asp:LinkButton>
-										<INPUT id="hdIdEnvio" type="hidden" runat="server">
+										<input id="hdIdEnvio" type="hidden" runat="server" />
 										<asp:LinkButton id="lnkAnularProceso" Runat="server"></asp:LinkButton>
-										<INPUT id="hdIdAnulacionProceso" type="hidden" name="hdIdAnulacionProceso" runat="server">
-									</TD>
-								</TR>
-								<TR>
-									<TD>&nbsp;</TD>
-									<TD colSpan="2">
-										<asp:Label id="lblMensajeError" Runat="server" ForeColor="red"></asp:Label></TD>
-								</TR>
-							</TABLE>
-						</asp:panel><asp:panel id="pnlMensaje" Visible="False" Runat="server"><BR>&nbsp;&nbsp;&nbsp;&nbsp; 
-<asp:Label id="lblMensaje" Runat="server" CssClass="SubHead"></asp:Label>
-      <SCRIPT language="javascript">
+										<input id="hdIdAnulacionProceso" type="hidden" name="hdIdAnulacionProceso" runat="server" />
+									</td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td colSpan="2">
+										<asp:Label id="lblMensajeError" Runat="server" ForeColor="red"></asp:Label>
+									</td>
+								</tr>
+							</table>
+						</asp:Panel>
+						<asp:Panel id="pnlMensaje" Visible="False" Runat="server"><br>&nbsp;&nbsp;&nbsp;&nbsp; 
+							<asp:Label id="lblMensaje" runat="server" CssClass="SubHead"></asp:Label>
+							<script type="text/javascript" language="javascript">
 							<!--
 							//procedimiento para mostrar la ventana de espera del proceso
 								openPage('EsperaFinalEnvioAS400.aspx?id=<%=idProcess%>', 300, 390);							
 							-->
-							</SCRIPT>
-      </asp:panel>
-						<asp:Panel ID="pnlAnulacionProcesoDescuentos" Runat="server" Visible="False"><BR>&nbsp;&nbsp;&nbsp;&nbsp; 
-<asp:Label id="lblMensajeAnulacion" Runat="server" CssClass="SubHead"></asp:Label>
-      <SCRIPT language="javascript">
+							</script>
+						</asp:Panel>
+						<asp:Panel ID="pnlAnulacionProcesoDescuentos" Runat="server" Visible="False"><br>&nbsp;&nbsp;&nbsp;&nbsp; 
+							<asp:Label id="lblMensajeAnulacion" Runat="server" CssClass="SubHead"></asp:Label>
+							<script type="text/javascript" language="javascript">
 								<!--
 									//procedimiento para mostrar la ventana de espera del proceso
 									openPage('EsperaFinalAnulacion.aspx?id=<%=idProcess%>', 300, 390);							
 								-->
-							</SCRIPT>
-						</asp:Panel></td>
+							</script>
+						</asp:Panel>
+					</td>
 				</tr>
 			</table>
 		</form>
 	</body>
-</HTML>
+</html>

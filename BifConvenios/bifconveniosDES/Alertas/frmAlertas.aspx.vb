@@ -1,5 +1,5 @@
 ﻿Imports System.Data
-
+Imports BIFConvenios
 Imports BIFConvenios.BE
 Imports BIFConvenios.BL
 Imports Resource
@@ -96,7 +96,8 @@ Partial Class Alertas_frmAlertas
     End Sub
 
     Protected Sub btnNuevo_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNuevo.Click
-        Response.Redirect("frmEditarAlertas.aspx", True)
+        'Response.Redirect("frmEditarAlertas.aspx", True)
+        Response.Redirect(Utils.getUrlPathApplicationRedirectPage("/Alertas/frmEditarAlertas.aspx"), True)
     End Sub
 
     Protected Sub gvAlertas_PageIndexChanging(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewPageEventArgs) Handles gvAlertas.PageIndexChanging
@@ -140,6 +141,7 @@ Partial Class Alertas_frmAlertas
     End Sub
 
     Protected Sub btnRegresar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnRegresar.Click
-        Response.Redirect(Request.ApplicationPath + "/default.aspx", True)
+        ' Response.Redirect(Request.ApplicationPath + "/default.aspx", True)
+        Response.Redirect(Utils.getUrlPathApplicationRedirectPage("/default.aspx"), True)
     End Sub
 End Class

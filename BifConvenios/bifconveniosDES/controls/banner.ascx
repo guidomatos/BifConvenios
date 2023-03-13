@@ -1,6 +1,7 @@
 <%@ Register TagPrefix="cc1" Namespace="SolpartWebControls" Assembly="SolpartWebControls" %>
 <%@ Control Language="vb" AutoEventWireup="false" Inherits="Banner" CodeFile="Banner.ascx.vb" %>
 
+<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
         <td height="55" colspan="2">

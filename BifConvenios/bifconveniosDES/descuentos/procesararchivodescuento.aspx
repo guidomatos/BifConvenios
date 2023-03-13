@@ -1,22 +1,12 @@
-<%@ Page Language="vb" AutoEventWireup="false" Inherits="BIFConvenios.ProcesarArchivoDescuento"
-    CodeFile="ProcesarArchivoDescuento.aspx.vb" %>
-
+<%@ Page Language="vb" AutoEventWireup="false" Inherits="BIFConvenios.ProcesarArchivoDescuento" CodeFile="ProcesarArchivoDescuento.aspx.vb" %>
 <%@ Register TagPrefix="uc1" TagName="Banner" Src="../controls/Banner.ascx" %>
-<%@ Register Assembly="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
-    Namespace="System.Web.UI" TagPrefix="asp" %>
+<%@ Register Assembly="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI" TagPrefix="asp" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>BIFConvenios - Cargar Cuotas Descontadas (Empresa)</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-    <meta name="GENERATOR" content="Microsoft Visual Studio.NET 7.0">
-    <meta name="CODE_LANGUAGE" content="Visual Basic 7.0">
-    <meta name="vs_defaultClientScript" content="JavaScript">
-    <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
-    <link href="<%=Request.ApplicationPath%>/css/global.css" type="text/css" rel="stylesheet">
-
-    <script language="javascript" src="<%Response.Write(Request.ApplicationPath)%>/js/global.js"
-        type="text/javascript"></script>
+    <link href="<%=ResolveUrl("~/css/global.css") %>" rel="Stylesheet" type="text/css" />
+    <script src='<%=ResolveUrl("~/js/global.js") %>' language ="javascript" type="text/javascript"></script>
         
     <style type="text/css">
         
@@ -95,7 +85,6 @@
                 </td>
             </tr>
         </table>
-        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <div id="container" style="width:1200px;">
             <div class="row">
                 <div class="cell containercell">

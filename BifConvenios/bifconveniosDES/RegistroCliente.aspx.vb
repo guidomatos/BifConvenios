@@ -1,19 +1,11 @@
-﻿Imports System.Web
-Imports System.Data
-Imports System.Web.UI
-Imports System.Web.UI.WebControls
-Imports System.Data.SqlClient
-Imports System.Web.Services
-
+﻿Imports System.Data.SqlClient
 Imports BIFConvenios.BE
 Imports BIFConvenios.BL
-Imports Resource
 
 Namespace BIFConvenios
 
     Partial Class RegistroCliente
-
-        Inherits System.Web.UI.Page
+        Inherits Page
         Protected oproc As New Proceso()
         Protected idGenFile As String = ""
         Protected formatoArchivo As String = ""
@@ -36,7 +28,7 @@ Namespace BIFConvenios
         Protected strCodIBS As String
 
 
-        Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
 
             strCodProceso = CType(Session("strCodProceso"), String)
             strCodIBS = CType(Session("strCodIBS"), String)
@@ -49,7 +41,7 @@ Namespace BIFConvenios
                 txtFecha.Text = Date.Now.ToShortDateString
                 txtFecCargo.Text = Date.Now.ToShortDateString
 
-                dr = oproc.InformeProceso(CType(strCodProceso, String))
+                dr = oproc.InformeProceso(strCodProceso)
                 'Utils.AddSwap(lnkBack, "Image1", Request.ApplicationPath + "/images/regresar_on.jpg")
 
                 If dr.Read Then
@@ -69,10 +61,8 @@ Namespace BIFConvenios
 
         End Sub
 
-        Protected Sub btnGrabarCliente_ServerClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrabarCliente.ServerClick
-
-            Dim Script As String = ""
-            Dim oProceso As New BIFConvenios.Proceso()
+        Protected Sub btnGrabarCliente_ServerClick(sender As Object, e As EventArgs) Handles btnGrabarCliente.ServerClick
+            Dim oProceso As New Proceso()
             Dim Codigo_proceso As String = CType(Session("strCodProceso"), String)
 
             Dim Pagare, Modular, ApellidoPaterno, ApellidoMaterno, Trabajador, Referencia, Documento As String
@@ -90,7 +80,7 @@ Namespace BIFConvenios
                 Referencia = String.Empty
                 Importe = CType(txtImporteNew.Value.Trim(), Decimal)
                 Cuota = 0
-                Deuda = CType(0.0, Decimal)
+                Deuda = 0.0
                 Documento = txtDocumento.Value.Trim()
 
                 MontoOriginal = CType(txtMontoOriginal.Value.Trim(), Decimal)
@@ -99,18 +89,18 @@ Namespace BIFConvenios
                 CuotasPactada = txtCuotaPactada.Value.Trim()
                 CuotasPagada = txtCuotaPagada.Value.Trim()
 
-
+                Dim Script As String
                 If (txtFecha.Text.Length = 10) Then
 
                     If (txtFecCargo.Text.Length = 10) Then
 
-                        If (CInt(CuotasPagada) <= CInt(CuotasPactada)) Then
+                        If (CuotasPagada <= CuotasPactada) Then
 
                             FechaDesembolso = txtFecha.Text.Trim()
                             FechaCargo = txtFecCargo.Text.Trim()
 
                             'Registra en la tabla ClienteCuota
-                            oProceso.InsertaClienteCuota(CType(Session("strCodProceso"), String), Pagare, Modular, ApellidoPaterno, ApellidoMaterno, Trabajador, Referencia, Importe, _
+                            oProceso.InsertaClienteCuota(CType(Session("strCodProceso"), String), Pagare, Modular, ApellidoPaterno, ApellidoMaterno, Trabajador, Referencia, Importe,
                                                     Cuota, Deuda, Documento, FechaDesembolso, MontoOriginal, CuotasInformada, FechaCargo, CuotasPactada, CuotasPagada)
 
                             LimpiarTextbox()
@@ -118,22 +108,17 @@ Namespace BIFConvenios
                             Script = "<script>alert('El registro ha sido grabado satisfactoriamente.')</script>"
                             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "Script", Script, False)
 
-
-
                         Else
                             Script = "alert('La Cuota Pagada no puede ser mayor la Cuota Pactada');"
                             ClientScript.RegisterStartupScript(Me.GetType(), "script", Script, True)
-
                         End If
 
                     Else
                         Script = "alert('El formato de la Fecha de Cuota es incorrecta, debe tener el siguiente formato: dd/MM/yyyy');"
                         ClientScript.RegisterStartupScript(Me.GetType(), "script", Script, True)
-
                     End If
 
                 Else
-
                     Script = "alert('El formato de la Fecha de Desembolso es incorrecta, debe tener el siguiente formato: dd/MM/yyyy');"
                     ClientScript.RegisterStartupScript(Me.GetType(), "script", Script, True)
                 End If
@@ -141,12 +126,9 @@ Namespace BIFConvenios
 
             End If
 
-            
         End Sub
 
-
         Sub LimpiarTextbox()
-
             txtFecha.Text = Date.Now.ToShortDateString
             txtFecCargo.Text = Date.Now.ToShortDateString
 
@@ -162,7 +144,7 @@ Namespace BIFConvenios
             txtCuotaPagada.Value = String.Empty
         End Sub
 
-        Protected Sub btnCerrar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
+        Protected Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
             Response.Redirect("ResultadoProcesoCronogramaFuturo.aspx?id=" + CType(Session("strCodProceso"), String) & "&codIBS=" + CType(Session("strCodIBS"), String) & "&consultar=0")
         End Sub
     End Class

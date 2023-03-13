@@ -1,21 +1,18 @@
-﻿Imports System.Data
-Imports System.Data.SqlClient
-Imports System.Configuration
-
+﻿Imports System.Data.SqlClient
 Imports Resource
 
 Partial Class frmConsultaCuotasCliente
-    Inherits System.Web.UI.Page
+    Inherits Page
 
     Protected oCliente As New BIFConvenios.Cliente()
     'Protected oProceso As New Proceso()
 
-    Protected objWSConvenios As New wsConvenios.WSBIFConvenios
+    Protected objWSConvenios As New wsBIFConvenios.WSBIFConveniosClient
     Protected PID As String = ""
 
     Protected dt As New DataTable()
 
-    Private Sub BindDG(ByVal dt As DataTable)
+    Private Sub BindDG(dt As DataTable)
         pnlMensaje.Visible = False
         lblMensaje.Text = ""
 
@@ -71,7 +68,7 @@ Partial Class frmConsultaCuotasCliente
         End Try
     End Sub
 
-    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         If Not IsPostBack Then
             Dim CodCliente As String = Request.Params("CodCliente").ToString()
             Dim strAnio As String = Request.Params("anio").ToString()
@@ -79,7 +76,6 @@ Partial Class frmConsultaCuotasCliente
             Dim strFechaIBS As String = Request.Params("FechaIBS").ToString()
 
             Dim dr As SqlDataReader = oCliente.GetCliente(CodCliente)
-            Dim dt As New DataTable()
 
             If dr.Read Then
                 Dim TipoDocumento As String = CType(dr("TipoDocumento"), String)
@@ -90,8 +86,7 @@ Partial Class frmConsultaCuotasCliente
                 ltrlDocumento.Text = NumeroDocumento
                 ltrlPeriodo.Text = strAnio.ToString() + " - " + strMes.ToString()
 
-                objWSConvenios.Credentials = System.Net.CredentialCache.DefaultCredentials
-                dt = objWSConvenios.ConsultaPagaresDeIBS(CodClienteIBS, strAnio, strMes, strFechaIBS, CodCliente, Context.User.Identity.Name.ToString())
+                Dim dt As DataTable = objWSConvenios.ConsultaPagaresDeIBS(CodClienteIBS, strAnio, strMes, strFechaIBS, CodCliente, Context.User.Identity.Name.ToString())
 
                 Session("dtEmpresa") = dt
 
@@ -100,35 +95,29 @@ Partial Class frmConsultaCuotasCliente
         End If
     End Sub
 
-    Protected Sub gvQuery_PageIndexChanging(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewPageEventArgs) Handles gvQuery.PageIndexChanging
+    Protected Sub gvQuery_PageIndexChanging(sender As Object, e As GridViewPageEventArgs) Handles gvQuery.PageIndexChanging
         gvQuery.PageIndex = e.NewPageIndex
 
-        Dim dtSessionEmpresa As New DataTable()
-
-        If Not Session("dtEmpresa") Is DBNull.Value Then
-            dtSessionEmpresa = CType(Session("dtEmpresa"), DataTable)
+        If Session("dtEmpresa") IsNot DBNull.Value Then
+            Dim dtSessionEmpresa As DataTable = CType(Session("dtEmpresa"), DataTable)
 
             BindDG(dtSessionEmpresa)
         End If
     End Sub
 
-    Protected Sub lnkBack_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lnkBack.Click
+    Protected Sub lnkBack_Click(sender As Object, e As EventArgs) Handles lnkBack.Click
         Response.Redirect("cargageneracioncf.aspx")
     End Sub
 
-    Protected Sub btnSearch_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-        Dim dtSessionEmpresa As New DataTable()
-
-        If Not Session("dtEmpresa") Is DBNull.Value Then
-            dtSessionEmpresa = CType(Session("dtEmpresa"), DataTable)
+    Protected Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        If Session("dtEmpresa") IsNot DBNull.Value Then
+            Dim dtSessionEmpresa As DataTable = CType(Session("dtEmpresa"), DataTable)
 
             BindDG(dtSessionEmpresa)
         End If
     End Sub
 
-    Protected Sub ddlCriterio_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlCriterio.SelectedIndexChanged
-        Dim dtSessionEmpresa As New DataTable()
-
+    Protected Sub ddlCriterio_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlCriterio.SelectedIndexChanged
         Select Case ddlCriterio.SelectedIndex
             Case 0
                 txtValor.Text = ""
@@ -139,8 +128,8 @@ Partial Class frmConsultaCuotasCliente
                 txtValor.Enabled = True
         End Select
 
-        If Not Session("dtEmpresa") Is DBNull.Value Then
-            dtSessionEmpresa = CType(Session("dtEmpresa"), DataTable)
+        If Session("dtEmpresa") IsNot DBNull.Value Then
+            Dim dtSessionEmpresa As DataTable = CType(Session("dtEmpresa"), DataTable)
 
             BindDG(dtSessionEmpresa)
         End If

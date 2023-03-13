@@ -1,16 +1,9 @@
-﻿Imports CrystalDecisions.Shared
-Imports CrystalDecisions.CrystalReports.Engine
-
-Imports System.Data
-Imports System.Data.SqlClient
-Imports System.Configuration.ConfigurationSettings
-Imports System.IO
-Imports BIFConvenios.BL
+﻿Imports System.IO
 Imports BIFConvenios.Utils
 Imports Resource
 
 Partial Class reportes_reporteCasillero
-    Inherits System.Web.UI.Page
+    Inherits Page
 
     Protected oproc As New BIFConvenios.Proceso()
     Protected oCuota As New BIFConvenios.Cuota()
@@ -18,9 +11,18 @@ Partial Class reportes_reporteCasillero
     Protected dsCasilleroDetIBS As DataSet
     'Protected oRepListadoCasillero As New RepListadoCasillero()
     Protected dsListadoCasillero As New DataSetReporteCasillero()
+    Protected objWSConvenios As New wsBIFConvenios.WSBIFConveniosClient
+
+    Private Sub ResultadoBusquedaEmpresa(resultadoBusqueda As String)
+        Dim resultadoArray() As String = Split(resultadoBusqueda, "|")
+        hdCodigoEmpresa.Value = resultadoArray(0)
+        txtNombreEmpresa.Text = resultadoArray(1)
+    End Sub
+
+    Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
 
 
-    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        AddHandler ucBuscarEmpresa.UpdateEvent, AddressOf ResultadoBusquedaEmpresa
 
 
         If Not Page.IsPostBack Then
@@ -47,12 +49,11 @@ Partial Class reportes_reporteCasillero
     Private Sub ListarReporteCasillero(ByVal pEmpresa As String, ByVal pAnio As Integer, ByVal pMes As Integer)
 
         Dim ldsCabecera, ldsDetalle As DataSet
-        
+
         Try
 
-            Dim objWSConvenios As New wsConvenios.WSBIFConvenios
-            objWSConvenios.Credentials = System.Net.CredentialCache.DefaultCredentials
             ldsCabecera = objWSConvenios.ObtenerCabeceraCasillero(pEmpresa, pAnio, pMes)
+
             Session("ldsCabecera") = ldsCabecera
 
             If ldsCabecera.Tables(0).Rows.Count > 0 Then
@@ -78,12 +79,12 @@ Partial Class reportes_reporteCasillero
                 lblMensaje.Text = "La consulta no devuelve datos."
                 PnlReporte.Visible = False
             End If
-            
+
         Catch ex As Exception
             'Call MostrarMensajeGeneral(True, Utils.HandleError(excp))
         End Try
 
-        
+
     End Sub
 
     Protected Sub lnkBuscar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lnkBuscar.Click
@@ -211,4 +212,5 @@ Partial Class reportes_reporteCasillero
     Protected Sub lnkBack_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lnkBack.Click
         Response.Redirect("../Default.aspx")
     End Sub
+
 End Class

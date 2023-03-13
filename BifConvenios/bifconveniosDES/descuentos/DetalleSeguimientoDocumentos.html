@@ -1,22 +1,26 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>BIFConvenios - Generacion de documentos de cobranza</title>
-		<LINK href="../css/global.css" type="text/css" rel="stylesheet">
-			<link rel="stylesheet" type="text/css" href="../css/pop_style.css" />
-			<script type="text/javascript" language="JavaScript1.2" src="../js/common.js"></script>
-	</head>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>BIFConvenios - Generacion de documentos de cobranza</title>
+	<link href="../css/global.css" type="text/css" rel="stylesheet" />
+	<link href="../css/pop_style.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" language="JavaScript1.2" src="../js/common.js"></script>
+</head>
 	<body topmargin="10" leftmargin="15">
 		<script type="text/javascript" language="JavaScript1.2" src="../js/pop_events.js"></script>
 		<BASE TARGET="_self">
-		<script language="javascript">
-<!--
-	function seleccionaDocumento(){
-		top.returnValue = document.all("tipoDocumento").value;
-		window.close();
-	}
--->
+		<script type="text/javascript" language="javascript">
+
+            var tipoFormatoSeleccionado = '';
+
+			function seleccionaDocumento() {
+                tipoFormatoSeleccionado = document.all("tipoDocumento").value;
+				window.close();
+			}
+            function ReturnValueSeleccionado() {
+                return tipoFormatoSeleccionado;
+            }
 		</script>
 		<form>
 			<table border="0" cellpadding="0" cellspacing="0" width="400">

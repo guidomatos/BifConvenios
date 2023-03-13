@@ -1,7 +1,7 @@
 Namespace BIFConvenios
 
     Partial Class EsperaFinalEnvioAS400
-        Inherits System.Web.UI.Page
+        Inherits Page
 #Region " Web Form Designer Generated Code "
 
         'This call is required by the Web Form Designer.
@@ -32,11 +32,11 @@ Namespace BIFConvenios
         Dim strRegistrosSQL As String = ""
         Dim strRegistrosAS_400 As String = ""
 
-        Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Private Sub Page_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             'Put user code to initialize the page here
 
-            If Not Request.Params("id") Is Nothing Then
-                idProcess = CType(Request.Params("id"), String)
+            If Request.Params("id") IsNot Nothing Then
+                idProcess = Request.Params("id")
                 'If Not Utils.TestServer() Then
                 '    lblMensaje.Text = Utils.SERVER_UNAVAILABLE
                 '    pnlFinal.Visible = False
@@ -45,14 +45,14 @@ Namespace BIFConvenios
                 '    pnlMensaje.Visible = True
                 '    Exit Sub
                 'End If
-                If oProcess.EsperaFinalEnvioDescuentosAS400(CType(idProcess, String)) Then
+                If oProcess.EsperaFinalEnvioDescuentosAS400(idProcess) Then
                     pnlSwf.Visible = False
                     pnlFinal.Visible = True
                 Else
                     pnlSwf.Visible = True
                     pnlFinal.Visible = False
 
-                    oProcess.getProcesoMesAnio(idProcess, mes, anio, Fecha_ProcesoAS400, _
+                    oProcess.getProcesoMesAnio(idProcess, mes, anio, Fecha_ProcesoAS400,
                                                 TipoDocumento, NumeroDocumento)
                     CustomerNumber = oProcess.GetCustomerNumber(TipoDocumento, NumeroDocumento)
                     strRegistrosSQL = oProcess.GetTotalRegistrosEnvio_AS400(idProcess)
