@@ -18,9 +18,20 @@
     <base target="_self" />
     
     <script type="text/javascript">
+        //function Seleccionar(id) {
+        //    top.returnValue = id;
+        //    this.close();
+        //}
+
+        var idSeleccionado = 0;
         function Seleccionar(id) {
-            top.returnValue = id;
-            this.close();
+            window.opener.returnValue = id;
+            idSeleccionado = id;
+            window.close();
+        }
+
+        function ReturnValueSeleccionado() {
+            return idSeleccionado;
         }
     </script>
     

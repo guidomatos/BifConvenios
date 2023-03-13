@@ -29,20 +29,52 @@
         }
         
         function BuscarAlerta() {
-            var returnValue = OpenFormatPageDialog('frmListaAlertas.aspx',400,980);
-            if (fctTrim(returnValue) != ''){
-                document.all('hdCodAlerta').value = returnValue;                    
-                __doPostBack('lnkCargarAlerta','');
-            }
+            //var returnValue = OpenFormatPageDialog('frmListaAlertas.aspx',400,980);
+            //if (fctTrim(returnValue) != ''){
+            //    document.all('hdCodAlerta').value = returnValue;                    
+            //    __doPostBack('lnkCargarAlerta','');
+            //}
+
+            OpenFormatPageDialog('frmListaAlertas.aspx', 400, 980);
+        }
+
+        var popup;
+        function OpenFormatPageDialog(url, height, width) {
+
+            // Obtener el tamaño de la ventana principal
+            var parentWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            var parentHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+            // Calcular la posición de la ventana secundaria
+            var left = (parentWidth - width) / 2;
+            var top = (parentHeight - height) / 2;
+
+
+            popup = window.open(url, '', 'left=' + left + ',top=' + top + ',height=' + height + 'px,width=' + width + 'px,toolbar=no,directories=no,status=no,continued from previous linemenubar = no, scrollbars = no, resizable = no, modal = yes');
+            popup.opener = window;
+
+            var timer = setInterval(function () {
+                if (popup.closed) {
+                    clearInterval(timer);
+                    var returnValue = popup.ReturnValueSeleccionado();
+                    if (typeof returnValue !== "undefined") {
+                        if (fctTrim(returnValue) != '') {
+                            document.all('hdCodAlerta').value = returnValue;
+                            __doPostBack('lnkCargarAlerta', '');
+
+                        }
+                    }
+                }
+            }, 100);
         }
         
-        function OpenFormatPageDialog(url, height , width ) {
-			    var returnValue = window.showModalDialog(url,'', 'dialogTop: 150px; dialogLeft: 150px;dialogWidth:' + width +  'px;dialogHeight:' + height+ 'px;status: no;help:no;'); 
-			    if (typeof (returnValue) == "undefined"){
-				    returnValue = '';
-			    }
-			    return returnValue;
-	    }
+     //   function OpenFormatPageDialog(url, height , width ) {
+			  //  var returnValue = window.showModalDialog(url,'', 'dialogTop: 150px; dialogLeft: 150px;dialogWidth:' + width +  'px;dialogHeight:' + height+ 'px;status: no;help:no;'); 
+			  //  if (typeof (returnValue) == "undefined"){
+				 //   returnValue = '';
+			  //  }
+			  //  return returnValue;
+	    //}
     </script>
     
     <style type="text/css">
@@ -170,7 +202,7 @@
                                                 <asp:TextBox ID="txtNomAlerta" runat="server" Width="430px" Enabled="false"/>
                                             </td>
                                             <td style="width:80px;">
-                                                <asp:Button ID="btnBuscarAlerta" runat="server" CssClass="button" Text="Buscar" Width="80px" OnClientClick="BuscarAlerta();" />
+                                                <asp:Button ID="btnBuscarAlerta" runat="server" CssClass="button" Text="Buscar" Width="80px" OnClientClick="BuscarAlerta(); return false;" UseSubmitBehavior="false"  />
                                             </td>
                                         </tr>
                                     </table>
